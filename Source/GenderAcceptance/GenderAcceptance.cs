@@ -10,10 +10,40 @@ using HarmonyLib;
 using Verse.Noise;
 using UnityEngine;
 using System.Reflection;
+using Simple_Trans;
 
 namespace GenderAcceptance
 {
-    public class Thought_HomophobicVsGay : Thought_SituationalSocial
+    public static class Helper
+    {
+        public static int CountGenderIndividuals(Map map, GenderIdentity gender)
+        {
+            int count = 0;
+            List<Pawn> colonists = map.mapPawns.FreeColonists;
+
+            foreach (Pawn pawn in colonists)
+            {
+                if (pawn.Dead || Helper.GetCurrentIdentity(pawn) != gender) continue;
+
+                count++;
+            }
+            return count / 2;
+        }
+        public static GenderIdentity GetCurrentIdentity(Pawn pawn)
+        {
+            if (pawn.health.hediffSet.HasHediff(SimpleTransPregnancyUtility.transDef))
+            {
+                return GenderIdentity.Transgender;
+            }
+            if (pawn.health.hediffSet.HasHediff(SimpleTransPregnancyUtility.cisDef))
+            {
+                return GenderIdentity.Cisgender;
+            }
+            return GenderIdentity.Cisgender;
+        }   
+    }
+
+    public class Thought_TransphobicVsTransgender : Thought_SituationalSocial
     {
         public override float OpinionOffset()
         {
@@ -22,7 +52,7 @@ namespace GenderAcceptance
                 return 0f;
             }
 
-            if (this.otherPawn.story.traits.HasTrait(TraitDefOf.Gay) || this.otherPawn.story.traits.HasTrait(TraitDefOf.Bisexual))
+            if (Helper.GetCurrentIdentity(this.otherPawn) == GenderIdentity.Transgender)
             {
                 return -25f;
             }
@@ -31,30 +61,20 @@ namespace GenderAcceptance
         }
     }
 
-    public class ThoughtWorker_HomophobicVsGay : ThoughtWorker
+    public class ThoughtWorker_TransphobicVsTransgender : ThoughtWorker
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
         {
-            if (p.story.traits.HasTrait(TraitDef.Named("Homophobic")) &&
-                (otherPawn.story.traits.HasTrait(TraitDefOf.Gay) ||
-                 otherPawn.story.traits.HasTrait(TraitDefOf.Bisexual) ||
-                 IsInSameSexRelationship(otherPawn)))
+            if (p.story.traits.HasTrait(TraitDef.Named("Transphobic")) &&
+                (Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender))
             {
                 return ThoughtState.ActiveAtStage(0);
             }
             return ThoughtState.Inactive;
         }
-
-        private bool IsInSameSexRelationship(Pawn pawn)
-        {
-            return pawn.relations.DirectRelations.Any(rel =>
-                (rel.def == PawnRelationDefOf.Lover || rel.def == PawnRelationDefOf.Spouse) &&
-                pawn.gender == rel.otherPawn.gender);
-        }
     }
-
-
-    public class Thought_HeterophobicVsStraight : Thought_SituationalSocial
+    
+    public class Thought_CisphobicVsCisgender : Thought_SituationalSocial
     {
         public override float OpinionOffset()
         {
@@ -63,7 +83,7 @@ namespace GenderAcceptance
                 return 0f;
             }
 
-            if (!this.otherPawn.story.traits.HasTrait(TraitDefOf.Gay) && !this.otherPawn.story.traits.HasTrait(TraitDefOf.Bisexual) && !this.otherPawn.story.traits.HasTrait(TraitDefOf.Asexual))
+            if (Helper.GetCurrentIdentity(this.otherPawn) == GenderIdentity.Cisgender)
             {
                 return -25f;
             }
@@ -72,37 +92,25 @@ namespace GenderAcceptance
         }
     }
 
-    public class ThoughtWorker_HeterophobicVsStraight : ThoughtWorker
+    public class ThoughtWorker_CisphobicVsCisgender : ThoughtWorker
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
         {
-            if (p.story.traits.HasTrait(TraitDef.Named("Heterophobic"))
-                && !otherPawn.story.traits.HasTrait(TraitDefOf.Gay)
-                && !otherPawn.story.traits.HasTrait(TraitDefOf.Bisexual)
-                && !otherPawn.story.traits.HasTrait(TraitDefOf.Asexual))
+            if (p.story.traits.HasTrait(TraitDef.Named("Cisphobic"))
+                && Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Cisgender)
             {
-                if (!IsInSameSexRelationship(otherPawn))
-                {
-                    return ThoughtState.ActiveAtStage(0);
-                }
+                return ThoughtState.ActiveAtStage(0);
             }
             return ThoughtState.Inactive;
         }
-
-        private bool IsInSameSexRelationship(Pawn pawn)
-        {
-            return pawn.relations.DirectRelations.Any(rel =>
-                (rel.def == PawnRelationDefOf.Lover || rel.def == PawnRelationDefOf.Spouse) &&
-                pawn.gender == rel.otherPawn.gender);
-        }
     }
 
-    public class ThoughtWorker_PreceptSameSexCouples : ThoughtWorker_Precept
+    public class ThoughtWorker_PreceptTransgender : ThoughtWorker_Precept
     {
         protected override ThoughtState ShouldHaveThought(Pawn p)
         {
-            int sameSexCoupleCount = CountSameSexCouples(p.Map);
-            int stage = CalculateStageBasedOnCount(sameSexCoupleCount);
+            int transgenderCount = Helper.CountGenderIndividuals(p.Map, GenderIdentity.Transgender);
+            int stage = CalculateStageBasedOnCount(transgenderCount);
 
             if (stage >= 0)
 
@@ -113,95 +121,40 @@ namespace GenderAcceptance
             return ThoughtState.ActiveAtStage(0);
         }
 
-        public static int CountSameSexCouples(Map map)
-        {
-            int count = 0;
-            List<Pawn> colonists = map.mapPawns.FreeColonists;
-
-            foreach (Pawn pawn in colonists)
-            {
-                if (pawn.Dead) continue;
-
-                foreach (DirectPawnRelation relation in pawn.relations.DirectRelations)
-                {
-                    if ((relation.def == PawnRelationDefOf.Lover || relation.def == PawnRelationDefOf.Spouse) &&
-                        pawn.gender == relation.otherPawn.gender &&
-                        colonists.Contains(relation.otherPawn) &&
-                        !relation.otherPawn.Dead)
-                    {
-                        count++;
-                    }
-                }
-            }
-            return count / 2;
-        }
-
         private int CalculateStageBasedOnCount(int count)
         {
             return Math.Min(count - 1, 4);
         }
     }
 
-    public class ThoughtWorker_PositiveViewOnSameSexCouples : ThoughtWorker
+    public class ThoughtWorker_PositiveViewOnTransgenderIndividuals : ThoughtWorker
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn pawn, Pawn otherPawn)
         {
-            var adoredPrecept = DefDatabase<PreceptDef>.GetNamed("SameSexCouples_Adored", false);
+            var adoredPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Adored", false);
             if (adoredPrecept != null && pawn.Ideo.HasPrecept(adoredPrecept))
             {
-                if (IsInSameSexRelationship(otherPawn))
+                if (Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender)
                 {
-                    if (!IsInSameSexRelationshipWith(pawn, otherPawn))
-                    {
-                        return ThoughtState.ActiveAtStage(0);
-                    }
+                    return ThoughtState.ActiveAtStage(0);
                 }
             }
             return ThoughtState.Inactive;
         }
-        private bool IsInSameSexRelationship(Pawn pawn)
-        {
-            return pawn.relations.DirectRelations.Any(rel =>
-                (rel.def == PawnRelationDefOf.Lover || rel.def == PawnRelationDefOf.Spouse) &&
-                pawn.gender == rel.otherPawn.gender);
-        }
-
-        private bool IsInSameSexRelationshipWith(Pawn pawn, Pawn otherPawn)
-        {
-            return pawn.relations.DirectRelations.Any(rel =>
-                (rel.def == PawnRelationDefOf.Lover || rel.def == PawnRelationDefOf.Spouse) &&
-                pawn.gender == rel.otherPawn.gender && rel.otherPawn == otherPawn);
-        }
     }
-    public class ThoughtWorker_NegativeViewOnSameSexCouples : ThoughtWorker
+    public class ThoughtWorker_NegativeViewOnTransgenderIndividuals : ThoughtWorker
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn pawn, Pawn otherPawn)
         {
-            var despisedPrecept = DefDatabase<PreceptDef>.GetNamed("SameSexCouples_Despised", false);
+            var despisedPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Despised", false);
             if (despisedPrecept != null && pawn.Ideo.HasPrecept(despisedPrecept))
             {
-                if (IsInSameSexRelationship(otherPawn))
+                if (Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender && !pawn.relations.DirectRelations.Any(rel => (rel.def == PawnRelationDefOf.Lover || rel.def == PawnRelationDefOf.Spouse)))
                 {
-                    if (!IsInSameSexRelationshipWith(pawn, otherPawn))
-                    {
-                        return ThoughtState.ActiveAtStage(0);
-                    }
+                    return ThoughtState.ActiveAtStage(0);
                 }
             }
             return ThoughtState.Inactive;
-        }
-        private bool IsInSameSexRelationship(Pawn pawn)
-        {
-            return pawn.relations.DirectRelations.Any(rel =>
-                (rel.def == PawnRelationDefOf.Lover || rel.def == PawnRelationDefOf.Spouse) &&
-                pawn.gender == rel.otherPawn.gender);
-        }
-
-        private bool IsInSameSexRelationshipWith(Pawn pawn, Pawn otherPawn)
-        {
-            return pawn.relations.DirectRelations.Any(rel =>
-                (rel.def == PawnRelationDefOf.Lover || rel.def == PawnRelationDefOf.Spouse) &&
-                pawn.gender == rel.otherPawn.gender && rel.otherPawn == otherPawn);
         }
     }
 
@@ -209,50 +162,11 @@ namespace GenderAcceptance
     {
         public MyMod(ModContentPack content) : base(content)
         {
-            var harmony = new Harmony("com.my.mod.uniqueid");
+            var harmony = new Harmony("netdot.mian.genderacceptance");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
     }
 
-    [HarmonyPatch(typeof(RelationsUtility), "AttractedToGender")]
-    public static class Patch_AttractedToGender
-    {
-        [HarmonyPostfix]
-        public static void Postfix(Pawn pawn, Gender gender, ref bool __result)
-        {
-            var adoredPrecept = DefDatabase<PreceptDef>.GetNamed("SameSexCouples_Adored", false);
-            var despisedPrecept = DefDatabase<PreceptDef>.GetNamed("SameSexCouples_Despised", false);
-
-            bool adoresSameSex = pawn.Ideo?.HasPrecept(adoredPrecept) ?? false;
-            bool despisesSameSex = pawn.Ideo?.HasPrecept(despisedPrecept) ?? false;
-
-            bool isGay = pawn.story.traits.HasTrait(TraitDefOf.Gay);
-            bool isBisexual = pawn.story.traits.HasTrait(TraitDefOf.Bisexual);
-            bool isAsexual = pawn.story.traits.HasTrait(TraitDefOf.Asexual);
-
-            if (isAsexual)
-            {
-                __result = false;
-                return;
-            }
-            if (isBisexual)
-            {
-                __result = true;
-                return;
-            }
-            if (adoresSameSex)
-            {
-                __result = true;
-                return;
-            }
-            if (despisesSameSex && isGay)
-            {
-                __result = true;
-                return;
-            }
-            __result = (isGay && pawn.gender == gender) || (!isGay && pawn.gender != gender);
-        }
-    }
     [HarmonyPatch(typeof(InteractionWorker_RomanceAttempt), "SuccessChance")]
     public static class Patch_InteractionWorker_RomanceAttempt_SuccessChance
     {
@@ -260,9 +174,9 @@ namespace GenderAcceptance
         public static void Postfix(Pawn initiator, Pawn recipient, ref float __result)
         {
             const float reductionFactor = 0.1f;
-            var adoredPrecept = DefDatabase<PreceptDef>.GetNamed("SameSexCouples_Adored", false);
-            var despisedPrecept = DefDatabase<PreceptDef>.GetNamed("SameSexCouples_Despised", false);
-
+            var adoredPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Adored", false);
+            var despisedPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Despised", false);
+            
             bool adoresSameSex = initiator.Ideo?.HasPrecept(adoredPrecept) ?? false;
             bool despisesSameSex = initiator.Ideo?.HasPrecept(despisedPrecept) ?? false;
             bool isStraight = !initiator.story.traits.HasTrait(TraitDefOf.Gay) && initiator.gender == recipient.gender;
