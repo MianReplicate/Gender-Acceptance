@@ -1,0 +1,14 @@
+<Defs>
+  <ThoughtDef>
+    <defName>CisphobicVsCisgender</defName>
+    <workerClass>GenderAcceptance.ThoughtWorker_CisphobicVsCisgender</workerClass>
+    <thoughtClass>GenderAcceptance.Thought_CisphobicVsCisgender</thoughtClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>Cisphobia</label>
+        <baseOpinionOffset>-25</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>
