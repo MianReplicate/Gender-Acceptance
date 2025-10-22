@@ -1,0 +1,44 @@
+<Defs>
+    <TraitDef>
+        <defName>Chaser</defName>
+        <commonality>1.3</commonality>
+        <label>chaser</label>
+        <description>This pawn fetishizes transgender individuals.</description>
+        <degreeDatas>
+            <li>
+                <label>chaser</label>
+                <description>[PAWN_nameDef] fetishizes transgender individuals.</description>
+            </li>
+        </degreeDatas>
+        <conflictingTraits>
+            <li>Transphobic</li>
+        </conflictingTraits>
+    </TraitDef>
+    <TraitDef>
+        <defName>Cisphobic</defName>
+        <label>cisphobic</label>
+        <description>This pawn dislikes cisgender individuals.</description>
+        <degreeDatas>
+            <li>
+                <degree>0</degree>
+                <label>cisphobic</label>
+                <description>[PAWN_nameDef] dislikes cisgender individuals.</description>
+            </li>
+        </degreeDatas>
+    </TraitDef>
+    <TraitDef>
+        <defName>Transphobic</defName>
+        <label>transphobic</label>
+        <description>This pawn dislikes transgender individuals.</description>
+        <degreeDatas>
+            <li>
+                <degree>0</degree>
+                <label>transphobic</label>
+                <description>[PAWN_nameDef] dislikes transgender individuals.</description>
+            </li>
+        </degreeDatas>
+        <conflictingTraits>
+            <li>Chaser</li>
+        </conflictingTraits>
+    </TraitDef>
+</Defs>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <!-- Issues-->
+    <IssueDef>
+        <defName>Transgender</defName>
+        <label>Transgender Individuals</label>
+        <iconPath>UI/Issues/Sexuality</iconPath>
+    </IssueDef>
+
+    <!-- Precepts-->
+    <PreceptDef>
+        <defName>Transgender_Adored</defName>
+        <issue>Transgender</issue>
+        <label>Adored</label>
+        <description>Cherishing transgender people leads to a more diverse and accepting population.</description>
+        <impact>Medium</impact>
+        <comps>
+            <li Class="PreceptComp_SituationalThought">
+                <thought>AmountOfTransgender_Liked</thought>
+            </li>
+        </comps>
+    </PreceptDef>
+    
+    <PreceptDef>
+        <defName>Transgender_Despised</defName>
+        <issue>Transgender</issue>
+        <label>Despised</label>
+        <description>Valuing traditional norms, transgender individuals are contrary to our community's foundational principles.</description>
+        <impact>Medium</impact>
+        <comps>
+            <li Class="PreceptComp_SituationalThought">
+                <thought>AmountOfTransgender_Disliked</thought>
+            </li>
+        </comps>
+    </PreceptDef>
+</Defs>

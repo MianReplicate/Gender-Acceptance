@@ -1,5 +1,0 @@
-C:\Users\kille\OneDrive\Documents\Mods\TestForceLovehate\Source\ForceLoveHate\obj\Debug\ForceLoveHate.csproj.AssemblyReference.cache
-C:\Users\kille\OneDrive\Documents\Mods\TestForceLovehate\Source\ForceLoveHate\obj\Debug\ForceLoveHate.csproj.CoreCompileInputs.cache
-C:\Users\kille\OneDrive\Documents\Mods\TestForceLovehate\Source\ForceLoveHate\obj\Debug\ForceLoveHate.csproj.CopyComplete
-C:\Users\kille\OneDrive\Documents\Mods\TestForceLovehate\Source\ForceLoveHate\obj\Debug\ForceLoveHate.dll
-C:\Users\kille\OneDrive\Documents\Mods\TestForceLovehate\ForceLoveHate.dll

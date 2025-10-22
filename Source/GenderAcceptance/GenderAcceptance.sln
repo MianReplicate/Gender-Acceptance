@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForceLoveHate", "ForceLoveHate.csproj", "{A6144EA1-76E0-49CC-A738-8B0609582917}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenderAcceptance", "GenderAcceptance.csproj", "{A6144EA1-76E0-49CC-A738-8B0609582917}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

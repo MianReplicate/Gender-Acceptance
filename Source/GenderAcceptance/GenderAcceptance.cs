@@ -1,15 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using RimWorld;
 using Verse;
-using HarmonyLib;
-using Verse.Noise;
-using UnityEngine;
-using System.Reflection;
 using Simple_Trans;
 
 namespace GenderAcceptance
@@ -27,7 +19,7 @@ namespace GenderAcceptance
 
                 count++;
             }
-            return count / 2;
+            return count;
         }
         public static GenderIdentity GetCurrentIdentity(Pawn pawn)
         {
@@ -42,31 +34,14 @@ namespace GenderAcceptance
             return GenderIdentity.Cisgender;
         }   
     }
-
-    public class Thought_TransphobicVsTransgender : Thought_SituationalSocial
-    {
-        public override float OpinionOffset()
-        {
-            if (ThoughtUtility.ThoughtNullified(this.pawn, this.def))
-            {
-                return 0f;
-            }
-
-            if (Helper.GetCurrentIdentity(this.otherPawn) == GenderIdentity.Transgender)
-            {
-                return -25f;
-            }
-
-            return 0f;
-        }
-    }
-
-    public class ThoughtWorker_TransphobicVsTransgender : ThoughtWorker
+    
+    public class ThoughtWorker_Transphobia : ThoughtWorker
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
         {
-            if (p.story.traits.HasTrait(TraitDef.Named("Transphobic")) &&
-                (Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender))
+            if ((p.story.traits.HasTrait(GADefOf.Transphobic) &&
+                (Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender)) || (
+                    Helper.GetCurrentIdentity(p) == GenderIdentity.Transgender && otherPawn.story.traits.HasTrait(GADefOf.Transphobic)))
             {
                 return ThoughtState.ActiveAtStage(0);
             }
@@ -74,25 +49,44 @@ namespace GenderAcceptance
         }
     }
     
-    public class Thought_CisphobicVsCisgender : Thought_SituationalSocial
+    public class ThoughtWorker_InternalTransphobia : ThoughtWorker_Precept
     {
-        public override float OpinionOffset()
+        protected override ThoughtState ShouldHaveThought(Pawn p)
         {
-            if (ThoughtUtility.ThoughtNullified(this.pawn, this.def))
+            var despisedPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Despised", false);
+            if (Helper.GetCurrentIdentity(p) == GenderIdentity.Transgender && (p.Ideo?.HasPrecept(despisedPrecept) ?? false))
             {
-                return 0f;
+                return ThoughtState.ActiveAtStage(0);
             }
-
-            if (Helper.GetCurrentIdentity(this.otherPawn) == GenderIdentity.Cisgender)
+            return ThoughtState.Inactive;
+        }
+    }
+    
+    public class ThoughtWorker_Chaser : ThoughtWorker
+    {
+        protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
+        {
+            if (p.story.traits.HasTrait(TraitDef.Named("Chaser")) && Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender)
             {
-                return -25f;
+                return ThoughtState.ActiveAtStage(0);
             }
-
-            return 0f;
+            return ThoughtState.Inactive;
         }
     }
 
-    public class ThoughtWorker_CisphobicVsCisgender : ThoughtWorker
+    public class ThoughtWorker_Similarity : ThoughtWorker
+    {
+        protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
+        {
+            if (Helper.GetCurrentIdentity(p) == GenderIdentity.Transgender && Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender)
+            {
+                return ThoughtState.ActiveAtStage(0);
+            }
+            return ThoughtState.Inactive;
+        }
+    }
+    
+    public class ThoughtWorker_Cisphobia : ThoughtWorker
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
         {
@@ -109,30 +103,23 @@ namespace GenderAcceptance
     {
         protected override ThoughtState ShouldHaveThought(Pawn p)
         {
+            if(Helper.GetCurrentIdentity(p) == GenderIdentity.Transgender) return ThoughtState.ActiveAtStage(0);
+            
             int transgenderCount = Helper.CountGenderIndividuals(p.Map, GenderIdentity.Transgender);
-            int stage = CalculateStageBasedOnCount(transgenderCount);
+            int stage = Math.Min(transgenderCount - 1, 4);
 
             if (stage >= 0)
-
-                if (stage >= 0)
-                {
-                    return ThoughtState.ActiveAtStage(stage + 1);
-                }
+                return ThoughtState.ActiveAtStage(stage + 1);
             return ThoughtState.ActiveAtStage(0);
-        }
-
-        private int CalculateStageBasedOnCount(int count)
-        {
-            return Math.Min(count - 1, 4);
         }
     }
 
-    public class ThoughtWorker_PositiveViewOnTransgenderIndividuals : ThoughtWorker
+    public class ThoughtWorker_PositiveViewOnTransgender : ThoughtWorker
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn pawn, Pawn otherPawn)
         {
             var adoredPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Adored", false);
-            if (adoredPrecept != null && pawn.Ideo.HasPrecept(adoredPrecept))
+            if (adoredPrecept != null && (pawn.Ideo?.HasPrecept(adoredPrecept) ?? false))
             {
                 if (Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender)
                 {
@@ -142,14 +129,14 @@ namespace GenderAcceptance
             return ThoughtState.Inactive;
         }
     }
-    public class ThoughtWorker_NegativeViewOnTransgenderIndividuals : ThoughtWorker
+    public class ThoughtWorker_NegativeViewOnTransgender : ThoughtWorker
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn pawn, Pawn otherPawn)
         {
             var despisedPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Despised", false);
-            if (despisedPrecept != null && pawn.Ideo.HasPrecept(despisedPrecept))
+            if (despisedPrecept != null && (pawn.Ideo?.HasPrecept(despisedPrecept) ?? false))
             {
-                if (Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender && !pawn.relations.DirectRelations.Any(rel => (rel.def == PawnRelationDefOf.Lover || rel.def == PawnRelationDefOf.Spouse)))
+                if (Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender)
                 {
                     return ThoughtState.ActiveAtStage(0);
                 }
@@ -158,41 +145,41 @@ namespace GenderAcceptance
         }
     }
 
-    public class MyMod : Mod
-    {
-        public MyMod(ModContentPack content) : base(content)
-        {
-            var harmony = new Harmony("netdot.mian.genderacceptance");
-            harmony.PatchAll(Assembly.GetExecutingAssembly());
-        }
-    }
-
-    [HarmonyPatch(typeof(InteractionWorker_RomanceAttempt), "SuccessChance")]
-    public static class Patch_InteractionWorker_RomanceAttempt_SuccessChance
-    {
-        [HarmonyPostfix]
-        public static void Postfix(Pawn initiator, Pawn recipient, ref float __result)
-        {
-            const float reductionFactor = 0.1f;
-            var adoredPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Adored", false);
-            var despisedPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Despised", false);
-            
-            bool adoresSameSex = initiator.Ideo?.HasPrecept(adoredPrecept) ?? false;
-            bool despisesSameSex = initiator.Ideo?.HasPrecept(despisedPrecept) ?? false;
-            bool isStraight = !initiator.story.traits.HasTrait(TraitDefOf.Gay) && initiator.gender == recipient.gender;
-            bool isGay = initiator.story.traits.HasTrait(TraitDefOf.Gay) && initiator.gender != recipient.gender;
-
-            if ((adoresSameSex && isStraight) || (despisesSameSex && isGay))
-            {
-                float compatibilityFactor = initiator.relations.CompatibilityWith(recipient);
-                float opinionFactor = initiator.relations.OpinionOf(recipient) / 100.0f; 
-
-                float dynamicChance = Mathf.Clamp01(compatibilityFactor * opinionFactor);
-
-                dynamicChance *= reductionFactor;
-
-                __result = Mathf.Max(__result, dynamicChance);
-            }
-        }
-    }
+    // public class MyMod : Mod
+    // {
+    //     public MyMod(ModContentPack content) : base(content)
+    //     {
+    //         var harmony = new Harmony("netdot.mian.genderacceptance");
+    //         harmony.PatchAll(Assembly.GetExecutingAssembly());
+    //     }
+    // }
+    
+    // [HarmonyPatch(typeof(InteractionWorker_RomanceAttempt), "SuccessChance")]
+    // public static class Patch_InteractionWorker_RomanceAttempt_SuccessChance
+    // {
+    //     [HarmonyPostfix]
+    //     public static void Postfix(Pawn initiator, Pawn recipient, ref float __result)
+    //     {
+    //         const float reductionFactor = 0.1f;
+    //         var adoredPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Adored", false);
+    //         var despisedPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Despised", false);
+    //         
+    //         bool adoresSameSex = initiator.Ideo?.HasPrecept(adoredPrecept) ?? false;
+    //         bool despisesSameSex = initiator.Ideo?.HasPrecept(despisedPrecept) ?? false;
+    //         bool isStraight = !initiator.story.traits.HasTrait(TraitDefOf.Gay) && initiator.gender == recipient.gender;
+    //         bool isGay = initiator.story.traits.HasTrait(TraitDefOf.Gay) && initiator.gender != recipient.gender;
+    //
+    //         if ((adoresSameSex && isStraight) || (despisesSameSex && isGay))
+    //         {
+    //             float compatibilityFactor = initiator.relations.CompatibilityWith(recipient);
+    //             float opinionFactor = initiator.relations.OpinionOf(recipient) / 100.0f; 
+    //
+    //             float dynamicChance = Mathf.Clamp01(compatibilityFactor * opinionFactor);
+    //
+    //             dynamicChance *= reductionFactor;
+    //
+    //             __result = Mathf.Max(__result, dynamicChance);
+    //         }
+    //     }
+    // }
 }
