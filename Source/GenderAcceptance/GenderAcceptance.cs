@@ -37,6 +37,13 @@ namespace GenderAcceptance
 
             return codes.AsEnumerable();
         }
+
+        public static float ChaserFactor(Pawn pawn, Pawn target)
+        {
+            if (ChaserSeesFetish(pawn, target))
+                return 2f;
+            return 0f;
+        }
         
         // used for chasers
         public static bool IsGay(this Pawn pawn)
