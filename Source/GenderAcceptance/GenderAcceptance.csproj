@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="GADefOf.cs" />
     <Compile Include="GenderAcceptance.cs" />
+    <Compile Include="Patches\InteractionWorker_RomanceAttempt.cs" />
     <Compile Include="Patches\Mod Integration\WayBetterRomance.cs" />
     <Compile Include="Patches\Pawn_RelationsTracker.cs" />
     <Compile Include="Patches\RelationsUtility.cs" />

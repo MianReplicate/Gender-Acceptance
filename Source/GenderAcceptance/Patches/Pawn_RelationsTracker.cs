@@ -9,6 +9,15 @@ namespace GenderAcceptance.Patches;
 [HarmonyPatch(typeof(RimWorld.Pawn_RelationsTracker))]
 public static class Pawn_RelationsTracker
 {
+    // 200x the factor for sexxx!
+    [HarmonyPatch(nameof(RimWorld.Pawn_RelationsTracker.SecondaryLovinChanceFactor))]
+    [HarmonyPostfix]
+    public static void AddChaserFactor(Pawn otherPawn, ref float __result, ref RimWorld.Pawn_RelationsTracker __instance, Pawn ___pawn)
+    {
+        if (Helper.ChaserSeesFetish(___pawn, otherPawn))
+            __result *= 2;
+    }
+    
     // Transphobic people perceive trans people as their assigned gender, so this patch replaces the checks for gender with the definitive version :sunglasses:
     [HarmonyPatch(nameof(RimWorld.Pawn_RelationsTracker.SecondaryLovinChanceFactor))]
     [HarmonyTranspiler]

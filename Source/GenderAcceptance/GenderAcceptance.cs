@@ -13,6 +13,8 @@ using Pawn_RelationsTracker = RimWorld.Pawn_RelationsTracker;
 using RelationsUtility = RimWorld.RelationsUtility;
 
 //TODO: transphobic cultures wont like gender affirming parties
+// TODO: swap opinion increase for chasers to increasing romance/sex factors
+// TODO: add lang files
 namespace GenderAcceptance
 {
     public static class Helper

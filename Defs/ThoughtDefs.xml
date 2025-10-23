@@ -38,7 +38,7 @@
     <workerClass>GenderAcceptance.ThoughtWorker_NegativeViewOnTransgender</workerClass>
     <stages>
       <li>
-        <label>Is Transgender</label>
+        <label>Transphobia</label>
         <baseOpinionOffset>-20</baseOpinionOffset>
       </li>
     </stages>
@@ -85,7 +85,7 @@
     <workerClass>GenderAcceptance.ThoughtWorker_PositiveViewOnTransgender</workerClass>
     <stages>
       <li>
-        <label>Is Transgender</label>
+        <label>Transgender</label>
         <baseOpinionOffset>+20</baseOpinionOffset>
       </li>
     </stages>
@@ -119,9 +119,6 @@
         <baseOpinionOffset>-25</baseOpinionOffset>
       </li>
     </stages>
-    <nullifyingTraits>
-      <li>Chaser</li>
-    </nullifyingTraits>
   </ThoughtDef>
 
   <!--Misc-->
@@ -132,7 +129,7 @@
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
       <li>
-        <label>Is Transgender</label>
+        <label>Both relate to being transgender</label>
         <baseOpinionOffset>+10</baseOpinionOffset>
       </li>
     </stages>
@@ -145,7 +142,7 @@
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
       <li>
-        <label>Fetishizes Transness</label>
+        <label>Fetishizes transness</label>
         <baseOpinionOffset>+30</baseOpinionOffset>
         <!--        <romanceChanceFactor>1.5</romanceChanceFactor>-->
       </li>
