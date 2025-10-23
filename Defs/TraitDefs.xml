@@ -11,7 +11,6 @@
             </li>
         </degreeDatas>
         <conflictingTraits>
-            <li>Transphobic</li>
             <li>Asexual</li>
             <li MayRequire="divinederivative.romance">HeteroAce</li>
             <li MayRequire="divinederivative.romance">HomoAce</li>
@@ -41,8 +40,5 @@
                 <description>[PAWN_nameDef] dislikes transgender individuals.</description>
             </li>
         </degreeDatas>
-        <conflictingTraits>
-            <li>Chaser</li>
-        </conflictingTraits>
     </TraitDef>
 </Defs>

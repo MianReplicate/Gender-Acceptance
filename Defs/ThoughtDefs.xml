@@ -76,7 +76,6 @@
     </stages>
     <nullifyingTraits>
       <li>Transphobic</li>
-      <li>Chaser</li>
     </nullifyingTraits>
   </ThoughtDef>
 
@@ -156,7 +155,6 @@
   <ThoughtDef>
     <defName>Internal_Transphobia</defName>
     <workerClass>GenderAcceptance.ThoughtWorker_InternalTransphobia</workerClass>
-    <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <stages>
       <li>
         <label>Internal Transphobia</label>

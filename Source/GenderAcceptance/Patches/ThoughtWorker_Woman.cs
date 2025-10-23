@@ -19,10 +19,10 @@ public class ThoughtWorker_Woman
         {
             if (codes[i].LoadsField(AccessTools.Field(typeof(Pawn), nameof(Pawn.gender))))
             {
-                
+                var label = codes[i - 1].labels[0];
                 codes.RemoveRange(i - 1, 2);
                 codes.InsertRange(i - 1, [
-                    new CodeInstruction(OpCodes.Ldarg_1),
+                    new CodeInstruction(OpCodes.Ldarg_1).WithLabels(label),
                     new CodeInstruction(OpCodes.Ldarg_2),
                     CodeInstruction.Call(typeof(Helper), nameof(Helper.GetPerceivedGender)),
                 ]);

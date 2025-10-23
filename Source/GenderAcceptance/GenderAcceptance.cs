@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using GenderAcceptance.Patches;
@@ -8,25 +9,31 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 using Simple_Trans;
+using Pawn_RelationsTracker = RimWorld.Pawn_RelationsTracker;
 using RelationsUtility = RimWorld.RelationsUtility;
 
 //TODO: transphobic cultures wont like gender affirming parties
-// TODO: replace every instance of where pawns percieve a trans person's gender and if theyre transphobic for that individual pawn, replace it for like romance or smth
 namespace GenderAcceptance
 {
     public static class Helper
     {
         public static IEnumerable<CodeInstruction> ReplaceGenderAttractionCalls(IEnumerable<CodeInstruction> instructions)
         {
-            foreach (var code in instructions)
+            var codes = new List<CodeInstruction>(instructions);
+            for (var i = 0; i < codes.Count; i++)
             {
-                if (code.LoadsField(AccessTools.Field(typeof(Pawn), nameof(Pawn.gender))))
+                if (codes[i].LoadsField(AccessTools.Field(typeof(Pawn), nameof(Pawn.gender)))
+                    && codes[i + 1].Calls(AccessTools.Method(typeof(RelationsUtility), nameof(RelationsUtility.AttractedToGender))))
                 {
-                    yield return new CodeInstruction(OpCodes.Nop);
-                    yield return CodeInstruction.Call(typeof(Helper), nameof(AttractedToPerson), [typeof(Pawn), typeof(Pawn)]);
+                
+                    codes.RemoveRange(i, 2);
+                    codes.InsertRange(i, [
+                        CodeInstruction.Call(typeof(Helper), nameof(AttractedToPerson)),
+                    ]);
                 }
-                yield return code;
-            } 
+            }
+
+            return codes.AsEnumerable();
         }
         
         // used for chasers
