@@ -14,10 +14,9 @@ public class InteractionWorker_RomanceAttempt
 {
     //Adds a chaser factor to the romance success chance tooltip
     [HarmonyPatch(nameof(RimWorld.InteractionWorker_RomanceAttempt.RomanceFactors))]
+    [HarmonyTranspiler]
     [HarmonyAfter("rimworld.divineDerivative.romance")]
-    public static class InteractionWorker_RomanceAttempt_RomanceFactors
-    {
-        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
+        public static IEnumerable<CodeInstruction> AddChaserFactorTooltip(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
         {
             MethodInfo methodToLookFor = ModsConfig.IsActive("divinederivative.romance") 
                 ? WayBetterRomance.GetSexualityFactor()
@@ -54,7 +53,7 @@ public class InteractionWorker_RomanceAttempt
                     yield return CodeInstruction.Call(typeof(Translator), nameof(Translator.Translate), [typeof(string)]);
                     yield return CodeInstruction.Call(typeof(TaggedString), "op_Implicit", [typeof(TaggedString)]);
                     yield return new(OpCodes.Ldloc, num);
-                    yield return CodeInstruction.Call(typeof(InteractionWorker_RomanceAttempt), "RomanceFactorLine");
+                    yield return CodeInstruction.Call(typeof(RimWorld.InteractionWorker_RomanceAttempt), "RomanceFactorLine");
                     yield return CodeInstruction.Call(typeof(StringBuilder), nameof(StringBuilder.AppendLine), [typeof(string)]);
                     yield return new(OpCodes.Pop);
 
@@ -67,5 +66,4 @@ public class InteractionWorker_RomanceAttempt
                 }
             }
         }
-    }
 }

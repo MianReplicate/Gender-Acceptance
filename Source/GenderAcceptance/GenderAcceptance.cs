@@ -19,22 +19,27 @@ namespace GenderAcceptance
 {
     public static class Helper
     {
-        public static IEnumerable<CodeInstruction> ReplaceGenderAttractionCalls(IEnumerable<CodeInstruction> instructions)
+        // Transphobic people see trans people as their AGAB, therefore a straight transphobic man could be attracted to a trans man based on this code
+        public static IEnumerable<CodeInstruction> ReplaceAttractGenderWithPerceivedGender(IEnumerable<CodeInstruction> instructions)
         {
             var codes = new List<CodeInstruction>(instructions);
             for (var i = 0; i < codes.Count; i++)
             {
+                // otherPawn.gender => Helper.GetPerceivedGender(pawn, otherPawn)
                 if (codes[i].LoadsField(AccessTools.Field(typeof(Pawn), nameof(Pawn.gender)))
                     && codes[i + 1].Calls(AccessTools.Method(typeof(RelationsUtility), nameof(RelationsUtility.AttractedToGender))))
                 {
-                
-                    codes.RemoveRange(i, 2);
-                    codes.InsertRange(i, [
-                        CodeInstruction.Call(typeof(Helper), nameof(AttractedToPerson)),
-                    ]);
+                    codes[i] = CodeInstruction.Call(typeof(Helper), nameof(GetPerceivedGender));
+                    codes.Insert(i - 1, new CodeInstruction(OpCodes.Dup));
+                    
+                    i += 1; // skips the AttractedToGender call
+                    // codes.RemoveRange(i, 2);
+                    // codes.InsertRange(i, [
+                    // CodeInstruction.Call(typeof(Helper), nameof(AttractedToPerson)),
+                    // ]);
                 }
             }
-
+            
             return codes.AsEnumerable();
         }
 

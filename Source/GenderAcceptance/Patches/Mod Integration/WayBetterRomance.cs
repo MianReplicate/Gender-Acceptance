@@ -17,26 +17,31 @@ public static class WayBetterRomance
         // The below patches just replace gender attraction calls with our own so that the transphobia trait will work properly
         // (transphobic people don't believe trans people are the gender they say they are)
         
+        // Replaces with our attraction call
         harmony.Patch(typeof(SexualityUtility).GetMethod(nameof(SexualityUtility.CouldWeBeLovers)),
             prefix: typeof(WayBetterRomance).GetMethod(nameof(CouldWeBeLoversReplacement)));
 
         harmony.Patch(typeof(SexualityUtility).GetMethod(nameof(SexualityUtility.WouldConsiderMarriage)),
-            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceGenderAttractionCalls)));
+            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceAttractGenderWithPerceivedGender)));
         
         harmony.Patch(typeof(SexualityUtility).GetMethod(nameof(SexualityUtility.CouldWeBeMarried)),
-            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceGenderAttractionCalls)));
+            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceAttractGenderWithPerceivedGender)));
 
         harmony.Patch(typeof(HookupUtility).GetMethod(nameof(HookupUtility.HookupOption)),
-            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceGenderAttractionCalls)));
+            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceAttractGenderWithPerceivedGender)));
         
         harmony.Patch(typeof(HookupUtility).GetMethod(nameof(HookupUtility.HookupEligiblePair)),
-            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceGenderAttractionCalls)));
+            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceAttractGenderWithPerceivedGender)));
         
+        // Replace this patch with our own so that we can put the gender call in there
         harmony.Unpatch(typeof(InteractionWorker_Breakup).GetMethod(nameof(InteractionWorker_Breakup.RandomSelectionWeight))
         , typeof(InteractionWorker_Breakup_RandomSelectionWeight)
             .GetMethod(nameof(InteractionWorker_Breakup_RandomSelectionWeight.Postfix)));
         harmony.Patch(typeof(InteractionWorker_Breakup).GetMethod(nameof(InteractionWorker_Breakup.RandomSelectionWeight)),
             postfix: typeof(WayBetterRomance).GetMethod(nameof(InteractionWorker_Breakup_RandomSelectionWeight_Postfix)));
+
+        harmony.Patch(typeof(HookupUtility).GetMethod(nameof(HookupUtility.HookupFactors)),
+            transpiler: typeof(Helper).GetMethod(nameof(AddChaserFactorToHookup)));
     }
 
     public static IEnumerable<CodeInstruction> AddChaserFactorToHookup(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
@@ -68,7 +73,7 @@ public static class WayBetterRomance
                     yield return new(OpCodes.Ldloc, num);
                     yield return new(OpCodes.Ldc_R4, 0f); // default value is 0f
                     yield return new(OpCodes.Beq_S, oldLabel);
-                    //stringBuilder.AppendLine(RomanceFactorLine("WBR.HookupChanceSexuality".Translate(), num);
+                    //stringBuilder.AppendLine(HookupFactorLine("GA.HookupChanceChaser".Translate(), num);
                     yield return new(OpCodes.Ldloc_0);
                     yield return new(OpCodes.Ldstr, "GA.HookupChanceChaser");
                     yield return CodeInstruction.Call(typeof(Translator), nameof(Translator.Translate), [typeof(string)]);

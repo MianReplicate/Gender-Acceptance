@@ -23,7 +23,7 @@ namespace GenderAcceptance
         public static ThoughtDef Transphobia;
         
         public static ThoughtDef Similar;
-        public static ThoughtDef Chaser_Transgender_Spotted;
+        // public static ThoughtDef Chaser_Transgender_Spotted;
         
         static GADefOf()
         {

@@ -14,7 +14,7 @@ public static class RelationsUtility
     [HarmonyPriority(Priority.Last)]
     public static IEnumerable<CodeInstruction> RomanceEligiblePatch(IEnumerable<CodeInstruction> instructions)
     {
-        return Helper.ReplaceGenderAttractionCalls(instructions);
+        return Helper.ReplaceAttractGenderWithPerceivedGender(instructions);
     }
     
     // Way Better Romance removes the gender calls entirely, so let's make sure to run AFTER they remove them so that we don't mess up their thing
@@ -25,6 +25,6 @@ public static class RelationsUtility
     [HarmonyPriority(Priority.Last)]
     public static IEnumerable<CodeInstruction> RomanceOptionPatch(IEnumerable<CodeInstruction> instructions)
     {
-        return Helper.ReplaceGenderAttractionCalls(instructions);
+        return Helper.ReplaceAttractGenderWithPerceivedGender(instructions);
     }
 }

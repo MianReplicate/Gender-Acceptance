@@ -135,19 +135,19 @@
     </stages>
   </ThoughtDef>
 
-  <ThoughtDef>
-    <defName>Chaser_Transgender_Spotted</defName>
-    <workerClass>GenderAcceptance.ThoughtWorker_Chaser</workerClass>
-    <thoughtClass>Thought_SituationalSocial</thoughtClass>
-    <validWhileDespawned>true</validWhileDespawned>
-    <stages>
-      <li>
-        <label>Fetishizes transness</label>
-        <baseOpinionOffset>+30</baseOpinionOffset>
-        <!--        <romanceChanceFactor>1.5</romanceChanceFactor>-->
-      </li>
-    </stages>
-  </ThoughtDef>
+<!--  <ThoughtDef>-->
+<!--    <defName>Chaser_Transgender_Spotted</defName>-->
+<!--    <workerClass>GenderAcceptance.ThoughtWorker_Chaser</workerClass>-->
+<!--    <thoughtClass>Thought_SituationalSocial</thoughtClass>-->
+<!--    <validWhileDespawned>true</validWhileDespawned>-->
+<!--    <stages>-->
+<!--      <li>-->
+<!--        <label>Fetishizes transness</label>-->
+<!--        <baseOpinionOffset>+30</baseOpinionOffset>-->
+<!--        &lt;!&ndash;        <romanceChanceFactor>1.5</romanceChanceFactor>&ndash;&gt;-->
+<!--      </li>-->
+<!--    </stages>-->
+<!--  </ThoughtDef>-->
 
   <ThoughtDef>
     <defName>Internal_Transphobia</defName>
