@@ -12,6 +12,10 @@
         </degreeDatas>
         <conflictingTraits>
             <li>Transphobic</li>
+            <li>Asexual</li>
+            <li MayRequire="divinederivative.romance">HeteroAce</li>
+            <li MayRequire="divinederivative.romance">HomoAce</li>
+            <li MayRequire="divinederivative.romance">BiAce</li>
         </conflictingTraits>
     </TraitDef>
     <TraitDef>

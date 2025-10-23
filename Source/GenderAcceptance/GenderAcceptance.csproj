@@ -7,11 +7,12 @@
     <ProjectGuid>{A6144EA1-76E0-49CC-A738-8B0609582917}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ForceLoveHate</RootNamespace>
+    <RootNamespace>GenderAcceptance</RootNamespace>
     <AssemblyName>GenderAcceptance</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -32,13 +33,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\ForceLoveHate\packages\Lib.Harmony.2.4.1\lib\net472\0Harmony.dll</HintPath>
+      <HintPath>packages\Lib.Harmony.2.4.1\lib\net48\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>D:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="SimpleTransExpanded">
       <HintPath>D:\SteamLibrary\steamapps\workshop\content\294100\3516912373\1.6\Assemblies\Simple-Trans.dll</HintPath>
+    </Reference>
+    <Reference Include="WayBetterRomance">
+      <HintPath>D:\SteamLibrary\steamapps\workshop\content\294100\2877731755\1.6\Assemblies\WayBetterRomance.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,6 +59,11 @@
   <ItemGroup>
     <Compile Include="GADefOf.cs" />
     <Compile Include="GenderAcceptance.cs" />
+    <Compile Include="Patches\Mod Integration\WayBetterRomance.cs" />
+    <Compile Include="Patches\Pawn_RelationsTracker.cs" />
+    <Compile Include="Patches\RelationsUtility.cs" />
+    <Compile Include="Patches\ThoughtWorker_Man.cs" />
+    <Compile Include="Patches\ThoughtWorker_Woman.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

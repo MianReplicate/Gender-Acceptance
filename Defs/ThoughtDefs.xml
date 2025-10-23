@@ -55,7 +55,7 @@
     <stages>
       <li>
         <label>Lacking Diversity</label>
-        <description>Feels the lack of transgender individuals as a gap in communal diversity.</description>
+        <description>Feels the lack of transgender individuals as a gap in communal diversity</description>
         <baseMoodEffect>-4</baseMoodEffect>
       </li>
       <li>
@@ -70,7 +70,7 @@
       </li>
       <li>
         <label>Diverse Harmony</label>
-        <description>Joyful for the abundance of transgender individuals, symbolizing full acceptance.</description>
+        <description>Joyful for the abundance of transgender individuals, symbolizing full acceptance</description>
         <baseMoodEffect>+6</baseMoodEffect>
       </li>
     </stages>
@@ -146,7 +146,7 @@
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
       <li>
-        <label>Is Transgender</label>
+        <label>Fetishizes Transness</label>
         <baseOpinionOffset>+30</baseOpinionOffset>
         <!--        <romanceChanceFactor>1.5</romanceChanceFactor>-->
       </li>
@@ -159,9 +159,14 @@
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <stages>
       <li>
-        <label>I feel ashamed for being transgender</label>
-        <description>I deserve the hate I get.</description>
-        <baseMoodEffect>-10</baseMoodEffect>
+        <label>Internal Transphobia</label>
+        <description>I feel ashamed for being transgender</description>
+        <baseMoodEffect>-12</baseMoodEffect>
+      </li>
+      <li>
+        <label>Mild Internal Transphobia</label>
+        <description>It hurts that our culture is unaccepting of people like me</description>
+        <baseMoodEffect>-5</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>

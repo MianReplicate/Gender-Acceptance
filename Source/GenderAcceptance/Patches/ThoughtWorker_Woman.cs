@@ -1,0 +1,34 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Emit;
+using HarmonyLib;
+using Verse;
+
+namespace GenderAcceptance.Patches;
+
+[HarmonyPatch(typeof(RimWorld.ThoughtWorker_Woman))]
+public class ThoughtWorker_Woman
+{
+    // The method is protected so I cant do nameof :(
+    [HarmonyPatch("CurrentSocialStateInternal")]
+    [HarmonyTranspiler]
+    public static IEnumerable<CodeInstruction> GetGender(IEnumerable<CodeInstruction> instructions)
+    {
+        var codes = new List<CodeInstruction>(instructions);
+        for (var i = 0; i < codes.Count; i++)
+        {
+            if (codes[i].LoadsField(AccessTools.Field(typeof(Pawn), nameof(Pawn.gender))))
+            {
+                
+                codes.RemoveRange(i - 1, 2);
+                codes.InsertRange(i - 1, [
+                    new CodeInstruction(OpCodes.Ldarg_1),
+                    new CodeInstruction(OpCodes.Ldarg_2),
+                    CodeInstruction.Call(typeof(Helper), nameof(Helper.GetPerceivedGender)),
+                ]);
+            }
+        }
+
+        return codes.AsEnumerable();
+    }
+}

@@ -39,6 +39,7 @@
     <loadAfter>
         <li>Ludeon.RimWorld</li>
         <li>brrainz.harmony</li>
+        <li>divinederivative.romance</li>
         <li>runaway.simpletrans</li>
     </loadAfter>
 </ModMetaData> 

@@ -1,13 +1,92 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Reflection.Emit;
+using GenderAcceptance.Patches;
+using GenderAcceptance.Patches.Mod_Integration;
+using HarmonyLib;
 using RimWorld;
 using Verse;
 using Simple_Trans;
+using RelationsUtility = RimWorld.RelationsUtility;
 
+//TODO: transphobic cultures wont like gender affirming parties
+// TODO: replace every instance of where pawns percieve a trans person's gender and if theyre transphobic for that individual pawn, replace it for like romance or smth
 namespace GenderAcceptance
 {
     public static class Helper
     {
+        public static IEnumerable<CodeInstruction> ReplaceGenderAttractionCalls(IEnumerable<CodeInstruction> instructions)
+        {
+            foreach (var code in instructions)
+            {
+                if (code.LoadsField(AccessTools.Field(typeof(Pawn), nameof(Pawn.gender))))
+                {
+                    yield return new CodeInstruction(OpCodes.Nop);
+                    yield return CodeInstruction.Call(typeof(Helper), nameof(AttractedToPerson), [typeof(Pawn), typeof(Pawn)]);
+                }
+                yield return code;
+            } 
+        }
+        
+        // used for chasers
+        public static bool IsGay(this Pawn pawn)
+        {
+            var traits = pawn.story.traits;
+            var homoAce = DefDatabase<TraitDef>.GetNamedSilentFail("HomoAce");
+            return traits.HasTrait(TraitDefOf.Gay) || (homoAce != null && traits.HasTrait(homoAce));
+        }
+        public static bool IsStraight(this Pawn pawn)
+        {
+            var traits = pawn.story.traits;
+            var heteroAce = DefDatabase<TraitDef>.GetNamedSilentFail("HeteroAce");
+            var straight = DefDatabase<TraitDef>.GetNamedSilentFail("Straight");
+            return ((straight != null && traits.HasTrait(straight)) || (heteroAce != null && traits.HasTrait(heteroAce)) 
+                                                                    || (!pawn.IsGay() && !traits.HasTrait(TraitDefOf.Bisexual) && !traits.HasTrait(TraitDefOf.Asexual)));
+        }
+        // does a chaser find their fetish??
+        public static bool ChaserSeesFetish(Pawn initiator, Pawn recipient)
+        {
+            // initiator cannot have asexual traits
+            if (initiator.story.traits.HasTrait(GADefOf.Chaser) && GetCurrentIdentity(recipient) == GenderIdentity.Transgender)
+            {
+                var genderPerceivedByChaser = GetPerceivedGender(initiator, recipient);
+                if (initiator.IsGay() && genderPerceivedByChaser == initiator.gender)
+                    return true;
+                if (initiator.IsStraight() && genderPerceivedByChaser != initiator.gender)
+                    return true;
+            }
+            return false;
+        }
+
+        public static bool IsTransphobic(Pawn pawn)
+        {
+            return pawn.story.traits.HasTrait(GADefOf.Transphobic) || 
+                   (GetCurrentIdentity(pawn) == GenderIdentity.Cisgender 
+                    && (pawn.Ideo?.HasPrecept(GADefOf.Transgender_Despised) ?? false));
+        }
+
+        public static Gender GetPerceivedGender(Pawn initiator, Pawn recipient)
+        {
+            if (GetCurrentIdentity(recipient) != GenderIdentity.Transgender)
+                return recipient.gender;
+
+            if (recipient.gender != Gender.Male && recipient.gender != Gender.Female)
+                return recipient.gender; // idk what to do otherwise if im being honest. e.g. nonbinary people
+            
+            return IsTransphobic(initiator) ? recipient.gender == Gender.Male ? Gender.Female : Gender.Male : recipient.gender;
+        }
+
+        public static bool AttractedToPerson(Pawn initiator, Pawn recipient)
+        {
+            return RelationsUtility.AttractedToGender(initiator, GetPerceivedGender(initiator, recipient));
+        }
+
+        public static bool AttractedToEachOther(Pawn pawn1, Pawn pawn2)
+        {
+            return AttractedToPerson(pawn1, pawn2) && AttractedToPerson(pawn2, pawn1);
+        }
+        
         public static int CountGenderIndividuals(Map map, GenderIdentity gender)
         {
             int count = 0;
@@ -40,7 +119,7 @@ namespace GenderAcceptance
         protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
         {
             if ((p.story.traits.HasTrait(GADefOf.Transphobic) &&
-                (Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender)) || (
+                Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender) || (
                     Helper.GetCurrentIdentity(p) == GenderIdentity.Transgender && otherPawn.story.traits.HasTrait(GADefOf.Transphobic)))
             {
                 return ThoughtState.ActiveAtStage(0);
@@ -53,10 +132,10 @@ namespace GenderAcceptance
     {
         protected override ThoughtState ShouldHaveThought(Pawn p)
         {
-            var despisedPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Despised", false);
-            if (Helper.GetCurrentIdentity(p) == GenderIdentity.Transgender && (p.Ideo?.HasPrecept(despisedPrecept) ?? false))
+            if (Helper.GetCurrentIdentity(p) == GenderIdentity.Transgender && (p.Ideo?.HasPrecept(GADefOf.Transgender_Despised) ?? false))
             {
-                return ThoughtState.ActiveAtStage(0);
+                var count = Helper.CountGenderIndividuals(p.Map, GenderIdentity.Transgender);
+                return count <= 2 ? ThoughtState.ActiveAtStage(0) : ThoughtState.ActiveAtStage(1);
             }
             return ThoughtState.Inactive;
         }
@@ -66,10 +145,8 @@ namespace GenderAcceptance
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
         {
-            if (p.story.traits.HasTrait(TraitDef.Named("Chaser")) && Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender)
-            {
+            if (Helper.ChaserSeesFetish(p, otherPawn))
                 return ThoughtState.ActiveAtStage(0);
-            }
             return ThoughtState.Inactive;
         }
     }
@@ -90,7 +167,7 @@ namespace GenderAcceptance
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
         {
-            if (p.story.traits.HasTrait(TraitDef.Named("Cisphobic"))
+            if (p.story.traits.HasTrait(GADefOf.Cisphobic)
                 && Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Cisgender)
             {
                 return ThoughtState.ActiveAtStage(0);
@@ -118,8 +195,7 @@ namespace GenderAcceptance
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn pawn, Pawn otherPawn)
         {
-            var adoredPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Adored", false);
-            if (adoredPrecept != null && (pawn.Ideo?.HasPrecept(adoredPrecept) ?? false))
+            if (pawn.Ideo?.HasPrecept(GADefOf.Transgender_Adored) ?? false)
             {
                 if (Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender)
                 {
@@ -133,8 +209,7 @@ namespace GenderAcceptance
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn pawn, Pawn otherPawn)
         {
-            var despisedPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Despised", false);
-            if (despisedPrecept != null && (pawn.Ideo?.HasPrecept(despisedPrecept) ?? false))
+            if (pawn.Ideo?.HasPrecept(GADefOf.Transgender_Despised) ?? false)
             {
                 if (Helper.GetCurrentIdentity(otherPawn) == GenderIdentity.Transgender)
                 {
@@ -145,41 +220,18 @@ namespace GenderAcceptance
         }
     }
 
-    // public class MyMod : Mod
-    // {
-    //     public MyMod(ModContentPack content) : base(content)
-    //     {
-    //         var harmony = new Harmony("netdot.mian.genderacceptance");
-    //         harmony.PatchAll(Assembly.GetExecutingAssembly());
-    //     }
-    // }
-    
-    // [HarmonyPatch(typeof(InteractionWorker_RomanceAttempt), "SuccessChance")]
-    // public static class Patch_InteractionWorker_RomanceAttempt_SuccessChance
-    // {
-    //     [HarmonyPostfix]
-    //     public static void Postfix(Pawn initiator, Pawn recipient, ref float __result)
-    //     {
-    //         const float reductionFactor = 0.1f;
-    //         var adoredPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Adored", false);
-    //         var despisedPrecept = DefDatabase<PreceptDef>.GetNamed("Transgender_Despised", false);
-    //         
-    //         bool adoresSameSex = initiator.Ideo?.HasPrecept(adoredPrecept) ?? false;
-    //         bool despisesSameSex = initiator.Ideo?.HasPrecept(despisedPrecept) ?? false;
-    //         bool isStraight = !initiator.story.traits.HasTrait(TraitDefOf.Gay) && initiator.gender == recipient.gender;
-    //         bool isGay = initiator.story.traits.HasTrait(TraitDefOf.Gay) && initiator.gender != recipient.gender;
-    //
-    //         if ((adoresSameSex && isStraight) || (despisesSameSex && isGay))
-    //         {
-    //             float compatibilityFactor = initiator.relations.CompatibilityWith(recipient);
-    //             float opinionFactor = initiator.relations.OpinionOf(recipient) / 100.0f; 
-    //
-    //             float dynamicChance = Mathf.Clamp01(compatibilityFactor * opinionFactor);
-    //
-    //             dynamicChance *= reductionFactor;
-    //
-    //             __result = Mathf.Max(__result, dynamicChance);
-    //         }
-    //     }
-    // }
+    [StaticConstructorOnStartup]
+    public static class Startup
+    {
+        static Startup()
+        {
+            var harmony = new Harmony("rimworld.mian.genderacceptance");
+            harmony.PatchAll();
+
+            if (ModsConfig.IsActive("divinederivative.romance"))
+            {
+                WayBetterRomance.Patch(harmony);
+            }
+        }
+    }
 }
