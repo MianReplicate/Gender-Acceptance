@@ -44,6 +44,9 @@
     <Reference Include="WayBetterRomance">
       <HintPath>..\..\..\..\..\..\workshop\content\294100\2877731755\1.6\Assemblies\WayBetterRomance.dll</HintPath>
     </Reference>
+    <Reference Include="IntimacyLovin">
+      <HintPath>..\..\..\..\..\..\workshop\content\294100\3498422643\1.6\Assemblies\LoveyDoveySexWithEuterpe.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,6 +64,7 @@
     <Compile Include="GenderAcceptance.cs" />
     <Compile Include="Patches\InteractionWorker_RomanceAttempt.cs" />
     <Compile Include="Patches\LovePartnerRelationUtility.cs" />
+    <Compile Include="Patches\Mod Integration\IntimacyLovin.cs" />
     <Compile Include="Patches\Mod Integration\WayBetterRomance.cs" />
     <Compile Include="Patches\Pawn_RelationsTracker.cs" />
     <Compile Include="Patches\RelationsUtility.cs" />

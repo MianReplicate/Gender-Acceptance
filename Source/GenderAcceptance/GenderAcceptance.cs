@@ -252,6 +252,11 @@ namespace GenderAcceptance
             {
                 WayBetterRomance.Patch(harmony);
             }
+            
+            if (ModsConfig.IsActive("lovelydovey.sex.witheuterpe"))
+            {
+                IntimacyLovin.Patch(harmony);
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ public static class WayBetterRomance
         // (transphobic people don't believe trans people are the gender they say they are)
         
         harmony.Patch(typeof(SexualityUtility).GetMethod(nameof(SexualityUtility.CouldWeBeLovers)),
-            transpiler: typeof(WayBetterRomance).GetMethod(nameof(Helper.ReplaceAttractGenderWithPerceivedGender)));
+            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceAttractGenderWithPerceivedGender)));
 
         harmony.Patch(typeof(SexualityUtility).GetMethod(nameof(SexualityUtility.WouldConsiderMarriage)),
             transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceAttractGenderWithPerceivedGender)));
