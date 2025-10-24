@@ -50,11 +50,11 @@ public class InteractionWorker_RomanceAttempt
                     //stringBuilder.AppendLine(RomanceFactorLine("WBR.HookupChanceSexuality".Translate(), num);
                     yield return new(OpCodes.Ldloc_0);
                     yield return new(OpCodes.Ldstr, "GA.HookupChanceChaser");
-                    yield return CodeInstruction.Call(typeof(Translator), nameof(Translator.Translate), [typeof(string)]);
+                    // yield return CodeInstruction.Call(typeof(Translator), nameof(Translator.Translate), [typeof(string)]);
                     yield return CodeInstruction.Call(typeof(TaggedString), "op_Implicit", [typeof(TaggedString)]);
                     yield return new(OpCodes.Ldloc, num);
                     yield return CodeInstruction.Call(typeof(RimWorld.InteractionWorker_RomanceAttempt), "RomanceFactorLine");
-                    yield return CodeInstruction.Call(typeof(StringBuilder), nameof(StringBuilder.AppendLine), [typeof(string)]);
+                    yield return new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(StringBuilder), nameof(StringBuilder.AppendLine), [typeof(string)]));
                     yield return new(OpCodes.Pop);
 
                     startFound = false;
