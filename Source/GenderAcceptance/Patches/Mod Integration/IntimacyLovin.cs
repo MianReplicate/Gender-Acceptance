@@ -16,6 +16,23 @@ public static class IntimacyLovin
         
         harmony.Patch(typeof(CommonChecks).GetMethod(nameof(CommonChecks.AreMutuallyAttracted)),
             transpiler: typeof(Helper).GetMethod(nameof(ReplaceAttractGenderWithPerceivedGender)));
+        harmony.Patch(typeof(InteractionWorker_Seduce).GetMethod(nameof(InteractionWorker_Seduce.RandomSelectionWeight)),
+            postfix: typeof(IntimacyLovin).GetMethod(nameof(AddChaserRandomSelectionFactor)));
+        harmony.Patch(typeof(SexUtilities).GetMethod(nameof(SexUtilities.SexDisposition)),
+            postfix: typeof(IntimacyLovin).GetMethod(nameof(AddChaserDispositionFactor)));
+    }
+    public static void AddChaserRandomSelectionFactor(Pawn initiator, Pawn recipient, ref float __result)
+    {
+        //Adjust with chaser rating
+        if(Helper.ChaserSeesFetish(initiator, recipient))
+            __result *= 2f;
+    }
+    
+    public static void AddChaserDispositionFactor(Pawn initiator, Pawn recipient, ref float __result)
+    {
+        //Adjust with chaser rating
+        if(Helper.ChaserSeesFetish(initiator, recipient))
+            __result *= 2f;
     }
     
     public static IEnumerable<CodeInstruction> ReplaceAttractGenderWithPerceivedGender(IEnumerable<CodeInstruction> instructions)

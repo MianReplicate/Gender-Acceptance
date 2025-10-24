@@ -12,7 +12,7 @@ public class LovePartnerRelationUtility
      public static void Postfix(Pawn generated, Pawn other, ref float __result)
         {
             //Adjust with chaser rating
-            float chaserFactor = Helper.ChaserSeesFetish(generated, other) ? 2f: 0;
-            __result *= chaserFactor;
+            if(Helper.ChaserSeesFetish(generated, other))
+                __result *= 2f;
         }
 }
