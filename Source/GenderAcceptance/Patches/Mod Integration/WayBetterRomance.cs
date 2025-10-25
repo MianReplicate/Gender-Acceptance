@@ -39,7 +39,7 @@ public static class WayBetterRomance
             
         // Adds the chaser factor tooltip to the hookup menu
         harmony.Patch(typeof(HookupUtility).GetMethod(nameof(HookupUtility.HookupFactors)),
-            transpiler: typeof(Helper).GetMethod(nameof(AddChaserFactorToHookup)));
+            transpiler: typeof(WayBetterRomance).GetMethod(nameof(AddChaserFactorToHookup)));
     }
 
     public static IEnumerable<CodeInstruction> AddChaserFactorToHookup(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
@@ -52,7 +52,7 @@ public static class WayBetterRomance
 
             foreach (CodeInstruction code in instructions)
             {
-                if (startFound && code.Branches(out _))
+                if (startFound && code.opcode == OpCodes.Brfalse_S)
                 {
                     oldLabel = (Label)code.operand;
                     code.operand = newLabel;
@@ -75,7 +75,7 @@ public static class WayBetterRomance
                     yield return new(OpCodes.Ldloc_0);
                     yield return new(OpCodes.Ldstr, "GA.HookupChanceChaser");
                     // yield return CodeInstruction.Call(typeof(Translator), nameof(Translator.Translate), [typeof(string)]);
-                    yield return CodeInstruction.Call(typeof(TaggedString), "op_Implicit", [typeof(TaggedString)]);
+                    // yield return CodeInstruction.Call(typeof(TaggedString), "op_Implicit", [typeof(TaggedString)]);
                     yield return new(OpCodes.Ldloc, num);
                     yield return CodeInstruction.Call(typeof(HookupUtility), "HookupFactorLine");
                     yield return new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(StringBuilder), nameof(StringBuilder.AppendLine), [typeof(string)]));

@@ -16,6 +16,7 @@ using RelationsUtility = RimWorld.RelationsUtility;
 //TODO: transphobic cultures wont like gender affirming parties
 // TODO: swap opinion increase for chasers to increasing romance/sex factors
 // TODO: add lang files
+// TODO: ideally also support RJW but, we gotta write a PR first for SimpleTrans
 namespace GenderAcceptance
 {
     public static class Helper
@@ -26,14 +27,12 @@ namespace GenderAcceptance
             var codes = new List<CodeInstruction>(instructions);
             for (var i = 0; i < codes.Count; i++)
             {
-                // otherPawn.gender => Helper.GetPerceivedGender(pawn, otherPawn)
+                // otherPawn.gender => Helper.AttractedToPerson(pawn, otherPawn)
                 if (codes[i].LoadsField(AccessTools.Field(typeof(Pawn), nameof(Pawn.gender)))
                     && codes[i + 1].Calls(AccessTools.Method(typeof(RelationsUtility), nameof(RelationsUtility.AttractedToGender))))
                 {
-                    codes[i] = CodeInstruction.Call(typeof(Helper), nameof(GetPerceivedGender));
-                    codes.Insert(i - 1, new CodeInstruction(OpCodes.Dup));
-                    
-                    i += 1; // skips past the AttractedToGender call
+                    codes[i] = CodeInstruction.Call(typeof(Helper), nameof(AttractedToPerson));
+                    codes.RemoveAt(i + 1);
                 }
             }
             
@@ -65,21 +64,15 @@ namespace GenderAcceptance
         // does a chaser find their fetish??
         public static bool ChaserSeesFetish(Pawn initiator, Pawn recipient)
         {
-            // initiator cannot have asexual traits
-            if (initiator.story.traits.HasTrait(GADefOf.Chaser) && recipient.GetCurrentIdentity() == GenderIdentity.Transgender)
-            {
-                var genderPerceivedByChaser = GetPerceivedGender(initiator, recipient);
-                if (initiator.IsGay() && genderPerceivedByChaser == initiator.gender)
-                    return true;
-                if (initiator.IsStraight() && genderPerceivedByChaser != initiator.gender)
-                    return true;
-            }
+            if ((initiator.story?.traits?.HasTrait(GADefOf.Chaser) ?? false) && recipient.GetCurrentIdentity() == GenderIdentity.Transgender)
+                return AttractedToPerson(initiator, recipient);
             return false;
         }
 
         public static bool IsTransphobic(this Pawn pawn)
         {
-            return pawn.story.traits.HasTrait(GADefOf.Transphobic) || 
+            Log.Message("Pawn being checked: " + pawn);
+            return (pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false) || 
                    (pawn.GetCurrentIdentity() == GenderIdentity.Cisgender 
                     && (pawn.Ideo?.HasPrecept(GADefOf.Transgender_Despised) ?? false));
         }
@@ -120,11 +113,13 @@ namespace GenderAcceptance
         }
         public static GenderIdentity GetCurrentIdentity(this Pawn pawn)
         {
-            if (pawn.health.hediffSet.HasHediff(SimpleTransPregnancyUtility.transDef))
+            if(pawn == null)
+                Log.Message("pawn is null!");
+            if (pawn.health?.hediffSet?.HasHediff(SimpleTransPregnancyUtility.transDef) ?? false)
             {
                 return GenderIdentity.Transgender;
             }
-            if (pawn.health.hediffSet.HasHediff(SimpleTransPregnancyUtility.cisDef))
+            if (pawn.health?.hediffSet?.HasHediff(SimpleTransPregnancyUtility.cisDef) ?? false)
             {
                 return GenderIdentity.Cisgender;
             }
@@ -136,9 +131,9 @@ namespace GenderAcceptance
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
         {
-            if ((p.story.traits.HasTrait(GADefOf.Transphobic) &&
+            if (((p.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false) &&
                 otherPawn.GetCurrentIdentity() == GenderIdentity.Transgender) || (
-                    p.GetCurrentIdentity() == GenderIdentity.Transgender && otherPawn.story.traits.HasTrait(GADefOf.Transphobic)))
+                    p.GetCurrentIdentity() == GenderIdentity.Transgender && (otherPawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false)))
             {
                 return ThoughtState.ActiveAtStage(0);
             }
@@ -185,8 +180,9 @@ namespace GenderAcceptance
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
         {
-            if (p.story.traits.HasTrait(GADefOf.Cisphobic)
-                && otherPawn.GetCurrentIdentity() == GenderIdentity.Cisgender)
+            if (((p.story?.traits?.HasTrait(GADefOf.Cisphobic) ?? false)
+                && otherPawn.GetCurrentIdentity() == GenderIdentity.Cisgender) || (
+                p.GetCurrentIdentity() == GenderIdentity.Cisgender && (otherPawn.story?.traits?.HasTrait(GADefOf.Cisphobic) ?? false)))
             {
                 return ThoughtState.ActiveAtStage(0);
             }

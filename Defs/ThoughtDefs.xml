@@ -1,6 +1,6 @@
 <Defs>
   <!-- Precept Thoughts -->
-  <ThoughtDef>
+  <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>AmountOfTransgender_Disliked</defName>
     <thoughtClass>Thought_Situational</thoughtClass>
     <workerClass>GenderAcceptance.ThoughtWorker_PreceptTransgender</workerClass>
@@ -32,7 +32,7 @@
     </nullifyingTraits>
   </ThoughtDef>
 
-  <ThoughtDef>
+  <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>NegativeViewOnTransgender</defName>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <workerClass>GenderAcceptance.ThoughtWorker_NegativeViewOnTransgender</workerClass>
@@ -47,7 +47,7 @@
     </nullifyingTraits>
   </ThoughtDef>
 
-  <ThoughtDef>
+  <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>AmountOfTransgender_Liked</defName>
     <thoughtClass>Thought_Situational</thoughtClass>
     <workerClass>GenderAcceptance.ThoughtWorker_PreceptTransgender</workerClass>
@@ -79,7 +79,7 @@
     </nullifyingTraits>
   </ThoughtDef>
 
-  <ThoughtDef>
+  <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>PositiveViewOnTransgender</defName>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <workerClass>GenderAcceptance.ThoughtWorker_PositiveViewOnTransgender</workerClass>
@@ -149,7 +149,7 @@
 <!--    </stages>-->
 <!--  </ThoughtDef>-->
 
-  <ThoughtDef>
+  <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>Internal_Transphobia</defName>
     <workerClass>GenderAcceptance.ThoughtWorker_InternalTransphobia</workerClass>
     <stages>

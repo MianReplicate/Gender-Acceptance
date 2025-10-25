@@ -2,14 +2,14 @@
 <Defs>
 
     <!-- Issues-->
-    <IssueDef>
+    <IssueDef MayRequire="Ludeon.RimWorld.Ideology">
         <defName>Transgender</defName>
         <label>Transgender Individuals</label>
         <iconPath>UI/Issues/Sexuality</iconPath>
     </IssueDef>
 
     <!-- Precepts-->
-    <PreceptDef>
+    <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
         <defName>Transgender_Adored</defName>
         <issue>Transgender</issue>
         <label>Adored</label>
@@ -22,7 +22,7 @@
         </comps>
     </PreceptDef>
     
-    <PreceptDef>
+    <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
         <defName>Transgender_Despised</defName>
         <issue>Transgender</issue>
         <label>Despised</label>
