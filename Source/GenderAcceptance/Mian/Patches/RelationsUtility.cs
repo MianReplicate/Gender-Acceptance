@@ -3,7 +3,7 @@ using System.Reflection.Emit;
 using HarmonyLib;
 using Verse;
 
-namespace GenderAcceptance.Patches;
+namespace GenderAcceptance.Mian.Patches;
 
 [HarmonyPatch(typeof(RimWorld.RelationsUtility))]
 public static class RelationsUtility

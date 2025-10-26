@@ -1,0 +1,13 @@
+﻿<Defs>
+    <NeedDef>
+        <defName>Chaser_Need</defName>
+        <needClass>GenderAcceptance.Mian.Chaser_Need</needClass>
+        <label>Trans Intimacy</label>
+        <description>Chasers need to have some intimacy with a trans person every now and then.</description>
+        <minIntelligence>Humanlike</minIntelligence>
+        <freezeWhileSleeping>true</freezeWhileSleeping>
+        <freezeInMentalState>true</freezeInMentalState>
+        <showForCaravanMembers>false</showForCaravanMembers>
+        <developmentalStageFilter>Adult</developmentalStageFilter>
+    </NeedDef>
+</Defs>

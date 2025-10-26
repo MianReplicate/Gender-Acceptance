@@ -1,7 +1,7 @@
 ﻿using RimWorld;
 using Verse;
 
-namespace GenderAcceptance;
+namespace GenderAcceptance.Mian;
 
 [DefOf]
 public static class GADefOf
@@ -9,6 +9,8 @@ public static class GADefOf
     public static TraitDef Chaser;
     public static TraitDef Transphobic;
     public static TraitDef Cisphobic;
+
+    public static NeedDef Chaser_Need;
 
     [MayRequireIdeology] public static PreceptDef Transgender_Adored;
     [MayRequireIdeology] public static PreceptDef Transgender_Despised;
@@ -21,11 +23,15 @@ public static class GADefOf
     [MayRequireIdeology] public static ThoughtDef Internal_Transphobia;
 
     public static ThoughtDef TransgenderPersonJoined;
+    public static ThoughtDef CisgenderPersonJoined;
     public static ThoughtDef Cisphobia;
     public static ThoughtDef Transphobia;
         
     public static ThoughtDef Similar;
-    // public static ThoughtDef Chaser_Transgender_Spotted;
+    public static ThoughtDef Chaser_Need_Thought;
+    
+    public static ThoughtDef Accidental_Misgender;
+
         
     static GADefOf()
     {

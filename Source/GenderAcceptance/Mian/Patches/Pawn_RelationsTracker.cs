@@ -4,7 +4,7 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 
-namespace GenderAcceptance.Patches;
+namespace GenderAcceptance.Mian.Patches;
 
 [HarmonyPatch(typeof(RimWorld.Pawn_RelationsTracker))]
 public static class Pawn_RelationsTracker

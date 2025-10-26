@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using GenderAcceptance.Patches;
-using GenderAcceptance.Patches.Mod_Integration;
+using GenderAcceptance.Mian.Patches.Mod_Integration;
 using HarmonyLib;
 using RimWorld;
 using Verse;
@@ -16,7 +15,7 @@ using RelationsUtility = RimWorld.RelationsUtility;
 //TODO: transphobic cultures wont like gender affirming parties
 // TODO: add lang files
 // TODO: ideally also support RJW but, we gotta write a PR first for SimpleTrans
-namespace GenderAcceptance
+namespace GenderAcceptance.Mian
 {
     public static class Helper
     {
@@ -53,10 +52,10 @@ namespace GenderAcceptance
             return false;
         }
 
-        public static bool IsTransphobic(this Pawn pawn)
+        public static bool IsTransphobic(this Pawn pawn, bool includePrecept=true)
         {
             return (pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false) || 
-                   (pawn.GetCurrentIdentity() == GenderIdentity.Cisgender 
+                   (includePrecept && pawn.GetCurrentIdentity() == GenderIdentity.Cisgender 
                     && (pawn.Ideo?.HasPrecept(GADefOf.Transgender_Despised) ?? false));
         }
 
@@ -107,13 +106,58 @@ namespace GenderAcceptance
             return GenderIdentity.Cisgender;
         }   
     }
+
+    public class InteractionWorker_PurposeMisgender : InteractionWorker
+    {
+        public virtual float RandomSelectionWeight(Pawn initiator, Pawn recipient)
+        {
+            if (initiator.IsTransphobic() && recipient.GetCurrentIdentity() == GenderIdentity.Transgender)
+            {
+                return 1 * NegativeInteractionUtility.NegativeInteractionChanceFactor(initiator, recipient);
+            }
+            return 0.0f;
+        }
+    }
+    
+    public class InteractionWorker_Misgender : InteractionWorker
+    {
+        public virtual float RandomSelectionWeight(Pawn initiator, Pawn recipient)
+        {
+            if (recipient.GetCurrentIdentity() == GenderIdentity.Transgender)
+            {
+                return 0.05f;
+            }
+            return 0.0f;
+        }
+        
+        public override void Interacted(
+            Pawn initiator,
+            Pawn recipient,
+            List<RulePackDef> extraSentencePacks,
+            out string letterText,
+            out string letterLabel,
+            out LetterDef letterDef,
+            out LookTargets lookTargets)
+        {
+            letterText = (string) null;
+            letterLabel = (string) null;
+            letterDef = (LetterDef) null;
+            lookTargets = (LookTargets) null;
+
+            if (!initiator.IsTransphobic())
+            {
+                var thought = ThoughtMaker.MakeThought(GADefOf.Accidental_Misgender, 0);
+                initiator.needs.mood.thoughts.memories.TryGainMemory(thought);
+            }
+        }
+    }
     
     public class ThoughtWorker_Transphobia : ThoughtWorker
     {
         protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
         {
-            if (((p.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false) &&
-                otherPawn.GetCurrentIdentity() == GenderIdentity.Transgender) || (
+            if ((p.IsTransphobic(false) &&
+                 otherPawn.GetCurrentIdentity() == GenderIdentity.Transgender) || (
                     p.GetCurrentIdentity() == GenderIdentity.Transgender && (otherPawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false)))
             {
                 return ThoughtState.ActiveAtStage(0);
@@ -202,6 +246,32 @@ namespace GenderAcceptance
             return ThoughtState.Inactive;
         }
     }
+    
+    public class ThoughtWorker_Chaser_Need : ThoughtWorker
+    {
+        protected override ThoughtState CurrentStateInternal(Pawn p)
+        {
+            var chaserNeed = (Chaser_Need) p.needs.TryGetNeed(GADefOf.Chaser_Need);
+            if (chaserNeed == null)
+                return ThoughtState.Inactive;
+            switch (chaserNeed.CurCategory)
+            {
+                case ChaserCategory.JustHadIntimacy:
+                    return ThoughtState.ActiveAtStage(0);
+                case ChaserCategory.Neutral:
+                    return ThoughtState.Inactive;
+                case ChaserCategory.LongWhile:
+                    return ThoughtState.ActiveAtStage(1);
+                case ChaserCategory.ExtremelyLongWhile:
+                    return ThoughtState.ActiveAtStage(2);
+                case ChaserCategory.Aching:
+                    return ThoughtState.ActiveAtStage(3);
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+    }
+
 
     [StaticConstructorOnStartup]
     public static class Startup

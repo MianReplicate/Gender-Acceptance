@@ -1,0 +1,50 @@
+﻿<Defs>
+    <InteractionDef>
+        <defName>PurposeMisgender</defName>
+        <label>misgender</label>
+        <workerClass>GenderAcceptance.Mian.InteractionWorker_PurposeMisgender</workerClass>
+        <symbol>Things/Mote/SpeechSymbols/Insult</symbol>
+        
+        <socialFightBaseChance>0.2</socialFightBaseChance>
+        <recipientThought>GenderAcceptance.Mian.Thought_Misgendered</recipientThought>
+        <logRulesInitiator>
+            <rulesStrings>
+                <li>r_logentry(p=3)->[INITIATOR_nameDef] [adjective] [comment]</li>
+                
+                <li>adjective->purposefully</li>
+                <li>adjective->openly</li>
+                <li>adjective->loudly</li>
+                <li>adjective->disrespectfully</li>
+                <li>adjective->cruelly</li>
+                <li>adjective->angrily</li>
+                <li>adjective->recklessly</li>
+                <li>adjective->rudely</li>
+                
+                <li>comment(p=3)->misgendered [RECIPIENT_nameDef].</li>
+                <li>comment->exposed [RECIPIENT_nameDef]'s [PersonalCharacteristic] as a way to justify misgendering [RECIPIENT_pronoun].</li>
+                <li>comment->insulted [RECIPIENT_nameDef]'s gender identity and misgendered [RECIPIENT_pronoun].</li>
+                <li>comment->used the wrong pronouns for [RECIPIENT_nameDef].</li>
+            </rulesStrings>
+        </logRulesInitiator>
+    </InteractionDef>
+
+    <InteractionDef>
+        <defName>Misgender</defName>
+        <label>misgender</label>
+        <workerClass>GenderAcceptance.Mian.InteractionWorker_Misgender</workerClass>
+        <symbol>Things/Mote/SpeechSymbols/Insult</symbol>
+        <socialFightBaseChance>0</socialFightBaseChance>
+        <recipientThought>Misgendered</recipientThought>
+        <logRulesInitiator>
+            <rulesStrings>
+                <li>r_logentry(p=3)->[INITIATOR_nameDef] [adjective] [comment]</li>
+
+                <li>adjective->accidentally</li>
+                <li>adjective->mistakenly</li>
+                
+                <li>comment(p=3)->misgendered [RECIPIENT_nameDef].</li>
+                <li>comment->used the wrong pronouns for [RECIPIENT_nameDef].</li>
+            </rulesStrings>
+        </logRulesInitiator>
+    </InteractionDef>
+</Defs>

@@ -4,10 +4,10 @@ using System.Reflection.Emit;
 using HarmonyLib;
 using Verse;
 
-namespace GenderAcceptance.Patches;
+namespace GenderAcceptance.Mian.Patches;
 
-[HarmonyPatch(typeof(RimWorld.ThoughtWorker_Man))]
-public class ThoughtWorker_Man
+[HarmonyPatch(typeof(RimWorld.ThoughtWorker_Woman))]
+public class ThoughtWorker_Woman
 {
     // The method is protected so I cant do nameof :(
     [HarmonyPatch("CurrentSocialStateInternal")]

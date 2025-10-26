@@ -5,7 +5,7 @@ using HarmonyLib;
 using LoveyDoveySexWithEuterpe;
 using Verse;
 
-namespace GenderAcceptance.Patches.Mod_Integration;
+namespace GenderAcceptance.Mian.Patches.Mod_Integration;
 
 public static class IntimacyLovin
 {

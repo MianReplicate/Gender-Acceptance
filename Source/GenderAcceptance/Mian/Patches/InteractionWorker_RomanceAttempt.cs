@@ -2,12 +2,11 @@
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
-
-using GenderAcceptance.Patches.Mod_Integration;
+using GenderAcceptance.Mian.Patches.Mod_Integration;
 using HarmonyLib;
 using Verse;
 
-namespace GenderAcceptance.Patches;
+namespace GenderAcceptance.Mian.Patches;
 
 [HarmonyPatch(typeof(RimWorld.InteractionWorker_RomanceAttempt))]
 public class InteractionWorker_RomanceAttempt

@@ -3,7 +3,7 @@
   <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>AmountOfTransgender_Disliked</defName>
     <thoughtClass>Thought_Situational</thoughtClass>
-    <workerClass>GenderAcceptance.ThoughtWorker_PreceptTransgender</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorker_PreceptTransgender</workerClass>
     <validWhileDespawned>false</validWhileDespawned>
     <stages>
       <li>
@@ -35,7 +35,7 @@
   <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>NegativeViewOnTransgender</defName>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
-    <workerClass>GenderAcceptance.ThoughtWorker_NegativeViewOnTransgender</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorker_NegativeViewOnTransgender</workerClass>
     <stages>
       <li>
         <label>Transphobia</label>
@@ -50,7 +50,7 @@
   <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>AmountOfTransgender_Liked</defName>
     <thoughtClass>Thought_Situational</thoughtClass>
-    <workerClass>GenderAcceptance.ThoughtWorker_PreceptTransgender</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorker_PreceptTransgender</workerClass>
     <validWhileDespawned>false</validWhileDespawned>
     <stages>
       <li>
@@ -82,7 +82,7 @@
   <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>PositiveViewOnTransgender</defName>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
-    <workerClass>GenderAcceptance.ThoughtWorker_PositiveViewOnTransgender</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorker_PositiveViewOnTransgender</workerClass>
     <stages>
       <li>
         <label>Transgender</label>
@@ -97,7 +97,7 @@
   <!--Phobias-->
   <ThoughtDef>
     <defName>Cisphobia</defName>
-    <workerClass>GenderAcceptance.ThoughtWorker_Cisphobia</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorker_Cisphobia</workerClass>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
@@ -110,7 +110,7 @@
   
   <ThoughtDef>
     <defName>Transphobia</defName>
-    <workerClass>GenderAcceptance.ThoughtWorker_Transphobia</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorker_Transphobia</workerClass>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
@@ -123,8 +123,36 @@
 
   <!--Misc-->
   <ThoughtDef>
+    <defName>Chaser_Need_Thought</defName>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorker_Chaser_Need</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>Intimate with a trans person</label>
+        <description>Been around a trans person recently, feeling great!</description>
+        <baseMoodEffect>+25</baseMoodEffect>
+      </li>
+      <li>
+        <label>Need a trans person</label>
+        <description>I haven't felt the touch of a trans person in a while..</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+      <li>
+        <label>Longing for a trans person</label>
+        <description>I'm getting anxious and worried that I will never touch a trans person ever again.</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+      <li>
+        <label>Aching for a trans person</label>
+        <description>I am foaming at the mouth in desperate need for a transgender.</description>
+        <baseMoodEffect>-15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
     <defName>Similar</defName>
-    <workerClass>GenderAcceptance.ThoughtWorker_Similarity</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorker_Similarity</workerClass>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
@@ -140,7 +168,7 @@
     <durationDays>5</durationDays>
     <stages>
       <li>
-        <label>There's someone else who is like me!</label>
+        <label>Transgender person joined </label>
         <description>It feels good knowing I'll have company that can relate to being transgender.</description>
         <baseMoodEffect>+25</baseMoodEffect>
       </li>
@@ -152,9 +180,69 @@
     </stages>
   </ThoughtDef>
 
+  <ThoughtDef>
+    <defName>Accidental_Misgender</defName>
+    <durationDays>2</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>misgendered someone</label>
+        <description>I accidentally misgendered someone. I feel terrible.</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Misgendered</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>20</durationDays>
+    <stackLimit>300</stackLimit>
+    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <socialTargetDevelopmentalStageFilter>Baby, Child, Adult</socialTargetDevelopmentalStageFilter>
+    <stages>
+      <li>
+        <label>misgendered</label>
+        <baseOpinionOffset>-15</baseOpinionOffset>
+      </li>
+    </stages>
+    <thoughtToMake>MisgenderedMood</thoughtToMake>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>MisgenderedMood</defName>
+    <durationDays>2</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>misgendered</label>
+        <description>I was misgendered by someone!</description>
+        <baseMoodEffect>-8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>CisgenderPersonJoined</defName>
+    <durationDays>5</durationDays>
+    <stages>
+      <li>
+        <label>Cisgender person joined</label>
+        <description>Disgusting! Why did we let them join?</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
   <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>Internal_Transphobia</defName>
-    <workerClass>GenderAcceptance.ThoughtWorker_InternalTransphobia</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorker_InternalTransphobia</workerClass>
     <stages>
       <li>
         <label>Internal Transphobia</label>

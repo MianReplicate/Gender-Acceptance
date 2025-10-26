@@ -8,7 +8,7 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 
-namespace GenderAcceptance.Patches.Mod_Integration;
+namespace GenderAcceptance.Mian.Patches.Mod_Integration;
 
 public static class WayBetterRomance
 {
