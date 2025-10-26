@@ -74,8 +74,8 @@ public static class WayBetterRomance
                     //stringBuilder.AppendLine(HookupFactorLine("GA.HookupChanceChaser".Translate(), num);
                     yield return new(OpCodes.Ldloc_0);
                     yield return new(OpCodes.Ldstr, "GA.HookupChanceChaser");
-                    // yield return CodeInstruction.Call(typeof(Translator), nameof(Translator.Translate), [typeof(string)]);
-                    // yield return CodeInstruction.Call(typeof(TaggedString), "op_Implicit", [typeof(TaggedString)]);
+                    yield return CodeInstruction.Call(typeof(Translator), nameof(Translator.Translate), [typeof(string)]);
+                    yield return CodeInstruction.Call(typeof(TaggedString), "op_Implicit", [typeof(TaggedString)]);
                     yield return new(OpCodes.Ldloc, num);
                     yield return CodeInstruction.Call(typeof(HookupUtility), "HookupFactorLine");
                     yield return new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(StringBuilder), nameof(StringBuilder.AppendLine), [typeof(string)]));

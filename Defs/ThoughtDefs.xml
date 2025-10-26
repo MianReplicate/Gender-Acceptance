@@ -130,24 +130,27 @@
     <stages>
       <li>
         <label>Both relate to being transgender</label>
-        <baseOpinionOffset>+10</baseOpinionOffset>
+        <baseOpinionOffset>+15</baseOpinionOffset>
       </li>
     </stages>
   </ThoughtDef>
 
-<!--  <ThoughtDef>-->
-<!--    <defName>Chaser_Transgender_Spotted</defName>-->
-<!--    <workerClass>GenderAcceptance.ThoughtWorker_Chaser</workerClass>-->
-<!--    <thoughtClass>Thought_SituationalSocial</thoughtClass>-->
-<!--    <validWhileDespawned>true</validWhileDespawned>-->
-<!--    <stages>-->
-<!--      <li>-->
-<!--        <label>Fetishizes transness</label>-->
-<!--        <baseOpinionOffset>+30</baseOpinionOffset>-->
-<!--        &lt;!&ndash;        <romanceChanceFactor>1.5</romanceChanceFactor>&ndash;&gt;-->
-<!--      </li>-->
-<!--    </stages>-->
-<!--  </ThoughtDef>-->
+  <ThoughtDef>
+    <defName>TransgenderPersonJoined</defName>
+    <durationDays>5</durationDays>
+    <stages>
+      <li>
+        <label>There's someone else who is like me!</label>
+        <description>It feels good knowing I'll have company that can relate to being transgender.</description>
+        <baseMoodEffect>+25</baseMoodEffect>
+      </li>
+      <li>
+        <label>Transgender person joined</label>
+        <description>Disgusting! Why did we let them join?</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
 
   <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>Internal_Transphobia</defName>

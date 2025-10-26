@@ -14,7 +14,6 @@ using RelationsUtility = RimWorld.RelationsUtility;
 
 // TODO: add credits (divineDerivative)!
 //TODO: transphobic cultures wont like gender affirming parties
-// TODO: swap opinion increase for chasers to increasing romance/sex factors
 // TODO: add lang files
 // TODO: ideally also support RJW but, we gotta write a PR first for SimpleTrans
 namespace GenderAcceptance
@@ -46,21 +45,6 @@ namespace GenderAcceptance
             return 0f;
         }
         
-        // used for chasers
-        public static bool IsGay(this Pawn pawn)
-        {
-            var traits = pawn.story.traits;
-            var homoAce = DefDatabase<TraitDef>.GetNamedSilentFail("HomoAce");
-            return traits.HasTrait(TraitDefOf.Gay) || (homoAce != null && traits.HasTrait(homoAce));
-        }
-        public static bool IsStraight(this Pawn pawn)
-        {
-            var traits = pawn.story.traits;
-            var heteroAce = DefDatabase<TraitDef>.GetNamedSilentFail("HeteroAce");
-            var straight = DefDatabase<TraitDef>.GetNamedSilentFail("Straight");
-            return ((straight != null && traits.HasTrait(straight)) || (heteroAce != null && traits.HasTrait(heteroAce)) 
-                                                                    || (!pawn.IsGay() && !traits.HasTrait(TraitDefOf.Bisexual) && !traits.HasTrait(TraitDefOf.Asexual)));
-        }
         // does a chaser find their fetish??
         public static bool ChaserSeesFetish(Pawn initiator, Pawn recipient)
         {
@@ -71,7 +55,6 @@ namespace GenderAcceptance
 
         public static bool IsTransphobic(this Pawn pawn)
         {
-            Log.Message("Pawn being checked: " + pawn);
             return (pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false) || 
                    (pawn.GetCurrentIdentity() == GenderIdentity.Cisgender 
                     && (pawn.Ideo?.HasPrecept(GADefOf.Transgender_Despised) ?? false));
@@ -113,8 +96,6 @@ namespace GenderAcceptance
         }
         public static GenderIdentity GetCurrentIdentity(this Pawn pawn)
         {
-            if(pawn == null)
-                Log.Message("pawn is null!");
             if (pawn.health?.hediffSet?.HasHediff(SimpleTransPregnancyUtility.transDef) ?? false)
             {
                 return GenderIdentity.Transgender;
@@ -153,16 +134,6 @@ namespace GenderAcceptance
             return ThoughtState.Inactive;
         }
     }
-    
-    public class ThoughtWorker_Chaser : ThoughtWorker
-    {
-        protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
-        {
-            if (Helper.ChaserSeesFetish(p, otherPawn))
-                return ThoughtState.ActiveAtStage(0);
-            return ThoughtState.Inactive;
-        }
-    }
 
     public class ThoughtWorker_Similarity : ThoughtWorker
     {
@@ -194,8 +165,6 @@ namespace GenderAcceptance
     {
         protected override ThoughtState ShouldHaveThought(Pawn p)
         {
-            if(p.GetCurrentIdentity() == GenderIdentity.Transgender) return ThoughtState.ActiveAtStage(0);
-            
             int transgenderCount = Helper.CountGenderIndividuals(p.Map, GenderIdentity.Transgender);
             int stage = Math.Min(transgenderCount - 1, 4);
 
