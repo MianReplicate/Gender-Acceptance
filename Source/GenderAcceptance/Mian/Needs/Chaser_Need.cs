@@ -4,10 +4,11 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace GenderAcceptance.Mian;
+namespace GenderAcceptance.Mian.Needs;
 
 public enum ChaserCategory : byte
 {
+  Inactive,
   JustHadIntimacy,
   Neutral,
   LongWhile,
@@ -17,13 +18,12 @@ public enum ChaserCategory : byte
 
 public class Chaser_Need : Need
 {
-      private static readonly float[] Thresholds = new float[5]
+      private static readonly float[] Thresholds = new float[4]
   {
     0.8f,
-    0.6f,
-    0.4f,
-    0.2f,
-    0.05f
+    0.5f,
+    0.25f,
+    0.1f
   };
 
   public override bool ShowOnNeedList => !this.Disabled;
@@ -36,6 +36,8 @@ public class Chaser_Need : Need
   {
     get
     {
+      if (Disabled)
+        return ChaserCategory.Inactive;
       if ((double) this.CurLevel > (double) Chaser_Need.Thresholds[0])
         return ChaserCategory.JustHadIntimacy;
       if ((double) this.CurLevel > (double) Chaser_Need.Thresholds[1])
@@ -78,11 +80,11 @@ public class Chaser_Need : Need
     this.threshPercents = new List<float>((IEnumerable<float>) Chaser_Need.Thresholds);
   }
 
-  public override void SetInitialLevel() => this.CurLevel = 0.7f;
+  public override void SetInitialLevel() => this.CurLevel = Rand.Range(0.7f, 1f);
   
   private void GainNeed(float amount)
   {
-    if ((double) amount <= 0.0 || amount >= 1.0)
+    if ((double) amount <= 0.0 || this.curLevelInt >= 1)
       return;
     this.curLevelInt += amount;
     this.lastGainTick = Find.TickManager.TicksGame;
@@ -90,12 +92,12 @@ public class Chaser_Need : Need
 
   public void GainNeedFromInteraction()
   {
-    GainNeed(0.2f);
+    GainNeed(Rand.Range(0.1f, 0.3f));
   }
 
   public void GainNeedFromSex()
   {
-    GainNeed(1f);
+    GainNeed(Rand.Range(1f, 1.5f));
   }
 
   public override void NeedInterval()

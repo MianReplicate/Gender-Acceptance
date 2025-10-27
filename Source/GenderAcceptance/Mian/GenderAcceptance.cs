@@ -106,6 +106,8 @@ namespace GenderAcceptance.Mian;
     {
         static Startup()
         {
+            Log.Message("Transphobia? More like trans-dimensional timey wimey shi-");
+            
             Harmony.DEBUG = true;
             
             var harmony = new Harmony("rimworld.mian.genderacceptance");

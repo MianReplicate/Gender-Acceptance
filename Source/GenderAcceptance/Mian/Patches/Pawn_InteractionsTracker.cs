@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using GenderAcceptance.Mian.Needs;
+using HarmonyLib;
 using Verse;
 
 namespace GenderAcceptance.Mian.Patches;

@@ -1,4 +1,5 @@
 ﻿using System;
+using GenderAcceptance.Mian.Needs;
 using RimWorld;
 using Verse;
 
@@ -24,7 +25,7 @@ public class ThoughtWorker_Chaser_Need : ThoughtWorker
             case ChaserCategory.Aching:
                 return ThoughtState.ActiveAtStage(3);
             default:
-                throw new NotImplementedException();
+                return ThoughtState.Inactive;
         }
     }
 }
