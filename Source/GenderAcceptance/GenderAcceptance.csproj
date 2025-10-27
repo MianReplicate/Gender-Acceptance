@@ -90,11 +90,11 @@
     <Compile Include="Mian\Chaser_Need.cs" />
     <Compile Include="Mian\Patches\Faction.cs" />
     <Compile Include="Mian\Patches\InteractionWorker_RomanceAttempt.cs" />
-    <Compile Include="Mian\Patches\JobDriver_VisitSickPawn.cs" />
     <Compile Include="Mian\Patches\LovePartnerRelationUtility.cs" />
     <Compile Include="Mian\Patches\MemoryThoughtHandler.cs" />
     <Compile Include="Mian\Patches\Mod Integration\IntimacyLovin.cs" />
     <Compile Include="Mian\Patches\Mod Integration\WayBetterRomance.cs" />
+    <Compile Include="Mian\Patches\Pawn_InteractionsTracker.cs" />
     <Compile Include="Mian\Patches\Pawn_RelationsTracker.cs" />
     <Compile Include="Mian\Patches\RelationsUtility.cs" />
     <Compile Include="Mian\Patches\ThoughtWorker_Man.cs" />

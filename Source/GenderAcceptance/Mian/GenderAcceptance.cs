@@ -15,6 +15,7 @@ using RelationsUtility = RimWorld.RelationsUtility;
 //TODO: transphobic cultures wont like gender affirming parties
 // TODO: add lang files
 // TODO: ideally also support RJW but, we gotta write a PR first for SimpleTrans
+// TODO: chasers get intimacy need by trans ppl in all sorts of social interactions
 namespace GenderAcceptance.Mian
 {
     public static class Helper
