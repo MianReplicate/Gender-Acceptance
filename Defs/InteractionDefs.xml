@@ -2,11 +2,11 @@
     <InteractionDef>
         <defName>PurposeMisgender</defName>
         <label>misgender</label>
-        <workerClass>GenderAcceptance.Mian.InteractionWorker_PurposeMisgender</workerClass>
+        <workerClass>GenderAcceptance.Mian.InteractionWorkers.InteractionWorker_PurposeMisgender</workerClass>
         <symbol>Things/Mote/SpeechSymbols/Insult</symbol>
         
         <socialFightBaseChance>0.2</socialFightBaseChance>
-        <recipientThought>GenderAcceptance.Mian.Thought_Misgendered</recipientThought>
+        <recipientThought>Misgendered</recipientThought>
         <logRulesInitiator>
             <rulesStrings>
                 <li>r_logentry(p=3)->[INITIATOR_nameDef] [adjective] [comment]</li>
@@ -31,7 +31,7 @@
     <InteractionDef>
         <defName>Misgender</defName>
         <label>misgender</label>
-        <workerClass>GenderAcceptance.Mian.InteractionWorker_Misgender</workerClass>
+        <workerClass>GenderAcceptance.Mian.InteractionWorkers.InteractionWorker_Misgender</workerClass>
         <symbol>Things/Mote/SpeechSymbols/Insult</symbol>
         <socialFightBaseChance>0</socialFightBaseChance>
         <recipientThought>Misgendered</recipientThought>

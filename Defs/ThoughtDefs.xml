@@ -3,7 +3,7 @@
   <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>AmountOfTransgender_Disliked</defName>
     <thoughtClass>Thought_Situational</thoughtClass>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorker_PreceptTransgender</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_PreceptTransgender</workerClass>
     <validWhileDespawned>false</validWhileDespawned>
     <stages>
       <li>
@@ -35,7 +35,7 @@
   <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>NegativeViewOnTransgender</defName>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorker_NegativeViewOnTransgender</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_NegativeViewOnTransgender</workerClass>
     <stages>
       <li>
         <label>Transphobia</label>
@@ -50,7 +50,7 @@
   <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>AmountOfTransgender_Liked</defName>
     <thoughtClass>Thought_Situational</thoughtClass>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorker_PreceptTransgender</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_PreceptTransgender</workerClass>
     <validWhileDespawned>false</validWhileDespawned>
     <stages>
       <li>
@@ -82,7 +82,7 @@
   <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>PositiveViewOnTransgender</defName>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorker_PositiveViewOnTransgender</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_PositiveViewOnTransgender</workerClass>
     <stages>
       <li>
         <label>Transgender</label>
@@ -97,7 +97,7 @@
   <!--Phobias-->
   <ThoughtDef>
     <defName>Cisphobia</defName>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorker_Cisphobia</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_Cisphobia</workerClass>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
@@ -110,7 +110,7 @@
   
   <ThoughtDef>
     <defName>Transphobia</defName>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorker_Transphobia</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_Transphobia</workerClass>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
@@ -124,7 +124,7 @@
   <!--Misc-->
   <ThoughtDef>
     <defName>Chaser_Need_Thought</defName>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorker_Chaser_Need</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_Chaser_Need</workerClass>
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
       <li>
@@ -152,7 +152,7 @@
   
   <ThoughtDef>
     <defName>Similar</defName>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorker_Similarity</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_Similarity</workerClass>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
@@ -242,7 +242,7 @@
 
   <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>Internal_Transphobia</defName>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorker_InternalTransphobia</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_InternalTransphobia</workerClass>
     <stages>
       <li>
         <label>Internal Transphobia</label>

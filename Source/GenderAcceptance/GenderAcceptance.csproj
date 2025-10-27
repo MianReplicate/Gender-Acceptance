@@ -33,61 +33,48 @@
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Lib.Harmony.2.4.1\lib\net48\0Harmony.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="RimWorld">
       <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="RJW">
       <HintPath>..\..\..\..\Mods\rjw-master\1.6\Assemblies\RJW.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="SimpleTransExpanded">
       <HintPath>..\..\..\..\..\..\workshop\content\294100\3516912373\1.6\Assemblies\Simple-Trans.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="WayBetterRomance">
       <HintPath>..\..\..\..\..\..\workshop\content\294100\2877731755\1.6\Assemblies\WayBetterRomance.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="IntimacyLovin">
       <HintPath>..\..\..\..\..\..\workshop\content\294100\3498422643\1.6\Assemblies\LoveyDoveySexWithEuterpe.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="System">
-      <Private>False</Private>
     </Reference>
     <Reference Include="System.Core">
-      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml.Linq">
-      <Private>False</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions">
-      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp">
-      <Private>False</Private>
     </Reference>
     <Reference Include="System.Data">
-      <Private>False</Private>
     </Reference>
     <Reference Include="System.Net.Http">
-      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml">
-      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mian\GADefOf.cs" />
     <Compile Include="Mian\GenderAcceptance.cs" />
-    <Compile Include="Mian\Chaser_Need.cs" />
+    <Compile Include="Mian\InteractionWorkers\Misgender.cs" />
+    <Compile Include="Mian\InteractionWorkers\PurposeMisgender.cs" />
+    <Compile Include="Mian\Needs\Chaser_Need.cs" />
     <Compile Include="Mian\Patches\Faction.cs" />
     <Compile Include="Mian\Patches\InteractionWorker_RomanceAttempt.cs" />
     <Compile Include="Mian\Patches\LovePartnerRelationUtility.cs" />
@@ -99,11 +86,15 @@
     <Compile Include="Mian\Patches\RelationsUtility.cs" />
     <Compile Include="Mian\Patches\ThoughtWorker_Man.cs" />
     <Compile Include="Mian\Patches\ThoughtWorker_Woman.cs" />
+    <Compile Include="Mian\ThoughtWorkers\Chaser_Need.cs" />
+    <Compile Include="Mian\ThoughtWorkers\Cisphobia.cs" />
+    <Compile Include="Mian\ThoughtWorkers\InternalTransphobia.cs" />
+    <Compile Include="Mian\ThoughtWorkers\NegativeViewOnTransgender.cs" />
+    <Compile Include="Mian\ThoughtWorkers\PositiveViewOnTransgender.cs" />
+    <Compile Include="Mian\ThoughtWorkers\PreceptTransgender.cs" />
+    <Compile Include="Mian\ThoughtWorkers\Similarity.cs" />
+    <Compile Include="Mian\ThoughtWorkers\Transphobia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
