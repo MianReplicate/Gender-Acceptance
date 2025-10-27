@@ -12,10 +12,9 @@ public static class MemoryThoughtHandler
     [HarmonyPostfix]
     public static void GainTransIntimacyFromLovin(RimWorld.MemoryThoughtHandler __instance, Thought_Memory newThought, Pawn otherPawn)
     {
-        if ((__instance.pawn.story?.traits?.HasTrait(GADefOf.Chaser) ?? false) &&
-            newThought.def == ThoughtDefOf.GotSomeLovin && otherPawn.GetCurrentIdentity() == GenderIdentity.Transgender)
+        if (newThought.def == ThoughtDefOf.GotSomeLovin && Helper.ChaserSeesFetish(__instance.pawn, otherPawn))
         {
-            ((Chaser_Need) __instance.pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeed(1f);
+            ((Chaser_Need) __instance.pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromSex();
         }
     }
 }

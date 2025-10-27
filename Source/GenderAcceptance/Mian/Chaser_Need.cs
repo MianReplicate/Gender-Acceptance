@@ -80,12 +80,22 @@ public class Chaser_Need : Need
 
   public override void SetInitialLevel() => this.CurLevel = 0.7f;
   
-  public void GainNeed(float amount)
+  private void GainNeed(float amount)
   {
     if ((double) amount <= 0.0 || amount >= 1.0)
       return;
     this.curLevelInt += amount;
     this.lastGainTick = Find.TickManager.TicksGame;
+  }
+
+  public void GainNeedFromInteraction()
+  {
+    GainNeed(0.2f);
+  }
+
+  public void GainNeedFromSex()
+  {
+    GainNeed(1f);
   }
 
   public override void NeedInterval()
