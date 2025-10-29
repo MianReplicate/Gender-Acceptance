@@ -3,7 +3,6 @@
         <defName>Chaser</defName>
         <commonality>1.3</commonality>
         <label>chaser</label>
-        <description>This pawn fetishizes transgender individuals.</description>
         <degreeDatas>
             <li>
                 <label>chaser</label>
@@ -20,7 +19,6 @@
     <TraitDef>
         <defName>Cisphobic</defName>
         <label>cisphobic</label>
-        <description>This pawn dislikes cisgender individuals.</description>
         <degreeDatas>
             <li>
                 <degree>0</degree>
@@ -32,7 +30,6 @@
     <TraitDef>
         <defName>Transphobic</defName>
         <label>transphobic</label>
-        <description>This pawn dislikes transgender individuals.</description>
         <degreeDatas>
             <li>
                 <degree>0</degree>
