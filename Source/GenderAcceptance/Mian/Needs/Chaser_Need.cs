@@ -91,7 +91,7 @@ public class Chaser_Need : Need
 
   public void GainNeedFromInteraction()
   {
-    GainNeed(Rand.Range(0.1f, 0.3f));
+    GainNeed(Rand.Range(0.1f, 0.15f));
   }
 
   public void GainNeedFromSex()

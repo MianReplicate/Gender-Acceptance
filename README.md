@@ -10,6 +10,7 @@ It contains built in patches for mods such as Way Better Romance and Intimacy - 
 - Chaser trait - Chasers fetishize transgender individuals, often needing to be intimate with them from time to time in order to be happy. They will seek out transgender individuals more often for romance and love making.
 - Precept and ideologies for the Ideology DLC relating to acceptance of transgender individuals.
 - Transgender individuals are more fond of one another as they relate to being transgender.
+- Pawns may misgender transgender individuals whether purposefully or on accident.
 
 ## FAQ ❓
 - Will you add compatibility with this one mod?
