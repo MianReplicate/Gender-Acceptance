@@ -7,7 +7,7 @@ namespace GenderAcceptance.Mian.InteractionWorkers;
 
 public class InteractionWorker_Misgender : InteractionWorker
 {
-    public virtual float RandomSelectionWeight(Pawn initiator, Pawn recipient)
+    public override float RandomSelectionWeight(Pawn initiator, Pawn recipient)
     {
         if (recipient.GetCurrentIdentity() == GenderIdentity.Transgender)
         {

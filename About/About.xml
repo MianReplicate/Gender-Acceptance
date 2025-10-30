@@ -28,6 +28,5 @@
     <loadAfter>
         <li>Ludeon.RimWorld</li>
         <li>brrainz.harmony</li>
-<!--        <li>runaway.simpletrans</li>-->
     </loadAfter>
 </ModMetaData> 

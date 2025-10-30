@@ -32,6 +32,9 @@
             <li Class="PreceptComp_SituationalThought">
                 <thought>AmountOfTransgender_Disliked</thought>
             </li>
+            <li Class="PreceptComp_SituationalThought">
+                <thought>Internal_Transphobia</thought>
+            </li>
         </comps>
     </PreceptDef>
 </Defs>

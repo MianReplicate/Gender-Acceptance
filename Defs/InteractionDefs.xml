@@ -33,11 +33,11 @@
         <label>misgender</label>
         <workerClass>GenderAcceptance.Mian.InteractionWorkers.InteractionWorker_Misgender</workerClass>
         <symbol>Things/Mote/SpeechSymbols/Insult</symbol>
-        <socialFightBaseChance>0</socialFightBaseChance>
+        <socialFightBaseChance>0.01</socialFightBaseChance>
         <recipientThought>Misgendered</recipientThought>
         <logRulesInitiator>
             <rulesStrings>
-                <li>r_logentry(p=3)->[INITIATOR_nameDef] [adjective] [comment]</li>
+                <li>r_logentry->[INITIATOR_nameDef] [adjective] [comment]</li>
 
                 <li>adjective->accidentally</li>
                 <li>adjective->mistakenly</li>

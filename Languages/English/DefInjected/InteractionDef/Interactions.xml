@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-    <PurposeMisgender.label>Misgender</PurposeMisgender.label>
+    <PurposeMisgender.label>Purposefully Misgendered</PurposeMisgender.label>
     <PurposeMisgender.logRulesInitiator.rulesStrings.0>r_logentry->[INITIATOR_nameDef] [adjective] [comment]</PurposeMisgender.logRulesInitiator.rulesStrings.0>
     <PurposeMisgender.logRulesInitiator.rulesStrings.1>adjective->purposefully</PurposeMisgender.logRulesInitiator.rulesStrings.1>
     <PurposeMisgender.logRulesInitiator.rulesStrings.2>adjective->openly</PurposeMisgender.logRulesInitiator.rulesStrings.2>
@@ -10,9 +10,15 @@
     <PurposeMisgender.logRulesInitiator.rulesStrings.6>adjective->angrily</PurposeMisgender.logRulesInitiator.rulesStrings.6>
     <PurposeMisgender.logRulesInitiator.rulesStrings.7>adjective->recklessly</PurposeMisgender.logRulesInitiator.rulesStrings.7>
     <PurposeMisgender.logRulesInitiator.rulesStrings.8>adjective->rudely</PurposeMisgender.logRulesInitiator.rulesStrings.8>
-
     <PurposeMisgender.logRulesInitiator.rulesStrings.9>comment(p=3)->misgendered [RECIPIENT_nameDef].</PurposeMisgender.logRulesInitiator.rulesStrings.9>
     <PurposeMisgender.logRulesInitiator.rulesStrings.10>comment->exposed [RECIPIENT_nameDef]'s [PersonalCharacteristic] as a way to justify misgendering [RECIPIENT_pronoun].</PurposeMisgender.logRulesInitiator.rulesStrings.10>
     <PurposeMisgender.logRulesInitiator.rulesStrings.11>comment->insulted [RECIPIENT_nameDef]'s gender identity and misgendered [RECIPIENT_pronoun].</PurposeMisgender.logRulesInitiator.rulesStrings.11>
     <PurposeMisgender.logRulesInitiator.rulesStrings.12>comment->used the wrong pronouns for [RECIPIENT_nameDef].</PurposeMisgender.logRulesInitiator.rulesStrings.12>
+
+    <Misgender.label>Misgendered</Misgender.label>
+    <Misgender.logRulesInitiator.rulesStrings.0>r_logentry->[INITIATOR_nameDef] [adjective] [comment]</Misgender.logRulesInitiator.rulesStrings.0>
+    <Misgender.logRulesInitiator.rulesStrings.1>adjective->accidentally</Misgender.logRulesInitiator.rulesStrings.1>
+    <Misgender.logRulesInitiator.rulesStrings.2>adjective->mistakenly</Misgender.logRulesInitiator.rulesStrings.2>
+    <Misgender.logRulesInitiator.rulesStrings.3>comment(p=3)->misgendered [RECIPIENT_nameDef].</Misgender.logRulesInitiator.rulesStrings.3>
+    <Misgender.logRulesInitiator.rulesStrings.4>comment->used the wrong pronouns for [RECIPIENT_nameDef].</Misgender.logRulesInitiator.rulesStrings.4>
 </LanguageData>

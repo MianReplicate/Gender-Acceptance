@@ -30,6 +30,9 @@
     <nullifyingTraits>
       <li>Cisphobic</li>
     </nullifyingTraits>
+    <nullifyingHediffs>
+      <li>Transgender</li>
+    </nullifyingHediffs>
   </ThoughtDef>
 
   <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
@@ -145,7 +148,7 @@
       <li>
         <label>Aching for a trans person</label>
         <description>I am foaming at the mouth in desperate need for a transgender.</description>
-        <baseMoodEffect>-15</baseMoodEffect>
+        <baseMoodEffect>-12</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
@@ -224,8 +227,8 @@
     <stages>
       <li>
         <label>misgendered</label>
-        <description>I was misgendered by {0}!</description>
-        <baseMoodEffect>-8</baseMoodEffect>
+        <description>I was misgendered by {1}!</description>
+        <baseMoodEffect>-6</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
@@ -246,12 +249,13 @@
 
   <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>Internal_Transphobia</defName>
+    <thoughtClass>Thought_Situational</thoughtClass>
     <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_InternalTransphobia</workerClass>
     <stages>
       <li>
         <label>Internal transphobia</label>
         <description>I feel ashamed for being transgender</description>
-        <baseMoodEffect>-12</baseMoodEffect>
+        <baseMoodEffect>-10</baseMoodEffect>
       </li>
       <li>
         <label>Mild internal transphobia</label>
