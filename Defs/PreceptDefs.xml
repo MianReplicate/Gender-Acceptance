@@ -4,7 +4,7 @@
     <!-- Issues-->
     <IssueDef MayRequire="Ludeon.RimWorld.Ideology">
         <defName>Transgender</defName>
-        <label>Transgender Individuals</label>
+        <label>Transgender individuals</label>
         <iconPath>UI/Issues/Sexuality</iconPath>
     </IssueDef>
 

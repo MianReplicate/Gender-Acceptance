@@ -6,11 +6,15 @@ using Verse;
 using Simple_Trans;
 using RelationsUtility = RimWorld.RelationsUtility;
 
-//TODO: transphobic cultures wont like gender affirming parties
 // TODO: ideally also support RJW but, we gotta write a PR first for SimpleTrans
 namespace GenderAcceptance.Mian;
     public static class Helper
     {
+        public static void Log(string text)
+        {
+            Verse.Log.Message("[Gender Acceptance] "+ text);
+        }
+        
         // Transphobic people see trans people as their AGAB, therefore a straight transphobic man could be attracted to a trans man based on this code
         public static IEnumerable<CodeInstruction> ReplaceAttractGenderWithPerceivedGender(IEnumerable<CodeInstruction> instructions)
         {
@@ -104,7 +108,7 @@ namespace GenderAcceptance.Mian;
     {
         static Startup()
         {
-            Log.Message("Transphobia? More like trans-dimensional timey wimey shi-");
+            Helper.Log("Transphobia? More like trans-dimensional timey wimey shi-");
             
             Harmony.DEBUG = true;
             
