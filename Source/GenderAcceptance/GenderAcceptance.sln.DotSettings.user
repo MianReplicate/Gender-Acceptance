@@ -155,4 +155,5 @@
   &lt;Assembly Path="C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Gender-Acceptance\Source\GenderAcceptance\packages\Lib.Harmony.2.4.1\lib\net48\0Harmony.dll" /&gt;&#xD;
   &lt;Assembly Path="D:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Core.dll" /&gt;&#xD;
-&lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>
+&lt;/AssemblyExplorer&gt;</s:String>
+	</wpf:ResourceDictionary>

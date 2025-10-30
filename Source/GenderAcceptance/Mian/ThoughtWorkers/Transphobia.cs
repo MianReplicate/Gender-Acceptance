@@ -8,9 +8,8 @@ public class ThoughtWorker_Transphobia : ThoughtWorker
 {
     protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
     {
-        if ((p.IsTransphobic(false) &&
-             otherPawn.GetCurrentIdentity() == GenderIdentity.Transgender) || (
-                p.GetCurrentIdentity() == GenderIdentity.Transgender && (otherPawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false)))
+        if (p.IsTransphobic(false) &&
+             otherPawn.GetCurrentIdentity() == GenderIdentity.Transgender)
         {
             return ThoughtState.ActiveAtStage(0);
         }

@@ -22,9 +22,7 @@
         </li>
     </modDependencies>
 
-    <description>
-        Gender Acceptance is a mod (an addon to Simple Trans) that adds traits revolving around transphobia, cisphobia, and chasers to Rimworld.
-    </description>
+    <description>Gender Acceptance is a mod (an addon to Simple Trans) that adds traits revolving around transphobia, cisphobia, and chasers to Rimworld.</description>
     <loadAfter>
         <li>Ludeon.RimWorld</li>
         <li>brrainz.harmony</li>
