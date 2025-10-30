@@ -22,20 +22,8 @@
         </li>
     </modDependencies>
 
-    <description>This mod introduces 'Homophobic' and 'Heterophobic' traits to RimWorld, alongside precepts for ideologies reflecting these traits, affecting social interactions between pawns based on their sexual orientation at a basic level.
-
-    The traits function similarly to misogynistic and misandrist traits. 
-    Homophobic: -25 to sexuality traits(besides asexual) or pawns in a Same-Sex relationship
-    Heterophobic: -25 to pawns without a sexuality trait or pawns not in a Same-Sex relationship.
-
-    The issue centers on Same-Sex with the precepts of Despised or Adored:
-    
-    Despised: Provides mood bonuses while there are no same-sex relationships within the colony. (Nullified if the pawn has Heterophobia) When there are same-sex couples, it provides a mood debuff (more couples result in a higher debuff). It also introduces social stigma towards individuals in same-sex couples. Additionally, it allows pawns with the gay trait to attempt romance with pawns of the opposite gender (at a significantly reduced chance), but only by initiating romance, not autonomously.
-    
-    Adored: Provides mood bonuses depending on the number of same-sex couples within the colony (nullified if the pawn has Homophobia). The absence of same-sex couples results in a mood debuff. This precept also makes pawns viewing same-sex relations socially favor those in such relationships. Furthermore, pawns without the gay or bisexual traits can attempt romance with pawns of the same gender (at a significantly reduced chance), but again, only by initiating romance, not on their own.
-
-    A side note: My intent was to allow pawns to attempt romance outside their given sexual preference when succumbing to social norms within an ideology but was unsure how to reasonably modify RomanceChanceFactor.
-    This mod does not promote any form of real-life discrimination; it was created to build more compelling social dynamics from what is already in the game. I believe where a pawn is allowed to love, they are also allowed to hate. This is similar to default traits in the game, such as misogynistic and misandrist traits, hard workers vs. lazy, teetotaler vs. drug addicts. I intended for pawns to be able to have both Heterophobia and Homophobia, as well as gay and Homophobia, and vice versa, much like a misogynistic female or a misandrist male.
+    <description>
+        Gender Acceptance is a mod (an addon to Simple Trans) that adds traits revolving around transphobia, cisphobia, and chasers to Rimworld.
     </description>
     <loadAfter>
         <li>Ludeon.RimWorld</li>

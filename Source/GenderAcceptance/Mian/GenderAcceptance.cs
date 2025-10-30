@@ -6,7 +6,6 @@ using Verse;
 using Simple_Trans;
 using RelationsUtility = RimWorld.RelationsUtility;
 
-// TODO: add credits (divineDerivative)!
 //TODO: transphobic cultures wont like gender affirming parties
 // TODO: ideally also support RJW but, we gotta write a PR first for SimpleTrans
 namespace GenderAcceptance.Mian;
