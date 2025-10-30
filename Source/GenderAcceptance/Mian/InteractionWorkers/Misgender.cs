@@ -33,7 +33,7 @@ public class InteractionWorker_Misgender : InteractionWorker
         if (!initiator.IsTransphobic())
         {
             var thought = ThoughtMaker.MakeThought(GADefOf.Accidental_Misgender, 0);
-            initiator.needs.mood.thoughts.memories.TryGainMemory(thought);
+            initiator.needs.mood.thoughts.memories.TryGainMemory(thought, recipient);
         }
     }
 }

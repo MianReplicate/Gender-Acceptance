@@ -23,16 +23,16 @@ public class Faction
                 var transphobic = pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false;
                 if (!transphobic && pawn.GetCurrentIdentity() != GenderIdentity.Transgender)
                     continue;
-                var thought = ThoughtMaker.MakeThought(GADefOf.TransgenderPersonJoined, transphobic ? 1 : 0);
-                pawn.needs.mood.thoughts.memories.TryGainMemory(thought);   
+                var thought = ThoughtMaker.MakeThought(GADefOf.Transgender_Person_Joined, transphobic ? 1 : 0);
+                pawn.needs.mood.thoughts.memories.TryGainMemory(thought, joinerPawn);
             }
             else
             {
                 var cisphobic = pawn.story?.traits?.HasTrait(GADefOf.Cisphobic) ?? false;
                 if (!cisphobic)
                     continue;
-                var thought = ThoughtMaker.MakeThought(GADefOf.CisgenderPersonJoined, 0);
-                pawn.needs.mood.thoughts.memories.TryGainMemory(thought);   
+                var thought = ThoughtMaker.MakeThought(GADefOf.Cisgender_Person_Joined, 0);
+                pawn.needs.mood.thoughts.memories.TryGainMemory(thought, joinerPawn);
             }
         }
     }

@@ -22,7 +22,7 @@
         <baseMoodEffect>-6</baseMoodEffect>
       </li>
       <li>
-        <label>Too many Transgender Individuals</label>
+        <label>Too Many Transgender Individuals</label>
         <description>Distressed by many transgender individuals, feeling overwhelmed.</description>
         <baseMoodEffect>-9</baseMoodEffect>
       </li>
@@ -54,23 +54,23 @@
     <validWhileDespawned>false</validWhileDespawned>
     <stages>
       <li>
-        <label>Lacking Diversity</label>
-        <description>Feels the lack of transgender individuals as a gap in communal diversity</description>
+        <label>Lacking Transgender Individuals</label>
+        <description>Our community isn't diverse until we get transgender individuals.</description>
         <baseMoodEffect>-4</baseMoodEffect>
       </li>
       <li>
         <label>First Transgender Individual</label>
-        <description>The presence of a transgender individual among us serves as a beacon of progress and love</description>
+        <description>The presence of a transgender individual among us speaks volume about our diversity.</description>
         <baseMoodEffect>+2</baseMoodEffect>
       </li>
       <li>
-        <label>Growing Diversity</label>
-        <description>A couple transgender people in our midst enhance our community's vibrancy</description>
+        <label>Multiple Transgender Individuals</label>
+        <description>Multiple transgender people within the community make us feel safe and diverse.</description>
         <baseMoodEffect>+4</baseMoodEffect>
       </li>
       <li>
-        <label>Diverse Harmony</label>
-        <description>Joyful for the abundance of transgender individuals, symbolizing full acceptance</description>
+        <label>Populated Transgender Community</label>
+        <description>Joyful for the abundance of transgender individuals, symbolizing full acceptance.</description>
         <baseMoodEffect>+6</baseMoodEffect>
       </li>
     </stages>
@@ -157,24 +157,26 @@
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
       <li>
-        <label>Both relate to being transgender</label>
+        <label>Relates to being transgender</label>
         <baseOpinionOffset>+15</baseOpinionOffset>
       </li>
     </stages>
   </ThoughtDef>
 
   <ThoughtDef>
-    <defName>TransgenderPersonJoined</defName>
+    <defName>Transgender_Person_Joined</defName>
     <durationDays>5</durationDays>
+    <stackLimit>10</stackLimit>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
     <stages>
       <li>
-        <label>Transgender person joined </label>
+        <label>Transgender person joined</label>
         <description>It feels good knowing I'll have company that can relate to being transgender.</description>
         <baseMoodEffect>+25</baseMoodEffect>
       </li>
       <li>
         <label>Transgender person joined</label>
-        <description>Disgusting! Why did we let them join?</description>
+        <description>Disgusting! Why did we let {0} join?</description>
         <baseMoodEffect>-10</baseMoodEffect>
       </li>
     </stages>
@@ -185,11 +187,11 @@
     <durationDays>2</durationDays>
     <stackLimit>10</stackLimit>
     <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
-    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
     <stages>
       <li>
         <label>misgendered someone</label>
-        <description>I accidentally misgendered someone. I feel terrible.</description>
+        <description>I accidentally misgendered {0}. I feel terrible.</description>
         <baseMoodEffect>-5</baseMoodEffect>
       </li>
     </stages>
@@ -222,19 +224,21 @@
     <stages>
       <li>
         <label>misgendered</label>
-        <description>I was misgendered by someone!</description>
+        <description>I was misgendered by {0}!</description>
         <baseMoodEffect>-8</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
   
   <ThoughtDef>
-    <defName>CisgenderPersonJoined</defName>
+    <defName>Cisgender_Person_Joined</defName>
     <durationDays>5</durationDays>
+    <stackLimit>10</stackLimit>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
     <stages>
       <li>
         <label>Cisgender person joined</label>
-        <description>Disgusting! Why did we let them join?</description>
+        <description>Disgusting! Why did we let {0} join?</description>
         <baseMoodEffect>-10</baseMoodEffect>
       </li>
     </stages>
@@ -245,12 +249,12 @@
     <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_InternalTransphobia</workerClass>
     <stages>
       <li>
-        <label>Internal Transphobia</label>
+        <label>Internal transphobia</label>
         <description>I feel ashamed for being transgender</description>
         <baseMoodEffect>-12</baseMoodEffect>
       </li>
       <li>
-        <label>Mild Internal Transphobia</label>
+        <label>Mild internal transphobia</label>
         <description>It hurts that our culture is unaccepting of people like me</description>
         <baseMoodEffect>-5</baseMoodEffect>
       </li>

@@ -22,8 +22,8 @@ public static class GADefOf
     [MayRequireIdeology] public static ThoughtDef PositiveViewOnTransgender;
     [MayRequireIdeology] public static ThoughtDef Internal_Transphobia;
 
-    public static ThoughtDef TransgenderPersonJoined;
-    public static ThoughtDef CisgenderPersonJoined;
+    public static ThoughtDef Transgender_Person_Joined;
+    public static ThoughtDef Cisgender_Person_Joined;
     public static ThoughtDef Cisphobia;
     public static ThoughtDef Transphobia;
         
