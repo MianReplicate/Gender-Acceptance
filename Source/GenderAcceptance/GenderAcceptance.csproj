@@ -31,42 +31,26 @@
     <Copy SourceFiles="@(ToCopy)" DestinationFolder="..\..\Assemblies\" />
   </Target>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.4.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Lib.Harmony.2.4.1\lib\net48\0Harmony.dll</HintPath>
-    </Reference>
+
     <Reference Include="RimWorld">
       <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="RJW">
       <HintPath>..\..\..\..\Mods\rjw-master\1.6\Assemblies\RJW.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SimpleTransExpanded">
       <HintPath>..\..\..\..\..\..\workshop\content\294100\3516912373\1.6\Assemblies\Simple-Trans.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="WayBetterRomance">
       <HintPath>..\..\..\..\..\..\workshop\content\294100\2877731755\1.6\Assemblies\WayBetterRomance.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="IntimacyLovin">
       <HintPath>..\..\..\..\..\..\workshop\content\294100\3498422643\1.6\Assemblies\LoveyDoveySexWithEuterpe.dll</HintPath>
-    </Reference>
-    <Reference Include="System">
-    </Reference>
-    <Reference Include="System.Core">
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-    </Reference>
-    <Reference Include="Microsoft.CSharp">
-    </Reference>
-    <Reference Include="System.Data">
-    </Reference>
-    <Reference Include="System.Net.Http">
-    </Reference>
-    <Reference Include="System.Xml">
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +80,10 @@
     <Compile Include="Mian\ThoughtWorkers\Similarity.cs" />
     <Compile Include="Mian\ThoughtWorkers\Transphobia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Lib.Harmony.Ref" Version="2.4.1" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
