@@ -16,9 +16,14 @@
         </li>
         <li>
             <packageId>runaway.simpletrans</packageId>
-            <displayName>Simple Trans (Expanded)</displayName>
+            <displayName>Requires Simple Trans or Gender Works or </displayName>
             <steamWorkshopUrl>steam://url/CommunityFilePage/3516912373</steamWorkshopUrl>
             <downloadUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=3516912373</downloadUrl>
+
+            <alternativePackageIds IgnoreIfNoMatchingField="True">
+                <li>lovelydovey.sex.withrosaline</li>
+                <li>cammy.identity.gender</li>
+            </alternativePackageIds>
         </li>
     </modDependencies>
 

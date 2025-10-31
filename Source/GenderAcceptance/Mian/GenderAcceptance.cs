@@ -6,7 +6,6 @@ using Verse;
 using Simple_Trans;
 using RelationsUtility = RimWorld.RelationsUtility;
 
-// TODO: ideally also support RJW but, we gotta write a PR first for SimpleTrans
 namespace GenderAcceptance.Mian;
     public static class Helper
     {

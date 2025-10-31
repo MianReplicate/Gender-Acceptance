@@ -18,20 +18,31 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <RimWorldPath Condition="'$(RimWorldPath)' == ''">D:\SteamLibrary\steamapps\common\RimWorld</RimWorldPath>
     <ModName>Topic of Love</ModName>
   </PropertyGroup>
   
   <ItemGroup>
 
+<!--    Set a RimWorldPath environment variable in your computer to the path of RimWorld! -->
     <Reference Include="RimWorld">
       <HintPath>$(RimWorldPath)\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    
+<!--    Subscribe to the dependencies below-->
     <Reference Include="SimpleTransExpanded">
       <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\3516912373\1.6\Assemblies\Simple-Trans.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="IdentityDysphoria">
+      <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\3498422643\1.6\Assemblies\Identity.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="GenderWorks">
+      <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\3534254491\1.6\Assemblies\LoveyDoveySexWithRosaline.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    
     <Reference Include="WayBetterRomance">
       <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\2877731755\1.6\Assemblies\WayBetterRomance.dll</HintPath>
       <Private>False</Private>
