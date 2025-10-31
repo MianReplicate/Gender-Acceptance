@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ModMetaData>
-    <name>Gender Acceptance</name>
+    <name>Topic of Gender</name>
     <author>MianReplicate</author>
     <packageId>MianReplicate.GenderAcceptance</packageId>
     <supportedVersions>
@@ -22,7 +22,7 @@
         </li>
     </modDependencies>
 
-    <description>Gender Acceptance is a mod (an addon to Simple Trans) that adds traits revolving around transphobia, cisphobia, and chasers to Rimworld.</description>
+    <description>Topic of Gender is a mod (an addon to Simple Trans) that adds traits revolving around transphobia, cisphobia, and chasers to Rimworld.</description>
     <loadAfter>
         <li>Ludeon.RimWorld</li>
         <li>brrainz.harmony</li>

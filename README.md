@@ -1,5 +1,5 @@
 ﻿## Introduction 📜
-Gender Acceptance is a mod (an addon to Simple Trans) that adds traits revolving around transphobia, cisphobia, and chasers to Rimworld.
+Topic of Gender is a mod (an addon to Simple Trans) that adds traits revolving around transphobia, cisphobia, and chasers to Rimworld.
 
 It contains built in patches for mods such as Way Better Romance and Intimacy - A Lovin' Expansion.
 
@@ -16,10 +16,11 @@ It contains built in patches for mods such as Way Better Romance and Intimacy - 
 - Will you add compatibility with this one mod?
   - Suggest it and I can look into it!
 - RJW Support?
-  - When Simple Trans gets support for RJW, I will look into supporting this mod with it as well.
+  - When Simple Trans gets support for RJW, I will look into supporting this mod with it as well if it is not already supported.
 
 ## Credits 👏
 - Special thanks to divineDerivative for letting me use some of their code from Way Better Romance!
+- Inspired heavily by Edges of Acceptance
 - Thanks to Hack Club for hosting the Athena Awards!
 
 ## Final Message 💖
