@@ -1,10 +1,12 @@
-﻿## Introduction 📜
-Topic of Gender is a mod (an addon to Simple Trans) that adds traits revolving around transphobia, cisphobia, and chasers to Rimworld.
+﻿[![Athena Award Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Faward.athena.hackclub.com%2Fapi%2Fbadge)](https://award.athena.hackclub.com?utm_source=readme)
+
+## Introduction 📜
+Topic of Gender is a mod (an addon to Simple Trans) that adds traits revolving around transphobia, cisphobia, and chasers to RimWorld.
 
 It contains built in patches for mods such as Way Better Romance and Intimacy - A Lovin' Expansion.
 
 ## Additions ➕
-- Cisphobia and Transphobia work how you'd expect them to. Pawns with these traits will despise cisgender or transgender units.
+- Cisphobia and Transphobia work how you'd expect them to. Pawns with these traits will despise cisgender or transgender pawns.
   - There's a special feature for the transphobic trait however! Transphobic pawns perceive transgender pawns as the gender they were assigned at birth, rather than what they currently identify as. For example, a straight cis transphobic man will be attracted to transgender men since they do not see them as men.
   - Watch out when accepting transgender or cisgender pawns, the phobic pawns won't be very happy with your decision!
 - Chaser trait - Chasers fetishize transgender individuals, often needing to be intimate with them from time to time in order to be happy. They will seek out transgender individuals more often for romance and love making.
