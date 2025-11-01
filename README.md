@@ -30,3 +30,5 @@ It also contains built in patches for mods such as Way Better Romance and Intima
 Trans rights 🏳️‍⚧️ and intersex rights are human rights. This mod was not made with the intention to dehumanize transgender people but rather to add drama to an already dramatic game. 
 
 If you are transphobic, feel free to kindly fuck off, downvote, and leave a jester steam award <3.
+
+Source: https://github.com/MianReplicate/Gender-Acceptance

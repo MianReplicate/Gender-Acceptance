@@ -19,9 +19,9 @@ public class SimpleTrans : TransDependency
         return GenderIdentity.Cisgender;
     }
 
-    public override bool HasMismatchingGenitalia(Pawn pawn)
+    public override bool HasMatchingGenitalia(Pawn pawn)
     {
-        return (pawn.gender == Gender.Male && !pawn.health.hediffSet.HasHediff(SimpleTransPregnancyUtility.canSireDef))
-            || (pawn.gender == Gender.Female && !pawn.health.hediffSet.HasHediff(SimpleTransPregnancyUtility.canCarryDef));
+        return (pawn.gender == Gender.Male && pawn.health.hediffSet.HasHediff(SimpleTransPregnancyUtility.canSireDef))
+            || (pawn.gender == Gender.Female && pawn.health.hediffSet.HasHediff(SimpleTransPregnancyUtility.canCarryDef));
     }
 }

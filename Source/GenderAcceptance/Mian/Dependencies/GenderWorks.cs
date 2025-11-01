@@ -11,9 +11,9 @@ public class GenderWorks : TransDependency
                 GenderUtilities.HasMaleReproductiveOrgan(pawn) && pawn.gender == Gender.Male ? GenderIdentity.Cisgender : GenderIdentity.Transgender;
     }
 
-    public override bool HasMismatchingGenitalia(Pawn pawn)
+    public override bool HasMatchingGenitalia(Pawn pawn)
     {
-        return (pawn.gender == Gender.Female && !GenderUtilities.HasFemaleReproductiveOrgan(pawn)) 
-               || (pawn.gender == Gender.Male && !GenderUtilities.HasMaleReproductiveOrgan(pawn));
+        return (pawn.gender == Gender.Female && GenderUtilities.HasFemaleReproductiveOrgan(pawn)) 
+               || (pawn.gender == Gender.Male && GenderUtilities.HasMaleReproductiveOrgan(pawn));
     }
 }

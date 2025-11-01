@@ -108,11 +108,19 @@ public static class GenderUtility {
     }
 
     // Used to help people figure out who is trans or not.
-    public static bool HasMismatchingGenitalia(this Pawn pawn)
+    public static bool HasMatchingGenitalia(this Pawn pawn)
     {
         if (pawn.gender != Gender.Male && pawn.gender != Gender.Female)
             return true; // nonbinary moment !
         
-        return TransDependencies.TransLibrary.HasMismatchingGenitalia(pawn);
+        return TransDependencies.TransLibrary.HasMatchingGenitalia(pawn);
+    }
+    
+    public static bool LooksCis(this Pawn pawn)
+    {
+        if (pawn.gender != Gender.Male && pawn.gender != Gender.Female)
+            return true;
+        
+        return TransDependencies.TransLibrary.LooksCis(pawn);
     }
 }

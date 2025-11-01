@@ -35,8 +35,21 @@ public class Dysphoria : TransDependency
         return (pawn.Ideo?.HasPrecept(Trans_Abhorrent) ?? false) || (pawn.Ideo?.HasPrecept(Trans_Disapproved) ?? false);
     }
 
-    public override bool HasMismatchingGenitalia(Pawn pawn)
+    public override bool HasMatchingGenitalia(Pawn pawn)
     {
-        throw new System.NotImplementedException();
+        var breasts = DefOfDysphoria.Breasts;
+        var noBreasts = DefOfDysphoria.NoBreasts;
+        var hediffs = pawn.health.hediffSet;
+
+        return (hediffs.HasHediff(breasts) && pawn.gender == Gender.Female) || (hediffs.HasHediff(noBreasts) && pawn.gender == Gender.Male);
+    }
+
+    public override bool LooksCis(Pawn pawn)
+    {
+        StatDef femStat = DefOfDysphoria.FemStat;
+        StatDef mascStat = DefOfDysphoria.MascStat;
+
+        return (pawn.gender == Gender.Male && pawn.GetStatValue(mascStat) > 50)
+            || (pawn.gender == Gender.Female && pawn.GetStatValue(femStat) > 50);
     }
 }
