@@ -1,5 +1,19 @@
 ﻿<Defs>
     <InteractionDef>
+        <defName>ComeOut</defName>
+        <label>comeout</label>
+        <workerClass>GenderAcceptance.Mian.InteractionWorkers.InteractionWorker_ComeOut</workerClass>
+        <symbol>Things/Mote/SpeechSymbols/ReduceWill</symbol>
+
+<!--        <socialFightBaseChance>0.01</socialFightBaseChance>-->
+        <logRulesInitiator>
+            <rulesStrings>
+
+            </rulesStrings>
+        </logRulesInitiator>
+    </InteractionDef>
+    
+    <InteractionDef>
         <defName>PurposeMisgender</defName>
         <label>misgender</label>
         <workerClass>GenderAcceptance.Mian.InteractionWorkers.InteractionWorker_PurposeMisgender</workerClass>

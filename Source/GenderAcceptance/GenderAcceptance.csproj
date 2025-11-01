@@ -12,13 +12,13 @@
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
     
-    <OutputPath>../../Assemblies/</OutputPath>
+    <OutputPath>../../1.6/Assemblies/</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
   </PropertyGroup>
 
   <PropertyGroup>
-    <ModName>Topic of Love</ModName>
+    <ModName>Topic of Gender</ModName>
   </PropertyGroup>
   
   <ItemGroup>
@@ -35,7 +35,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="IdentityDysphoria">
-      <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\3498422643\1.6\Assemblies\Identity.dll</HintPath>
+      <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\3282023834\1.6\Assemblies\Identity.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="GenderWorks">
@@ -53,8 +53,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mian\Dependencies\Dysphoria.cs" />
+    <Compile Include="Mian\Dependencies\GenderWorks.cs" />
+    <Compile Include="Mian\Dependencies\SimpleTrans.cs" />
     <Compile Include="Mian\GADefOf.cs" />
     <Compile Include="Mian\GenderAcceptance.cs" />
+    <Compile Include="Mian\GenderIdentity.cs" />
     <Compile Include="Mian\InteractionWorkers\Misgender.cs" />
     <Compile Include="Mian\InteractionWorkers\PurposeMisgender.cs" />
     <Compile Include="Mian\Needs\Chaser_Need.cs" />
@@ -63,21 +67,19 @@
     <Compile Include="Mian\Patches\LovePartnerRelationUtility.cs" />
     <Compile Include="Mian\Patches\MemoryThoughtHandler.cs" />
     <Compile Include="Mian\Patches\Mod Integration\IntimacyLovin.cs" />
+    <Compile Include="Mian\Patches\Mod Integration\SimpleTrans.cs" />
     <Compile Include="Mian\Patches\Mod Integration\WayBetterRomance.cs" />
+    <Compile Include="Mian\Patches\PawnData.cs" />
     <Compile Include="Mian\Patches\Pawn_InteractionsTracker.cs" />
     <Compile Include="Mian\Patches\Pawn_RelationsTracker.cs" />
-    <Compile Include="Mian\Patches\RelationsUtility.cs" />
-    <Compile Include="Mian\Patches\RitualRoleAssignments.cs" />
-    <Compile Include="Mian\Patches\ThoughtWorker_Man.cs" />
-    <Compile Include="Mian\Patches\ThoughtWorker_Woman.cs" />
     <Compile Include="Mian\ThoughtWorkers\Chaser_Need.cs" />
-    <Compile Include="Mian\ThoughtWorkers\Cisphobia.cs" />
     <Compile Include="Mian\ThoughtWorkers\InternalTransphobia.cs" />
-    <Compile Include="Mian\ThoughtWorkers\NegativeViewOnTransgender.cs" />
-    <Compile Include="Mian\ThoughtWorkers\PositiveViewOnTransgender.cs" />
+    <Compile Include="Mian\ThoughtWorkers\IsCisphobic.cs" />
+    <Compile Include="Mian\ThoughtWorkers\IsTransgenderSocial.cs" />
+    <Compile Include="Mian\ThoughtWorkers\IsTransphobic.cs" />
     <Compile Include="Mian\ThoughtWorkers\PreceptTransgender.cs" />
     <Compile Include="Mian\ThoughtWorkers\Similarity.cs" />
-    <Compile Include="Mian\ThoughtWorkers\Transphobia.cs" />
+    <Compile Include="Mian\TransKnowledge.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -105,9 +107,10 @@
       <!-- Root files -->
       <RootFiles Include="$(MSBuildProjectDirectory)\..\..\LICENSE" />
       <RootFiles Include="$(MSBuildProjectDirectory)\..\..\README.md" />
+      <RootFiles Include="$(MSBuildProjectDirectory)\..\..\LoadFolders.xml"/>
       
-
       <SixteenFiles Include="$(MSBuildProjectDirectory)\..\..\1.6\**\*.*" />
+      <IdeologyFiles Include="$(MSBuildProjectDirectory)\..\..\Ideology\**\*.*"/>
     </ItemGroup>
 
     <!-- Copy all defined files -->
@@ -115,7 +118,8 @@
     <Copy SourceFiles="@(AboutFiles)" DestinationFiles="@(AboutFiles->'$(RimWorldPath)\Mods\$(ModName)\About\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(RootFiles)" DestinationFiles="@(RootFiles->'$(RimWorldPath)\Mods\$(ModName)\%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(SixteenFiles)" DestinationFiles="@(SixteenFiles->'$(RimWorldPath)\Mods\$(ModName)\1.6\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(IdeologyFiles)" DestinationFiles="@(IdeologyFiles->'$(RimWorldPath)\Mods\$(ModName)\Ideology\%(RecursiveDir)%(Filename)%(Extension)')" />
 
-    <Message Text="Topic of Love deployed successfully to $(RimWorldPath)\Mods\$(ModName)" Importance="high" />
+    <Message Text="Topic of Gender deployed successfully to $(RimWorldPath)\Mods\$(ModName)" Importance="high" />
   </Target>
 </Project>

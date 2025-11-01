@@ -16,26 +16,6 @@ public static class WayBetterRomance
     {
         // The following patches replace ldfld gender lines with a call to get perceived gender instead so that the transphobia trait will work properly
         // (transphobic people don't believe trans people are the gender they say they are)
-        
-        harmony.Patch(typeof(SexualityUtility).GetMethod(nameof(SexualityUtility.CouldWeBeLovers)),
-            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceAttractGenderWithPerceivedGender)));
-
-        harmony.Patch(typeof(SexualityUtility).GetMethod(nameof(SexualityUtility.WouldConsiderMarriage)),
-            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceAttractGenderWithPerceivedGender)));
-        
-        harmony.Patch(typeof(SexualityUtility).GetMethod(nameof(SexualityUtility.CouldWeBeMarried)),
-            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceAttractGenderWithPerceivedGender)));
-
-        harmony.Patch(typeof(HookupUtility).GetMethod(nameof(HookupUtility.HookupOption)),
-            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceAttractGenderWithPerceivedGender)));
-        
-        harmony.Patch(typeof(HookupUtility).GetMethod(nameof(HookupUtility.HookupEligiblePair)),
-            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceAttractGenderWithPerceivedGender)));
-
-        harmony.Patch(
-            typeof(InteractionWorker_Breakup_RandomSelectionWeight).GetMethod(
-                nameof(InteractionWorker_Breakup_RandomSelectionWeight.Postfix)),
-            transpiler: typeof(Helper).GetMethod(nameof(Helper.ReplaceAttractGenderWithPerceivedGender)));
             
         // Adds the chaser factor tooltip to the hookup menu
         harmony.Patch(typeof(HookupUtility).GetMethod(nameof(HookupUtility.HookupFactors)),

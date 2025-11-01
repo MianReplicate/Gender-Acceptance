@@ -32,7 +32,8 @@ public static class GADefOf
     
     public static ThoughtDef Accidental_Misgender;
 
-        
+    public static ThoughtDef Dehumanized;
+
     static GADefOf()
     {
         DefOfHelper.EnsureInitializedInCtor(typeof(GADefOf));

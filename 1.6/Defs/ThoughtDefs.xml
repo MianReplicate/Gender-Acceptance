@@ -1,106 +1,9 @@
 <Defs>
-  <!-- Precept Thoughts -->
-  <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
-    <defName>AmountOfTransgender_Disliked</defName>
-    <thoughtClass>Thought_Situational</thoughtClass>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_PreceptTransgender</workerClass>
-    <validWhileDespawned>false</validWhileDespawned>
-    <stages>
-      <li>
-        <label>Traditional Gender Norms Preferred</label>
-        <description>Feels relief in maintaining traditional gender norms.</description>
-        <baseMoodEffect>+5</baseMoodEffect>
-      </li>
-      <li>
-        <label>Noticeable Transgender Individual</label>
-        <description>Discomfort with a transgender individual, feeling it's untraditional.</description>
-        <baseMoodEffect>-3</baseMoodEffect>
-      </li>
-      <li>
-        <label>Few Transgender Individuals</label>
-        <description>Unsettled by the presence of multiple transgender individuals.</description>
-        <baseMoodEffect>-6</baseMoodEffect>
-      </li>
-      <li>
-        <label>Too Many Transgender Individuals</label>
-        <description>Distressed by many transgender individuals, feeling overwhelmed.</description>
-        <baseMoodEffect>-9</baseMoodEffect>
-      </li>
-    </stages>
-    <nullifyingTraits>
-      <li>Cisphobic</li>
-    </nullifyingTraits>
-    <nullifyingHediffs>
-      <li>Transgender</li>
-    </nullifyingHediffs>
-  </ThoughtDef>
-
-  <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
-    <defName>NegativeViewOnTransgender</defName>
-    <thoughtClass>Thought_SituationalSocial</thoughtClass>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_NegativeViewOnTransgender</workerClass>
-    <stages>
-      <li>
-        <label>Transphobia</label>
-        <baseOpinionOffset>-20</baseOpinionOffset>
-      </li>
-    </stages>
-    <nullifyingTraits>
-      <li>Cisphobic</li>
-    </nullifyingTraits>
-  </ThoughtDef>
-
-  <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
-    <defName>AmountOfTransgender_Liked</defName>
-    <thoughtClass>Thought_Situational</thoughtClass>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_PreceptTransgender</workerClass>
-    <validWhileDespawned>false</validWhileDespawned>
-    <stages>
-      <li>
-        <label>Lacking Transgender Individuals</label>
-        <description>Our community isn't diverse until we get transgender individuals.</description>
-        <baseMoodEffect>-4</baseMoodEffect>
-      </li>
-      <li>
-        <label>First Transgender Individual</label>
-        <description>The presence of a transgender individual among us speaks volume about our diversity.</description>
-        <baseMoodEffect>+2</baseMoodEffect>
-      </li>
-      <li>
-        <label>Multiple Transgender Individuals</label>
-        <description>Multiple transgender people within the community make us feel safe and diverse.</description>
-        <baseMoodEffect>+4</baseMoodEffect>
-      </li>
-      <li>
-        <label>Populated Transgender Community</label>
-        <description>Joyful for the abundance of transgender individuals, symbolizing full acceptance.</description>
-        <baseMoodEffect>+6</baseMoodEffect>
-      </li>
-    </stages>
-    <nullifyingTraits>
-      <li>Transphobic</li>
-    </nullifyingTraits>
-  </ThoughtDef>
-
-  <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
-    <defName>PositiveViewOnTransgender</defName>
-    <thoughtClass>Thought_SituationalSocial</thoughtClass>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_PositiveViewOnTransgender</workerClass>
-    <stages>
-      <li>
-        <label>Transgender</label>
-        <baseOpinionOffset>+20</baseOpinionOffset>
-      </li>
-    </stages>
-    <nullifyingTraits>
-      <li>Transphobic</li>
-    </nullifyingTraits>
-  </ThoughtDef>
   
   <!--Phobias-->
   <ThoughtDef>
     <defName>Cisphobia</defName>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_Cisphobia</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_IsCisphobic</workerClass>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
@@ -113,7 +16,7 @@
   
   <ThoughtDef>
     <defName>Transphobia</defName>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_Transphobia</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_IsTransphobic</workerClass>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
@@ -207,8 +110,8 @@
     <stackLimit>300</stackLimit>
     <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
     <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
-    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
-    <socialTargetDevelopmentalStageFilter>Baby, Child, Adult</socialTargetDevelopmentalStageFilter>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <socialTargetDevelopmentalStageFilter>Child, Adult</socialTargetDevelopmentalStageFilter>
     <stages>
       <li>
         <label>misgendered</label>
@@ -223,7 +126,7 @@
     <durationDays>2</durationDays>
     <stackLimit>10</stackLimit>
     <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
-    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
     <stages>
       <li>
         <label>misgendered</label>
@@ -247,20 +150,70 @@
     </stages>
   </ThoughtDef>
 
-  <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
-    <defName>Internal_Transphobia</defName>
-    <thoughtClass>Thought_Situational</thoughtClass>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_InternalTransphobia</workerClass>
+  <ThoughtDef>
+    <defName>Dehumanized</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>5</durationDays>
+    <stackLimit>300</stackLimit>
+    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Adult</developmentalStageFilter>
+    <socialTargetDevelopmentalStageFilter>Adult</socialTargetDevelopmentalStageFilter>
     <stages>
       <li>
-        <label>Internal transphobia</label>
-        <description>I feel ashamed for being transgender</description>
+        <label>dehumanized</label>
+        <baseOpinionOffset>-15</baseOpinionOffset>
+      </li>
+    </stages>
+    <thoughtToMake>DehumanizedMood</thoughtToMake>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>DehumanizedMood</defName>
+    <durationDays>2</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>dehumanized</label>
+        <description>I was fetishized and treated like an object by {1}.</description>
         <baseMoodEffect>-10</baseMoodEffect>
       </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>CameOut</defName>
+    <durationDays>5</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
       <li>
-        <label>Mild internal transphobia</label>
-        <description>It hurts that our culture is unaccepting of people like me</description>
-        <baseMoodEffect>-5</baseMoodEffect>
+        <label>positive came out</label>
+        <description>I came out to {1}. It went wonderfully, and my bond with {OTHERPAWN_possessive} is stronger than ever.</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+      <li>
+        <label>positive came out</label>
+        <description>I came out to {1}. It went wonderfully, and my bond with {OTHERPAWN_possessive} is stronger than ever.</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>CameOutRecipient</defName>
+    <durationDays>2</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>came out</label>
+        <description>I was fetishized and treated like an object by {1}.</description>
+        <baseMoodEffect>-10</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>

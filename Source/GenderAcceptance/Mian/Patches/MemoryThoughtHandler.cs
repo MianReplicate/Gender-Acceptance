@@ -11,11 +11,12 @@ public static class MemoryThoughtHandler
 {
     [HarmonyPatch(nameof(RimWorld.MemoryThoughtHandler.TryGainMemory), [typeof(Thought_Memory), typeof(Pawn)])]
     [HarmonyPostfix]
-    public static void GainTransIntimacyFromLovin(RimWorld.MemoryThoughtHandler __instance, Thought_Memory newThought, Pawn otherPawn)
+    public static void ChaserAndTrannyFucked(RimWorld.MemoryThoughtHandler __instance, Thought_Memory newThought, Pawn otherPawn)
     {
-        if (newThought.def == ThoughtDefOf.GotSomeLovin && Helper.ChaserSeesFetish(__instance.pawn, otherPawn))
+        if (newThought.def == ThoughtDefOf.GotSomeLovin && Helper.DoesChaserSeeTranny(__instance.pawn, otherPawn))
         {
             ((Chaser_Need) __instance.pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromSex();
+            otherPawn.needs?.mood?.thoughts?.memories?.TryGainMemory(GADefOf.Dehumanized, __instance.pawn);
         }
     }
 }

@@ -52,6 +52,10 @@
     <MisgenderedMood.stages.0.label>Misgendered</MisgenderedMood.stages.0.label>
     <MisgenderedMood.stages.0.description>I was misgendered by {1}!</MisgenderedMood.stages.0.description>
 
+    <Dehumanized.stages.0.label>Dehumanized me in bed</Dehumanized.stages.0.label>
+    <DehumanizedMood.stages.0.label>Dehumanized</DehumanizedMood.stages.0.label>
+    <DehumanizedMood.stages.0.description>I was fetishized and treated like an object by {1}.</DehumanizedMood.stages.0.description>
+
     <Internal_Transphobia.stages.0.label>Internal transphobia</Internal_Transphobia.stages.0.label>
     <Internal_Transphobia.stages.0.description>I feel ashamed for being transgender.</Internal_Transphobia.stages.0.description>
     <Internal_Transphobia.stages.1.label>Mild internal transphobia</Internal_Transphobia.stages.1.label>

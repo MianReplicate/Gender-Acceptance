@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+    <RulePackDef>
+        <defName>ComingOut_Positive</defName>
+        <rulePack>
+            <rulesStrings>
+                <li>sent->This drove [RECIPIENT_nameDef] into a rage and [RECIPIENT_pronoun] began a fight!</li>
+            </rulesStrings>
+        </rulePack>
+    </RulePackDef>
+
+    <RulePackDef>
+        <defName>ComingOut_Negative</defName>
+        <rulePack>
+            <rulesStrings>
+                <li>sent->This drove [RECIPIENT_nameDef] into a rage and [RECIPIENT_pronoun] began a fight!</li>
+            </rulesStrings>
+        </rulePack>
+    </RulePackDef>
+</Defs>
