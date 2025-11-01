@@ -9,7 +9,7 @@ public class ThoughtWorker_PreceptTransgender : ThoughtWorker_Precept
 {
     protected override ThoughtState ShouldHaveThought(Pawn p)
     {
-        int transgenderCount = Helper.CountGenderIndividuals(p.Map, GenderIdentity.Transgender);
+        int transgenderCount = GenderUtility.CountGenderIndividuals(p, GenderIdentity.Transgender);
         int stage = Math.Min(transgenderCount - 1, 4);
 
         if (stage >= 0)

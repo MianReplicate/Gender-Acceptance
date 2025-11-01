@@ -23,14 +23,14 @@ public static class IntimacyLovin
     public static void AddChaserRandomSelectionFactor(Pawn initiator, Pawn recipient, ref float __result)
     {
         //Adjust with chaser rating
-        if(Helper.DoesChaserSeeTranny(initiator, recipient))
+        if(GenderUtility.DoesChaserSeeTranny(initiator, recipient))
             __result *= 2f;
     }
     
     public static void AddChaserDispositionFactor(Pawn initiator, Pawn recipient, ref float __result)
     {
         //Adjust with chaser rating
-        if(Helper.DoesChaserSeeTranny(initiator, recipient))
+        if(GenderUtility.DoesChaserSeeTranny(initiator, recipient))
             __result *= 2f;
     }
     

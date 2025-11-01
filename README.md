@@ -1,15 +1,18 @@
 ﻿[![Athena Award Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Faward.athena.hackclub.com%2Fapi%2Fbadge)](https://award.athena.hackclub.com?utm_source=readme)
 
 ## Introduction 📜
-Topic of Gender is a mod (an addon to Simple Trans) that adds traits revolving around transphobia, cisphobia, and chasers to RimWorld.
+Topic of Gender is a mod that adds traits revolving around transphobia, cisphobia, and chasers to RimWorld.
 
-It contains built in patches for mods such as Way Better Romance and Intimacy - A Lovin' Expansion.
+**TOPIC OF GENDER BY ITSELF DOES NOT ADD TRANSGENDER PAWNS. YOU NEED ONE OF THE LIBRARY MODS: Simple Trans, Identity: Dysphoria, or Intimacy - Gender Works**
+
+It also contains built in patches for mods such as Way Better Romance and Intimacy - A Lovin' Expansion.
 
 ## Additions ➕
 - Cisphobia and Transphobia work how you'd expect them to. Pawns with these traits will despise cisgender or transgender pawns.
-  - There's a special feature for the transphobic trait however! Transphobic pawns perceive transgender pawns as the gender they were assigned at birth, rather than what they currently identify as. For example, a straight cis transphobic man will be attracted to transgender men since they do not see them as men.
+  - There's fog of war! Transphobic pawns don't automatically know who is trans and have to find out through trans pawns voluntarily coming out or through.. accidents.
   - Watch out when accepting transgender or cisgender pawns, the phobic pawns won't be very happy with your decision!
 - Chaser trait - Chasers fetishize transgender individuals, often needing to be intimate with them from time to time in order to be happy. They will seek out transgender individuals more often for romance and love making.
+  - Transgender pawns may feel dehumanized after the lovin'
 - Precept and ideologies for the Ideology DLC relating to acceptance of transgender individuals.
 - Transgender individuals are more fond of one another as they relate to being transgender.
 - Pawns may misgender transgender individuals whether purposefully or on accident.
@@ -17,8 +20,6 @@ It contains built in patches for mods such as Way Better Romance and Intimacy - 
 ## FAQ ❓
 - Will you add compatibility with this one mod?
   - Suggest it and I can look into it!
-- RJW Support?
-  - When Simple Trans gets support for RJW, I will look into supporting this mod with it as well if it is not already supported.
 
 ## Credits 👏
 - Special thanks to divineDerivative for letting me use some of their code from Way Better Romance!

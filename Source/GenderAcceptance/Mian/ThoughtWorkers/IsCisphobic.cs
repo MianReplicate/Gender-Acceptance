@@ -7,7 +7,7 @@ public class ThoughtWorker_IsCisphobic : ThoughtWorker
 {
     protected override ThoughtState CurrentSocialStateInternal(Pawn pawn, Pawn otherPawn)
     {
-        if ((pawn.story?.traits?.HasTrait(GADefOf.Cisphobic) ?? false ) && otherPawn.GetCurrentIdentity() == GenderIdentity.Cisgender)
+        if ((pawn.story?.traits?.HasTrait(GADefOf.Cisphobic) ?? false ) && !pawn.BelievesIsTrans(otherPawn))
         {
             return ThoughtState.ActiveAtStage(0);
         }

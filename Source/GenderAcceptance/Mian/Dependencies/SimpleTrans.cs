@@ -4,9 +4,9 @@ using Verse;
 
 namespace GenderAcceptance.Mian.Dependencies;
 
-public class SimpleTrans
+public class SimpleTrans : TransDependency
 {
-    public static GenderIdentity GetCurrentIdentity(Pawn pawn)
+    public override GenderIdentity GetCurrentIdentity(Pawn pawn)
     {
         if (pawn.health?.hediffSet?.HasHediff(SimpleTransPregnancyUtility.transDef) ?? false)
         {
@@ -17,5 +17,11 @@ public class SimpleTrans
             return GenderIdentity.Cisgender;
         }
         return GenderIdentity.Cisgender;
+    }
+
+    public override bool HasMismatchingGenitalia(Pawn pawn)
+    {
+        return (pawn.gender == Gender.Male && !pawn.health.hediffSet.HasHediff(SimpleTransPregnancyUtility.canSireDef))
+            || (pawn.gender == Gender.Female && !pawn.health.hediffSet.HasHediff(SimpleTransPregnancyUtility.canCarryDef));
     }
 }

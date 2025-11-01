@@ -8,7 +8,7 @@ public class ThoughtWorker_IsTransgenderSocial : ThoughtWorker
 {
     protected override ThoughtState CurrentSocialStateInternal(Pawn pawn, Pawn otherPawn)
     {
-        if (otherPawn.GetCurrentIdentity() == GenderIdentity.Transgender)
+        if (pawn.BelievesIsTrans(otherPawn))
         {
             return ThoughtState.ActiveAtStage(0);
         }

@@ -40,7 +40,7 @@ public class InteractionWorker_RomanceAttempt
                     //num = Helper.ChaserFactor(romanceTarget, romancer);
                     yield return new CodeInstruction(OpCodes.Ldarg_1).WithLabels(newLabel);
                     yield return new(OpCodes.Ldarg_0);
-                    yield return CodeInstruction.Call(typeof(Helper), nameof(Helper.ChaserFactor));
+                    yield return CodeInstruction.Call(typeof(Helper), nameof(GenderUtility.ChaserFactor));
                     yield return new(OpCodes.Stloc, num);
                     //if (num != 0f)
                     yield return new(OpCodes.Ldloc, num);

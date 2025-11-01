@@ -13,7 +13,7 @@ public class Pawn_InteractionsTracker
     {
         if (!__result)
             return;
-        if (Helper.DoesChaserSeeTranny(___pawn, recipient))
+        if (GenderUtility.DoesChaserSeeTranny(___pawn, recipient))
             ((Chaser_Need) ___pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromInteraction();
     }
 }

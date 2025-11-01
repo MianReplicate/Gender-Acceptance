@@ -8,7 +8,7 @@ public class InteractionWorker_PurposeMisgender : InteractionWorker
 {
     public override float RandomSelectionWeight(Pawn initiator, Pawn recipient)
     {
-        if (initiator.IsTrannyphobic() && recipient.GetCurrentIdentity() == GenderIdentity.Transgender)
+        if (initiator.IsTrannyphobic() && initiator.BelievesIsTrans(recipient))
         {
             return 1 * NegativeInteractionUtility.NegativeInteractionChanceFactor(initiator, recipient) * (initiator.IsTrannyphobic(false) ? 1.5f : 1);
         }

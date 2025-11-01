@@ -13,10 +13,16 @@ public static class MemoryThoughtHandler
     [HarmonyPostfix]
     public static void ChaserAndTrannyFucked(RimWorld.MemoryThoughtHandler __instance, Thought_Memory newThought, Pawn otherPawn)
     {
-        if (newThought.def == ThoughtDefOf.GotSomeLovin && Helper.DoesChaserSeeTranny(__instance.pawn, otherPawn))
+        if (newThought.def == ThoughtDefOf.GotSomeLovin)
         {
-            ((Chaser_Need) __instance.pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromSex();
-            otherPawn.needs?.mood?.thoughts?.memories?.TryGainMemory(GADefOf.Dehumanized, __instance.pawn);
+            if(otherPawn.HasMismatchingGenitalia())
+                TransKnowledge.KnowledgeLearned(__instance.pawn, otherPawn);
+            
+            if (GenderUtility.DoesChaserSeeTranny(__instance.pawn, otherPawn))
+            {
+                ((Chaser_Need) __instance.pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromSex();
+                otherPawn.needs?.mood?.thoughts?.memories?.TryGainMemory(GADefOf.Dehumanized, __instance.pawn);   
+            }
         }
     }
 }

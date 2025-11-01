@@ -9,11 +9,11 @@ public class InteractionWorker_Misgender : InteractionWorker
 {
     public override float RandomSelectionWeight(Pawn initiator, Pawn recipient)
     {
-        if (recipient.GetCurrentIdentity() == GenderIdentity.Transgender)
+        if (initiator.BelievesIsTrans(recipient))
         {
             return 0.05f;
         }
-        return 0.0f;
+        return 0.005f;
     }
         
     public override void Interacted(

@@ -56,13 +56,17 @@
     <Compile Include="Mian\Dependencies\Dysphoria.cs" />
     <Compile Include="Mian\Dependencies\GenderWorks.cs" />
     <Compile Include="Mian\Dependencies\SimpleTrans.cs" />
+    <Compile Include="Mian\Dependencies\TransDependencies.cs" />
+    <Compile Include="Mian\Dependencies\TransDependency.cs" />
     <Compile Include="Mian\GADefOf.cs" />
     <Compile Include="Mian\GenderAcceptance.cs" />
     <Compile Include="Mian\GenderIdentity.cs" />
+    <Compile Include="Mian\Helper.cs" />
     <Compile Include="Mian\InteractionWorkers\Misgender.cs" />
     <Compile Include="Mian\InteractionWorkers\PurposeMisgender.cs" />
     <Compile Include="Mian\Needs\Chaser_Need.cs" />
     <Compile Include="Mian\Patches\Faction.cs" />
+    <Compile Include="Mian\Patches\GrammarUtilityPatch.cs" />
     <Compile Include="Mian\Patches\InteractionWorker_RomanceAttempt.cs" />
     <Compile Include="Mian\Patches\LovePartnerRelationUtility.cs" />
     <Compile Include="Mian\Patches\MemoryThoughtHandler.cs" />

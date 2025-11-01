@@ -4,7 +4,7 @@ using Verse;
 
 namespace GenderAcceptance.Mian.Dependencies;
 
-public class Dysphoria
+public class Dysphoria : TransDependency
 {
     private static PreceptDef Trans_Abhorrent = DefDatabase<PreceptDef>.GetNamed("Trans_Abhorrent");
     private static PreceptDef Trans_Disapproved = DefDatabase<PreceptDef>.GetNamed("Trans_Disapproved");
@@ -18,7 +18,7 @@ public class Dysphoria
         DefOfDysphoria.femaleGender,
         DefOfDysphoria.androgyneGender
     };
-    public static GenderIdentity GetCurrentIdentity(Pawn pawn)
+    public override GenderIdentity GetCurrentIdentity(Pawn pawn)
     {
         foreach (var gender in genders)
         {
@@ -30,8 +30,13 @@ public class Dysphoria
         return GenderIdentity.Cisgender;
     }
 
-    public static bool IsInCultureWithTransphobia(Pawn pawn)
+    public override bool IsInCultureWithTransphobia(Pawn pawn)
     {
         return (pawn.Ideo?.HasPrecept(Trans_Abhorrent) ?? false) || (pawn.Ideo?.HasPrecept(Trans_Disapproved) ?? false);
+    }
+
+    public override bool HasMismatchingGenitalia(Pawn pawn)
+    {
+        throw new System.NotImplementedException();
     }
 }
