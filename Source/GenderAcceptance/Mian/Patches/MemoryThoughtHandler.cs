@@ -11,7 +11,7 @@ public static class MemoryThoughtHandler
 {
     [HarmonyPatch(nameof(RimWorld.MemoryThoughtHandler.TryGainMemory), [typeof(Thought_Memory), typeof(Pawn)])]
     [HarmonyPostfix]
-    public static void ChaserAndTrannyFucked(RimWorld.MemoryThoughtHandler __instance, Thought_Memory newThought, Pawn otherPawn)
+    public static void PersonAndTrannyFucked(RimWorld.MemoryThoughtHandler __instance, Thought_Memory newThought, Pawn otherPawn)
     {
         if (newThought.def == ThoughtDefOf.GotSomeLovin)
         {

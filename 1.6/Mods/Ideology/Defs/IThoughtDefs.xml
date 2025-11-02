@@ -39,7 +39,7 @@
     <ThoughtDef>
         <defName>NegativeViewOnTransgender</defName>
         <thoughtClass>Thought_SituationalSocial</thoughtClass>
-        <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_IsTransgenderSocial</workerClass>
+        <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_IsTransgenderNegative</workerClass>
         <stages>
             <li>
                 <label>Transphobia</label>
@@ -104,7 +104,7 @@
     <ThoughtDef>
         <defName>PositiveViewOnTransgender</defName>
         <thoughtClass>Thought_SituationalSocial</thoughtClass>
-        <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_IsTransgenderSocial</workerClass>
+        <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_IsTransgenderPositive</workerClass>
         <stages>
             <li>
                 <label>Transgender</label>

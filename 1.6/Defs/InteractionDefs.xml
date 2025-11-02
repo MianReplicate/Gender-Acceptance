@@ -1,5 +1,22 @@
 ﻿<Defs>
     <InteractionDef>
+        <defName>Transvestigate</defName>
+        <label>transvestigate</label>
+        <workerClass>GenderAcceptance.Mian.InteractionWorkers.InteractionWorker_Transvestigate</workerClass>
+        <symbol>Things/Mote/SpeechSymbols/DeepTalk</symbol>
+
+        <logRulesInitiator>
+            <rulesStrings>
+                <li>r_logentry->[INITIATOR_nameDef] [comment] [RECIPIENT_nameDef].</li>
+
+                <li>comment->is transvestigating</li>
+                <li>comment->is watching</li>
+                <li>comment->is stalking</li>
+            </rulesStrings>
+        </logRulesInitiator>
+    </InteractionDef>
+    
+    <InteractionDef>
         <defName>ComeOut</defName>
         <label>comeout</label>
         <workerClass>GenderAcceptance.Mian.InteractionWorkers.InteractionWorker_ComeOut</workerClass>
@@ -7,7 +24,7 @@
 
         <logRulesInitiator>
             <rulesStrings>
-                <li>r_logentry->[INITIATOR_nameDef] [comment] to [RECIPIENT_nameDef]</li>
+                <li>r_logentry->[INITIATOR_nameDef] [comment] to [RECIPIENT_nameDef].</li>
                 
                 <li>comment->came out</li>
                 <li>comment->poured their tears into coming out</li>

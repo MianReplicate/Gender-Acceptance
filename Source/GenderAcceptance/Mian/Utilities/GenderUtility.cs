@@ -5,19 +5,6 @@ using Verse;
 
 namespace GenderAcceptance.Mian;
 
-public static class Helper
-{
-    public static void Log(string text)
-    {
-        Verse.Log.Message("[Gender Acceptance] " + text);
-    }
-
-    public static void Error(string text)
-    {
-        Verse.Log.Error("[Gender Acceptance] " + text);
-    }
-}
-
 public static class GenderUtility {
 
 // Transphobic people see trans people as their AGAB, therefore a straight transphobic man could be attracted to a trans man based on this code
@@ -45,7 +32,7 @@ public static class GenderUtility {
         return 0f;
     }
         
-    // does a chaser find their fetish??
+    // does a chaser find the tranny??
     public static bool DoesChaserSeeTranny(Pawn initiator, Pawn recipient)
     {
         if ((initiator.story?.traits?.HasTrait(GADefOf.Chaser) ?? false) && initiator.BelievesIsTrans(recipient))
@@ -57,7 +44,7 @@ public static class GenderUtility {
     {
         return (pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false) || 
                (includePrecept && pawn.GetCurrentIdentity() == GenderIdentity.Cisgender 
-                               && pawn.IsInCultureWithTrannyphobia());
+                               && pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Despised);
     }
 
     // public static Gender GetPerceivedGender(Pawn initiator, Pawn recipient)
@@ -95,9 +82,9 @@ public static class GenderUtility {
         return count;
     }
 
-    public static bool IsInCultureWithTrannyphobia(this Pawn pawn)
+    public static CultureViewOnTrans CultureOpinionOnTrans(this Pawn pawn)
     {
-        return TransDependencies.TransLibrary.IsInCultureWithTransphobia(pawn);
+        return TransDependencies.TransLibrary.CultureOpinionOnTrans(pawn);
     }
     public static GenderIdentity GetCurrentIdentity(this Pawn pawn)
     {

@@ -2,5 +2,9 @@
 <LanguageData>
   
   <GA.HookupChanceChaser>Chaser</GA.HookupChanceChaser>
-  <GA.PawnBelievesOtherPawnIsTrans>[PAWN_nameDef] believes [SUSPECTEDPAWN_nameDef] is transgender.</GA.PawnBelievesOtherPawnIsTrans>
+  <GA.PawnBelievesOtherPawnIsTrans>{INITIATOR_nameDef} believes {RECIPIENT_nameDef} is transgender.</GA.PawnBelievesOtherPawnIsTrans>
+  <GA.PawnBelievesOtherPawnIsTransLabel>{INITIATOR_nameDef} has a suspicion about {RECIPIENT_nameDef}</GA.PawnBelievesOtherPawnIsTransLabel>
+
+  <GA.ComeOutLabel>{INITIATOR_nameDef} came out to {RECIPIENT_nameDef}</GA.ComeOutLabel>
+
 </LanguageData>

@@ -68,6 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mian\Dependencies\CultureViewOnTrans.cs" />
     <Compile Include="Mian\Dependencies\Dysphoria.cs" />
     <Compile Include="Mian\Dependencies\GenderWorks.cs" />
     <Compile Include="Mian\Dependencies\SimpleTrans.cs" />
@@ -76,10 +77,13 @@
     <Compile Include="Mian\GADefOf.cs" />
     <Compile Include="Mian\GenderAcceptance.cs" />
     <Compile Include="Mian\GenderIdentity.cs" />
-    <Compile Include="Mian\Helper.cs" />
     <Compile Include="Mian\InteractionWorkers\ComeOut.cs" />
     <Compile Include="Mian\InteractionWorkers\Misgender.cs" />
     <Compile Include="Mian\InteractionWorkers\PurposeMisgender.cs" />
+    <Compile Include="Mian\InteractionWorkers\Transvestigate.cs" />
+    <Compile Include="Mian\JobDrivers\JobDriver_Transvestigate.cs" />
+    <Compile Include="Mian\MentalStateWorkers\Transvestigate.cs" />
+    <Compile Include="Mian\MentalStates\Transvestigate.cs" />
     <Compile Include="Mian\Needs\Chaser_Need.cs" />
     <Compile Include="Mian\Patches\Faction.cs" />
     <Compile Include="Mian\Patches\GrammarUtilityPatch.cs" />
@@ -95,11 +99,16 @@
     <Compile Include="Mian\ThoughtWorkers\Chaser_Need.cs" />
     <Compile Include="Mian\ThoughtWorkers\InternalTransphobia.cs" />
     <Compile Include="Mian\ThoughtWorkers\IsCisphobic.cs" />
-    <Compile Include="Mian\ThoughtWorkers\IsTransgenderSocial.cs" />
+    <Compile Include="Mian\ThoughtWorkers\IsTransgenderNegative.cs" />
+    <Compile Include="Mian\ThoughtWorkers\IsTransgenderPositive.cs" />
     <Compile Include="Mian\ThoughtWorkers\IsTransphobic.cs" />
     <Compile Include="Mian\ThoughtWorkers\PreceptTransgender.cs" />
     <Compile Include="Mian\ThoughtWorkers\Similarity.cs" />
     <Compile Include="Mian\TransKnowledge.cs" />
+    <Compile Include="Mian\Utilities\GenderUtility.cs" />
+    <Compile Include="Mian\Utilities\Helper.cs" />
+    <Compile Include="Mian\Utilities\TransvestigateUtility.cs" />
+    <Compile Include="Mian\Verbs\Transvestigate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,7 @@ It also contains built in patches for mods such as Way Better Romance and Intima
 - Cisphobia and Transphobia work how you'd expect them to. Pawns with these traits will despise cisgender or transgender pawns.
   - There's fog of war! Transphobic pawns don't automatically know who is trans and have to find out through trans pawns voluntarily coming out or through.. accidents.
   - Watch out when accepting transgender or cisgender pawns, the phobic pawns won't be very happy with your decision!
-- Chaser trait - Chasers fetishize transgender individuals, often needing to be intimate with them from time to time in order to be happy. They will seek out transgender individuals more often for romance and love making.
+- Chaser trait - Chasers find the transgender identity exotic, often desiring to be intimate with them from time to time in order to be content. They will seek out transgender individuals more often for romance and love making.
   - Transgender pawns may feel dehumanized after the lovin'
 - Precept and ideologies for the Ideology DLC relating to acceptance of transgender individuals.
 - Transgender individuals are more fond of one another as they relate to being transgender.

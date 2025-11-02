@@ -1,0 +1,9 @@
+﻿<Defs>
+    <JobDef>
+        <defName>Transvestigate</defName>
+        <driverClass>JobDriver_Transvestigate</driverClass>
+        <reportString>transvestigating TargetA.</reportString>,
+        <joyDuration>4000</joyDuration>
+        <joyKind>Social</joyKind>
+    </JobDef>
+</Defs>

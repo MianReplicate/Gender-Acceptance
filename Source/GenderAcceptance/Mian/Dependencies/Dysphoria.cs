@@ -30,9 +30,10 @@ public class Dysphoria : TransDependency
         return GenderIdentity.Cisgender;
     }
 
-    public override bool IsInCultureWithTransphobia(Pawn pawn)
+    public override CultureViewOnTrans CultureOpinionOnTrans(Pawn pawn)
     {
-        return (pawn.Ideo?.HasPrecept(Trans_Abhorrent) ?? false) || (pawn.Ideo?.HasPrecept(Trans_Disapproved) ?? false);
+        return (pawn.Ideo?.HasPrecept(Trans_Abhorrent) ?? false) || (pawn.Ideo?.HasPrecept(Trans_Disapproved) ?? false) ? CultureViewOnTrans.Despised : 
+            (pawn.Ideo?.HasPrecept(Trans_Approved) ?? false) || (pawn.Ideo?.HasPrecept(Trans_Exalted) ?? false) ? CultureViewOnTrans.Adored : CultureViewOnTrans.Neutral;
     }
 
     public override bool HasMatchingGenitalia(Pawn pawn)
@@ -51,5 +52,10 @@ public class Dysphoria : TransDependency
 
         return (pawn.gender == Gender.Male && pawn.GetStatValue(mascStat) > 50)
             || (pawn.gender == Gender.Female && pawn.GetStatValue(femStat) > 50);
+    }
+    
+    public override bool FeaturesAppearances()
+    {
+        return true;
     }
 }

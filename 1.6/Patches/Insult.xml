@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/InteractionDef[defName="Insult"]/logRulesInitiator/rulesStrings</xpath>
+        <value>
+            <li>insultcomparison(INITIATOR_isTransphobic==true)->a non-passing transgender individual</li>
+            <li>insultcomparison(INITIATOR_isTransphobic==true)->a transgender slur</li>
+            <li>insultcomparison(INITIATOR_isTransphobic==true)->the transgender slur</li>
+        </value>
+    </Operation>
+</Patch>

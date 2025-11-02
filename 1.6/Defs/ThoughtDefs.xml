@@ -194,7 +194,7 @@
     <socialTargetDevelopmentalStageFilter>Child, Adult</socialTargetDevelopmentalStageFilter>
     <stages>
       <li>
-        <label>coming out went amazing</label>
+        <label>coming out to {1} went amazing</label>
         <baseOpinionOffset>10</baseOpinionOffset>
       </li>
     </stages>
@@ -212,7 +212,7 @@
     <socialTargetDevelopmentalStageFilter>Child, Adult</socialTargetDevelopmentalStageFilter>
     <stages>
       <li>
-        <label>coming out was terrible</label>
+        <label>coming out to {1} was terrible</label>
         <baseOpinionOffset>-10</baseOpinionOffset>
       </li>
     </stages>
@@ -227,7 +227,7 @@
     <developmentalStageFilter>Child, Adult</developmentalStageFilter>
     <stages>
       <li>
-        <label>coming out went amazing</label>
+        <label>coming out to {1} went amazing</label>
         <description>I came out to {1}. It went wonderfully, and my bond with {OTHERPAWN_possessive} is stronger than ever.</description>
         <baseMoodEffect>10</baseMoodEffect>
       </li>
@@ -242,7 +242,7 @@
     <developmentalStageFilter>Child, Adult</developmentalStageFilter>
     <stages>
       <li>
-        <label>coming out was terrible</label>
+        <label>coming out to {1} was terrible</label>
         <description>I came out to {1}. It was terrible, and I don't know what my relationship is with {OTHERPAWN_possessive} anymore.</description>
         <baseMoodEffect>-10</baseMoodEffect>
       </li>
@@ -258,7 +258,7 @@
     <stages>
       <li>
         <label>found out {1} is transgender</label>
-        <description>I found out {1} identified as transgender! I'll make sure to use {OTHERPAWN_possessive} preferred pronouns and to support {OTHERPAWN_possessive} the best I can.</description>
+        <description>I'll make sure to use {OTHERPAWN_possessive} preferred pronouns and to support {OTHERPAWN_possessive} the best I can.</description>
         <baseMoodEffect>10</baseMoodEffect>
       </li>
     </stages>

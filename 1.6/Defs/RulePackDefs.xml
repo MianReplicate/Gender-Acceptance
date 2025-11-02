@@ -2,10 +2,20 @@
 
 <Defs>
     <RulePackDef>
+        <defName>Suspicions_About_Trans</defName>
+        <rulePack>
+            <rulesStrings>
+                <li>r_logentry->[INITIATOR_nameDef] suspects that [RECIPIENT_possessive] may be transgender.</li>
+            </rulesStrings>
+        </rulePack>
+    </RulePackDef>
+
+    <RulePackDef>
         <defName>Chaser_Found_Out</defName>
         <rulePack>
             <rulesStrings>
-                <li>entry->[PAWN_nameDef] feels a deep urge within them to become closer to [SUSPECTEDPAWN_possessive].</li>
+                <li>r_logentry(INITIATOR_isTransphobic==false)->[INITIATOR_nameDef] desires to become closer to [RECIPIENT_nameDef].</li>
+                <li>r_logentry(INITIATOR_isTransphobic==true)->Despite [INITIATOR_possessive] transphobia, [INITIATOR_nameDef] desires to become closer to [RECIPIENT_nameDef].</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>
@@ -14,7 +24,7 @@
         <defName>Transphobe_Found_Out</defName>
         <rulePack>
             <rulesStrings>
-                <li>entry->[PAWN_nameDef] views [SUSPECTEDPAWN_possessive] in a more cautious and negative light now because of [PAWN_possessive] beliefs.</li>
+                <li>r_logentry->[INITIATOR_nameDef] views [RECIPIENT_possessive] in a more cautious and negative light now because of [INITIATOR_possessive] beliefs.</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>
@@ -23,7 +33,7 @@
         <defName>Coming_Out_Positive_Pack</defName>
         <rulePack>
             <rulesStrings>
-                <li>entry->[RECIPIENT_nameDef] was extremely respectful about it.</li>
+                <li>r_logentry->[RECIPIENT_nameDef] was extremely respectful about it.</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>
@@ -32,7 +42,7 @@
         <defName>Coming_Out_Negative_Pack</defName>
         <rulePack>
             <rulesStrings>
-                <li>entry->[RECIPIENT_nameDef] was shocked and enraged.</li>
+                <li>r_logentry->[RECIPIENT_nameDef] was shocked and enraged.</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>

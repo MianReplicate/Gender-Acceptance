@@ -26,19 +26,21 @@ public interface ITransDependency
     public bool HasMatchingGenitalia(Pawn pawn);
     
     /// <summary>
-    /// Determines whether the pawn is in a culture with transphobia or not.
+    /// Checks whether the culture is transphobic, accepting or neutral
     /// </summary>
     /// <param name="pawn">THe pawn to check</param>
-    /// <returns>Whether the pawn is in a culture with transphobia or not</returns>
-    public bool IsInCultureWithTransphobia(Pawn pawn);
+    /// <returns>Whether the pawn is in a culture that is transphobic, accepting or neutral</returns>
+    public CultureViewOnTrans CultureOpinionOnTrans(Pawn pawn);
     
     /// <summary>
     /// Whether the pawn looks cis to other pawns.
-    /// This is used in InteractionDefs and other places of the code to determine whether someone thinks a pawn is trans or cis
+    /// This can be used anywhere when a pawn interacts with another pawn
     /// </summary>
     /// <param name="pawn">The pawn to check</param>
     /// <returns>Whether the pawn appears cis or not</returns>
     public bool LooksCis(Pawn pawn);
+
+    public bool FeaturesAppearances();
 }
 
 public static class TransDependencies
@@ -73,6 +75,9 @@ public static class TransDependencies
         if (detectedPackages.Count > 1)
         {
             Helper.Error("You have multiple transgender mods! Please choose one to keep and remove the rest: " + detectedPackages.ToStringList(", "));
+        } else if (detectedPackages.Empty())
+        {
+            Helper.Error("You have none of the transgender mods required downloaded! Please choose one to download: " + transLibraries.Keys.ToStringList(", "));
         }
     }
 }

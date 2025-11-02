@@ -1,0 +1,32 @@
+﻿<Defs>
+    <MentalBreakDef>
+        <defName>TransvestigatingSpree</defName>
+        <mentalState>TransvestigatingSpree</mentalState>
+        <baseCommonality>0.5</baseCommonality>
+        <intensity>Minor</intensity>
+    </MentalBreakDef>
+    <MentalStateDef Name="TransvestigatingSpree" ParentName="BaseMentalState">
+        <defName>TransvestigatingSpree</defName>
+        <stateClass>GenderAcceptance.Mian.MentalState.MentalState_TransvestigateSpree</stateClass>
+        <workerClass>GenderAcceptance.Mian.MentalStateWorkers.MentalStateWorker_TransvestigateSpree</workerClass>
+        <label>transvestigating spree</label>
+        <category>Malicious</category>
+        <colonistsOnly>true</colonistsOnly>
+<!--        <blockInteractionInitiationExcept>-->
+<!--            <li>Transvestigate</li>-->
+<!--        </blockInteractionInitiationExcept>-->
+        <blockRandomInteraction>true</blockRandomInteraction>
+        <minTicksBeforeRecovery>25000</minTicksBeforeRecovery>
+        <maxTicksBeforeRecovery>45000</maxTicksBeforeRecovery>
+        <recoveryMtbDays>0.166</recoveryMtbDays>
+        <recoverFromSleep>true</recoverFromSleep>
+        <moodRecoveryThought>Catharsis</moodRecoveryThought>
+        <blockNormalThoughts>true</blockNormalThoughts>
+        <nameColor>(0.98,0.48,0.16)</nameColor>
+        <recoveryMessage>{0} is no longer on an transvestigating spree.</recoveryMessage>
+        <beginLetter>{0} is on an transvestigating spree.\n\n[PAWN_pronoun] will wander around, randomly investigating others to see if they are transgender.</beginLetter>
+        <beginLetterDef>NegativeEvent</beginLetterDef>
+        <baseInspectLine>Mental state: Transvestigating spree</baseInspectLine>
+        <allowBeatfire>true</allowBeatfire>
+    </MentalStateDef>
+</Defs>

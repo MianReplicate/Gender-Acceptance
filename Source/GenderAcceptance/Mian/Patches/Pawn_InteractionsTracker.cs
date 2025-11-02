@@ -1,4 +1,5 @@
-﻿using GenderAcceptance.Mian.Needs;
+﻿using GenderAcceptance.Mian.Dependencies;
+using GenderAcceptance.Mian.Needs;
 using HarmonyLib;
 using Verse;
 
@@ -15,5 +16,6 @@ public class Pawn_InteractionsTracker
             return;
         if (GenderUtility.DoesChaserSeeTranny(___pawn, recipient))
             ((Chaser_Need) ___pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromInteraction();
+        ___pawn.AttemptTransvestigate(recipient, 0.01f, 0.05f);
     }
 }
