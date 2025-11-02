@@ -12,15 +12,7 @@ public static class GADefOf
 
     public static NeedDef Chaser_Need;
 
-    [MayRequireIdeology] public static PreceptDef Transgender_Adored;
     [MayRequireIdeology] public static PreceptDef Transgender_Despised;
-    [MayRequireIdeology] public static IssueDef Transgender;
-
-    [MayRequireIdeology] public static ThoughtDef AmountOfTransgender_Disliked;
-    [MayRequireIdeology] public static ThoughtDef NegativeViewOnTransgender;
-    [MayRequireIdeology] public static ThoughtDef AmountOfTransgender_Liked;
-    [MayRequireIdeology] public static ThoughtDef PositiveViewOnTransgender;
-    [MayRequireIdeology] public static ThoughtDef Internal_Transphobia;
 
     public static RulePackDef Chaser_Found_Out;
     public static RulePackDef Transphobe_Found_Out;
@@ -47,5 +39,8 @@ public static class GADefOf
     static GADefOf()
     {
         DefOfHelper.EnsureInitializedInCtor(typeof(GADefOf));
+
+        if (!ModsConfig.IsActive("cammy.identity.gender"))
+            Transgender_Despised = DefDatabase<PreceptDef>.GetNamed("Transgender_Despised");
     }
 }

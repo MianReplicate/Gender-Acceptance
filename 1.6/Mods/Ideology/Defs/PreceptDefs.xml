@@ -2,17 +2,17 @@
 <Defs>
 
     <!-- Issues-->
-    <IssueDef MayRequire="Ludeon.RimWorld.Ideology">
+    <IssueDef>
         <defName>Transgender</defName>
-        <label>Transgender individuals</label>
+        <label>transgender individuals</label>
         <iconPath>GenderAcceptance/UI/Issues/Transgender</iconPath>
     </IssueDef>
 
     <!-- Precepts-->
-    <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <PreceptDef>
         <defName>Transgender_Adored</defName>
         <issue>Transgender</issue>
-        <label>Adored</label>
+        <label>adored</label>
         <description>Cherishing transgender people leads to a more diverse and accepting population.</description>
         <impact>Medium</impact>
         <comps>
@@ -22,10 +22,10 @@
         </comps>
     </PreceptDef>
     
-    <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <PreceptDef>
         <defName>Transgender_Despised</defName>
         <issue>Transgender</issue>
-        <label>Despised</label>
+        <label>despised</label>
         <description>Valuing traditional norms, transgender individuals are contrary to our community's foundational principles.</description>
         <impact>Medium</impact>
         <comps>

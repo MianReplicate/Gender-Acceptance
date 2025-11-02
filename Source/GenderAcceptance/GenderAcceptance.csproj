@@ -33,6 +33,16 @@
       <HintPath>$(RimWorldPath)\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+
+    <Reference Include="System">
+      <HintPath>$(RimWorldPath)\RimWorldWin64_Data\Managed\System.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
+    <Reference Include="Mscorlib">
+      <HintPath>$(RimWorldPath)\RimWorldWin64_Data\Managed\mscorlib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     
 <!--    Subscribe to the dependencies below-->
     <Reference Include="SimpleTransExpanded">
@@ -117,10 +127,9 @@
       <!-- Root files -->
       <RootFiles Include="$(MSBuildProjectDirectory)\..\..\LICENSE" />
       <RootFiles Include="$(MSBuildProjectDirectory)\..\..\README.md" />
-      <RootFiles Include="$(MSBuildProjectDirectory)\..\..\LoadFolders.xml"/>
+      <RootFiles Include="$(MSBuildProjectDirectory)\..\..\loadFolders.xml"/>
       
       <SixteenFiles Include="$(MSBuildProjectDirectory)\..\..\1.6\**\*.*" />
-      <IdeologyFiles Include="$(MSBuildProjectDirectory)\..\..\Ideology\**\*.*"/>
     </ItemGroup>
 
     <!-- Copy all defined files -->
@@ -128,7 +137,6 @@
     <Copy SourceFiles="@(AboutFiles)" DestinationFiles="@(AboutFiles->'$(RimWorldPath)\Mods\$(ModName)\About\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(RootFiles)" DestinationFiles="@(RootFiles->'$(RimWorldPath)\Mods\$(ModName)\%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(SixteenFiles)" DestinationFiles="@(SixteenFiles->'$(RimWorldPath)\Mods\$(ModName)\1.6\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(IdeologyFiles)" DestinationFiles="@(IdeologyFiles->'$(RimWorldPath)\Mods\$(ModName)\Ideology\%(RecursiveDir)%(Filename)%(Extension)')" />
 
     <Message Text="Topic of Gender deployed successfully to $(RimWorldPath)\Mods\$(ModName)" Importance="high" />
   </Target>

@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<LanguageData>
-    <Chaser.degreeDatas.0.label>chaser</Chaser.degreeDatas.0.label>
-    <Chaser.degreeDatas.0.description>{PAWN_nameDef} fetishizes transgender individuals.</Chaser.degreeDatas.0.description>
-    <Cisphobic.degreeDatas.0.label>cisphobic</Cisphobic.degreeDatas.0.label>
-    <Cisphobic.degreeDatas.0.description>{PAWN_nameDef} dislikes cisgender individuals.</Cisphobic.degreeDatas.0.description>
-    <Transphobic.degreeDatas.0.label>transphobic</Transphobic.degreeDatas.0.label>
-    <Transphobic.degreeDatas.0.description>{PAWN_nameDef} dislikes transgender individuals.</Transphobic.degreeDatas.0.description>
-</LanguageData>
