@@ -60,4 +60,20 @@
     <Internal_Transphobia.stages.0.description>I feel ashamed for being transgender.</Internal_Transphobia.stages.0.description>
     <Internal_Transphobia.stages.1.label>Mild internal transphobia</Internal_Transphobia.stages.1.label>
     <Internal_Transphobia.stages.1.description>It hurts that our culture is unaccepting of people like me.</Internal_Transphobia.stages.1.description>
+
+    <CameOutPositive.stages.0.label>Coming out went amazing</CameOutPositive.stages.0.label>
+    <CameOutNegative.stages.0.label>Coming out was terrible</CameOutNegative.stages.0.label>
+    
+    <CameOutMoodPositive.stages.0.label>Coming out went amazing</CameOutMoodPositive.stages.0.label>
+    <CameOutMoodPositive.stages.0.description>I came out to {1}. It went wonderfully, and my bond with {OTHERPAWN_possessive} is stronger than ever.</CameOutMoodPositive.stages.0.description>
+
+    <CameOutMoodNegative.stages.0.label>Coming out was terrible</CameOutMoodNegative.stages.0.label>
+    <CameOutMoodNegative.stages.0.description>I came out to {1}. It was terrible, and I don't know what my relationship is with {OTHERPAWN_possessive} anymore.</CameOutMoodNegative.stages.0.description>
+
+    <FoundOutPawnIsTransMoodPositive.stages.0.label>Found out {1} is transgender</FoundOutPawnIsTransMoodPositive.stages.0.label>
+    <FoundOutPawnIsTransMoodPositive.stages.0.description>I'll make sure to use {OTHERPAWN_possessive} preferred pronouns and to support {OTHERPAWN_possessive} the best I can.</FoundOutPawnIsTransMoodPositive.stages.0.description>
+
+    <FoundOutPawnIsTransMoodNegative.stages.0.label>Found out {1} is transgender</FoundOutPawnIsTransMoodNegative.stages.0.label>
+    <FoundOutPawnIsTransMoodNegative.stages.0.description>I'm disappointed that {1} is one of those "transgenders." It's a phase they'll grow out of I imagine.</FoundOutPawnIsTransMoodNegative.stages.0.description>
+
 </LanguageData>

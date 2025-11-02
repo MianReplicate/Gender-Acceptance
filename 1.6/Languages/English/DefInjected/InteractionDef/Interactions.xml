@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+    <ComeOut.label>Came Out</ComeOut.label>
+    <ComeOut.logRulesInitiator.rulesStrings.0>r_logentry->[INITIATOR_nameDef] [comment] to [RECIPIENT_nameDef]</ComeOut.logRulesInitiator.rulesStrings.0>
+    <ComeOut.logRulesInitiator.rulesStrings.1>comment->came out</ComeOut.logRulesInitiator.rulesStrings.1>
+    <ComeOut.logRulesInitiator.rulesStrings.2>comment->poured their tears into coming out</ComeOut.logRulesInitiator.rulesStrings.2>
+    <ComeOut.logRulesInitiator.rulesStrings.3>comment->overcame the courage to come out</ComeOut.logRulesInitiator.rulesStrings.3>
+
     <PurposeMisgender.label>Purposefully Misgendered</PurposeMisgender.label>
     <PurposeMisgender.logRulesInitiator.rulesStrings.0>r_logentry->[INITIATOR_nameDef] [adjective] [comment]</PurposeMisgender.logRulesInitiator.rulesStrings.0>
     <PurposeMisgender.logRulesInitiator.rulesStrings.1>adjective->purposefully</PurposeMisgender.logRulesInitiator.rulesStrings.1>

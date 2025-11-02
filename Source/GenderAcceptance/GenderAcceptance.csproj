@@ -28,6 +28,11 @@
       <HintPath>$(RimWorldPath)\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+
+    <Reference Include="UnityEngine">
+      <HintPath>$(RimWorldPath)\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     
 <!--    Subscribe to the dependencies below-->
     <Reference Include="SimpleTransExpanded">
@@ -62,6 +67,7 @@
     <Compile Include="Mian\GenderAcceptance.cs" />
     <Compile Include="Mian\GenderIdentity.cs" />
     <Compile Include="Mian\Helper.cs" />
+    <Compile Include="Mian\InteractionWorkers\ComeOut.cs" />
     <Compile Include="Mian\InteractionWorkers\Misgender.cs" />
     <Compile Include="Mian\InteractionWorkers\PurposeMisgender.cs" />
     <Compile Include="Mian\Needs\Chaser_Need.cs" />

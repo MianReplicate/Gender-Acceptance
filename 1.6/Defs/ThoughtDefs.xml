@@ -184,19 +184,50 @@
   </ThoughtDef>
 
   <ThoughtDef>
-    <defName>CameOut</defName>
+    <defName>CameOutPositive</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>5</durationDays>
+    <stackLimit>300</stackLimit>
+    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <socialTargetDevelopmentalStageFilter>Child, Adult</socialTargetDevelopmentalStageFilter>
+    <stages>
+      <li>
+        <label>came out</label>
+        <baseOpinionOffset>10</baseOpinionOffset>
+      </li>
+    </stages>
+    <thoughtToMake>CameOutMoodPositive</thoughtToMake>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>CameOutNegative</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>5</durationDays>
+    <stackLimit>300</stackLimit>
+    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <socialTargetDevelopmentalStageFilter>Child, Adult</socialTargetDevelopmentalStageFilter>
+    <stages>
+      <li>
+        <label>came out</label>
+        <baseOpinionOffset>-10</baseOpinionOffset>
+      </li>
+    </stages>
+    <thoughtToMake>CameOutMoodNegative</thoughtToMake>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>CameOutMoodPositive</defName>
     <durationDays>5</durationDays>
     <stackLimit>10</stackLimit>
     <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
     <developmentalStageFilter>Child, Adult</developmentalStageFilter>
     <stages>
       <li>
-        <label>positive came out</label>
-        <description>I came out to {1}. It went wonderfully, and my bond with {OTHERPAWN_possessive} is stronger than ever.</description>
-        <baseMoodEffect>10</baseMoodEffect>
-      </li>
-      <li>
-        <label>positive came out</label>
+        <label>came out</label>
         <description>I came out to {1}. It went wonderfully, and my bond with {OTHERPAWN_possessive} is stronger than ever.</description>
         <baseMoodEffect>10</baseMoodEffect>
       </li>
@@ -204,15 +235,45 @@
   </ThoughtDef>
 
   <ThoughtDef>
-    <defName>CameOutRecipient</defName>
-    <durationDays>2</durationDays>
+    <defName>CameOutMoodNegative</defName>
+    <durationDays>5</durationDays>
     <stackLimit>10</stackLimit>
     <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
     <developmentalStageFilter>Child, Adult</developmentalStageFilter>
     <stages>
       <li>
         <label>came out</label>
-        <description>I was fetishized and treated like an object by {1}.</description>
+        <description>I came out to {1}. It was terrible, and I don't know what my relationship is with {OTHERPAWN_possessive} anymore.</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>FoundOutPawnIsTransMoodPositive</defName>
+    <durationDays>2</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>found out</label>
+        <description>I found out {1} identified as transgender! I'll make sure to use {OTHERPAWN_possessive} preferred pronouns and to support {OTHERPAWN_possessive} the best I can.</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>FoundOutPawnIsTransMoodNegative</defName>
+    <durationDays>2</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>found out</label>
+        <description>I'm disappointed that {1} is one of those "transgenders." It's a phase they'll grow out of I imagine.</description>
         <baseMoodEffect>-10</baseMoodEffect>
       </li>
     </stages>

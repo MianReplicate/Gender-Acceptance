@@ -2,19 +2,37 @@
 
 <Defs>
     <RulePackDef>
-        <defName>ComingOut_Positive</defName>
+        <defName>Chaser_Found_Out</defName>
         <rulePack>
             <rulesStrings>
-                <li>sent->This drove [RECIPIENT_nameDef] into a rage and [RECIPIENT_pronoun] began a fight!</li>
+                <li>entry->[PAWN_nameDef] feels a deep urge within them to become closer to [SUSPECTEDPAWN_possessive].</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>
 
     <RulePackDef>
-        <defName>ComingOut_Negative</defName>
+        <defName>Transphobe_Found_Out</defName>
         <rulePack>
             <rulesStrings>
-                <li>sent->This drove [RECIPIENT_nameDef] into a rage and [RECIPIENT_pronoun] began a fight!</li>
+                <li>entry->[PAWN_nameDef] views [SUSPECTEDPAWN_possessive] in a more cautious and negative light now because of [PAWN_possessive] beliefs.</li>
+            </rulesStrings>
+        </rulePack>
+    </RulePackDef>
+
+    <RulePackDef>
+        <defName>Coming_Out_Positive_Pack</defName>
+        <rulePack>
+            <rulesStrings>
+                <li>entry->[RECIPIENT_nameDef] was extremely respectful about it.</li>
+            </rulesStrings>
+        </rulePack>
+    </RulePackDef>
+    
+    <RulePackDef>
+        <defName>Coming_Out_Negative_Pack</defName>
+        <rulePack>
+            <rulesStrings>
+                <li>entry->[RECIPIENT_nameDef] was shocked and enraged.</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>

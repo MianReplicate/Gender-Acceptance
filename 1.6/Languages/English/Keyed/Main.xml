@@ -2,5 +2,5 @@
 <LanguageData>
   
   <GA.HookupChanceChaser>Chaser</GA.HookupChanceChaser>
-  
+  <GA.PawnBelievesOtherPawnIsTrans>[PAWN_nameDef] believes [SUSPECTEDPAWN_nameDef] is transgender.</GA.PawnBelievesOtherPawnIsTrans>
 </LanguageData>

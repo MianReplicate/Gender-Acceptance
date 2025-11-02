@@ -16,7 +16,7 @@ public static class MemoryThoughtHandler
         if (newThought.def == ThoughtDefOf.GotSomeLovin)
         {
             if(!otherPawn.HasMatchingGenitalia())
-                TransKnowledge.KnowledgeLearned(__instance.pawn, otherPawn);
+                TransKnowledge.KnowledgeLearned(__instance.pawn, otherPawn, false);
             
             if (GenderUtility.DoesChaserSeeTranny(__instance.pawn, otherPawn))
             {

@@ -22,6 +22,16 @@ public static class GADefOf
     [MayRequireIdeology] public static ThoughtDef PositiveViewOnTransgender;
     [MayRequireIdeology] public static ThoughtDef Internal_Transphobia;
 
+    public static RulePackDef Chaser_Found_Out;
+    public static RulePackDef Transphobe_Found_Out;
+    public static RulePackDef Coming_Out_Positive_Pack;
+    public static RulePackDef Coming_Out_Negative_Pack;
+
+    public static ThoughtDef CameOutNegative;
+    public static ThoughtDef CameOutPositive;
+    public static ThoughtDef FoundOutPawnIsTransMoodPositive;
+    public static ThoughtDef FoundOutPawnIsTransMoodNegative;
+
     public static ThoughtDef Transgender_Person_Joined;
     public static ThoughtDef Cisgender_Person_Joined;
     public static ThoughtDef Cisphobia;

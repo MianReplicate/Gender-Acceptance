@@ -5,10 +5,13 @@
         <workerClass>GenderAcceptance.Mian.InteractionWorkers.InteractionWorker_ComeOut</workerClass>
         <symbol>Things/Mote/SpeechSymbols/ReduceWill</symbol>
 
-<!--        <socialFightBaseChance>0.01</socialFightBaseChance>-->
         <logRulesInitiator>
             <rulesStrings>
-
+                <li>r_logentry->[INITIATOR_nameDef] [comment] to [RECIPIENT_nameDef]</li>
+                
+                <li>comment->came out</li>
+                <li>comment->poured their tears into coming out</li>
+                <li>comment->overcame the courage to come out</li>
             </rulesStrings>
         </logRulesInitiator>
     </InteractionDef>
