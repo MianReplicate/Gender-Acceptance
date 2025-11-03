@@ -42,7 +42,7 @@ public static class GenderUtility {
 
     public static bool IsTrannyphobic(this Pawn pawn, bool includePrecept=true)
     {
-        return (pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false) || 
+        return ((pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false) || (pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false)) || 
                (includePrecept && pawn.GetCurrentIdentity() == GenderIdentity.Cisgender 
                                && pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Despised);
     }

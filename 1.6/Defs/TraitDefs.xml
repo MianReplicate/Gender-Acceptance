@@ -6,11 +6,12 @@
         <degreeDatas>
             <li>
                 <label>chaser</label>
-                <description>[PAWN_nameDef] fetishizes transgender individuals.</description>
+                <description>[PAWN_nameDef] desires to get closer to transgender individuals to fulfil their dark desires.</description>
             </li>
         </degreeDatas>
         <conflictingTraits>
             <li>Asexual</li>
+            <li>Transphobic</li>
             <li MayRequire="divinederivative.romance">HeteroAce</li>
             <li MayRequire="divinederivative.romance">HomoAce</li>
             <li MayRequire="divinederivative.romance">BiAce</li>

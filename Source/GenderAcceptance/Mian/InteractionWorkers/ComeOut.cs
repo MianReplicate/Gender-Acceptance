@@ -59,5 +59,10 @@ public class InteractionWorker_ComeOut : InteractionWorker
         initiator.needs.mood.thoughts.memories.TryGainMemory(isPositive ? GADefOf.CameOutPositive : GADefOf.CameOutNegative, recipient);
         
         letterDef = isPositive ? LetterDefOf.PositiveEvent : LetterDefOf.NegativeEvent;
+        
+        recipient.needs.mood.thoughts.memories.TryGainMemory(isPositive ? GADefOf.FoundOutPawnIsTransMoodPositive : GADefOf.FoundOutPawnIsTransMoodNegative, recipient);
+
+        if (!isPositive)
+            Helper.CheckSocialFightStart(Mathf.Abs(Mathf.Clamp((recipient.relations.OpinionOf(initiator) - 100), -100, 0) / 100f), initiator, recipient);
     }
 }

@@ -5,7 +5,9 @@
         <defName>Suspicions_About_Trans</defName>
         <rulePack>
             <rulesStrings>
-                <li>r_logentry->[INITIATOR_nameDef] suspects that [RECIPIENT_possessive] may be transgender.</li>
+                <li>r_logentry->[INITIATOR_nameDef] suspects that [RECIPIENT_pronoun] may be transgender.\n\n[what_happened].\n\nThis led [INITIATOR_pronoun] to believe [RECIPIENT_nameDef] is trans.</li>
+                
+                <li>what_happened(didSex==true)->During their lovin' session, [INITIATOR_nameDef] noticed that [RECIPIENT_nameDef]'s [PersonalCharacteristic] was off.</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>
@@ -14,8 +16,35 @@
         <defName>Chaser_Found_Out</defName>
         <rulePack>
             <rulesStrings>
-                <li>r_logentry(INITIATOR_isTransphobic==false)->[INITIATOR_nameDef] desires to become closer to [RECIPIENT_nameDef].</li>
-                <li>r_logentry(INITIATOR_isTransphobic==true)->Despite [INITIATOR_possessive] transphobia, [INITIATOR_nameDef] desires to become closer to [RECIPIENT_nameDef].</li>
+                <li>r_logentry->[main]</li>
+                
+<!--                <li>main->[</li>-->
+                <li>main->[INITIATOR_nameDef] finds [RECIPIENT_nameDef]'s transgender identity to be [describe], and wishes to get closer to [RECIPIENT_possessive].</li>
+                <li>main->[INITIATOR_nameDef] feels a [adjective] [want] to get closer to [RECIPIENT_nameDef] due to [RECIPIENT_possessive] identity.</li>
+
+                <li>want->desire</li>
+                <li>want->eagerness</li>
+                <li>want->want</li>
+                <li>want->dedication</li>
+                <li>want->commitment</li>
+                <li>want->keenness</li>
+                <li>want->enthusiasm</li>
+                
+                <li>adjective->strange</li>
+                <li>adjective->unavoidable</li>
+                <li>adjective->dark</li>
+                <li>adjective->primal</li>
+                <li>adjective->fierce</li>
+                <li>adjective->intense</li>
+                <li>adjective->burning</li>
+                <li>adjective->frenzied</li>
+                <li>adjective->feverish</li>
+
+                <li>describe->hot</li>
+                <li>describe->sexy</li>
+                <li>describe->interesting</li>
+                <li>describe->exotic</li>
+                <li>describe->special</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>
@@ -24,7 +53,7 @@
         <defName>Transphobe_Found_Out</defName>
         <rulePack>
             <rulesStrings>
-                <li>r_logentry->[INITIATOR_nameDef] views [RECIPIENT_possessive] in a more cautious and negative light now because of [INITIATOR_possessive] beliefs.</li>
+                <li>r_logentry->[INITIATOR_nameDef] views [RECIPIENT_possessive] in a more cautious and negative light now because of [INITIATOR_possessive] transphobic beliefs.</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>

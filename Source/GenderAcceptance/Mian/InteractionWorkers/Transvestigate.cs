@@ -21,11 +21,6 @@ public class InteractionWorker_Transvestigate : InteractionWorker
         letterDef = null;
         lookTargets = (LookTargets) null;
         
-        if(!recipient.LooksCis() && TransDependencies.TransLibrary.FeaturesAppearances())
-            TransKnowledge.KnowledgeLearned(initiator, recipient, false);
-        else if (Rand.Chance(0.05f))
-        {
-            TransKnowledge.KnowledgeLearned(initiator, recipient, false);
-        }
+        initiator.AttemptTransvestigate(recipient);
     }
 }

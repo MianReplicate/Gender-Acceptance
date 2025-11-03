@@ -12,6 +12,13 @@ public static class GrammarUtilityPatch
     [HarmonyPatch(nameof(GrammarUtility.RulesForPawn), typeof(string), typeof(Pawn), typeof(Dictionary<string, string>),
         typeof(bool), typeof(bool))]
     [HarmonyPostfix]
-    public static void AddExtraRules(IEnumerable<Rule> __result, Pawn pawn, string pawnSymbol) => 
-        __result.AddItem(new Rule_String(pawnSymbol + "_isTransphobic", (pawn.IsTrannyphobic()).ToString()));
+    public static void AddExtraRules(Pawn pawn, string pawnSymbol, Dictionary<string, string> constants=null)
+    {
+        string prefix = "";
+        if (!pawnSymbol.NullOrEmpty())
+            prefix = $"{prefix}{pawnSymbol}_";
+        
+        if(constants != null)
+            constants[prefix + "isTransphobic"] = pawn.IsTrannyphobic().ToString();
+    }
 }
