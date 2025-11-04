@@ -1,4 +1,5 @@
-﻿using GenderAcceptance.Mian.Needs;
+﻿using System.Collections.Generic;
+using GenderAcceptance.Mian.Needs;
 using HarmonyLib;
 using RimWorld;
 using Simple_Trans;
@@ -15,13 +16,17 @@ public static class MemoryThoughtHandler
     {
         if (newThought.def == ThoughtDefOf.GotSomeLovin)
         {
-            if(!otherPawn.HasMatchingGenitalia())
-                TransKnowledge.KnowledgeLearned(__instance.pawn, otherPawn, false, new()
+            Dictionary<string, string> rules =
+                new()
                 {
-                    {"didSex", "True"}
-                });
-            
-            if (GenderUtility.DoesChaserSeeTranny(__instance.pawn, otherPawn))
+                    { "didSex", "True" },
+                };
+            if (!otherPawn.HasMatchingGenitalia() || Rand.Chance(0.01f)){
+                rules.Add("mismatchedGenitalia", "True");
+                TransKnowledge.KnowledgeLearned(__instance.pawn, otherPawn, false, rules);
+            }
+
+        if (GenderUtility.DoesChaserSeeTranny(__instance.pawn, otherPawn))
             {
                 ((Chaser_Need) __instance.pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromSex();
                 otherPawn.needs?.mood?.thoughts?.memories?.TryGainMemory(GADefOf.Dehumanized, __instance.pawn);   
