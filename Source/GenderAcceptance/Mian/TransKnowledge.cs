@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GenderAcceptance.Mian.Dependencies;
 using RimWorld;
 using UnityEngine;
@@ -10,6 +11,12 @@ namespace GenderAcceptance.Mian;
 
 public static class TransKnowledge
 {
+    private static Dictionary<string, string> defaultRules =
+    new(){
+        {"didSex", "False"},
+        {"mismatchedGenitalia", "True"}
+    };
+    
     private static readonly Dictionary<Pawn, List<Pawn>> believedToBeTransgender = new Dictionary<Pawn, List<Pawn>>();
 
     public static void SetBelievedToBeTrannies(Pawn pawn, List<Pawn> pawns)
@@ -26,7 +33,7 @@ public static class TransKnowledge
         }
         return null;
     }
-    public static void KnowledgeLearned(Pawn pawn, Pawn otherPawn, bool hardLearned, Dictionary<string, string> customConstants=null)
+    public static void KnowledgeLearned(Pawn pawn, Pawn otherPawn, bool hardLearned, Dictionary<string, string> rules=null)
     {
         var list = believedToBeTransgender.TryGetValue(pawn, new());
         if (list.Contains(otherPawn))
@@ -38,10 +45,12 @@ public static class TransKnowledge
         {
             var request = new GrammarRequest();
 
-            if (customConstants == null)
-                customConstants = new();
+            if (rules == null)
+                rules = defaultRules;
+            else
+                rules.AddRange(defaultRules.Where(rule => !rules.ContainsKey(rule.Key)).ToDictionary(pair => pair.Key, pair => pair.Value));
             request.Includes.Add(GADefOf.Suspicions_About_Trans);
-            request.Constants.AddRange(customConstants);
+            request.Constants.AddRange(rules);
             request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", pawn, request.Constants));
             request.Rules.AddRange(GrammarUtility.RulesForPawn("RECIPIENT", otherPawn, request.Constants));
             
@@ -62,7 +71,7 @@ public static class TransKnowledge
             {
                 request.Clear();
                 request.Includes.Add(grammarPack);
-                request.Constants.AddRange(customConstants);
+                request.Constants.AddRange(rules);
                 request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", pawn, request.Constants));
                 request.Rules.AddRange(GrammarUtility.RulesForPawn("RECIPIENT", otherPawn, request.Constants));
                 

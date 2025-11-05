@@ -26,7 +26,8 @@ public static class GADefOf
     public static ThoughtDef FoundOutPawnIsTransMoodPositive;
     public static ThoughtDef FoundOutPawnIsTransMoodNegative;
 
-    public static ThoughtDef Transgender_Person_Joined;
+    public static ThoughtDef Transgender_Person_Joined_Positive;
+    public static ThoughtDef Transgender_Person_Joined_Negative;
     public static ThoughtDef Cisgender_Person_Joined;
     public static ThoughtDef Cisphobia;
     public static ThoughtDef Transphobia;

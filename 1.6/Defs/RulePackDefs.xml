@@ -7,11 +7,14 @@
             <rulesStrings>
                 <li>r_logentry->[INITIATOR_nameDef] suspects that [RECIPIENT_nameDef] may be transgender.\n\n[what_happened].\n\nThis led [INITIATOR_objective] to believe [RECIPIENT_nameDef] is trans.</li>
                 
+                <li>what_happened(didSex==false)->[random_event]</li>
                 <li>what_happened(didSex==true)->During their lovin' session, [sex_event]</li>
-                <li>sex_event->[INITIATOR_nameDef] noticed that [RECIPIENT_nameDef]'s [sex_characteristic] was off.</li>
+                <li>sex_event->[INITIATOR_nameDef] noticed that [RECIPIENT_nameDef]'s [sex_characteristic] was like another gender</li>
                 
                 <li>sex_characteristic(mismatchedGenitalia==true)->genitalia</li>
                 <li>sex_characteristic(mismatchedGenitalia==false)->[PersonalCharacteristic]</li>
+                
+                <li>random_event->[INITIATOR_nameDef] spotted [RECIPIENT_nameDef]'s [AdjectiveAny] [PersonalCharacteristic] and thought it looked too much like what a [RECIPIENT_otherGender] would do.</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>

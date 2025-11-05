@@ -70,7 +70,7 @@
   </ThoughtDef>
 
   <ThoughtDef>
-    <defName>Transgender_Person_Joined</defName>
+    <defName>Transgender_Person_Joined_Positive</defName>
     <durationDays>5</durationDays>
     <stackLimit>10</stackLimit>
     <developmentalStageFilter>Child, Adult</developmentalStageFilter>
@@ -80,6 +80,15 @@
         <description>It feels good knowing I'll have company that can relate to being transgender.</description>
         <baseMoodEffect>+25</baseMoodEffect>
       </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Transgender_Person_Joined_Negative</defName>
+    <durationDays>5</durationDays>
+    <stackLimit>10</stackLimit>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
       <li>
         <label>Transgender person joined</label>
         <description>Disgusting! Why did we let {0} join?</description>
@@ -87,7 +96,7 @@
       </li>
     </stages>
   </ThoughtDef>
-
+  
   <ThoughtDef>
     <defName>Accidental_Misgender</defName>
     <durationDays>2</durationDays>

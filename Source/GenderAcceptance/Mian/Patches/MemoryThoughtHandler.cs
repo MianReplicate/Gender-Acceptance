@@ -14,6 +14,7 @@ public static class MemoryThoughtHandler
     [HarmonyPostfix]
     public static void PersonAndTrannyFucked(RimWorld.MemoryThoughtHandler __instance, Thought_Memory newThought, Pawn otherPawn)
     {
+        // this is like the universal sex thought
         if (newThought.def == ThoughtDefOf.GotSomeLovin)
         {
             Dictionary<string, string> rules =

@@ -47,6 +47,11 @@ public static class GenderUtility {
                                && pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Despised);
     }
 
+    public static Gender GetOppositeGender(this Pawn pawn)
+    {
+        return pawn.gender == Gender.Female ? Gender.Male : pawn.gender == Gender.Male ? Gender.Female : Gender.None;
+    }
+
     // public static Gender GetPerceivedGender(Pawn initiator, Pawn recipient)
     // {
     //     if (recipient.GetCurrentIdentity() != GenderIdentity.Transgender)
