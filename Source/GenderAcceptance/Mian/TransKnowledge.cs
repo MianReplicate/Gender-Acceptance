@@ -86,13 +86,12 @@ public static class TransKnowledge
                 request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", pawn, request.Constants));
                 request.Rules.AddRange(GrammarUtility.RulesForPawn("RECIPIENT", otherPawn, request.Constants));
                 
-                text = $"{text}{
+                text += "\n\n" +
                     GrammarResolver.Resolve(
                         grammarPack.FirstRuleKeyword, 
                         request, "extraSentencePack", 
                         false, 
-                        grammarPack.FirstUntranslatedRuleKeyword)
-                }";
+                        grammarPack.FirstUntranslatedRuleKeyword);
             }
 
             Find.LetterStack.ReceiveLetter("GA.PawnBelievesOtherPawnIsTransLabel".Translate(pawn.Named("INITIATOR"), otherPawn.Named("RECIPIENT")), text, LetterDefOf.NeutralEvent, new LookTargets(pawn, otherPawn)); 
@@ -109,7 +108,8 @@ public static class TransKnowledge
             return;
         if (!recipient.RaceProps.Humanlike)
             return;
-        var appearanceRoll = Rand.Chance(appearanceChance - (recipient.CalculateRelativeAppearanceFromIdentity() / 10) * (initiator.story?.traits?.HasTrait(GADefOf.Chaser) ?? false ? 1.5f : 1));
+        var relative = recipient.CalculateRelativeAppearanceFromIdentity();
+        var appearanceRoll = Rand.Chance(appearanceChance - (relative / 5) * ((initiator.story?.traits?.HasTrait(GADefOf.Chaser) ?? false) && relative < 0 ? 1.5f : 1));
         var normalRoll = Rand.Chance(normalChance);
         if (appearanceRoll || normalRoll)
         {

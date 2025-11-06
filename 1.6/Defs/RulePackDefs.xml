@@ -121,12 +121,12 @@
                 <li>friendlyVerb->looking happy</li>
                 <li>friendlyVerb->looking pleased</li>
                 
-                <li>friendlyVerb->foaming at the mouth</li>
-                <li>friendlyVerb->enraged</li>
-                <li>friendlyVerb->snarling</li>
-                <li>friendlyVerb->growling</li>
-                <li>friendlyVerb->gritting</li>
-                <li>friendlyVerb->fuming</li>
+                <li>enemyVerb->foaming at the mouth</li>
+                <li>enemyVerb->enraged</li>
+                <li>enemyVerb->snarling</li>
+                <li>enemyVerb->growling</li>
+                <li>enemyVerb->gritting</li>
+                <li>enemyVerb->fuming</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>
