@@ -93,7 +93,7 @@ public static class GenderUtility {
     }
     public static GenderIdentity GetCurrentIdentity(this Pawn pawn)
     {
-        if (pawn.IsEnby())
+        if (pawn.IsEnbyBySexTerm())
             return GenderIdentity.Transgender; // nonbinary moment?
 
         return TransDependencies.TransLibrary.GetCurrentIdentity(pawn);
@@ -102,35 +102,32 @@ public static class GenderUtility {
     // Used to help people figure out who is trans or not.
     public static bool AppearsToHaveMatchingGenitalia(this Pawn pawn)
     {
-        if (pawn.IsEnby())
-            return true; // nonbinary moment !
+        if (pawn.GetGenderedAppearance() == Gendered.Androgynous)
+            return true;
         
         return TransDependencies.TransLibrary.AppearsToHaveMatchingGenitalia(pawn);
     }
     
-    public static Gendered GetGendered(this Pawn pawn)
+    public static Gendered GetGenderedAppearance(this Pawn pawn)
     {
-        if (pawn.IsEnby())
-            return Gendered.Androgynous;
-        
         return TransDependencies.TransLibrary.GetGendered(pawn);
     }
 
-    public static bool IsEnby(this Pawn pawn)
+    public static bool IsEnbyBySexTerm(this Pawn pawn)
     {
         return pawn.gender != Gender.Male && pawn.gender != Gender.Female;
     }
 
     public static bool DoesPawnAppearanceMatchGenderNorm(this Pawn pawn)
     {
-        var appearance = pawn.GetGendered();
+        var appearance = pawn.GetGenderedAppearance();
         if (appearance == Gendered.None) // current trans library does not support appearance
+            return true;
+        if (appearance == Gendered.Androgynous)
             return true;
         
         var genderIdentity = pawn.gender;
-
-        if (appearance == Gendered.Androgynous)
-            return true;
+        
         if (genderIdentity == Gender.Male && appearance == Gendered.Masculine)
             return true;
         if (genderIdentity == Gender.Female && appearance == Gendered.Feminine)

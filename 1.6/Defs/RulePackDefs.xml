@@ -34,9 +34,12 @@
                 <li>sex_characteristic(mismatchedGenitalia==true,p=2)->genitalia</li>
                 <li>sex_characteristic->[PersonalCharacteristic]</li>
                 
-                <li>random_event->[INITIATOR_pronoun] thought [RECIPIENT_nameDef] looked too suspicious</li>
+                <li>random_event->[INITIATOR_pronoun] thought [RECIPIENT_nameDef] looked too [appearance]</li>
                 <li>random_event(transvestigate==true)->[INITIATOR_nameDef] investigated [RECIPIENT_nameDef] doing something naughty using their [AdjectiveAny] [PersonalCharacteristic]. It seemed like something a [AdjectiveAny] [RECIPIENT_otherGender] would do</li>
                 <li>random_event->[INITIATOR_nameDef] spotted [RECIPIENT_nameDef]'s [AdjectiveAny] [PersonalCharacteristic] and thought it looked too much like what a [AdjectiveAny] [RECIPIENT_otherGender] would do</li>
+                
+                <li>appearance(hasAppearance==true)->[RECIPIENT_gendered]</li>
+                <li>appearance(hasAppearance==false)->suspicious</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>

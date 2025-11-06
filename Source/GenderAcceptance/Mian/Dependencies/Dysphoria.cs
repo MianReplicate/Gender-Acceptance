@@ -38,14 +38,11 @@ public class Dysphoria : TransDependency
 
     public override bool AppearsToHaveMatchingGenitalia(Pawn pawn)
     {
-        if (pawn.GetGendered() == Gendered.Androgynous)
-            return true;
-        
         var breasts = DefOfDysphoria.Breasts;
         var noBreasts = DefOfDysphoria.NoBreasts;
         var hediffs = pawn.health.hediffSet;
 
-        return (hediffs.HasHediff(breasts) && pawn.GetGendered() == Gendered.Feminine) || (hediffs.HasHediff(noBreasts) && pawn.GetGendered() == Gendered.Masculine);
+        return (hediffs.HasHediff(breasts) && pawn.GetGenderedAppearance() == Gendered.Feminine) || (hediffs.HasHediff(noBreasts) && pawn.GetGenderedAppearance() == Gendered.Masculine);
     }
 
     public override Gendered GetGendered(Pawn pawn)

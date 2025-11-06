@@ -21,7 +21,7 @@ public class SimpleTrans : TransDependency
 
     public override bool AppearsToHaveMatchingGenitalia(Pawn pawn)
     {
-        return (pawn.gender == Gender.Male && pawn.health.hediffSet.HasHediff(SimpleTransPregnancyUtility.canSireDef))
-            || (pawn.gender == Gender.Female && pawn.health.hediffSet.HasHediff(SimpleTransPregnancyUtility.canCarryDef));
+        return (pawn.GetGenderedAppearance() == Gendered.Masculine && pawn.health.hediffSet.HasHediff(SimpleTransPregnancyUtility.canSireDef))
+            || (pawn.GetGenderedAppearance() == Gendered.Feminine && pawn.health.hediffSet.HasHediff(SimpleTransPregnancyUtility.canCarryDef));
     }
 }

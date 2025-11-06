@@ -12,7 +12,7 @@ public class GenderWorks : TransDependency
 
     public override bool AppearsToHaveMatchingGenitalia(Pawn pawn)
     {
-        return (pawn.gender == Gender.Female && GenderUtilities.HasFemaleReproductiveOrgan(pawn)) 
-               || (pawn.gender == Gender.Male && GenderUtilities.HasMaleReproductiveOrgan(pawn));
+        return (pawn.GetGenderedAppearance() == Gendered.Feminine && GenderUtilities.HasFemaleReproductiveOrgan(pawn)) 
+               || (pawn.GetGenderedAppearance() == Gendered.Masculine && GenderUtilities.HasMaleReproductiveOrgan(pawn));
     }
 }

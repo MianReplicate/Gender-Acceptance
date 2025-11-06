@@ -103,7 +103,7 @@ public static class TransKnowledge
         return pawn.GetBelievedToBeTrannies(false)?.Contains(otherPawn) ?? false;
     }
 
-    public static void AttemptTransvestigate(this Pawn initiator, Pawn recipient, float normalChance=0.05f, float appearanceChance=1f)
+    public static void AttemptTransvestigate(this Pawn initiator, Pawn recipient, float normalChance=0.05f, float appearanceChance=0.5f)
     {
         var appearanceRoll = !recipient.DoesPawnAppearanceMatchGenderNorm() &&
                              Rand.Chance(appearanceChance);
@@ -112,7 +112,7 @@ public static class TransKnowledge
         {
             var rules = new List<Rule>();
             if (appearanceRoll)
-                rules.Add(new Rule_String("RECIPIENT_gendered", recipient.GetGendered().GetGenderNoun()));
+                rules.Add(new Rule_String("RECIPIENT_gendered", recipient.GetGenderedAppearance().GetGenderNoun()));
             KnowledgeLearned(initiator, recipient, false, new()
             {
                 { "transvestigate", "True" },
