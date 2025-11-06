@@ -1,0 +1,26 @@
+﻿<Defs>
+    <BodyTypeGenderedDef>
+        <bodyType>Male</bodyType>
+        <genderPoints>1</genderPoints>
+    </BodyTypeGenderedDef>
+    
+    <BodyTypeGenderedDef>
+        <bodyType>Fat</bodyType>
+        <genderPoints>1</genderPoints>
+    </BodyTypeGenderedDef>
+    
+    <BodyTypeGenderedDef>
+        <bodyType>Hulk</bodyType>
+        <genderPoints>1</genderPoints>
+    </BodyTypeGenderedDef>
+    
+    <BodyTypeGenderedDef>
+        <bodyType>Thin</bodyType>
+        <genderPoints>-1</genderPoints>
+    </BodyTypeGenderedDef>
+    
+    <BodyTypeGenderedDef>
+        <bodyType>Female</bodyType>
+        <genderPoints>-1</genderPoints>
+    </BodyTypeGenderedDef>
+</Defs>

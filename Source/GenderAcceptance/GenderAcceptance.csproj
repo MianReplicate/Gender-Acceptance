@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mian\Defs\BodyTypeGendered.cs" />
     <Compile Include="Mian\Dependencies\CultureViewOnTrans.cs" />
     <Compile Include="Mian\Dependencies\Dysphoria.cs" />
     <Compile Include="Mian\Dependencies\GenderWorks.cs" />

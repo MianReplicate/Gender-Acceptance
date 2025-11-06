@@ -5,10 +5,10 @@ namespace GenderAcceptance.Mian;
 
 public enum Gendered
 {
+    None,
     Masculine,
     Feminine,
     Androgynous,
-    None
 }
 
 public static class GenderedUtil {

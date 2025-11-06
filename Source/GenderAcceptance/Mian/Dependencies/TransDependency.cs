@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using GenderAcceptance.Mian.Defs;
+using RimWorld;
 using Verse;
 
 namespace GenderAcceptance.Mian.Dependencies;
@@ -19,12 +20,9 @@ public abstract class TransDependency : ITransDependency
         var genderPoints = 0;
         if (bodyType != null)
         {
-            if (bodyType == BodyTypeDefOf.Male || bodyType == BodyTypeDefOf.Fat || bodyType == BodyTypeDefOf.Hulk)
-            {
-                genderPoints += 1;
-            }
-            if (bodyType == BodyTypeDefOf.Female || bodyType == BodyTypeDefOf.Thin)
-                genderPoints -= 1;
+            var def = BodyTypeGenderedDef.FromBodyType(bodyType);
+            if(def != null)
+                genderPoints += def.genderPoints;
         }
         
         var styleGender = pawn.story?.hairDef?.styleGender;
@@ -53,10 +51,5 @@ public abstract class TransDependency : ITransDependency
             return Gendered.Feminine;
 
         return Gendered.Androgynous;
-        // fallback onto sex terms if necessary
-        // if (pawn.IsEnbyBySexTerm())
-        //     return Gendered.Androgynous;
-        //
-        // return pawn.gender == Gender.Male ? Gendered.Masculine : Gendered.Feminine;
     }
 }
