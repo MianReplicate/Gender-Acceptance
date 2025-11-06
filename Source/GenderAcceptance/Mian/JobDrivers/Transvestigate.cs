@@ -32,7 +32,7 @@ public class Transvestigate : JobDriver
         //     wantCoverFromTarget = true
         // };
 
-        for (var i = 1; i < Rand.Range(1f, 4f); i++)
+        for (var i = 0; i < Rand.Range(2f, 4f); i++)
         {
             var found = true;
             // var found = CastPositionFinder.TryFindCastPosition(request, out IntVec3 vec3);
@@ -60,13 +60,16 @@ public class Transvestigate : JobDriver
     {
         return Toils_General.Do((Action) (() =>
         {
-            if (!(this.pawn.MentalState is TransvestigateSpree mentalState2))
-                return;
+            // if (!(this.pawn.MentalState is TransvestigateSpree mentalState2))
+            //     return;
             this.pawn.AttemptTransvestigate(this.Target);
-            mentalState2.lastTransvestigatedTicks = Find.TickManager.TicksGame;
-            if (mentalState2.target != this.Target)
-                return;
-            mentalState2.transvestigatedTargetAtLeastOnce = true;
+            if (this.pawn.MentalState is TransvestigateSpree mentalState2)
+            {
+                mentalState2.lastTransvestigatedTicks = Find.TickManager.TicksGame;
+                if (mentalState2.target != this.Target)
+                    return;
+                mentalState2.transvestigatedTargetAtLeastOnce = true;   
+            }
         }));
     }
 

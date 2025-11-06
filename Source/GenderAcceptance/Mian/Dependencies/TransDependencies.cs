@@ -33,12 +33,12 @@ public interface ITransDependency
     public CultureViewOnTrans CultureOpinionOnTrans(Pawn pawn);
     
     /// <summary>
-    /// Whether the pawn looks cis to other pawns.
-    /// This can be used anywhere when a pawn interacts with another pawn
+    /// Calculates how gendered a pawn is depending on the trans mod used.
+    /// The higher the points, the more masculine. The closer to zero, the more androgynous. If below 0, they are feminine.
     /// </summary>
     /// <param name="pawn">The pawn to check</param>
-    /// <returns>Whether the pawn appears cis or not</returns>
-    public Gendered GetGendered(Pawn pawn);
+    /// <returns>The gendered points for the pawn</returns>
+    public float GetGenderedPoints(Pawn pawn);
 }
 
 public static class TransDependencies

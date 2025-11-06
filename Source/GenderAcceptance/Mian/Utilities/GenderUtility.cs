@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GenderAcceptance.Mian.Dependencies;
 using RimWorld;
 using Verse;
@@ -35,6 +36,8 @@ public static class GenderUtility {
     // does a chaser find the tranny??
     public static bool DoesChaserSeeTranny(Pawn initiator, Pawn recipient)
     {
+        if (!recipient.RaceProps.Humanlike)
+            return false;
         if ((initiator.story?.traits?.HasTrait(GADefOf.Chaser) ?? false) && initiator.BelievesIsTrans(recipient))
             return RelationsUtility.AttractedToGender(initiator, recipient.gender);
         return false;
@@ -107,32 +110,55 @@ public static class GenderUtility {
         
         return TransDependencies.TransLibrary.AppearsToHaveMatchingGenitalia(pawn);
     }
-    
+
+    public static Gendered GetGenderedAppearance(this Gender gender)
+    {
+        switch (gender)
+        {
+            case Gender.Male:
+                return Gendered.Masculine;
+            case Gender.Female:
+                return Gendered.Feminine;
+            default:
+                return Gendered.Androgynous;
+        }
+    }
     public static Gendered GetGenderedAppearance(this Pawn pawn)
     {
-        return TransDependencies.TransLibrary.GetGendered(pawn);
+        var genderedPoints = pawn.GetGenderedPoints();
+        return genderedPoints > 1 ? Gendered.Masculine : genderedPoints < -1 ? Gendered.Feminine : Gendered.Androgynous;
     }
+    public static float GetGenderedPoints(this Pawn pawn)
+    {
+        return TransDependencies.TransLibrary.GetGenderedPoints(pawn);
+    }
+
 
     public static bool IsEnbyBySexTerm(this Pawn pawn)
     {
         return pawn.gender != Gender.Male && pawn.gender != Gender.Female;
     }
 
-    public static bool DoesPawnAppearanceMatchGenderNorm(this Pawn pawn)
+    /// <summary>
+    /// Calculates a pawn's gendered points and makes it relative to their identity
+    /// The higher the points, the more their appearance fits their identity. The lower, the more their appearance does not fit.
+    /// </summary>
+    /// <param name="pawn">The pawn to check</param>
+    /// <returns>The relative gendered points for the pawn</returns>
+    public static float CalculateRelativeAppearanceFromIdentity(this Pawn pawn)
     {
-        var appearance = pawn.GetGenderedAppearance();
-        if (appearance == Gendered.None) // current trans library does not support appearance
-            return true;
-        if (appearance == Gendered.Androgynous)
-            return true;
+        var points = pawn.GetGenderedPoints();
         
-        var genderIdentity = pawn.gender;
+        if (pawn.gender == Gender.Male)
+            return points;
+        if (pawn.gender == Gender.Female)
+        {
+            if (points < 0)
+                return Math.Abs(points);
+            else
+                return -points;
+        }
         
-        if (genderIdentity == Gender.Male && appearance == Gendered.Masculine)
-            return true;
-        if (genderIdentity == Gender.Female && appearance == Gendered.Feminine)
-            return true;
-        
-        return false;
+        return -Math.Abs(points); // assume they are enby
     }
 }

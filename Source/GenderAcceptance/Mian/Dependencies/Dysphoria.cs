@@ -45,16 +45,17 @@ public class Dysphoria : TransDependency
         return (hediffs.HasHediff(breasts) && pawn.GetGenderedAppearance() == Gendered.Feminine) || (hediffs.HasHediff(noBreasts) && pawn.GetGenderedAppearance() == Gendered.Masculine);
     }
 
-    public override Gendered GetGendered(Pawn pawn)
+    public override float GetGenderedPoints(Pawn pawn)
     {
         var femStat = pawn.GetStatValue(DefOfDysphoria.FemStat);
         var mascStat = pawn.GetStatValue(DefOfDysphoria.MascStat);
 
         var difference = femStat > mascStat ? femStat - mascStat : mascStat - femStat;
 
-        if (difference < 25)
-            return Gendered.Androgynous;
-
-        return femStat > mascStat ? Gendered.Feminine : Gendered.Masculine;
+        return difference / 20;
+        // if (difference < 25)
+        //     return Gendered.Androgynous;
+        //
+        // return femStat > mascStat ? Gendered.Feminine : Gendered.Masculine;
     }
 }

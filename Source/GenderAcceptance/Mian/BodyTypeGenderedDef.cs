@@ -3,13 +3,13 @@ using System.Linq;
 using RimWorld;
 using Verse;
 
-namespace GenderAcceptance.Mian.Defs;
+namespace GenderAcceptance.Mian;
 
 public class BodyTypeGenderedDef : Def
 {
     public BodyTypeDef bodyType;
 
-    public int genderPoints { get; }
+    public int genderPoints;
 
     public override IEnumerable<string> ConfigErrors()
     {

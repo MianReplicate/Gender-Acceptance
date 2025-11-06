@@ -12,7 +12,7 @@ public class Pawn_InteractionsTracker
     [HarmonyPostfix]
     public static void TryInteractWith(Pawn ___pawn, bool __result, Pawn recipient)
     {
-        if (!__result)
+        if (!__result || !recipient.RaceProps.Humanlike)
             return;
         if (GenderUtility.DoesChaserSeeTranny(___pawn, recipient))
             ((Chaser_Need) ___pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromInteraction();

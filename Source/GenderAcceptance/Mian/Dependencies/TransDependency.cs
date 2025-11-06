@@ -1,4 +1,4 @@
-﻿using GenderAcceptance.Mian.Defs;
+﻿using GenderAcceptance.Mian;
 using RimWorld;
 using Verse;
 
@@ -14,7 +14,7 @@ public abstract class TransDependency : ITransDependency
         return pawn.Ideo?.HasPrecept(GADefOf.Transgender_Despised) ?? false ? CultureViewOnTrans.Despised : pawn.Ideo?.HasPrecept(GADefOf.Transgender_Adored) ?? false ? CultureViewOnTrans.Adored : CultureViewOnTrans.Neutral;
     }
 
-    public virtual Gendered GetGendered(Pawn pawn)
+    public virtual float GetGenderedPoints(Pawn pawn)
     {
         var bodyType = pawn.story?.bodyType;
         var genderPoints = 0;
@@ -45,11 +45,12 @@ public abstract class TransDependency : ITransDependency
             }
         }
 
-        if (genderPoints > 1)
-            return Gendered.Masculine;
-        if (genderPoints < -1)
-            return Gendered.Feminine;
-
-        return Gendered.Androgynous;
+        return genderPoints;
+        // if (genderPoints > 1)
+        //     return Gendered.Masculine;
+        // if (genderPoints < -1)
+        //     return Gendered.Feminine;
+        //
+        // return Gendered.Androgynous;
     }
 }

@@ -48,11 +48,11 @@
         <defName>Chaser_Found_Out</defName>
         <rulePack>
             <rulesStrings>
-                <li>r_logentry->[main].</li>
+                <li>r_logentry->\n\n[main].</li>
                 
-                <li>main->\n\n[INITIATOR_nameDef]'s pants feel rather wet, and [INITIATOR_pronoun] feels [INITIATOR_objective]self getting closer to [RECIPIENT_possessive] due to a [adjective] [want]</li>
-                <li>main->\n\n[INITIATOR_nameDef] finds [RECIPIENT_nameDef]'s transgender identity to be [describe], and wishes to get closer to [RECIPIENT_possessive]</li>
-                <li>main->\n\n[INITIATOR_nameDef] feels a [adjective] [want] to get closer to [RECIPIENT_nameDef] due to [RECIPIENT_possessive] identity</li>
+                <li>main->[INITIATOR_nameDef]'s pants feel rather wet, and [INITIATOR_pronoun] feels [INITIATOR_objective]self getting closer to [RECIPIENT_possessive] due to a [adjective] [want]</li>
+                <li>main->[INITIATOR_nameDef] finds [RECIPIENT_nameDef]'s transgender identity to be [describe], and wishes to get closer to [RECIPIENT_possessive]</li>
+                <li>main->[INITIATOR_nameDef] feels a [adjective] [want] to get closer to [RECIPIENT_nameDef] due to [RECIPIENT_possessive] identity</li>
 
                 <li>want->desire</li>
                 <li>want->eagerness</li>
@@ -89,7 +89,7 @@
                 <li>r_logentry->\n\n[main].</li>
            
                 <li>main(INITIATOR_isTransphobic==false)->[accepting]</li>
-                <li>main(INITIATOR_isTransphobic==false)->[transphobic]</li>
+                <li>main(INITIATOR_isTransphobic==true)->[transphobic]</li>
 
                 <li>accepting->[INITIATOR_nameDef], [friendlyVerb], has no problems with this revelation. [random_acceptance]</li>
                 <li>transphobic->[INITIATOR_nameDef], [enemyVerb], finds this [adverb] [transphobic_talking_point]. [random_transphobic]</li>
@@ -120,6 +120,13 @@
                 <li>friendlyVerb->looking amused</li>
                 <li>friendlyVerb->looking happy</li>
                 <li>friendlyVerb->looking pleased</li>
+                
+                <li>friendlyVerb->foaming at the mouth</li>
+                <li>friendlyVerb->enraged</li>
+                <li>friendlyVerb->snarling</li>
+                <li>friendlyVerb->growling</li>
+                <li>friendlyVerb->gritting</li>
+                <li>friendlyVerb->fuming</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>

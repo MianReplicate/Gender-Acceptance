@@ -1,26 +1,35 @@
 ﻿<Defs>
-    <BodyTypeGenderedDef>
+    <GenderAcceptance.Mian.BodyTypeGenderedDef>
+        <defName>Male</defName>
         <bodyType>Male</bodyType>
-        <genderPoints>1</genderPoints>
-    </BodyTypeGenderedDef>
+        <genderPoints>2</genderPoints>
+    </GenderAcceptance.Mian.BodyTypeGenderedDef>
     
-    <BodyTypeGenderedDef>
+    <GenderAcceptance.Mian.BodyTypeGenderedDef>
+        <defName>Fat</defName>
+
         <bodyType>Fat</bodyType>
         <genderPoints>1</genderPoints>
-    </BodyTypeGenderedDef>
+    </GenderAcceptance.Mian.BodyTypeGenderedDef>
     
-    <BodyTypeGenderedDef>
+    <GenderAcceptance.Mian.BodyTypeGenderedDef>
+        <defName>Hulk</defName>
+
         <bodyType>Hulk</bodyType>
-        <genderPoints>1</genderPoints>
-    </BodyTypeGenderedDef>
+        <genderPoints>2</genderPoints>
+    </GenderAcceptance.Mian.BodyTypeGenderedDef>
     
-    <BodyTypeGenderedDef>
+    <GenderAcceptance.Mian.BodyTypeGenderedDef>
+        <defName>Thin</defName>
+
         <bodyType>Thin</bodyType>
         <genderPoints>-1</genderPoints>
-    </BodyTypeGenderedDef>
+    </GenderAcceptance.Mian.BodyTypeGenderedDef>
     
-    <BodyTypeGenderedDef>
+    <GenderAcceptance.Mian.BodyTypeGenderedDef>
+        <defName>Female</defName>
+
         <bodyType>Female</bodyType>
-        <genderPoints>-1</genderPoints>
-    </BodyTypeGenderedDef>
+        <genderPoints>-2</genderPoints>
+    </GenderAcceptance.Mian.BodyTypeGenderedDef>
 </Defs>

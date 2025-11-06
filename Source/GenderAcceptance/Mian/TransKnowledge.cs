@@ -103,16 +103,19 @@ public static class TransKnowledge
         return pawn.GetBelievedToBeTrannies(false)?.Contains(otherPawn) ?? false;
     }
 
-    public static void AttemptTransvestigate(this Pawn initiator, Pawn recipient, float normalChance=0.05f, float appearanceChance=0.5f)
+    public static void AttemptTransvestigate(this Pawn initiator, Pawn recipient, float normalChance=0.025f, float appearanceChance=0.25f)
     {
-        var appearanceRoll = !recipient.DoesPawnAppearanceMatchGenderNorm() &&
-                             Rand.Chance(appearanceChance);
+        if (initiator.BelievesIsTrans(recipient))
+            return;
+        if (!recipient.RaceProps.Humanlike)
+            return;
+        var appearanceRoll = Rand.Chance(appearanceChance - (recipient.CalculateRelativeAppearanceFromIdentity() / 10) * (initiator.story?.traits?.HasTrait(GADefOf.Chaser) ?? false ? 1.5f : 1));
         var normalRoll = Rand.Chance(normalChance);
         if (appearanceRoll || normalRoll)
         {
             var rules = new List<Rule>();
             if (appearanceRoll)
-                rules.Add(new Rule_String("RECIPIENT_gendered", recipient.GetGenderedAppearance().GetGenderNoun()));
+                rules.Add(new Rule_String("RECIPIENT_gendered", recipient.GetOppositeGender().GetGenderedAppearance().GetGenderNoun()));
             KnowledgeLearned(initiator, recipient, false, new()
             {
                 { "transvestigate", "True" },
