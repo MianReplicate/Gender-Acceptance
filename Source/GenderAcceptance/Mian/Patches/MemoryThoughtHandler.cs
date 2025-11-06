@@ -22,8 +22,8 @@ public static class MemoryThoughtHandler
                 {
                     { "didSex", "True" },
                 };
-            bool sus = !otherPawn.HasMatchingGenitalia() || Rand.Chance(0.01f);
-            if (!otherPawn.HasMatchingGenitalia())
+            bool sus = !otherPawn.AppearsToHaveMatchingGenitalia() || Rand.Chance(0.01f);
+            if (!otherPawn.AppearsToHaveMatchingGenitalia())
                 rules.Add("mismatchedGenitalia", "True");
             
             if(sus)

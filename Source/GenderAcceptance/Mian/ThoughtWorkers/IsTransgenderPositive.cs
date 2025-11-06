@@ -5,7 +5,7 @@ using Verse;
 
 namespace GenderAcceptance.Mian.ThoughtWorkers;
 
-public class ThoughtWorker_IsTransgenderPositive : ThoughtWorker
+public class IsTransgenderPositive : ThoughtWorker
 {
     protected override ThoughtState CurrentSocialStateInternal(Pawn pawn, Pawn otherPawn)
     {

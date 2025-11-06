@@ -4,7 +4,7 @@ using Verse.AI;
 
 namespace GenderAcceptance.Mian.MentalStateWorkers;
 
-public class MentalStateWorker_TransvestigateSpree : MentalStateWorker
+public class TransvestigateSpree : MentalStateWorker
 {
 
     public override bool StateCanOccur(Pawn pawn)

@@ -11,11 +11,12 @@ namespace GenderAcceptance.Mian;
 
 public static class TransKnowledge
 {
-    private static Dictionary<string, string> defaultRules =
+    private static Dictionary<string, string> defaultConstants =
     new(){
         {"didSex", "False"},
         {"mismatchedGenitalia", "False"},
-        {"transvestigate", "False"}
+        {"transvestigate", "False"},
+        {"hasAppearance", "False"}
     };
     
     private static readonly Dictionary<Pawn, List<Pawn>> believedToBeTransgender = new Dictionary<Pawn, List<Pawn>>();
@@ -34,14 +35,14 @@ public static class TransKnowledge
         }
         return null;
     }
-    public static void KnowledgeLearned(Pawn pawn, Pawn otherPawn, bool hardLearned, Dictionary<string, string> rules=null)
+    public static void KnowledgeLearned(Pawn pawn, Pawn otherPawn, bool hardLearned, Dictionary<string, string> constants=null, List<Rule> rules=null)
     {
         var list = believedToBeTransgender.TryGetValue(pawn, new());
         if (list.Contains(otherPawn))
             return;
-        if (rules != null && !rules.All(element => defaultRules.ContainsKey(element.Key)))
+        if (constants != null && !constants.All(element => defaultConstants.ContainsKey(element.Key)))
         {
-            Helper.Error("Invalid rules given!");
+            Helper.Error("Invalid constants given!");
             return;
         }
         list.Add(otherPawn);
@@ -51,12 +52,15 @@ public static class TransKnowledge
         {
             var request = new GrammarRequest();
 
-            if (rules == null)
-                rules = defaultRules;
+            if (constants == null)
+                constants = defaultConstants;
             else
-                rules.AddRange(defaultRules.Where(rule => !rules.ContainsKey(rule.Key)).ToDictionary(pair => pair.Key, pair => pair.Value));
+                constants.AddRange(defaultConstants.Where(constant => !constants.ContainsKey(constant.Key)).ToDictionary(pair => pair.Key, pair => pair.Value));
+
             request.Includes.Add(GADefOf.Suspicions_About_Trans);
-            request.Constants.AddRange(rules);
+            if(rules != null)
+                request.Rules.AddRange(rules);
+            request.Constants.AddRange(constants);
             request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", pawn, request.Constants));
             request.Rules.AddRange(GrammarUtility.RulesForPawn("RECIPIENT", otherPawn, request.Constants));
             
@@ -76,11 +80,13 @@ public static class TransKnowledge
             {
                 request.Clear();
                 request.Includes.Add(grammarPack);
-                request.Constants.AddRange(rules);
+                if(rules != null)
+                    request.Rules.AddRange(rules);
+                request.Constants.AddRange(constants);
                 request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", pawn, request.Constants));
                 request.Rules.AddRange(GrammarUtility.RulesForPawn("RECIPIENT", otherPawn, request.Constants));
                 
-                text = $"{text}\n\n{
+                text = $"{text}{
                     GrammarResolver.Resolve(
                         grammarPack.FirstRuleKeyword, 
                         request, "extraSentencePack", 
@@ -99,10 +105,19 @@ public static class TransKnowledge
 
     public static void AttemptTransvestigate(this Pawn initiator, Pawn recipient, float normalChance=0.05f, float appearanceChance=1f)
     {
-        if((!recipient.LooksCis() && TransDependencies.TransLibrary.FeaturesAppearances() && Rand.Chance(appearanceChance)) || Rand.Chance(normalChance))
-            TransKnowledge.KnowledgeLearned(initiator, recipient, false, new ()
+        var appearanceRoll = !recipient.DoesPawnAppearanceMatchGenderNorm() &&
+                             Rand.Chance(appearanceChance);
+        var normalRoll = Rand.Chance(normalChance);
+        if (appearanceRoll || normalRoll)
+        {
+            var rules = new List<Rule>();
+            if (appearanceRoll)
+                rules.Add(new Rule_String("RECIPIENT_gendered", recipient.GetGendered().GetGenderNoun()));
+            KnowledgeLearned(initiator, recipient, false, new()
             {
-                {"transvestigate", "True"}
-            });
+                { "transvestigate", "True" },
+                { "hasAppearance", appearanceRoll.ToString()}
+            }, rules);
+        }
     }
 }

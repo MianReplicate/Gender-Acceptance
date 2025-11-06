@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <JoyGiverDef>
+        <defName>Transvestigate</defName>
+        <giverClass>GenderAcceptance.Mian.JoyGivers.Transvestigate</giverClass>
+        <baseChance>5.0</baseChance>
+        <jobDef>Transvestigate</jobDef>
+        <joyKind>Social</joyKind>
+    </JoyGiverDef>
+</Defs>

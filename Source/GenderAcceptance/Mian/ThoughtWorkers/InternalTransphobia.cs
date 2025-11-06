@@ -5,7 +5,7 @@ using Verse;
 
 namespace GenderAcceptance.Mian.ThoughtWorkers;
 
-public class ThoughtWorker_InternalTransphobia : ThoughtWorker_Precept
+public class InternalTransphobia : ThoughtWorker_Precept
 {
     protected override ThoughtState ShouldHaveThought(Pawn p)
     {

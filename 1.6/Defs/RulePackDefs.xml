@@ -47,9 +47,9 @@
             <rulesStrings>
                 <li>r_logentry->[main].</li>
                 
-                <li>main->[INITIATOR_nameDef]'s pants feel rather wet, and [INITIATOR_pronoun] feels [INITIATOR_objective]self getting closer to [RECIPIENT_possessive] due to a [adjective] [want]</li>
-                <li>main->[INITIATOR_nameDef] finds [RECIPIENT_nameDef]'s transgender identity to be [describe], and wishes to get closer to [RECIPIENT_possessive]</li>
-                <li>main->[INITIATOR_nameDef] feels a [adjective] [want] to get closer to [RECIPIENT_nameDef] due to [RECIPIENT_possessive] identity</li>
+                <li>main->\n\n[INITIATOR_nameDef]'s pants feel rather wet, and [INITIATOR_pronoun] feels [INITIATOR_objective]self getting closer to [RECIPIENT_possessive] due to a [adjective] [want]</li>
+                <li>main->\n\n[INITIATOR_nameDef] finds [RECIPIENT_nameDef]'s transgender identity to be [describe], and wishes to get closer to [RECIPIENT_possessive]</li>
+                <li>main->\n\n[INITIATOR_nameDef] feels a [adjective] [want] to get closer to [RECIPIENT_nameDef] due to [RECIPIENT_possessive] identity</li>
 
                 <li>want->desire</li>
                 <li>want->eagerness</li>
@@ -83,7 +83,7 @@
         <defName>Found_Out_About_Gender_Identity</defName>
         <rulePack>
             <rulesStrings>
-                <li>r_logentry->[INITIATOR_nameDef] [main].</li>
+                <li>r_logentry->\n\n[main].</li>
            
                 <li>main(INITIATOR_isTransphobic==false)->[accepting]</li>
                 <li>main(INITIATOR_isTransphobic==false)->[transphobic]</li>
@@ -125,8 +125,8 @@
         <defName>Coming_Out_Positive_Pack</defName>
         <rulePack>
             <rulesStrings>
-                <li>r_logentry->[RECIPIENT_nameDef] was rather respectful about it.</li>
-                <li>r_logentry->[RECIPIENT_nameDef] listened and nodded along as [INITIATOR_nameDef] spoke [INITIATOR_possessive] true feelings.</li>
+                <li>r_logentry->\n\n[RECIPIENT_nameDef] was rather respectful about it.</li>
+                <li>r_logentry->\n\n[RECIPIENT_nameDef] listened and nodded along as [INITIATOR_nameDef] spoke [INITIATOR_possessive] true feelings.</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>
@@ -135,8 +135,8 @@
         <defName>Coming_Out_Negative_Pack</defName>
         <rulePack>
             <rulesStrings>
-                <li>r_logentry->[RECIPIENT_nameDef] was shocked and enraged.</li>
-                <li>r_logentry->[RECIPIENT_nameDef] felt a fit of rage run rampage inside [RECIPIENT_objective]self.</li>
+                <li>r_logentry->\n\n[RECIPIENT_nameDef] was shocked and enraged.</li>
+                <li>r_logentry->\n\n[RECIPIENT_nameDef] felt a fit of rage run rampage inside [RECIPIENT_objective]self.</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>

@@ -5,7 +5,7 @@ using Verse;
 
 namespace GenderAcceptance.Mian.InteractionWorkers;
 
-public class InteractionWorker_Transvestigate : InteractionWorker
+public class Transvestigate : InteractionWorker
 {
     public override void Interacted(
         Pawn initiator,

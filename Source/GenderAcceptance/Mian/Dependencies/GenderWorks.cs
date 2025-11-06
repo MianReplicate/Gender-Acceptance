@@ -7,10 +7,10 @@ public class GenderWorks : TransDependency
 {
     public override GenderIdentity GetCurrentIdentity(Pawn pawn)
     {
-        return pawn.HasMatchingGenitalia() ? GenderIdentity.Cisgender : GenderIdentity.Transgender;
+        return pawn.AppearsToHaveMatchingGenitalia() ? GenderIdentity.Cisgender : GenderIdentity.Transgender;
     }
 
-    public override bool HasMatchingGenitalia(Pawn pawn)
+    public override bool AppearsToHaveMatchingGenitalia(Pawn pawn)
     {
         return (pawn.gender == Gender.Female && GenderUtilities.HasFemaleReproductiveOrgan(pawn)) 
                || (pawn.gender == Gender.Male && GenderUtilities.HasMaleReproductiveOrgan(pawn));

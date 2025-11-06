@@ -7,4 +7,8 @@
 
   <GA.ComeOutLabel>{INITIATOR_nameDef} came out to {RECIPIENT_nameDef}</GA.ComeOutLabel>
 
+  <GA.Masculine>masculine</GA.Masculine>
+  <GA.Feminine>feminine</GA.Feminine>
+  <GA.Androgynous>androgynous</GA.Androgynous>
+    
 </LanguageData>

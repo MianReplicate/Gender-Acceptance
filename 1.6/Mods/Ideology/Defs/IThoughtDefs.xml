@@ -4,7 +4,7 @@
     <ThoughtDef>
         <defName>AmountOfTransgender_Disliked</defName>
         <thoughtClass>Thought_Situational</thoughtClass>
-        <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_PreceptTransgender</workerClass>
+        <workerClass>GenderAcceptance.Mian.ThoughtWorkers.PreceptTransgender</workerClass>
         <validWhileDespawned>false</validWhileDespawned>
         <stages>
             <li>
@@ -39,7 +39,7 @@
     <ThoughtDef>
         <defName>NegativeViewOnTransgender</defName>
         <thoughtClass>Thought_SituationalSocial</thoughtClass>
-        <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_IsTransgenderNegative</workerClass>
+        <workerClass>GenderAcceptance.Mian.ThoughtWorkers.IsTransgenderNegative</workerClass>
         <stages>
             <li>
                 <label>Transphobia</label>
@@ -54,7 +54,7 @@
     <ThoughtDef>
         <defName>AmountOfTransgender_Liked</defName>
         <thoughtClass>Thought_Situational</thoughtClass>
-        <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_PreceptTransgender</workerClass>
+        <workerClass>GenderAcceptance.Mian.ThoughtWorkers.PreceptTransgender</workerClass>
         <validWhileDespawned>false</validWhileDespawned>
         <stages>
             <li>
@@ -86,7 +86,7 @@
     <ThoughtDef>
         <defName>Internal_Transphobia</defName>
         <thoughtClass>Thought_Situational</thoughtClass>
-        <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_InternalTransphobia</workerClass>
+        <workerClass>GenderAcceptance.Mian.ThoughtWorkers.InternalTransphobia</workerClass>
         <stages>
             <li>
                 <label>Internal transphobia</label>
@@ -104,7 +104,7 @@
     <ThoughtDef>
         <defName>PositiveViewOnTransgender</defName>
         <thoughtClass>Thought_SituationalSocial</thoughtClass>
-        <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_IsTransgenderPositive</workerClass>
+        <workerClass>GenderAcceptance.Mian.ThoughtWorkers.IsTransgenderPositive</workerClass>
         <stages>
             <li>
                 <label>Transgender</label>

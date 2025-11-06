@@ -8,8 +8,9 @@
     <LangVersion>latest</LangVersion>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-    
-    <DebugType>none</DebugType>
+
+    <DebugType>embedded</DebugType>
+    <EmbedAllSources>true</EmbedAllSources>
     <DebugSymbols>false</DebugSymbols>
     
     <OutputPath>../../1.6/Assemblies/</OutputPath>
@@ -76,12 +77,14 @@
     <Compile Include="Mian\Dependencies\TransDependency.cs" />
     <Compile Include="Mian\GADefOf.cs" />
     <Compile Include="Mian\GenderAcceptance.cs" />
+    <Compile Include="Mian\Gendered.cs" />
     <Compile Include="Mian\GenderIdentity.cs" />
     <Compile Include="Mian\InteractionWorkers\ComeOut.cs" />
     <Compile Include="Mian\InteractionWorkers\Misgender.cs" />
     <Compile Include="Mian\InteractionWorkers\PurposeMisgender.cs" />
     <Compile Include="Mian\InteractionWorkers\Transvestigate.cs" />
-    <Compile Include="Mian\JobDrivers\JobDriver_Transvestigate.cs" />
+    <Compile Include="Mian\JobDrivers\Transvestigate.cs" />
+    <Compile Include="Mian\JoyGivers\Transvestigate.cs" />
     <Compile Include="Mian\MentalStateWorkers\Transvestigate.cs" />
     <Compile Include="Mian\MentalStates\Transvestigate.cs" />
     <Compile Include="Mian\Needs\Chaser_Need.cs" />

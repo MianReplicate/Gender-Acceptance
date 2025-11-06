@@ -7,8 +7,8 @@
     </MentalBreakDef>
     <MentalStateDef Name="TransvestigatingSpree" ParentName="BaseMentalState">
         <defName>TransvestigatingSpree</defName>
-        <stateClass>GenderAcceptance.Mian.MentalState.MentalState_TransvestigateSpree</stateClass>
-        <workerClass>GenderAcceptance.Mian.MentalStateWorkers.MentalStateWorker_TransvestigateSpree</workerClass>
+        <stateClass>GenderAcceptance.Mian.MentalState.TransvestigateSpree</stateClass>
+        <workerClass>GenderAcceptance.Mian.MentalStateWorkers.TransvestigateSpree</workerClass>
         <label>transvestigating spree</label>
         <category>Malicious</category>
         <colonistsOnly>true</colonistsOnly>

@@ -2,7 +2,7 @@
     <InteractionDef>
         <defName>Transvestigate</defName>
         <label>transvestigate</label>
-        <workerClass>GenderAcceptance.Mian.InteractionWorkers.InteractionWorker_Transvestigate</workerClass>
+        <workerClass>GenderAcceptance.Mian.InteractionWorkers.Transvestigate</workerClass>
         <symbol>Things/Mote/SpeechSymbols/DeepTalk</symbol>
 
         <logRulesInitiator>
@@ -19,7 +19,7 @@
     <InteractionDef>
         <defName>ComeOut</defName>
         <label>comeout</label>
-        <workerClass>GenderAcceptance.Mian.InteractionWorkers.InteractionWorker_ComeOut</workerClass>
+        <workerClass>GenderAcceptance.Mian.InteractionWorkers.ComeOut</workerClass>
         <symbol>Things/Mote/SpeechSymbols/ReduceWill</symbol>
 
         <logRulesInitiator>
@@ -36,7 +36,7 @@
     <InteractionDef>
         <defName>PurposeMisgender</defName>
         <label>misgender</label>
-        <workerClass>GenderAcceptance.Mian.InteractionWorkers.InteractionWorker_PurposeMisgender</workerClass>
+        <workerClass>GenderAcceptance.Mian.InteractionWorkers.PurposeMisgender</workerClass>
         <symbol>Things/Mote/SpeechSymbols/Insult</symbol>
         
         <socialFightBaseChance>0.2</socialFightBaseChance>
@@ -65,7 +65,7 @@
     <InteractionDef>
         <defName>Misgender</defName>
         <label>misgender</label>
-        <workerClass>GenderAcceptance.Mian.InteractionWorkers.InteractionWorker_Misgender</workerClass>
+        <workerClass>GenderAcceptance.Mian.InteractionWorkers.Misgender</workerClass>
         <symbol>Things/Mote/SpeechSymbols/Insult</symbol>
         <socialFightBaseChance>0.01</socialFightBaseChance>
         <recipientThought>Misgendered</recipientThought>

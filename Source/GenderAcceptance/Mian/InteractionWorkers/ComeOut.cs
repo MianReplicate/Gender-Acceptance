@@ -8,7 +8,7 @@ using Verse;
 
 namespace GenderAcceptance.Mian.InteractionWorkers;
 
-public class InteractionWorker_ComeOut : InteractionWorker
+public class ComeOut : InteractionWorker
 {
     public override float RandomSelectionWeight(Pawn initiator, Pawn recipient)
     {

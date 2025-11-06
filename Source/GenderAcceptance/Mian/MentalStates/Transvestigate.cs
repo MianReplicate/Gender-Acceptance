@@ -8,7 +8,7 @@ using Verse.AI;
 
 namespace GenderAcceptance.Mian.MentalState;
 
-public class MentalState_TransvestigateSpree : Verse.AI.MentalState
+public class TransvestigateSpree : Verse.AI.MentalState
 {
     public override void ExposeData()
     {

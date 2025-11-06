@@ -36,26 +36,28 @@ public class Dysphoria : TransDependency
             (pawn.Ideo?.HasPrecept(Trans_Approved) ?? false) || (pawn.Ideo?.HasPrecept(Trans_Exalted) ?? false) ? CultureViewOnTrans.Adored : CultureViewOnTrans.Neutral;
     }
 
-    public override bool HasMatchingGenitalia(Pawn pawn)
+    public override bool AppearsToHaveMatchingGenitalia(Pawn pawn)
     {
+        if (pawn.GetGendered() == Gendered.Androgynous)
+            return true;
+        
         var breasts = DefOfDysphoria.Breasts;
         var noBreasts = DefOfDysphoria.NoBreasts;
         var hediffs = pawn.health.hediffSet;
 
-        return (hediffs.HasHediff(breasts) && pawn.gender == Gender.Female) || (hediffs.HasHediff(noBreasts) && pawn.gender == Gender.Male);
+        return (hediffs.HasHediff(breasts) && pawn.GetGendered() == Gendered.Feminine) || (hediffs.HasHediff(noBreasts) && pawn.GetGendered() == Gendered.Masculine);
     }
 
-    public override bool LooksCis(Pawn pawn)
+    public override Gendered GetGendered(Pawn pawn)
     {
-        StatDef femStat = DefOfDysphoria.FemStat;
-        StatDef mascStat = DefOfDysphoria.MascStat;
+        var femStat = pawn.GetStatValue(DefOfDysphoria.FemStat);
+        var mascStat = pawn.GetStatValue(DefOfDysphoria.MascStat);
 
-        return (pawn.gender == Gender.Male && pawn.GetStatValue(mascStat) > 50)
-            || (pawn.gender == Gender.Female && pawn.GetStatValue(femStat) > 50);
-    }
-    
-    public override bool FeaturesAppearances()
-    {
-        return true;
+        var difference = femStat > mascStat ? femStat - mascStat : mascStat - femStat;
+
+        if (difference < 25)
+            return Gendered.Androgynous;
+
+        return femStat > mascStat ? Gendered.Feminine : Gendered.Masculine;
     }
 }

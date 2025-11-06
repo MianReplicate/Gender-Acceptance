@@ -3,7 +3,7 @@
   <!--Phobias-->
   <ThoughtDef>
     <defName>Cisphobia</defName>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_IsCisphobic</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.IsCisphobic</workerClass>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
@@ -16,7 +16,7 @@
   
   <ThoughtDef>
     <defName>Transphobia</defName>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_IsTransphobic</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.IsTransphobic</workerClass>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
@@ -30,7 +30,7 @@
   <!--Misc-->
   <ThoughtDef>
     <defName>Chaser_Need_Thought</defName>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_Chaser_Need</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.Chaser_Need</workerClass>
     <validWhileDespawned>true</validWhileDespawned>
     <stages>
       <li>
@@ -58,7 +58,7 @@
   
   <ThoughtDef>
     <defName>Similar</defName>
-    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.ThoughtWorker_Similarity</workerClass>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.Similarity</workerClass>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <validWhileDespawned>true</validWhileDespawned>
     <stages>

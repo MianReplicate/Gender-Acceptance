@@ -4,7 +4,7 @@ using Verse;
 
 namespace GenderAcceptance.Mian.ThoughtWorkers;
 
-public class ThoughtWorker_Similarity : ThoughtWorker
+public class Similarity : ThoughtWorker
 {
     protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
     {

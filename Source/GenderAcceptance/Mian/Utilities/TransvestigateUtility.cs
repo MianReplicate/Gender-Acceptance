@@ -17,7 +17,7 @@ public class TransvestigateUtility
         bool skipReachabilityCheck = false,
         bool allowPrisoners = true)
     {
-        if (!investigated.RaceProps.Humanlike || investigated.Faction != bully.Faction && (!allowPrisoners || investigated.HostFaction != bully.Faction) || investigated == bully || investigated.Dead || !investigated.Spawned || !investigated.Position.InHorDistOf(bully.Position, 40f) || !investigated.IsInteractionBlocked(null, false, false) || investigated.HostileTo((Thing) bully) || Find.TickManager.TicksGame - investigated.mindState.lastHarmTick < 833)
+        if (!investigated.RaceProps.Humanlike || investigated.Faction != bully.Faction && (!allowPrisoners || investigated.HostFaction != bully.Faction) || investigated == bully || investigated.Dead || !investigated.Spawned || !investigated.Position.InHorDistOf(bully.Position, 40f) )
             return false;
         return skipReachabilityCheck || bully.CanReach((LocalTargetInfo) (Thing) investigated, PathEndMode.Touch, Danger.Deadly);
     }

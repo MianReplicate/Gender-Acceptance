@@ -4,7 +4,7 @@ using Verse;
 
 namespace GenderAcceptance.Mian.InteractionWorkers;
 
-public class InteractionWorker_PurposeMisgender : InteractionWorker
+public class PurposeMisgender : InteractionWorker
 {
     public override float RandomSelectionWeight(Pawn initiator, Pawn recipient)
     {

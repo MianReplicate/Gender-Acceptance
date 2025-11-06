@@ -3,7 +3,7 @@ using Verse;
 
 namespace GenderAcceptance.Mian.ThoughtWorkers;
 
-public class ThoughtWorker_IsCisphobic : ThoughtWorker
+public class IsCisphobic : ThoughtWorker
 {
     protected override ThoughtState CurrentSocialStateInternal(Pawn pawn, Pawn otherPawn)
     {

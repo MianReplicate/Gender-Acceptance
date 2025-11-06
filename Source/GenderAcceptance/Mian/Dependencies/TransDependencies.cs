@@ -23,7 +23,7 @@ public interface ITransDependency
     /// </summary>
     /// <param name="pawn">THe pawn to check</param>
     /// <returns>Whether genitalia matches up with the pawn's gender identity or not</returns>
-    public bool HasMatchingGenitalia(Pawn pawn);
+    public bool AppearsToHaveMatchingGenitalia(Pawn pawn);
     
     /// <summary>
     /// Checks whether the culture is transphobic, accepting or neutral
@@ -38,9 +38,7 @@ public interface ITransDependency
     /// </summary>
     /// <param name="pawn">The pawn to check</param>
     /// <returns>Whether the pawn appears cis or not</returns>
-    public bool LooksCis(Pawn pawn);
-
-    public bool FeaturesAppearances();
+    public Gendered GetGendered(Pawn pawn);
 }
 
 public static class TransDependencies

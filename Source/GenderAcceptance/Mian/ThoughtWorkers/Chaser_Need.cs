@@ -5,11 +5,11 @@ using Verse;
 
 namespace GenderAcceptance.Mian.ThoughtWorkers;
 
-public class ThoughtWorker_Chaser_Need : ThoughtWorker
+public class Chaser_Need : ThoughtWorker
 {
     protected override ThoughtState CurrentStateInternal(Pawn p)
     {
-        var chaserNeed = (Chaser_Need) p.needs.TryGetNeed(GADefOf.Chaser_Need);
+        var chaserNeed = (Needs.Chaser_Need) p.needs.TryGetNeed(GADefOf.Chaser_Need);
         if (chaserNeed == null)
             return ThoughtState.Inactive;
         switch (chaserNeed.CurCategory)
