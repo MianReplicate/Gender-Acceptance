@@ -5,16 +5,38 @@
         <defName>Suspicions_About_Trans</defName>
         <rulePack>
             <rulesStrings>
-                <li>r_logentry->[INITIATOR_nameDef] suspects that [RECIPIENT_nameDef] may be transgender.\n\n[what_happened].\n\nThis led [INITIATOR_objective] to believe [RECIPIENT_nameDef] is trans.</li>
+                <li>r_logentry->[INITIATOR_nameDef] suspects that [RECIPIENT_nameDef] may be transgender.\n\n[what_happened].\n\nThis led [INITIATOR_objective] to believe [RECIPIENT_nameDef] is transgender.</li>
                 
                 <li>what_happened(didSex==false)->[random_event]</li>
+                <li>what_happened(didSex==false)->[INITIATOR_nameDef] used [INITIATOR_possessive] [AdjectiveAny] transvestigating psychic powers and [random_event]</li>
                 <li>what_happened(didSex==true)->During their lovin' session, [sex_event]</li>
-                <li>sex_event->[INITIATOR_nameDef] noticed that [RECIPIENT_nameDef]'s [sex_characteristic] was like another gender</li>
                 
-                <li>sex_characteristic(mismatchedGenitalia==true)->genitalia</li>
-                <li>sex_characteristic(mismatchedGenitalia==false)->[PersonalCharacteristic]</li>
+                <li>start_sex_event->[INITIATOR_nameDef] thought that</li>
+                <li>start_sex_event->[INITIATOR_nameDef] noticed that</li>
+
+                <li>sex_event->[start_sex_event] [RECIPIENT_nameDef]'s [sex_characteristic] was of another gender</li>
+                <li>sex_event->[start_sex_event] [RECIPIENT_nameDef] did not love [INITIATOR_objective] like a [RECIPIENT_gender] would</li>
+                <li>sex_event->[start_sex_event] [RECIPIENT_nameDef] [other_sex_verb] too much like a [RECIPIENT_otherGender]</li>
+
+                <li>sex_event->[INITIATOR_nameDef] felt too good for [RECIPIENT_nameDef] to be a [RECIPIENT_gender]</li>
+                <li>sex_event->[INITIATOR_nameDef] was [sex_verb] by [RECIPIENT_nameDef] too much for [RECIPIENT_objective] to be a [RECIPIENT_gender]</li>
                 
-                <li>random_event->[INITIATOR_nameDef] spotted [RECIPIENT_nameDef]'s [AdjectiveAny] [PersonalCharacteristic] and thought it looked too much like what a [RECIPIENT_otherGender] would do.</li>
+                <li>sex_verb->bottomed</li>
+                <li>sex_verb->topped</li>
+                <li>sex_verb->plopped</li>
+                <li>sex_verb->slammed</li>
+                
+                <li>other_sex_verb->moaned</li>
+                <li>other_sex_verb->cried</li>
+                <li>other_sex_verb->peed</li>
+                <li>other_sex_verb->groaned</li>
+
+                <li>sex_characteristic(mismatchedGenitalia==true,p=2)->genitalia</li>
+                <li>sex_characteristic->[PersonalCharacteristic]</li>
+                
+                <li>random_event->[INITIATOR_pronoun] thought [RECIPIENT_nameDef] looked too suspicious</li>
+                <li>random_event(transvestigate==true)->[INITIATOR_nameDef] investigated [RECIPIENT_nameDef] doing something naughty using their [AdjectiveAny] [PersonalCharacteristic]. It seemed like something a [AdjectiveAny] [RECIPIENT_otherGender] would do</li>
+                <li>random_event->[INITIATOR_nameDef] spotted [RECIPIENT_nameDef]'s [AdjectiveAny] [PersonalCharacteristic] and thought it looked too much like what a [AdjectiveAny] [RECIPIENT_otherGender] would do</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>
@@ -23,16 +45,17 @@
         <defName>Chaser_Found_Out</defName>
         <rulePack>
             <rulesStrings>
-                <li>r_logentry->[main]</li>
+                <li>r_logentry->[main].</li>
                 
-<!--                <li>main->[</li>-->
-                <li>main->[INITIATOR_nameDef] finds [RECIPIENT_nameDef]'s transgender identity to be [describe], and wishes to get closer to [RECIPIENT_possessive].</li>
-                <li>main->[INITIATOR_nameDef] feels a [adjective] [want] to get closer to [RECIPIENT_nameDef] due to [RECIPIENT_possessive] identity.</li>
+                <li>main->[INITIATOR_nameDef]'s pants feel rather wet, and [INITIATOR_pronoun] feels [INITIATOR_objective]self getting closer to [RECIPIENT_possessive] due to a [adjective] [want]</li>
+                <li>main->[INITIATOR_nameDef] finds [RECIPIENT_nameDef]'s transgender identity to be [describe], and wishes to get closer to [RECIPIENT_possessive]</li>
+                <li>main->[INITIATOR_nameDef] feels a [adjective] [want] to get closer to [RECIPIENT_nameDef] due to [RECIPIENT_possessive] identity</li>
 
                 <li>want->desire</li>
                 <li>want->eagerness</li>
                 <li>want->want</li>
                 <li>want->dedication</li>
+                <li>want->need</li>
                 <li>want->commitment</li>
                 <li>want->keenness</li>
                 <li>want->enthusiasm</li>
@@ -57,10 +80,43 @@
     </RulePackDef>
 
     <RulePackDef>
-        <defName>Transphobe_Found_Out</defName>
+        <defName>Found_Out_About_Gender_Identity</defName>
         <rulePack>
             <rulesStrings>
-                <li>r_logentry->[INITIATOR_nameDef] views [RECIPIENT_possessive] in a more cautious and negative light now because of [INITIATOR_possessive] transphobic beliefs.</li>
+                <li>r_logentry->[INITIATOR_nameDef] [main].</li>
+           
+                <li>main(INITIATOR_isTransphobic==false)->[accepting]</li>
+                <li>main(INITIATOR_isTransphobic==false)->[transphobic]</li>
+
+                <li>accepting->[INITIATOR_nameDef], [friendlyVerb], has no problems with this revelation. [random_acceptance]</li>
+                <li>transphobic->[INITIATOR_nameDef], [enemyVerb], finds this [adverb] [transphobic_talking_point]. [random_transphobic]</li>
+                
+                <li>random_acceptance->[INITIATOR_pronoun] will support [RECIPIENT_possessive] the best [INITIATOR_pronoun] can</li>
+                <li>random_acceptance->[INITIATOR_pronoun] will stay by [RECIPIENT_possessive] side no matter what</li>
+                
+                <li>random_transphobic->[INITIATOR_nameDef] feels hurt, and is more weary of [RECIPIENT_nameDef] now as a result.</li>
+                <li>random_transphobic->[INITIATOR_nameDef] finds [INITIATOR_objective]self straying away from [RECIPIENT_nameDef] as a result.</li>
+
+                <li>transphobic_talking_point->worrisome</li>
+                <li>transphobic_talking_point->problematic</li>
+                <li>transphobic_talking_point->predatory</li>
+                <li>transphobic_talking_point->out of touch with reality</li>
+                
+                <li>adverb->exceedingly</li>
+                <li>adverb->extremely</li>
+                <li>adverb->intensely</li>
+                <li>adverb->severely</li>
+                <li>adverb->hugely</li>
+                <li>adverb->immensely</li>
+
+                <li>friendlyVerb->laughing</li>
+                <li>friendlyVerb->smiling</li>
+                <li>friendlyVerb->chuckling</li>
+                <li>friendlyVerb->grinning</li>
+                <li>friendlyVerb->beaming</li>
+                <li>friendlyVerb->looking amused</li>
+                <li>friendlyVerb->looking happy</li>
+                <li>friendlyVerb->looking pleased</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>
@@ -69,7 +125,8 @@
         <defName>Coming_Out_Positive_Pack</defName>
         <rulePack>
             <rulesStrings>
-                <li>r_logentry->[RECIPIENT_nameDef] was extremely respectful about it.</li>
+                <li>r_logentry->[RECIPIENT_nameDef] was rather respectful about it.</li>
+                <li>r_logentry->[RECIPIENT_nameDef] listened and nodded along as [INITIATOR_nameDef] spoke [INITIATOR_possessive] true feelings.</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>
@@ -79,6 +136,7 @@
         <rulePack>
             <rulesStrings>
                 <li>r_logentry->[RECIPIENT_nameDef] was shocked and enraged.</li>
+                <li>r_logentry->[RECIPIENT_nameDef] felt a fit of rage run rampage inside [RECIPIENT_objective]self.</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>

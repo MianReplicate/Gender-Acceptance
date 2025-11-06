@@ -49,9 +49,7 @@ public class InteractionWorker_ComeOut : InteractionWorker
             isPositive = Rand.Bool;
         
         extraSentencePacks.Add(isPositive ? GADefOf.Coming_Out_Positive_Pack : GADefOf.Coming_Out_Negative_Pack);
-        
-        if(!isPositive)
-            extraSentencePacks.Add(GADefOf.Transphobe_Found_Out);
+        extraSentencePacks.Add(GADefOf.Found_Out_About_Gender_Identity);
         
         if(isChaser) 
             extraSentencePacks.Add(GADefOf.Chaser_Found_Out);

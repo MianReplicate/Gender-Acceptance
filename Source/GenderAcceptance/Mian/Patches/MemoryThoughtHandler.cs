@@ -22,10 +22,12 @@ public static class MemoryThoughtHandler
                 {
                     { "didSex", "True" },
                 };
-            if (!otherPawn.HasMatchingGenitalia() || Rand.Chance(0.01f)){
+            bool sus = !otherPawn.HasMatchingGenitalia() || Rand.Chance(0.01f);
+            if (!otherPawn.HasMatchingGenitalia())
                 rules.Add("mismatchedGenitalia", "True");
+            
+            if(sus)
                 TransKnowledge.KnowledgeLearned(__instance.pawn, otherPawn, false, rules);
-            }
 
         if (GenderUtility.DoesChaserSeeTranny(__instance.pawn, otherPawn))
             {

@@ -12,7 +12,7 @@ public static class GrammarUtilityPatch
     [HarmonyPatch(nameof(GrammarUtility.RulesForPawn), typeof(string), typeof(Pawn), typeof(Dictionary<string, string>),
         typeof(bool), typeof(bool))]
     [HarmonyPostfix]
-    public static void AddExtraRules(IEnumerable<Rule> __result, Pawn pawn, string pawnSymbol, Dictionary<string, string> constants=null)
+    public static IEnumerable<Rule> AddExtraRules(IEnumerable<Rule> __result, Pawn pawn, string pawnSymbol, Dictionary<string, string> constants=null)
     {
         string prefix = "";
         if (!pawnSymbol.NullOrEmpty())
@@ -23,6 +23,12 @@ public static class GrammarUtilityPatch
             constants[prefix + "isTransphobic"] = pawn.IsTrannyphobic().ToString();
         }
 
-        __result.AddItem(new Rule_String(prefix + "otherGender", pawn.GetOppositeGender().GetGenderNoun()));
+        foreach (var rule in __result)
+        {
+            yield return rule;
+        }
+        
+        yield return new Rule_String(prefix + "gender", pawn.gender.GetGenderNoun());
+        yield return new Rule_String(prefix + "otherGender", pawn.GetOppositeGender().GetGenderNoun());
     }
 }

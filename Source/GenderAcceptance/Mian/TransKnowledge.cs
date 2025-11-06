@@ -14,7 +14,8 @@ public static class TransKnowledge
     private static Dictionary<string, string> defaultRules =
     new(){
         {"didSex", "False"},
-        {"mismatchedGenitalia", "True"}
+        {"mismatchedGenitalia", "False"},
+        {"transvestigate", "False"}
     };
     
     private static readonly Dictionary<Pawn, List<Pawn>> believedToBeTransgender = new Dictionary<Pawn, List<Pawn>>();
@@ -38,6 +39,11 @@ public static class TransKnowledge
         var list = believedToBeTransgender.TryGetValue(pawn, new());
         if (list.Contains(otherPawn))
             return;
+        if (rules != null && !rules.All(element => defaultRules.ContainsKey(element.Key)))
+        {
+            Helper.Error("Invalid rules given!");
+            return;
+        }
         list.Add(otherPawn);
         SetBelievedToBeTrannies(pawn, list);
 
@@ -62,8 +68,7 @@ public static class TransKnowledge
             
             List<RulePackDef> extraRulePacks = new();
             
-            if (pawn.IsTrannyphobic())
-                extraRulePacks.Add(GADefOf.Transphobe_Found_Out);
+            extraRulePacks.Add(GADefOf.Found_Out_About_Gender_Identity);
             if (GenderUtility.DoesChaserSeeTranny(pawn, otherPawn))
                 extraRulePacks.Add(GADefOf.Chaser_Found_Out);
 
