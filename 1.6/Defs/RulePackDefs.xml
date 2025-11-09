@@ -43,6 +43,15 @@
             </rulesStrings>
         </rulePack>
     </RulePackDef>
+    
+        <RulePackDef>
+        <defName>Learned_About_Trans</defName>
+        <rulePack>
+            <rulesStrings>
+                <li>r_logentry->[INITIATOR_nameDef] learned that [RECIPIENT_nameDef] is transgender.</li>
+            </rulesStrings>
+        </rulePack>
+    </RulePackDef>
 
     <RulePackDef>
         <defName>Chaser_Found_Out</defName>
@@ -132,21 +141,14 @@
     </RulePackDef>
 
     <RulePackDef>
-        <defName>Coming_Out_Positive_Pack</defName>
+        <defName>Coming_Out</defName>
         <rulePack>
             <rulesStrings>
-                <li>r_logentry->\n\n[RECIPIENT_nameDef] was rather respectful about it.</li>
-                <li>r_logentry->\n\n[RECIPIENT_nameDef] listened and nodded along as [INITIATOR_nameDef] spoke [INITIATOR_possessive] true feelings.</li>
-            </rulesStrings>
-        </rulePack>
-    </RulePackDef>
-    
-    <RulePackDef>
-        <defName>Coming_Out_Negative_Pack</defName>
-        <rulePack>
-            <rulesStrings>
-                <li>r_logentry->\n\n[RECIPIENT_nameDef] was shocked and enraged.</li>
-                <li>r_logentry->\n\n[RECIPIENT_nameDef] felt a fit of rage run rampage inside [RECIPIENT_objective]self.</li>
+                <li>r_logentry(isPositive==true)->\n\n[RECIPIENT_nameDef] was rather respectful about it.</li>
+                <li>r_logentry(isPositive==true)->\n\n[RECIPIENT_nameDef] listened and nodded along as [INITIATOR_nameDef] spoke [INITIATOR_possessive] true feelings.</li>
+                
+                <li>r_logentry(isPositive==false)->\n\n[RECIPIENT_nameDef] was shocked and enraged.</li>
+                <li>r_logentry(isPositive==false)->\n\n[RECIPIENT_nameDef] felt a fit of rage run rampage inside [RECIPIENT_objective]self.</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>

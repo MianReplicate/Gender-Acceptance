@@ -37,30 +37,38 @@ public class ComeOut : InteractionWorker
         out LookTargets lookTargets)
     {
         letterText = (string) null;
-        letterLabel = "GA.ComeOutLabel".Translate(initiator.Named("INITIATOR"), recipient.Named("RECIPIENT"));
-        lookTargets = (LookTargets) new LookTargets(initiator, recipient);
+        letterLabel = null;
+        letterDef = null;
+        lookTargets = (LookTargets) null;
         
-        TransKnowledge.KnowledgeLearned(recipient, initiator, true);
+        var transphobia = recipient.GetTrannyphobicStatus(initiator);
+        var isNegative = transphobia.GenerallyTransphobic;
+        
+        if (transphobia.ChaserAttributeCounts && isNegative)
+            isNegative = Rand.Chance(0.1f * NegativeInteractionUtility.NegativeInteractionChanceFactor(recipient, initiator));
 
-        var isPositive = !recipient.IsTrannyphobic();
-        var isChaser = GenderUtility.DoesChaserSeeTranny(recipient, initiator);
+        var isPositive = !isNegative;
+        var constants = new Dictionary<string, string>()
+        {
+            {"isPositive", isPositive.ToString()}
+        };
 
-        if (isChaser && isPositive == false)
-            isPositive = Rand.Bool;
+        var packs = new List<RulePackDef>()
+        {
+            GADefOf.Coming_Out
+        };
         
-        extraSentencePacks.Add(isPositive ? GADefOf.Coming_Out_Positive_Pack : GADefOf.Coming_Out_Negative_Pack);
-        extraSentencePacks.Add(GADefOf.Found_Out_About_Gender_Identity);
-        
-        if(isChaser) 
-            extraSentencePacks.Add(GADefOf.Chaser_Found_Out);
+        TransKnowledge.KnowledgeLearned(
+            recipient, 
+            initiator, 
+            true, 
+            isPositive ? LetterDefOf.PositiveEvent : LetterDefOf.NegativeEvent, 
+            "GA.ComeOutLabel",
+            packs,
+            constants);
         
         initiator.needs.mood.thoughts.memories.TryGainMemory(isPositive ? GADefOf.CameOutPositive : GADefOf.CameOutNegative, recipient);
         
-        letterDef = isPositive ? LetterDefOf.PositiveEvent : LetterDefOf.NegativeEvent;
-        
         recipient.needs.mood.thoughts.memories.TryGainMemory(isPositive ? GADefOf.FoundOutPawnIsTransMoodPositive : GADefOf.FoundOutPawnIsTransMoodNegative, recipient);
-
-        if (!isPositive)
-            Helper.CheckSocialFightStart(Mathf.Abs(Mathf.Clamp((recipient.relations.OpinionOf(initiator) - 100), -100, 0) / 100f), initiator, recipient);
     }
 }

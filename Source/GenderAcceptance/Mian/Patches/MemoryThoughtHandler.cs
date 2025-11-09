@@ -17,17 +17,17 @@ public static class MemoryThoughtHandler
         // this is like the universal sex thought
         if (newThought.def == ThoughtDefOf.GotSomeLovin)
         {
-            Dictionary<string, string> rules =
+            Dictionary<string, string> constants =
                 new()
                 {
                     { "didSex", "True" },
                 };
             bool sus = !otherPawn.AppearsToHaveMatchingGenitalia() || Rand.Chance(0.01f);
             if (!otherPawn.AppearsToHaveMatchingGenitalia())
-                rules.Add("mismatchedGenitalia", "True");
+                constants.Add("mismatchedGenitalia", "True");
             
             if(sus)
-                TransKnowledge.KnowledgeLearned(__instance.pawn, otherPawn, false, rules);
+                TransKnowledge.KnowledgeLearned(__instance.pawn, otherPawn, false, LetterDefOf.NeutralEvent, constants: constants);
 
         if (GenderUtility.DoesChaserSeeTranny(__instance.pawn, otherPawn))
             {

@@ -43,11 +43,20 @@ public static class GenderUtility {
         return false;
     }
 
-    public static bool IsTrannyphobic(this Pawn pawn, bool includePrecept=true)
+    public static Trannyphobic GetTrannyphobicStatus(this Pawn pawn, Pawn recipient=null)
     {
-        return ((pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false) || (pawn.story?.traits?.HasTrait(GADefOf.Chaser) ?? false)) || 
-               (includePrecept && pawn.GetCurrentIdentity() == GenderIdentity.Cisgender 
-                               && pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Despised);
+        var chaser = recipient != null ? DoesChaserSeeTranny(pawn, recipient) : (pawn.story?.traits?.HasTrait(GADefOf.Chaser) ?? false);
+        var transphobicTrait = (pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false);
+        var transphobicPrecept = pawn.GetCurrentIdentity() == GenderIdentity.Cisgender
+                                 && pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Despised;
+        
+        return new Trannyphobic
+               {
+                   GenerallyTransphobic = chaser || transphobicTrait || transphobicPrecept,
+                   ChaserAttributeCounts = chaser,
+                   HasTransphobicTrait = transphobicTrait,
+                   TransphobicPreceptCounts = transphobicPrecept
+               };
     }
 
     public static Gender GetOppositeGender(this Pawn pawn)

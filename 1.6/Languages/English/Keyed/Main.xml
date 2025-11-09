@@ -10,5 +10,8 @@
   <GA.Masculine>masculine</GA.Masculine>
   <GA.Feminine>feminine</GA.Feminine>
   <GA.Androgynous>androgynous</GA.Androgynous>
-    
+
+  <GA.SocialFightTransphobia>{PAWN1_labelShort} started a social fight with {PAWN2_labelShort} because of {PAWN1_possessive} transphobic beliefs.</GA.SocialFightTransphobia>
+
+
 </LanguageData>

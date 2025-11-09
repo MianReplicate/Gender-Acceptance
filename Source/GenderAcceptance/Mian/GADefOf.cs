@@ -15,11 +15,11 @@ public static class GADefOf
     [MayRequireIdeology] public static PreceptDef Transgender_Despised;
     [MayRequireIdeology] public static PreceptDef Transgender_Adored;
 
+    public static RulePackDef Learned_About_Trans;
     public static RulePackDef Suspicions_About_Trans;
     public static RulePackDef Chaser_Found_Out;
     public static RulePackDef Found_Out_About_Gender_Identity;
-    public static RulePackDef Coming_Out_Positive_Pack;
-    public static RulePackDef Coming_Out_Negative_Pack;
+    public static RulePackDef Coming_Out;
 
     public static ThoughtDef CameOutNegative;
     public static ThoughtDef CameOutPositive;

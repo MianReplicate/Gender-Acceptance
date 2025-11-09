@@ -11,12 +11,15 @@ namespace GenderAcceptance.Mian;
 
 public static class TransKnowledge
 {
+    public const string DEFAULT_LETTER_LABEL = "GA.PawnBelievesOtherPawnIsTransLabel";
+    
     private static Dictionary<string, string> defaultConstants =
     new(){
         {"didSex", "False"},
         {"mismatchedGenitalia", "False"},
         {"transvestigate", "False"},
-        {"hasAppearance", "False"}
+        {"hasAppearance", "False"},
+        {"isPositive", "False"}
     };
     
     private static readonly Dictionary<Pawn, List<Pawn>> believedToBeTransgender = new Dictionary<Pawn, List<Pawn>>();
@@ -26,17 +29,22 @@ public static class TransKnowledge
         believedToBeTransgender.SetOrAdd(pawn, pawns);
     }
     
-    public static List<Pawn> GetBelievedToBeTrannies(this Pawn pawn, bool cleanReferences)
+    public static List<Pawn> GetKnownTrannies(this Pawn pawn, bool cleanReferences)
     {
         if (believedToBeTransgender.TryGetValue(pawn, out var pawns)){
-            // if(cleanReferences)
-                // pawns.RemoveWhere(pawnRef => pawnRef.Dead);
+            if(cleanReferences)
+                pawns.RemoveWhere(transPawn => transPawn.Discarded);
             return pawns;
         }
         return null;
     }
-    public static void KnowledgeLearned(Pawn pawn, Pawn otherPawn, bool hardLearned, Dictionary<string, string> constants=null, List<Rule> rules=null)
+    public static void KnowledgeLearned(Pawn pawn, Pawn otherPawn, bool hardLearned, LetterDef letter=null, string letterLabel=DEFAULT_LETTER_LABEL, List<RulePackDef> extraPacks=null, Dictionary<string, string> constants=null, List<Rule> rules=null)
     {
+        if (!pawn.RaceProps.Humanlike)
+            return;
+        if (!hardLearned && pawn.CultureOpinionOnTrans() != CultureViewOnTrans.Neutral)
+            return; // unless hard learned, cultures will not assume. This will make the game less annoying hopefully.
+        
         var list = believedToBeTransgender.TryGetValue(pawn, new());
         if (list.Contains(otherPawn))
             return;
@@ -48,7 +56,7 @@ public static class TransKnowledge
         list.Add(otherPawn);
         SetBelievedToBeTrannies(pawn, list);
 
-        if (!hardLearned)
+        if (letter != null)
         {
             var request = new GrammarRequest();
 
@@ -57,26 +65,21 @@ public static class TransKnowledge
             else
                 constants.AddRange(defaultConstants.Where(constant => !constants.ContainsKey(constant.Key)).ToDictionary(pair => pair.Key, pair => pair.Value));
 
-            request.Includes.Add(GADefOf.Suspicions_About_Trans);
-            if(rules != null)
-                request.Rules.AddRange(rules);
-            request.Constants.AddRange(constants);
-            request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", pawn, request.Constants));
-            request.Rules.AddRange(GrammarUtility.RulesForPawn("RECIPIENT", otherPawn, request.Constants));
+            var mainDef = hardLearned ? GADefOf.Learned_About_Trans : GADefOf.Suspicions_About_Trans;
+            var text = "";
             
-            var text = GrammarResolver.Resolve(
-                    GADefOf.Suspicions_About_Trans.FirstRuleKeyword,
-                    request, "extraSentencePack",
-                    false,
-                    GADefOf.Suspicions_About_Trans.FirstUntranslatedRuleKeyword);
+            List<RulePackDef> rulePacks = new();
             
-            List<RulePackDef> extraRulePacks = new();
+            rulePacks.Add(mainDef);
             
-            extraRulePacks.Add(GADefOf.Found_Out_About_Gender_Identity);
+            if(extraPacks != null)
+                rulePacks.AddRange(extraPacks);
+            
+            rulePacks.Add(GADefOf.Found_Out_About_Gender_Identity);
             if (GenderUtility.DoesChaserSeeTranny(pawn, otherPawn))
-                extraRulePacks.Add(GADefOf.Chaser_Found_Out);
+                rulePacks.Add(GADefOf.Chaser_Found_Out);
 
-            foreach (var grammarPack in extraRulePacks)
+            foreach (var grammarPack in rulePacks)
             {
                 request.Clear();
                 request.Includes.Add(grammarPack);
@@ -86,20 +89,41 @@ public static class TransKnowledge
                 request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", pawn, request.Constants));
                 request.Rules.AddRange(GrammarUtility.RulesForPawn("RECIPIENT", otherPawn, request.Constants));
                 
-                text += "\n\n" +
-                    GrammarResolver.Resolve(
-                        grammarPack.FirstRuleKeyword, 
-                        request, "extraSentencePack", 
-                        false, 
-                        grammarPack.FirstUntranslatedRuleKeyword);
+                text += (grammarPack == mainDef ? "" : "\n\n") +
+                                                      GrammarResolver.Resolve(
+                                                          grammarPack.FirstRuleKeyword, 
+                                                          request, "extraSentencePack", 
+                                                          false, 
+                                                          grammarPack.FirstUntranslatedRuleKeyword);   
             }
 
-            Find.LetterStack.ReceiveLetter("GA.PawnBelievesOtherPawnIsTransLabel".Translate(pawn.Named("INITIATOR"), otherPawn.Named("RECIPIENT")), text, LetterDefOf.NeutralEvent, new LookTargets(pawn, otherPawn)); 
+            Find.LetterStack.ReceiveLetter(letterLabel.Translate(pawn.Named("INITIATOR"), otherPawn.Named("RECIPIENT")), text, letter, new LookTargets(pawn, otherPawn));
+        }
+        
+        if (constants == null || (!constants.ContainsKey("isPositive") || constants["isPositive"] == "False"))
+        {
+            var trannyphobic = pawn.GetTrannyphobicStatus(otherPawn);
+            var interactionDef = new InteractionDef
+            {
+                socialFightBaseChance = 0.1f *
+                                        (trannyphobic.GenerallyTransphobic ? 1f : 0) *
+                                        (trannyphobic.ChaserAttributeCounts ? 0.1f : 1) *
+                                        (trannyphobic.HasTransphobicTrait ? 2 : 1) *
+                                        (trannyphobic.TransphobicPreceptCounts ? 1.25f : 1) *
+                                        NegativeInteractionUtility.NegativeInteractionChanceFactor(pawn, otherPawn)
+            };
+
+            if (!DebugSettings.enableRandomMentalStates || pawn.needs.mood == null || TutorSystem.TutorialMode ||
+                !DebugSettings.alwaysSocialFight && (double)Rand.Value >=
+                (double)pawn.interactions.SocialFightChance(interactionDef, otherPawn))
+                return;
+            
+            pawn.interactions.StartSocialFight(otherPawn, "GA.SocialFightTransphobia");
         }
     }
     public static bool BelievesIsTrans(this Pawn pawn, Pawn otherPawn)
     {
-        return pawn.GetBelievedToBeTrannies(false)?.Contains(otherPawn) ?? false;
+        return pawn.GetKnownTrannies(false)?.Contains(otherPawn) ?? false;
     }
 
     public static void AttemptTransvestigate(this Pawn initiator, Pawn recipient, float normalChance=0.025f, float appearanceChance=0.25f)
@@ -116,11 +140,17 @@ public static class TransKnowledge
             var rules = new List<Rule>();
             if (appearanceRoll)
                 rules.Add(new Rule_String("RECIPIENT_gendered", recipient.GetOppositeGender().GetGenderedAppearance().GetGenderNoun()));
-            KnowledgeLearned(initiator, recipient, false, new()
+            KnowledgeLearned(
+                initiator, 
+                recipient, 
+                false, 
+                LetterDefOf.NeutralEvent, 
+                constants: new()
             {
                 { "transvestigate", "True" },
                 { "hasAppearance", appearanceRoll.ToString()}
-            }, rules);
+            }, 
+                rules: rules);
         }
     }
 }

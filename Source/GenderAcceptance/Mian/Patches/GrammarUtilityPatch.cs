@@ -20,7 +20,7 @@ public static class GrammarUtilityPatch
 
         if (constants != null)
         {
-            constants[prefix + "isTransphobic"] = pawn.IsTrannyphobic().ToString();
+            constants[prefix + "isTransphobic"] = pawn.GetTrannyphobicStatus().ToString();
         }
 
         foreach (var rule in __result)

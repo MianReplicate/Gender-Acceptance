@@ -30,7 +30,7 @@ public class Misgender : InteractionWorker
         letterDef = (LetterDef) null;
         lookTargets = (LookTargets) null;
 
-        if (!initiator.IsTrannyphobic())
+        if (!initiator.GetTrannyphobicStatus().GenerallyTransphobic)
         {
             var thought = ThoughtMaker.MakeThought(GADefOf.Accidental_Misgender, 0);
             initiator.needs.mood.thoughts.memories.TryGainMemory(thought, recipient);
