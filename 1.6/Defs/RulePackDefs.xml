@@ -97,7 +97,7 @@
             <rulesStrings>
                 <li>r_logentry->\n\n[main].</li>
                 
-                <li>main(INITIATOR_isTransphobic==false)->[accepting].\n\n[INITIATOR_nameDef] will try [INITIATOR_possessive] best to not out [RECIPIENT_nameDef] when referring to [RECIPIENT_possessive] in conversations.</li>
+                <li>main(INITIATOR_isTransphobic==false)->[accepting]</li>
                 <li>main(INITIATOR_isTransphobic==true)->[transphobic].\n\n[INITIATOR_nameDef] may out [RECIPIENT_nameDef] during chitchats.</li>
 
                 <li>accepting->[INITIATOR_nameDef], [friendlyVerb], has no problems with this revelation. [random_acceptance]</li>

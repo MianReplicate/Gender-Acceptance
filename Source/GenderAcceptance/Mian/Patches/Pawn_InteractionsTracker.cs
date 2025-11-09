@@ -34,13 +34,21 @@ public class Pawn_InteractionsTracker
                     var revealChance = 0.05f;
 
                     if (transphobic.GenerallyTransphobic)
+                    {
                         revealChance *= 1.25f;
-                    if (transphobic.ChaserAttributeCounts)
-                        revealChance *= 0.5f;
-                    if (transphobic.HasTransphobicTrait)
-                        revealChance *= 1.25f;
-                    if (transphobic.TransphobicPreceptCounts)
-                        revealChance *= 5f;
+                        
+                        if (transphobic.ChaserAttributeCounts)
+                            revealChance *= 0.5f;
+                        if (transphobic.HasTransphobicTrait)
+                            revealChance *= 1.25f;
+                        if (transphobic.TransphobicPreceptCounts)
+                            revealChance *= 5f;
+                    }
+                    else
+                    {
+                        if (___pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Adored)
+                            revealChance *= 5f;
+                    }
                     
                     if(Rand.Chance(revealChance))
                         TransKnowledge.KnowledgeLearned(recipient, trannies[i], false);
