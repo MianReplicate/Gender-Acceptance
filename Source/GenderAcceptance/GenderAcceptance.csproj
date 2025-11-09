@@ -108,7 +108,7 @@
     <Compile Include="Mian\ThoughtWorkers\IsTransphobic.cs" />
     <Compile Include="Mian\ThoughtWorkers\PreceptTransgender.cs" />
     <Compile Include="Mian\ThoughtWorkers\Similarity.cs" />
-    <Compile Include="Mian\Trannyphobic.cs" />
+    <Compile Include="Mian\TransphobicStatus.cs" />
     <Compile Include="Mian\TransKnowledge.cs" />
     <Compile Include="Mian\Utilities\GenderUtility.cs" />
     <Compile Include="Mian\Utilities\Helper.cs" />

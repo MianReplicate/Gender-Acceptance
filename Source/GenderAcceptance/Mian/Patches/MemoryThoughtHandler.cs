@@ -12,7 +12,7 @@ public static class MemoryThoughtHandler
 {
     [HarmonyPatch(nameof(RimWorld.MemoryThoughtHandler.TryGainMemory), [typeof(Thought_Memory), typeof(Pawn)])]
     [HarmonyPostfix]
-    public static void PersonAndTrannyFucked(RimWorld.MemoryThoughtHandler __instance, Thought_Memory newThought, Pawn otherPawn)
+    public static void PersonAndTransFucked(RimWorld.MemoryThoughtHandler __instance, Thought_Memory newThought, Pawn otherPawn)
     {
         // this is like the universal sex thought
         if (newThought.def == ThoughtDefOf.GotSomeLovin)
@@ -29,7 +29,7 @@ public static class MemoryThoughtHandler
             if(sus)
                 TransKnowledge.KnowledgeLearned(__instance.pawn, otherPawn, false, LetterDefOf.NeutralEvent, constants: constants);
 
-        if (GenderUtility.DoesChaserSeeTranny(__instance.pawn, otherPawn))
+            if (GenderUtility.DoesChaserSeeTrans(__instance.pawn, otherPawn))
             {
                 ((Chaser_Need) __instance.pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromSex();
                 otherPawn.needs?.mood?.thoughts?.memories?.TryGainMemory(GADefOf.Dehumanized, __instance.pawn);   

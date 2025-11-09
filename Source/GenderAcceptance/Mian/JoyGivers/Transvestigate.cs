@@ -9,7 +9,7 @@ public class Transvestigate : JoyGiver
 {
     public override Job TryGiveJob(Pawn pawn)
     {
-        if (!pawn.GetTrannyphobicStatus().GenerallyTransphobic)
+        if (!pawn.GetTransphobicStatus().GenerallyTransphobic)
             return null;
         if (PawnUtility.WillSoonHaveBasicNeed(pawn))
             return null;

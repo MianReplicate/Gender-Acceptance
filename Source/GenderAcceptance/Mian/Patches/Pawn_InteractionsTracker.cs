@@ -15,7 +15,7 @@ public class Pawn_InteractionsTracker
     {
         if (!__result || !recipient.RaceProps.Humanlike)
             return;
-        if (GenderUtility.DoesChaserSeeTranny(___pawn, recipient))
+        if (GenderUtility.DoesChaserSeeTrans(___pawn, recipient))
             ((Chaser_Need) ___pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromInteraction();
         ___pawn.AttemptTransvestigate(recipient, 0.01f, 0.05f);
 
@@ -30,16 +30,16 @@ public class Pawn_InteractionsTracker
                 var randomCount = Rand.RangeInclusive(0, trannies.Count);
                 for (int i = 0; i < randomCount; i++)
                 {
-                    var trannyphobic = ___pawn.GetTrannyphobicStatus(trannies[i]);
+                    var transphobic = ___pawn.GetTransphobicStatus(trannies[i]);
                     var revealChance = 0.05f;
 
-                    if (trannyphobic.GenerallyTransphobic)
+                    if (transphobic.GenerallyTransphobic)
                         revealChance *= 1.25f;
-                    if (trannyphobic.ChaserAttributeCounts)
+                    if (transphobic.ChaserAttributeCounts)
                         revealChance *= 0.5f;
-                    if (trannyphobic.HasTransphobicTrait)
+                    if (transphobic.HasTransphobicTrait)
                         revealChance *= 1.25f;
-                    if (trannyphobic.TransphobicPreceptCounts)
+                    if (transphobic.TransphobicPreceptCounts)
                         revealChance *= 5f;
                     
                     if(Rand.Chance(revealChance))

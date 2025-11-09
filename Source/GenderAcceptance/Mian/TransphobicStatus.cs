@@ -1,6 +1,6 @@
 ﻿namespace GenderAcceptance.Mian;
 
-public struct Trannyphobic
+public struct TransphobicStatus
 {
     public bool GenerallyTransphobic { get; set; }
     public bool ChaserAttributeCounts { get; set; }

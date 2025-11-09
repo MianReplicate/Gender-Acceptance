@@ -5,6 +5,7 @@ using GenderAcceptance.Mian.Dependencies;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 using Verse.Grammar;
 
 namespace GenderAcceptance.Mian;
@@ -76,7 +77,7 @@ public static class TransKnowledge
                 rulePacks.AddRange(extraPacks);
             
             rulePacks.Add(GADefOf.Found_Out_About_Gender_Identity);
-            if (GenderUtility.DoesChaserSeeTranny(pawn, otherPawn))
+            if (GenderUtility.DoesChaserSeeTrans(pawn, otherPawn))
                 rulePacks.Add(GADefOf.Chaser_Found_Out);
 
             foreach (var grammarPack in rulePacks)
@@ -102,14 +103,14 @@ public static class TransKnowledge
         
         if (constants == null || (!constants.ContainsKey("isPositive") || constants["isPositive"] == "False"))
         {
-            var trannyphobic = pawn.GetTrannyphobicStatus(otherPawn);
+            var transphobia = pawn.GetTransphobicStatus(otherPawn);
             var interactionDef = new InteractionDef
             {
-                socialFightBaseChance = 0.1f *
-                                        (trannyphobic.GenerallyTransphobic ? 1f : 0) *
-                                        (trannyphobic.ChaserAttributeCounts ? 0.1f : 1) *
-                                        (trannyphobic.HasTransphobicTrait ? 2 : 1) *
-                                        (trannyphobic.TransphobicPreceptCounts ? 1.25f : 1) *
+                socialFightBaseChance = 0.35f *
+                                        (transphobia.GenerallyTransphobic ? 1f : 0) *
+                                        (transphobia.ChaserAttributeCounts ? 0.1f : 1) *
+                                        (transphobia.HasTransphobicTrait ? 2 : 1) *
+                                        (transphobia.TransphobicPreceptCounts ? 1.25f : 1) *
                                         NegativeInteractionUtility.NegativeInteractionChanceFactor(pawn, otherPawn)
             };
 
@@ -117,8 +118,8 @@ public static class TransKnowledge
                 !DebugSettings.alwaysSocialFight && (double)Rand.Value >=
                 (double)pawn.interactions.SocialFightChance(interactionDef, otherPawn))
                 return;
-            
-            pawn.interactions.StartSocialFight(otherPawn, "GA.SocialFightTransphobia");
+            if(pawn.jobs?.curJob?.def?.casualInterruptible ?? false)
+                pawn.interactions.StartSocialFight(otherPawn, "GA.SocialFightTransphobia");
         }
     }
     public static bool BelievesIsTrans(this Pawn pawn, Pawn otherPawn)

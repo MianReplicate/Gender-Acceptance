@@ -41,7 +41,7 @@ public class ComeOut : InteractionWorker
         letterDef = null;
         lookTargets = (LookTargets) null;
         
-        var transphobia = recipient.GetTrannyphobicStatus(initiator);
+        var transphobia = recipient.GetTransphobicStatus(initiator);
         var isNegative = transphobia.GenerallyTransphobic;
         
         if (transphobia.ChaserAttributeCounts && isNegative)
@@ -62,7 +62,7 @@ public class ComeOut : InteractionWorker
             recipient, 
             initiator, 
             true, 
-            isPositive ? LetterDefOf.PositiveEvent : LetterDefOf.NegativeEvent, 
+            isPositive ? LetterDefOf.PositiveEvent : LetterDefOf.NeutralEvent, 
             "GA.ComeOutLabel",
             packs,
             constants);

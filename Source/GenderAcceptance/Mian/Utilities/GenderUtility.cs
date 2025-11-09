@@ -28,13 +28,13 @@ public static class GenderUtility {
 
     public static float ChaserFactor(Pawn pawn, Pawn target)
     {
-        if (DoesChaserSeeTranny(pawn, target))
+        if (DoesChaserSeeTrans(pawn, target))
             return 2f;
         return 0f;
     }
         
-    // does a chaser find the tranny??
-    public static bool DoesChaserSeeTranny(Pawn initiator, Pawn recipient)
+    // does a chaser find the trans
+    public static bool DoesChaserSeeTrans(Pawn initiator, Pawn recipient)
     {
         if (!recipient.RaceProps.Humanlike)
             return false;
@@ -43,14 +43,14 @@ public static class GenderUtility {
         return false;
     }
 
-    public static Trannyphobic GetTrannyphobicStatus(this Pawn pawn, Pawn recipient=null)
+    public static TransphobicStatus GetTransphobicStatus(this Pawn pawn, Pawn recipient=null)
     {
-        var chaser = recipient != null ? DoesChaserSeeTranny(pawn, recipient) : (pawn.story?.traits?.HasTrait(GADefOf.Chaser) ?? false);
+        var chaser = recipient != null ? DoesChaserSeeTrans(pawn, recipient) : (pawn.story?.traits?.HasTrait(GADefOf.Chaser) ?? false);
         var transphobicTrait = (pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false);
         var transphobicPrecept = pawn.GetCurrentIdentity() == GenderIdentity.Cisgender
                                  && pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Despised;
         
-        return new Trannyphobic
+        return new TransphobicStatus
                {
                    GenerallyTransphobic = chaser || transphobicTrait || transphobicPrecept,
                    ChaserAttributeCounts = chaser,
@@ -72,7 +72,7 @@ public static class GenderUtility {
     //     if (recipient.gender != Gender.Male && recipient.gender != Gender.Female)
     //         return recipient.gender; // idk what to do otherwise if im being honest. e.g. nonbinary people
     //         
-    //     return initiator.IsTrannyphobic() ? recipient.gender == Gender.Male ? Gender.Female : Gender.Male : recipient.gender;
+    //     return initiator.Istransphobic() ? recipient.gender == Gender.Male ? Gender.Female : Gender.Male : recipient.gender;
     // }
     //
     // public static bool AttractedToPerson(Pawn initiator, Pawn recipient)
