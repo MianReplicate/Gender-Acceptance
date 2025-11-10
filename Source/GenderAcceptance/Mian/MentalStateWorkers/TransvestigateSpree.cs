@@ -14,6 +14,9 @@ public class TransvestigateSpree : MentalStateWorker
             return false;
         }
 
+        if (!pawn.GetTransphobicStatus().GenerallyTransphobic)
+            return false;
+
         var candidates = new List<Pawn>();
         TransvestigateUtility.GetInvestigatingCandidatesFor(pawn, candidates, true);
         bool flag = candidates.Count >= 1;

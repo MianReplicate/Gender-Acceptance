@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using GenderAcceptance.Mian.MentalState;
+using GenderAcceptance.Mian.MentalStates;
 using GenderAcceptance.Mian.Verbs;
 using RimWorld;
 using UnityEngine;

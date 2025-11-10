@@ -6,7 +6,7 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 
-namespace GenderAcceptance.Mian.MentalState;
+namespace GenderAcceptance.Mian.MentalStates;
 
 public class TransvestigateSpree : Verse.AI.MentalState
 {

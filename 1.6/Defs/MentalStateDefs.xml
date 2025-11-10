@@ -7,14 +7,14 @@
     </MentalBreakDef>
     <MentalStateDef Name="TransvestigatingSpree" ParentName="BaseMentalState">
         <defName>TransvestigatingSpree</defName>
-        <stateClass>GenderAcceptance.Mian.MentalState.TransvestigateSpree</stateClass>
+        <stateClass>GenderAcceptance.Mian.MentalStates.TransvestigateSpree</stateClass>
         <workerClass>GenderAcceptance.Mian.MentalStateWorkers.TransvestigateSpree</workerClass>
         <label>transvestigating spree</label>
         <category>Malicious</category>
         <colonistsOnly>true</colonistsOnly>
-<!--        <blockInteractionInitiationExcept>-->
-<!--            <li>Transvestigate</li>-->
-<!--        </blockInteractionInitiationExcept>-->
+        <blockInteractionInitiationExcept>
+            <li>Transvestigate</li>
+        </blockInteractionInitiationExcept>
         <blockRandomInteraction>true</blockRandomInteraction>
         <minTicksBeforeRecovery>25000</minTicksBeforeRecovery>
         <maxTicksBeforeRecovery>45000</maxTicksBeforeRecovery>

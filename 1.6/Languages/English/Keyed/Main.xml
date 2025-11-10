@@ -15,4 +15,6 @@
 
   <GA.FoundOutThroughChat>{RECEIVER_labelShort} was told by {TELLER_labelShort} that {GOSSIPED_labelShort} is transgender.</GA.FoundOutThroughChat>
 
+  <GA.ModName>Topic of Gender</GA.ModName>
+  <GA.EnableLoggingExplanation>Enable developer logging</GA.EnableLoggingExplanation>
 </LanguageData>

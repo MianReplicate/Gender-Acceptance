@@ -27,10 +27,8 @@ public static class GADefOf
     public static NeedDef Chaser_Need;
 
     public static RulePackDef Believes_Is_Trans;
-    // public static RulePackDef Suspicions_About_Trans;
     public static RulePackDef Chaser_Found_Out;
     public static RulePackDef Found_Out_About_Gender_Identity;
-    // public static RulePackDef Coming_Out;
 
     public static ThoughtDef CameOutNegative;
     public static ThoughtDef CameOutPositive;
@@ -50,7 +48,7 @@ public static class GADefOf
 
     public static ThoughtDef Dehumanized;
 
-    public static InteractionDef Transvestigate;
+    public static JobDef Transvestigate;
 
     static GADefOf()
     {

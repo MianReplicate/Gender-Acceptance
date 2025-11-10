@@ -35,6 +35,7 @@ public static class Pawn_RelationsTracker
 
             if (Rand.Chance(baseChance))
             {
+                Helper.Debug("Pawn " + ___pawn.Name + " is out to " + otherPawn.Name + " due to new relation: " + def.defName);
                 otherPawn.GetKnowledgeOnPawn(___pawn).cameOut = true;
                 otherPawn.GetKnowledgeOnPawn(___pawn).playedNotification = true;
             }

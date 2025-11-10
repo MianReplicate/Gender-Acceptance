@@ -48,7 +48,7 @@ public static class GenderUtility {
         var chaser = recipient != null ? DoesChaserSeeTrans(pawn, recipient) : (pawn.story?.traits?.HasTrait(GADefOf.Chaser) ?? false);
         var transphobicTrait = (pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false);
         var transphobicPrecept = pawn.GetCurrentIdentity() == GenderIdentity.Cisgender
-                                 && pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Despised;
+                                 && (pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Despised || pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Abhorrent);
         
         return new TransphobicStatus
                {

@@ -22,7 +22,7 @@ public static class Pawn_InteractionsTracker
         {
             ___pawn.AttemptTransvestigate(recipient, 0.001f, 0.005f);
 
-            var transgenders = ___pawn.GetTransgenderKnowledges(false).Where(knowledge => knowledge.BelievesTheyAreTrans()).ToList();
+            var transgenders = ___pawn.GetTransgenderKnowledges(false).Where(knowledge => knowledge.BelievesTheyAreTrans() && knowledge.Pawn != recipient).ToList();
             if (transgenders.Any())
             {
                 var randomCount = Rand.RangeInclusive(0, transgenders.Count);
@@ -59,12 +59,16 @@ public static class Pawn_InteractionsTracker
                             recipientKnowledge.transvestigate = true;
                         if (initKnowledge.sex)
                             recipientKnowledge.sex = true;
-                        
-                        var message = new Message(
-                            "GA.FoundOutThroughChat".Translate(___pawn.Named("TELLER"), recipient.Named("RECEIVER"), transgenders[i].Pawn.Named("GOSSIPED")),
-                            MessageTypeDefOf.NeutralEvent,
-                            new LookTargets(___pawn, recipient, transgenders[i].Pawn));
-                        Messages.Message(message);
+
+                        if (!recipientKnowledge.playedNotification)
+                        {
+                            recipientKnowledge.playedNotification = true;
+                            var message = new Message(
+                                "GA.FoundOutThroughChat".Translate(___pawn.Named("TELLER"), recipient.Named("RECEIVER"), transgenders[i].Pawn.Named("GOSSIPED")),
+                                MessageTypeDefOf.NeutralEvent,
+                                new LookTargets(___pawn, recipient, transgenders[i].Pawn));
+                            Messages.Message(message);   
+                        }
                         
                         TransKnowledgeManager.OnKnowledgeLearned(recipient, transgenders[i].Pawn);
                     }
