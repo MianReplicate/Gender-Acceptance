@@ -13,5 +13,6 @@
 
   <GA.SocialFightTransphobia>{PAWN1_labelShort} started a social fight with {PAWN2_labelShort} because of {PAWN1_possessive} transphobic beliefs.</GA.SocialFightTransphobia>
 
+  <GA.FoundOutThroughChat>{RECEIVER_labelShort} was told by {TELLER_labelShort} that {GOSSIPED_labelShort} is transgender.</GA.FoundOutThroughChat>
 
 </LanguageData>

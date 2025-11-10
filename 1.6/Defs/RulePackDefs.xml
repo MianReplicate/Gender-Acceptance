@@ -13,11 +13,11 @@
                 
                 <li>what_happened(cameOut==true)->[RECIPIENT_nameDef] came out to [INITIATOR_objective]. [comeOutPost]</li>
                 
-                <li>comeOutPost(isPositive=true)->[INITIATOR_nameDef] was rather respectful about it</li>
-                <li>comeOutPost(isPositive=true)->[INITIATOR_nameDef] listened and nodded along as [RECIPIENT_nameDef] spoke [RECIPIENT_possessive] true feelings</li>
+                <li>comeOutPost(isPositive==true)->[INITIATOR_nameDef] was rather respectful about it</li>
+                <li>comeOutPost(isPositive==true)->[INITIATOR_nameDef] listened and nodded along as [RECIPIENT_nameDef] spoke [RECIPIENT_possessive] true feelings</li>
 
-                <li>comeOutPost(isPositive=false)->[INITIATOR_nameDef] was shocked and enraged</li>
-                <li>comeOutPost(isPositive=false)->[INITIATOR_nameDef] felt a fit of rage run rampage inside [INITIATOR_objective]self</li>
+                <li>comeOutPost(isPositive==false)->[INITIATOR_nameDef] was shocked and enraged</li>
+                <li>comeOutPost(isPositive==false)->[INITIATOR_nameDef] felt a fit of rage run rampage inside [INITIATOR_objective]self</li>
                 
                 <li>start_sex_event->[INITIATOR_nameDef] thought that</li>
                 <li>start_sex_event->[INITIATOR_nameDef] noticed that</li>

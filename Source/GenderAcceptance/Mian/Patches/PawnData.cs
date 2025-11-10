@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using HarmonyLib;
 using Verse;
 
@@ -11,16 +12,19 @@ public static class PawnData
     [HarmonyPostfix]
     public static void GetExtraData(ref Verse.Pawn __instance)
     {
-        var knowntransgenders = __instance.GetModifiableKnownTransgenders(Scribe.mode == LoadSaveMode.Saving);
+        if (!__instance.RaceProps?.Humanlike ?? false)
+            return;
         
-        if (knowntransgenders != null)
+        var transknowledge = __instance.GetModifiableTransgenderKnowledge(Scribe.mode == LoadSaveMode.Saving, false);
+        
+        Scribe_Collections.Look(
+            ref transknowledge, 
+            "GABelievedToBeTransgenders", 
+            LookMode.Deep);
+        
+        if (Scribe.mode != LoadSaveMode.Saving)
         {
-            Scribe_Collections.Look<Pawn, TransKnowledge>(ref knowntransgenders, "GABelievedToBeTransgenders", LookMode.Reference, LookMode.Deep);
-
-            if (Scribe.mode != LoadSaveMode.Saving)
-            {
-                __instance.SetTransKnowledges(knowntransgenders);
-            }   
+            __instance.SetTransKnowledges(transknowledge);
         }
     }
 }

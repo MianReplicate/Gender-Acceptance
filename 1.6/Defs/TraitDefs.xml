@@ -38,5 +38,8 @@
                 <description>[PAWN_nameDef] dislikes transgender individuals.</description>
             </li>
         </degreeDatas>
+        <conflictingTraits>
+            <li>Transhumanist</li>
+        </conflictingTraits>
     </TraitDef>
 </Defs>

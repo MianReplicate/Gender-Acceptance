@@ -96,6 +96,7 @@
     <Compile Include="Mian\Patches\InteractionWorker_RomanceAttempt.cs" />
     <Compile Include="Mian\Patches\LovePartnerRelationUtility.cs" />
     <Compile Include="Mian\Patches\MemoryThoughtHandler.cs" />
+    <Compile Include="Mian\Patches\Mod Integration\Dysphoria.cs" />
     <Compile Include="Mian\Patches\Mod Integration\IntimacyLovin.cs" />
     <Compile Include="Mian\Patches\Mod Integration\SimpleTrans.cs" />
     <Compile Include="Mian\Patches\Mod Integration\WayBetterRomance.cs" />

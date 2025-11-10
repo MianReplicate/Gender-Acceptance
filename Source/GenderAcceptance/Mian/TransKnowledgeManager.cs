@@ -11,16 +11,31 @@ using Verse.Grammar;
 
 namespace GenderAcceptance.Mian;
 
-public class TransKnowledge : IExposable
+public class TransKnowledgeTracker : IExposable
 {
+    private Pawn pawn;
     public bool sex;
     public bool transvestigate;
     public bool cameOut;
+    public bool playedNotification;
+    public Pawn Pawn => pawn;
+
+    public TransKnowledgeTracker()
+    {
+    }
+    
+    public TransKnowledgeTracker(Pawn pawn)
+    {
+        this.pawn = pawn;
+    }
     public void ExposeData()
     {
+        Scribe_References.Look(ref pawn, "GAPawn");
+
         Scribe_Values.Look(ref sex, "GASex");
         Scribe_Values.Look(ref transvestigate, "GATransvestigate");
         Scribe_Values.Look(ref cameOut, "GACameOut");
+        Scribe_Values.Look(ref playedNotification, "GAPlayedNotification");
     }
 
     // public bool IsSuspiciousOfThem()
@@ -47,32 +62,28 @@ public static class TransKnowledgeManager
         {"isPositive", "False"}
     };
     
-    private static readonly Dictionary<Pawn, Dictionary<Pawn, TransKnowledge>> believedToBeTransgender = new Dictionary<Pawn, Dictionary<Pawn, TransKnowledge>>();
-
-    // public static void SetBelievedToBeTrans(Pawn pawn, List<Pawn> pawns)
-    // {
-    //     believedToBeTransgender.SetOrAdd(pawn, pawns);
-    // }
-    public static void SetTransKnowledges(this Pawn pawn, Dictionary<Pawn, TransKnowledge> knowledges)
+    private static readonly Dictionary<Pawn, List<TransKnowledgeTracker>> believedToBeTransgender = new();
+    
+    public static void SetTransKnowledges(this Pawn pawn, List<TransKnowledgeTracker> knowledges)
     {
         believedToBeTransgender[pawn] = knowledges;
     }
-    public static Dictionary<Pawn, TransKnowledge> GetModifiableKnownTransgenders(this Pawn pawn, bool cleanReferences)
+    public static List<TransKnowledgeTracker> GetModifiableTransgenderKnowledge(this Pawn pawn, bool cleanReferences, bool createIfMissing=true)
     {
         believedToBeTransgender.TryGetValue(pawn, out var pawns);
-        if (pawns == null)
+        if (pawns == null && createIfMissing)
         {
             pawns = new();
             believedToBeTransgender[pawn] = pawns;
         }
 
         if (cleanReferences)
-            pawns.RemoveAll(transPawn => transPawn.Key.Discarded);
+            pawns?.RemoveAll(tracker => tracker.Pawn.Discarded);
         return pawns;
     }
-    public static ReadOnlyDictionary<Pawn, TransKnowledge> GetKnownTransgenders(this Pawn pawn, bool cleanReferences)
+    public static ReadOnlyCollection<TransKnowledgeTracker> GetTransgenderKnowledges(this Pawn pawn, bool cleanReferences)
     {
-        return new ReadOnlyDictionary<Pawn, TransKnowledge>(GetModifiableKnownTransgenders(pawn, cleanReferences));
+        return GetModifiableTransgenderKnowledge(pawn, cleanReferences).AsReadOnly();
     }
     public static void OnKnowledgeLearned(Pawn pawn, Pawn otherPawn, LetterDef letter=null, string letterLabel=DEFAULT_LETTER_LABEL, List<RulePackDef> extraPacks=null, Dictionary<string, string> constants=null, List<Rule> rules=null)
     {
@@ -97,49 +108,53 @@ public static class TransKnowledgeManager
         var knowledge = pawn.GetKnowledgeOnPawn(otherPawn);
         if (!knowledge.BelievesTheyAreTrans())
             return;
-        
-        if (letter != null)
+
+        if (!knowledge.playedNotification)
         {
-            var request = new GrammarRequest();
-
-            if (constants == null)
-                constants = defaultConstants;
-            else
-                constants.AddRange(defaultConstants.Where(constant => !constants.ContainsKey(constant.Key)).ToDictionary(pair => pair.Key, pair => pair.Value));
-
-            var mainDef = GADefOf.Believes_Is_Trans;
-            var text = "";
-            
-            List<RulePackDef> rulePacks = new();
-            
-            rulePacks.Add(mainDef);
-            
-            if(extraPacks != null)
-                rulePacks.AddRange(extraPacks);
-            
-            rulePacks.Add(GADefOf.Found_Out_About_Gender_Identity);
-            if (GenderUtility.DoesChaserSeeTrans(pawn, otherPawn))
-                rulePacks.Add(GADefOf.Chaser_Found_Out);
-
-            foreach (var grammarPack in rulePacks)
+            knowledge.playedNotification = true;
+             if (letter != null)
             {
-                request.Clear();
-                request.Includes.Add(grammarPack);
-                if(rules != null)
-                    request.Rules.AddRange(rules);
-                request.Constants.AddRange(constants);
-                request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", pawn, request.Constants));
-                request.Rules.AddRange(GrammarUtility.RulesForPawn("RECIPIENT", otherPawn, request.Constants));
-                
-                text += (grammarPack == mainDef ? "" : "\n\n") +
-                                                      GrammarResolver.Resolve(
-                                                          grammarPack.FirstRuleKeyword, 
-                                                          request, "extraSentencePack", 
-                                                          false, 
-                                                          grammarPack.FirstUntranslatedRuleKeyword);   
-            }
+                var request = new GrammarRequest();
 
-            Find.LetterStack.ReceiveLetter(letterLabel.Translate(pawn.Named("INITIATOR"), otherPawn.Named("RECIPIENT")), text, letter, new LookTargets(pawn, otherPawn));
+                if (constants == null)
+                    constants = defaultConstants;
+                else
+                    constants.AddRange(defaultConstants.Where(constant => !constants.ContainsKey(constant.Key)).ToDictionary(pair => pair.Key, pair => pair.Value));
+
+                var mainDef = GADefOf.Believes_Is_Trans;
+                var text = "";
+                
+                List<RulePackDef> rulePacks = new();
+                
+                rulePacks.Add(mainDef);
+                
+                if(extraPacks != null)
+                    rulePacks.AddRange(extraPacks);
+                
+                rulePacks.Add(GADefOf.Found_Out_About_Gender_Identity);
+                if (GenderUtility.DoesChaserSeeTrans(pawn, otherPawn))
+                    rulePacks.Add(GADefOf.Chaser_Found_Out);
+
+                foreach (var grammarPack in rulePacks)
+                {
+                    request.Clear();
+                    request.Includes.Add(grammarPack);
+                    if(rules != null)
+                        request.Rules.AddRange(rules);
+                    request.Constants.AddRange(constants);
+                    request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", pawn, request.Constants));
+                    request.Rules.AddRange(GrammarUtility.RulesForPawn("RECIPIENT", otherPawn, request.Constants));
+                    
+                    text += (grammarPack == mainDef ? "" : "\n\n") +
+                                                          GrammarResolver.Resolve(
+                                                              grammarPack.FirstRuleKeyword, 
+                                                              request, "extraSentencePack", 
+                                                              false, 
+                                                              grammarPack.FirstUntranslatedRuleKeyword);   
+                }
+
+                Find.LetterStack.ReceiveLetter(letterLabel.Translate(pawn.Named("INITIATOR"), otherPawn.Named("RECIPIENT")), text, letter, new LookTargets(pawn, otherPawn));
+            }
         }
         
         if (constants == null || (!constants.ContainsKey("isPositive") || constants["isPositive"] == "False"))
@@ -171,16 +186,17 @@ public static class TransKnowledgeManager
     {
         return pawn.GetKnowledgeOnPawn(otherPawn).BelievesTheyAreTrans();
     }
-    public static TransKnowledge GetKnowledgeOnPawn(this Pawn pawn, Pawn otherPawn)
+    public static TransKnowledgeTracker GetKnowledgeOnPawn(this Pawn pawn, Pawn otherPawn)
     {
-        var dict = pawn.GetModifiableKnownTransgenders(false);
-        dict.TryGetValue(otherPawn, out var knowledge);
+        if(pawn == otherPawn)
+            throw new ArgumentException("Pawn cannot get trans knowledge on themselves.");
+        var list = pawn.GetModifiableTransgenderKnowledge(false);
+        var knowledge = list.Find(tracker => tracker.Pawn == otherPawn);
         if (knowledge == null)
         {
-            knowledge = new TransKnowledge();
-            dict.SetOrAdd(otherPawn, knowledge);
+            knowledge = new TransKnowledgeTracker(otherPawn);
+            list.Add(knowledge);
         }
-
         return knowledge;
     }
 

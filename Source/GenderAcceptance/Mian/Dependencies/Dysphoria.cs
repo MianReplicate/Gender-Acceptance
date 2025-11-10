@@ -32,8 +32,16 @@ public class Dysphoria : TransDependency
 
     public override CultureViewOnTrans CultureOpinionOnTrans(Pawn pawn)
     {
-        return (pawn.Ideo?.HasPrecept(Trans_Abhorrent) ?? false) || (pawn.Ideo?.HasPrecept(Trans_Disapproved) ?? false) ? CultureViewOnTrans.Despised : 
-            (pawn.Ideo?.HasPrecept(Trans_Approved) ?? false) || (pawn.Ideo?.HasPrecept(Trans_Exalted) ?? false) ? CultureViewOnTrans.Adored : CultureViewOnTrans.Neutral;
+        if ((pawn.Ideo?.HasPrecept(Trans_Abhorrent) ?? false))
+            return CultureViewOnTrans.Abhorrent;
+        if ((pawn.Ideo?.HasPrecept(Trans_Disapproved) ?? false))
+            return CultureViewOnTrans.Despised;
+        if ((pawn.Ideo?.HasPrecept(Trans_Approved) ?? false))
+            return CultureViewOnTrans.Adored;
+        if ((pawn.Ideo?.HasPrecept(Trans_Exalted) ?? false))
+            return CultureViewOnTrans.Exalted;
+
+        return CultureViewOnTrans.Neutral;
     }
 
     public override bool AppearsToHaveMatchingGenitalia(Pawn pawn)

@@ -33,5 +33,10 @@ namespace GenderAcceptance.Mian;
             {
                 Patches.Mod_Integration.SimpleTrans.Patch(harmony);
             }
+            
+            if (ModsConfig.IsActive("cammy.identity.gender"))
+            {
+                Patches.Mod_Integration.Dysphoria.Patch(harmony);
+            }
         }
     }

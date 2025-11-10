@@ -25,7 +25,6 @@ public static class MemoryThoughtHandler
             var sus = !otherPawn.AppearsToHaveMatchingGenitalia() || Rand.Chance(0.01f);
             if (!otherPawn.AppearsToHaveMatchingGenitalia())
             {
-                Helper.Log("mismatched genitalia!");
                 constants.Add("mismatchedGenitalia", "True");
             }
 

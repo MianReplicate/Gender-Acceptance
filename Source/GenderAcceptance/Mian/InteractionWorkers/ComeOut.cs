@@ -20,11 +20,20 @@ public class ComeOut : InteractionWorker
         var spouseRelation = initiator.relations.DirectRelationExists(PawnRelationDefOf.Spouse, recipient) ? 1.75f : 1f;
         var loversRelation = initiator.relations.DirectRelationExists(PawnRelationDefOf.Lover, recipient) ? 1.5f : 1f;
         var parentsRelation = initiator.relations.DirectRelationExists(PawnRelationDefOf.Parent, recipient) ? 1.25f : 1f;
-        var inTransphobicEnvironment = initiator.CultureOpinionOnTrans() == CultureViewOnTrans.Despised ? 0.05f : 
-                initiator.CultureOpinionOnTrans() == CultureViewOnTrans.Adored ? 1.75f : 1f;
+        var environment = 1f;
 
+        var cultureOpinion = initiator.CultureOpinionOnTrans();
+        if(cultureOpinion == CultureViewOnTrans.Despised)
+            environment = 0.05f;
+        else if(cultureOpinion == CultureViewOnTrans.Adored)
+            environment = 1.75f;
+        else if (cultureOpinion == CultureViewOnTrans.Exalted)
+            environment = 2.5f;
+        else if (cultureOpinion == CultureViewOnTrans.Abhorrent)
+            environment = 0.01f;
+        
         var opinion = Mathf.Clamp(initiator.relations.OpinionOf(recipient), 0, 100) / 100;
-        return opinion * spouseRelation * loversRelation * parentsRelation * inTransphobicEnvironment;
+        return opinion * spouseRelation * loversRelation * parentsRelation * environment;
     }
         
     public override void Interacted(
