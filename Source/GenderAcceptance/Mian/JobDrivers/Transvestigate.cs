@@ -13,7 +13,7 @@ public class Transvestigate : JobDriver
 {
     private const TargetIndex TargetInd = TargetIndex.A;
 
-    private Pawn Target => (Pawn) (Thing) this.pawn.CurJob.GetTarget(TargetIndex.A);
+    private Pawn Target => (Pawn)(Thing)this.pawn.CurJob.GetTarget(TargetIndex.A);
 
     public override bool TryMakePreToilReservations(bool errorOnFailed) => true;
 
@@ -32,31 +32,28 @@ public class Transvestigate : JobDriver
         //     wantCoverFromTarget = true
         // };
 
-        for (var i = 0; i < Rand.Range(2f, 4f); i++)
+
+        var found = true;
+        // var found = CastPositionFinder.TryFindCastPosition(request, out IntVec3 vec3);
+        if (found)
         {
-            var found = true;
-            // var found = CastPositionFinder.TryFindCastPosition(request, out IntVec3 vec3);
-            if (found)
-            {
-                yield return this.TransvestigatingSpreeDelayToil();
-                // var cell = Toils_Goto.GotoCell(vec3, PathEndMode.ClosestTouch);
-                // cell.socialMode = RandomSocialMode.Off;
-                // yield return cell;
-                // yield return Toils_Interpersonal.WaitToBeAbleToInteract(this.pawn);
-                Toil toil = Toils_Interpersonal.GotoInteractablePosition(TargetIndex.A);
-                toil.socialMode = RandomSocialMode.Off;
-                yield return toil;
-                yield return Toils_General.Wait(60);
-                yield return this.TransvestigateToil();
-            }
-            else
-            {
-                yield return Toils_General.Wait(30);
-            }   
+            yield return this.TransvestigatingSpreeDelayToil();
+            // var cell = Toils_Goto.GotoCell(vec3, PathEndMode.ClosestTouch);
+            // cell.socialMode = RandomSocialMode.Off;
+            // yield return cell;
+            // yield return Toils_Interpersonal.WaitToBeAbleToInteract(this.pawn);
+            Toil toil = Toils_Interpersonal.GotoInteractablePosition(TargetIndex.A);
+            toil.socialMode = RandomSocialMode.Off;
+            yield return toil;
+            yield return this.TransvestigateToil();
+        }
+        else
+        {
+            yield return Toils_General.Wait(30);
         }
     }
 
-    private Toil TransvestigateToil()
+private Toil TransvestigateToil()
     {
         return Toils_General.Do((Action) (() =>
         {

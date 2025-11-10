@@ -1,4 +1,5 @@
-﻿using GenderAcceptance.Mian.Dependencies;
+﻿using System.Linq;
+using GenderAcceptance.Mian.Dependencies;
 using GenderAcceptance.Mian.Needs;
 using HarmonyLib;
 using RimWorld;
@@ -7,7 +8,7 @@ using Verse;
 namespace GenderAcceptance.Mian.Patches;
 
 [HarmonyPatch(typeof(RimWorld.Pawn_InteractionsTracker))]
-public class Pawn_InteractionsTracker
+public static class Pawn_InteractionsTracker
 {
     [HarmonyPatch(nameof(RimWorld.Pawn_InteractionsTracker.TryInteractWith))]
     [HarmonyPostfix]
@@ -17,20 +18,17 @@ public class Pawn_InteractionsTracker
             return;
         if (GenderUtility.DoesChaserSeeTrans(___pawn, recipient))
             ((Chaser_Need) ___pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromInteraction();
-        ___pawn.AttemptTransvestigate(recipient, 0.01f, 0.05f);
-
         if (intDef == InteractionDefOf.Chitchat)
         {
-            var known = recipient.GetKnownTrannies(false);
-            var trannies = ___pawn.GetKnownTrannies(false);
-            trannies.RemoveWhere(pawn => known.Contains(pawn));
+            ___pawn.AttemptTransvestigate(recipient, 0.001f, 0.005f);
 
-            if (trannies.Any())
+            var transgenders = ___pawn.GetKnownTransgenders(false).ToList();
+            if (transgenders.Any())
             {
-                var randomCount = Rand.RangeInclusive(0, trannies.Count);
+                var randomCount = Rand.RangeInclusive(0, transgenders.Count);
                 for (int i = 0; i < randomCount; i++)
                 {
-                    var transphobic = ___pawn.GetTransphobicStatus(trannies[i]);
+                    var transphobic = ___pawn.GetTransphobicStatus(transgenders[i].Key);
                     var revealChance = 0.05f;
 
                     if (transphobic.GenerallyTransphobic)
@@ -49,9 +47,21 @@ public class Pawn_InteractionsTracker
                         if (___pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Adored)
                             revealChance *= 5f;
                     }
-                    
-                    if(Rand.Chance(revealChance))
-                        TransKnowledge.KnowledgeLearned(recipient, trannies[i], false);
+
+                    if (Rand.Chance(revealChance))
+                    {
+                        var initKnowledge = ___pawn.GetKnowledgeOnPawn(transgenders[i].Key);
+                        var recipientKnowledge = recipient.GetKnowledgeOnPawn(transgenders[i].Key);
+
+                        if (initKnowledge.cameOut)
+                            recipientKnowledge.cameOut = true;
+                        if (initKnowledge.transvestigate)
+                            recipientKnowledge.transvestigate = true;
+                        if (initKnowledge.sex)
+                            recipientKnowledge.sex = true;
+                        
+                        TransKnowledgeManager.OnKnowledgeLearned(recipient, transgenders[i].Key);
+                    }
                 }   
             }
         }

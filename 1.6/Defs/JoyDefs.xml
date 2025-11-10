@@ -3,7 +3,7 @@
     <JoyGiverDef>
         <defName>Transvestigate</defName>
         <giverClass>GenderAcceptance.Mian.JoyGivers.Transvestigate</giverClass>
-        <baseChance>5.0</baseChance>
+        <baseChance>0.05</baseChance>
         <jobDef>Transvestigate</jobDef>
         <joyKind>Social</joyKind>
     </JoyGiverDef>

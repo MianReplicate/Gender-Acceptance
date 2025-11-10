@@ -49,13 +49,7 @@ public class Dysphoria : TransDependency
     {
         var femStat = pawn.GetStatValue(DefOfDysphoria.FemStat);
         var mascStat = pawn.GetStatValue(DefOfDysphoria.MascStat);
-
-        var difference = femStat > mascStat ? femStat - mascStat : mascStat - femStat;
-
-        return difference / 20;
-        // if (difference < 25)
-        //     return Gendered.Androgynous;
-        //
-        // return femStat > mascStat ? Gendered.Feminine : Gendered.Masculine;
+        
+        return (mascStat - femStat) / 20 + base.GetGenderedPoints(pawn);
     }
 }

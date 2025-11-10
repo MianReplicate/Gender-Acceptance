@@ -2,14 +2,22 @@
 
 <Defs>
     <RulePackDef>
-        <defName>Suspicions_About_Trans</defName>
+        <defName>Believes_Is_Trans</defName>
         <rulePack>
             <rulesStrings>
-                <li>r_logentry->[INITIATOR_nameDef] suspects that [RECIPIENT_nameDef] may be transgender.\n\n[what_happened].\n\nThis led [INITIATOR_objective] to believe [RECIPIENT_nameDef] is transgender.</li>
+                <li>r_logentry->[INITIATOR_nameDef] believes that [RECIPIENT_nameDef] may be transgender.\n\n[what_happened].</li>
                 
-                <li>what_happened(didSex==false)->[random_event]</li>
-                <li>what_happened(didSex==false)->[INITIATOR_nameDef] used [INITIATOR_possessive] [AdjectiveAny] transvestigating psychic powers and [random_event]</li>
-                <li>what_happened(didSex==true)->During their lovin' session, [sex_event]</li>
+                <li>what_happened(didSex==false,cameOut==false)->[random_event]</li>
+                <li>what_happened(didSex==false,cameOut==false)->[INITIATOR_nameDef] used [INITIATOR_possessive] [AdjectiveAny] transvestigating psychic powers and [random_event]</li>
+                <li>what_happened(didSex==true,cameOut==false)->During their lovin' session, [sex_event]</li>
+                
+                <li>what_happened(cameOut==true)->[RECIPIENT_nameDef] came out to [INITIATOR_objective]. [comeOutPost]</li>
+                
+                <li>comeOutPost(isPositive=true)->[INITIATOR_nameDef] was rather respectful about it</li>
+                <li>comeOutPost(isPositive=true)->[INITIATOR_nameDef] listened and nodded along as [RECIPIENT_nameDef] spoke [RECIPIENT_possessive] true feelings</li>
+
+                <li>comeOutPost(isPositive=false)->[INITIATOR_nameDef] was shocked and enraged</li>
+                <li>comeOutPost(isPositive=false)->[INITIATOR_nameDef] felt a fit of rage run rampage inside [INITIATOR_objective]self</li>
                 
                 <li>start_sex_event->[INITIATOR_nameDef] thought that</li>
                 <li>start_sex_event->[INITIATOR_nameDef] noticed that</li>
@@ -40,15 +48,6 @@
                 
                 <li>appearance(hasAppearance==true)->[RECIPIENT_gendered]</li>
                 <li>appearance(hasAppearance==false)->suspicious</li>
-            </rulesStrings>
-        </rulePack>
-    </RulePackDef>
-    
-        <RulePackDef>
-        <defName>Learned_About_Trans</defName>
-        <rulePack>
-            <rulesStrings>
-                <li>r_logentry->[INITIATOR_nameDef] learned that [RECIPIENT_nameDef] is transgender.</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>
@@ -136,19 +135,6 @@
                 <li>enemyVerb->growling</li>
                 <li>enemyVerb->gritting</li>
                 <li>enemyVerb->fuming</li>
-            </rulesStrings>
-        </rulePack>
-    </RulePackDef>
-
-    <RulePackDef>
-        <defName>Coming_Out</defName>
-        <rulePack>
-            <rulesStrings>
-                <li>r_logentry(isPositive==true)->\n\n[INITIATOR_nameDef] was rather respectful about it.</li>
-                <li>r_logentry(isPositive==true)->\n\n[INITIATOR_nameDef] listened and nodded along as [RECIPIENT_nameDef] spoke [RECIPIENT_possessive] true feelings.</li>
-                
-                <li>r_logentry(isPositive==false)->\n\n[INITIATOR_nameDef] was shocked and enraged.</li>
-                <li>r_logentry(isPositive==false)->\n\n[INITIATOR_nameDef] felt a fit of rage run rampage inside [INITIATOR_objective]self.</li>
             </rulesStrings>
         </rulePack>
     </RulePackDef>

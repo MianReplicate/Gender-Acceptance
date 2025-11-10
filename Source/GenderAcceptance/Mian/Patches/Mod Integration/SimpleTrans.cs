@@ -36,7 +36,8 @@ public static class SimpleTrans
         foreach (var keyValuePair in totalPresence)
         {
             var pawn = keyValuePair.Key;
-            TransKnowledge.KnowledgeLearned(pawn, celebrant, true);
+            pawn.GetKnowledgeOnPawn(celebrant).cameOut = true;
+            TransKnowledgeManager.OnKnowledgeLearned(pawn, celebrant);
         }
     }
 }

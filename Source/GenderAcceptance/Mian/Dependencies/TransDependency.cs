@@ -11,7 +11,7 @@ public abstract class TransDependency : ITransDependency
     
     public virtual CultureViewOnTrans CultureOpinionOnTrans(Pawn pawn)
     {
-        return pawn.Ideo?.HasPrecept(GADefOf.Transgender_Despised) ?? false ? CultureViewOnTrans.Despised : pawn.Ideo?.HasPrecept(GADefOf.Transgender_Adored) ?? false ? CultureViewOnTrans.Adored : CultureViewOnTrans.Neutral;
+        return pawn.Ideo?.HasPrecept(IdeologyGADefOf.Transgender_Despised) ?? false ? CultureViewOnTrans.Despised : pawn.Ideo?.HasPrecept(IdeologyGADefOf.Transgender_Adored) ?? false ? CultureViewOnTrans.Adored : CultureViewOnTrans.Neutral;
     }
 
     public virtual float GetGenderedPoints(Pawn pawn)
@@ -46,11 +46,5 @@ public abstract class TransDependency : ITransDependency
         }
 
         return genderPoints;
-        // if (genderPoints > 1)
-        //     return Gendered.Masculine;
-        // if (genderPoints < -1)
-        //     return Gendered.Feminine;
-        //
-        // return Gendered.Androgynous;
     }
 }

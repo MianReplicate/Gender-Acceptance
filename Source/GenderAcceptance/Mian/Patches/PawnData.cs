@@ -1,22 +1,26 @@
-﻿using HarmonyLib;
+﻿using System.Linq;
+using HarmonyLib;
 using Verse;
 
 namespace GenderAcceptance.Mian.Patches;
 
 [HarmonyPatch(typeof(Verse.Pawn))]
-public class PawnData
+public static class PawnData
 {
     [HarmonyPatch(nameof(Verse.Pawn.ExposeData))]
     [HarmonyPostfix]
     public static void GetExtraData(ref Verse.Pawn __instance)
     {
-        var knownTrannies = __instance.GetKnownTrannies(Scribe.mode == LoadSaveMode.Saving);
-
-        Scribe_Collections.Look(ref knownTrannies, "GABelievedToBeTrannies", LookMode.Reference);
-
-        if (Scribe.mode != LoadSaveMode.Saving)
+        var knowntransgenders = __instance.GetModifiableKnownTransgenders(Scribe.mode == LoadSaveMode.Saving);
+        
+        if (knowntransgenders != null)
         {
-            TransKnowledge.SetBelievedToBeTrannies(__instance, knownTrannies);
+            Scribe_Collections.Look<Pawn, TransKnowledge>(ref knowntransgenders, "GABelievedToBeTransgenders", LookMode.Reference, LookMode.Deep);
+
+            if (Scribe.mode != LoadSaveMode.Saving)
+            {
+                __instance.SetTransKnowledges(knowntransgenders);
+            }   
         }
     }
 }

@@ -6,7 +6,7 @@ using Verse;
 namespace GenderAcceptance.Mian.Patches;
 
 [HarmonyPatch(typeof(RimWorld.Faction))]
-public class Faction
+public static class Faction
 {
     [HarmonyPatch(nameof(RimWorld.Faction.Notify_PawnJoined))]
     [HarmonyPostfix]

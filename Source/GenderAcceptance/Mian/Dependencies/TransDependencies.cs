@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using RimWorld;
 using Verse;
 
@@ -48,8 +49,9 @@ public static class TransDependencies
     /// </summary>
     public static ITransDependency TransLibrary;
     
-    private static Dictionary<string, Type> transLibraries = new()
+    private static readonly Dictionary<string, Type> TransLibraries = new()
     {
+        {"lovelydovey.sex.withrosaline:cammy.identity.gender", typeof(DysGenderWorks)},
         {"cammy.identity.gender", typeof(Dysphoria)},
         {"lovelydovey.sex.withrosaline", typeof(GenderWorks)},
         {"runaway.simpletrans", typeof(SimpleTrans)}
@@ -58,12 +60,19 @@ public static class TransDependencies
     public static void Setup()
     {
         var detectedPackages = new List<string>();
+        var packagedIDs = new List<string>();
         
-        foreach (var (id, libraryType) in transLibraries)
+        foreach (var (mainID, libraryType) in TransLibraries)
         {
-            if (ModsConfig.IsActive(id))
+            var allIDs = mainID.Split(":");
+
+            if (allIDs.ContainsAny(packagedIDs.Contains))
+                continue;
+            
+            if (allIDs.All(ModsConfig.IsActive))
             {
-                detectedPackages.Add(id);
+                detectedPackages.Add(mainID);
+                packagedIDs.AddRange(allIDs);
                 if (TransLibrary != null)
                     continue;
                 TransLibrary = (ITransDependency) Activator.CreateInstance(libraryType);
@@ -72,10 +81,12 @@ public static class TransDependencies
 
         if (detectedPackages.Count > 1)
         {
-            Helper.Error("You have multiple transgender mods! Please choose one to keep and remove the rest: " + detectedPackages.ToStringList(", "));
+            Helper.Error("You have multiple transgender mods! Please choose one to keep and remove the rest: " + string.Join(", ", detectedPackages));
         } else if (detectedPackages.Empty())
         {
-            Helper.Error("You have none of the transgender mods required downloaded! Please choose one to download: " + transLibraries.Keys.ToStringList(", "));
+            Helper.Error("You have none of the transgender mods required downloaded! Please choose one to download: " + string.Join(", ", TransLibraries.Keys));
         }
+        
+        Helper.Log("Applying library: " + TransLibrary.GetType().Name);
     }
 }

@@ -5,7 +5,7 @@ using Verse;
 namespace GenderAcceptance.Mian.Patches;
 
 [HarmonyPatch(typeof(RimWorld.LovePartnerRelationUtility))]
-public class LovePartnerRelationUtility
+public static class LovePartnerRelationUtility
 {
      [HarmonyPatch(typeof(RimWorld.LovePartnerRelationUtility), nameof(RimWorld.LovePartnerRelationUtility.LovePartnerRelationGenerationChance))]
      [HarmonyPostfix]

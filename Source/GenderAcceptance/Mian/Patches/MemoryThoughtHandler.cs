@@ -12,7 +12,7 @@ public static class MemoryThoughtHandler
 {
     [HarmonyPatch(nameof(RimWorld.MemoryThoughtHandler.TryGainMemory), [typeof(Thought_Memory), typeof(Pawn)])]
     [HarmonyPostfix]
-    public static void PersonAndTransFucked(RimWorld.MemoryThoughtHandler __instance, Thought_Memory newThought, Pawn otherPawn)
+    public static void LovinThoughtApplied(RimWorld.MemoryThoughtHandler __instance, Thought_Memory newThought, Pawn otherPawn)
     {
         // this is like the universal sex thought
         if (newThought.def == ThoughtDefOf.GotSomeLovin)
@@ -22,14 +22,21 @@ public static class MemoryThoughtHandler
                 {
                     { "didSex", "True" },
                 };
-            bool sus = !otherPawn.AppearsToHaveMatchingGenitalia() || Rand.Chance(0.01f);
+            var sus = !otherPawn.AppearsToHaveMatchingGenitalia() || Rand.Chance(0.01f);
             if (!otherPawn.AppearsToHaveMatchingGenitalia())
+            {
+                Helper.Log("mismatched genitalia!");
                 constants.Add("mismatchedGenitalia", "True");
-            
-            if(sus)
-                TransKnowledge.KnowledgeLearned(__instance.pawn, otherPawn, false, LetterDefOf.NeutralEvent, constants: constants);
+            }
 
-            if (GenderUtility.DoesChaserSeeTrans(__instance.pawn, otherPawn))
+            if (sus)
+            {
+                __instance.pawn.GetKnowledgeOnPawn(otherPawn).sex = true;
+                TransKnowledgeManager.OnKnowledgeLearned(__instance.pawn, otherPawn, LetterDefOf.NeutralEvent,
+                    constants: constants);
+            }
+
+        if (GenderUtility.DoesChaserSeeTrans(__instance.pawn, otherPawn))
             {
                 ((Chaser_Need) __instance.pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromSex();
                 otherPawn.needs?.mood?.thoughts?.memories?.TryGainMemory(GADefOf.Dehumanized, __instance.pawn);   

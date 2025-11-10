@@ -9,7 +9,7 @@ using Verse;
 namespace GenderAcceptance.Mian.Patches;
 
 [HarmonyPatch(typeof(RimWorld.InteractionWorker_RomanceAttempt))]
-public class InteractionWorker_RomanceAttempt
+public static class InteractionWorker_RomanceAttempt
 {
     //Adds a chaser factor to the romance success chance tooltip
     [HarmonyPatch(nameof(RimWorld.InteractionWorker_RomanceAttempt.RomanceFactors))]

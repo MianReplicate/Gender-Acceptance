@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Mian\BodyTypeGenderedDef.cs" />
     <Compile Include="Mian\Dependencies\CultureViewOnTrans.cs" />
+    <Compile Include="Mian\Dependencies\DysGenderWorks.cs" />
     <Compile Include="Mian\Dependencies\Dysphoria.cs" />
     <Compile Include="Mian\Dependencies\GenderWorks.cs" />
     <Compile Include="Mian\Dependencies\SimpleTrans.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Mian\MentalStates\Transvestigate.cs" />
     <Compile Include="Mian\Needs\Chaser_Need.cs" />
     <Compile Include="Mian\Patches\Faction.cs" />
+    <Compile Include="Mian\Patches\GenderUtilityPatch.cs" />
     <Compile Include="Mian\Patches\GrammarUtilityPatch.cs" />
     <Compile Include="Mian\Patches\InteractionWorker_RomanceAttempt.cs" />
     <Compile Include="Mian\Patches\LovePartnerRelationUtility.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Mian\Patches\Mod Integration\SimpleTrans.cs" />
     <Compile Include="Mian\Patches\Mod Integration\WayBetterRomance.cs" />
     <Compile Include="Mian\Patches\PawnData.cs" />
+    <Compile Include="Mian\Patches\PawnPatch.cs" />
     <Compile Include="Mian\Patches\Pawn_InteractionsTracker.cs" />
     <Compile Include="Mian\Patches\Pawn_RelationsTracker.cs" />
     <Compile Include="Mian\ThoughtWorkers\Chaser_Need.cs" />
@@ -109,7 +112,7 @@
     <Compile Include="Mian\ThoughtWorkers\PreceptTransgender.cs" />
     <Compile Include="Mian\ThoughtWorkers\Similarity.cs" />
     <Compile Include="Mian\TransphobicStatus.cs" />
-    <Compile Include="Mian\TransKnowledge.cs" />
+    <Compile Include="Mian\TransKnowledgeManager.cs" />
     <Compile Include="Mian\Utilities\GenderUtility.cs" />
     <Compile Include="Mian\Utilities\Helper.cs" />
     <Compile Include="Mian\Utilities\TransvestigateUtility.cs" />

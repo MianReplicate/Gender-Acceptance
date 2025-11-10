@@ -3,6 +3,20 @@ using Verse;
 
 namespace GenderAcceptance.Mian;
 
+public static class IdeologyGADefOf
+{
+    public static PreceptDef Transgender_Despised;
+    public static PreceptDef Transgender_Adored;
+
+    public static void Init()
+    {
+        if (!ModsConfig.IsActive("cammy.identity.gender")){
+            Transgender_Despised = DefDatabase<PreceptDef>.GetNamed("Transgender_Despised");
+            Transgender_Adored = DefDatabase<PreceptDef>.GetNamed("Transgender_Adored");
+        }
+    }
+}
+
 [DefOf]
 public static class GADefOf
 {
@@ -12,10 +26,7 @@ public static class GADefOf
 
     public static NeedDef Chaser_Need;
 
-    [MayRequireIdeology] public static PreceptDef Transgender_Despised;
-    [MayRequireIdeology] public static PreceptDef Transgender_Adored;
-
-    public static RulePackDef Learned_About_Trans;
+    public static RulePackDef Believes_Is_Trans;
     public static RulePackDef Suspicions_About_Trans;
     public static RulePackDef Chaser_Found_Out;
     public static RulePackDef Found_Out_About_Gender_Identity;
@@ -44,8 +55,6 @@ public static class GADefOf
     static GADefOf()
     {
         DefOfHelper.EnsureInitializedInCtor(typeof(GADefOf));
-
-        if (!ModsConfig.IsActive("cammy.identity.gender"))
-            Transgender_Despised = DefDatabase<PreceptDef>.GetNamed("Transgender_Despised");
+        IdeologyGADefOf.Init();
     }
 }

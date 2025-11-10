@@ -14,7 +14,7 @@ public class ComeOut : InteractionWorker
     {
         if (initiator.GetCurrentIdentity() == GenderIdentity.Cisgender)
             return 0f;
-        if (recipient.BelievesIsTrans(initiator))
+        if (recipient.GetKnowledgeOnPawn(initiator).cameOut)
             return 0f;
         
         var spouseRelation = initiator.relations.DirectRelationExists(PawnRelationDefOf.Spouse, recipient) ? 1.75f : 1f;
@@ -50,22 +50,23 @@ public class ComeOut : InteractionWorker
         var isPositive = !isNegative;
         var constants = new Dictionary<string, string>()
         {
-            {"isPositive", isPositive.ToString()}
+            {"isPositive", isPositive.ToString()},
+            {"cameOut", "True"}
         };
 
-        var packs = new List<RulePackDef>()
-        {
-            GADefOf.Coming_Out
-        };
-        
-        TransKnowledge.KnowledgeLearned(
+        // var packs = new List<RulePackDef>()
+        // {
+        //     GADefOf.Coming_Out
+        // };
+
+        recipient.GetKnowledgeOnPawn(initiator).cameOut = true;
+        TransKnowledgeManager.OnKnowledgeLearned(
             recipient, 
-            initiator, 
-            true, 
+            initiator,
             isPositive ? LetterDefOf.PositiveEvent : LetterDefOf.NeutralEvent, 
             "GA.ComeOutLabel",
-            packs,
-            constants);
+            // packs,
+            constants: constants);
         
         initiator.needs.mood.thoughts.memories.TryGainMemory(isPositive ? GADefOf.CameOutPositive : GADefOf.CameOutNegative, recipient);
         

@@ -32,7 +32,7 @@
             <li>Cisphobic</li>
         </nullifyingTraits>
         <nullifyingHediffs>
-            <li>Transgender</li>
+            <li MayRequire="runaway.simpletrans">Transgender</li>
         </nullifyingHediffs>
     </ThoughtDef>
 
