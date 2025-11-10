@@ -14,12 +14,9 @@ public class VersionTracker : GameComponent
         
     }
 
-    public override void StartedNewGame()
-    {
-        lastLaunchedVersion = Constants.Version;
-    }
-    
-    public override void GameComponentTick()
+    public override void StartedNewGame() => lastLaunchedVersion = Constants.Version;
+
+    public override void LoadedGame()
     {
         if (!lastLaunchedVersion.Equals(Constants.Version))
         {
