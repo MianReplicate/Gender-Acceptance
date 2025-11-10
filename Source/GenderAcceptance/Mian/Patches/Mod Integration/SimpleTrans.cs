@@ -38,6 +38,8 @@ public static class SimpleTrans
         foreach (var keyValuePair in totalPresence)
         {
             var pawn = keyValuePair.Key;
+            if (pawn == celebrant)
+                continue;
             pawn.GetKnowledgeOnPawn(celebrant).cameOut = true;
             TransKnowledgeManager.OnKnowledgeLearned(pawn, celebrant);
         }

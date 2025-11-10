@@ -78,6 +78,7 @@
     <Compile Include="Mian\Dependencies\TransDependencies.cs" />
     <Compile Include="Mian\Dependencies\TransDependency.cs" />
     <Compile Include="Mian\GADefOf.cs" />
+    <Compile Include="Mian\GameComps\VersionTracker.cs" />
     <Compile Include="Mian\GenderAcceptance.cs" />
     <Compile Include="Mian\Gendered.cs" />
     <Compile Include="Mian\GenderIdentity.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Mian\ThoughtWorkers\Similarity.cs" />
     <Compile Include="Mian\TransphobicStatus.cs" />
     <Compile Include="Mian\TransKnowledgeManager.cs" />
+    <Compile Include="Mian\Utilities\Constants.cs" />
     <Compile Include="Mian\Utilities\GenderUtility.cs" />
     <Compile Include="Mian\Utilities\Helper.cs" />
     <Compile Include="Mian\Utilities\TransvestigateUtility.cs" />

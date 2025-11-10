@@ -10,6 +10,8 @@ public class IsTransgenderNegative : ThoughtWorker
     {
         if (ModsConfig.IsActive("cammy.identity.gender"))
             return ThoughtState.Inactive;
+        if (pawn == otherPawn)
+            return ThoughtState.Inactive;
 
         if (pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Despised && pawn.BelievesIsTrans(otherPawn))
             return ThoughtState.ActiveAtStage(0);

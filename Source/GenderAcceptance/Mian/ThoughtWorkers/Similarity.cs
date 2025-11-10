@@ -7,6 +7,8 @@ public class Similarity : ThoughtWorker
 {
     protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
     {
+        if (p == otherPawn)
+            return ThoughtState.Inactive;
         if (p.GetCurrentIdentity() == GenderIdentity.Transgender && p.BelievesIsTrans(otherPawn))
             return ThoughtState.ActiveAtStage(0);
         return ThoughtState.Inactive;

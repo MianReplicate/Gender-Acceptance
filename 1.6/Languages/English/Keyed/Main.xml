@@ -17,4 +17,8 @@
 
   <GA.ModName>Topic of Gender</GA.ModName>
   <GA.EnableLoggingExplanation>Enable developer logging</GA.EnableLoggingExplanation>
+  
+  <GA.VersionUpdate>URGENT FROM TOPIC OF GENDER! PLEASE READ</GA.VersionUpdate>
+  <GA.VersionUpdateMain>Hi! Sorry for the interruption, but Topic of Gender has gotten a big update since the last time you've played.\n\nIf this is a new save, carry on, otherwise please continue reading.\n\nTopic of Gender has gotten a massive refactor which can affect the balance of your current saves.\n\nOne of these big chances are, people no longer know who is transgender unless they come out or are suspicious.\n\nIf you would like to know more, please go to the mod description for the full changelog.</GA.VersionUpdateMain>
+
 </LanguageData>

@@ -17,7 +17,7 @@ public static class Faction
         {
             if (pawn.Faction != __instance)
                 continue;
-            if (p.BelievesIsTrans(joinerPawn))
+            if (pawn.BelievesIsTrans(joinerPawn))
             {
                 var transphobic = pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false;
                 if (!transphobic && pawn.GetCurrentIdentity() != GenderIdentity.Transgender)
