@@ -32,6 +32,6 @@ public class VersionTracker : GameComponent
         base.ExposeData();
         Scribe_Values.Look(ref lastLaunchedVersion, "lastLaunchedVersion", "0.0");
         if (Scribe.mode == LoadSaveMode.LoadingVars)
-            Helper.Debug("Last loaded version: " + lastLaunchedVersion);
+            Helper.Log("Last loaded TOG version: " + lastLaunchedVersion);
     }
 }
