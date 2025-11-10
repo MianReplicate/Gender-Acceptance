@@ -18,9 +18,17 @@ public static class Pawn_InteractionsTracker
             return;
         if (GenderUtility.DoesChaserSeeTrans(___pawn, recipient))
             ((Chaser_Need)___pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromInteraction();
-        if (intDef == InteractionDefOf.Chitchat)
+
+        var smallTalk = DefDatabase<InteractionDef>.GetNamedSilentFail("Rimpsyche_Smalltalk");
+        var conversation = DefDatabase<InteractionDef>.GetNamedSilentFail("Rimpsyche_Conversation");
+        var chitchat = InteractionDefOf.Chitchat;
+        
+        
+        if (intDef == smallTalk || intDef == conversation || intDef == chitchat)
         {
-            ___pawn.AttemptTransvestigate(recipient, 0.001f, 0.005f);
+            var multiplier = intDef == conversation ? 2f : 1f;
+            
+            ___pawn.AttemptTransvestigate(recipient, 0.001f * multiplier, 0.005f * multiplier);
 
             var transgenders = ___pawn.GetTransgenderKnowledges(false)
                 .Where(knowledge => knowledge.BelievesTheyAreTrans() && knowledge.Pawn != recipient).ToList();
@@ -30,7 +38,7 @@ public static class Pawn_InteractionsTracker
                 for (var i = 0; i < randomCount; i++)
                 {
                     var transphobic = ___pawn.GetTransphobicStatus(transgenders[i].Pawn);
-                    var revealChance = 0.05f;
+                    var revealChance = 0.05f * multiplier;
 
                     if (transphobic.GenerallyTransphobic)
                     {
