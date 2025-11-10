@@ -13,13 +13,20 @@ public class BodyTypeGenderedDef : Def
 
     public override IEnumerable<string> ConfigErrors()
     {
-        foreach (string configError in base.ConfigErrors())
+        foreach (var configError in base.ConfigErrors())
             yield return configError;
         if (bodyType == null)
             yield return "no body type def set";
     }
 
-    public static BodyTypeGenderedDef FromBodyType(BodyTypeDef bodyType) => DefDatabase<BodyTypeGenderedDef>.AllDefs
-        .Where(def => def.bodyType == bodyType).FirstOrFallback();
-    public static BodyTypeGenderedDef Named(string defName) => DefDatabase<BodyTypeGenderedDef>.GetNamed(defName);
+    public static BodyTypeGenderedDef FromBodyType(BodyTypeDef bodyType)
+    {
+        return DefDatabase<BodyTypeGenderedDef>.AllDefs
+            .Where(def => def.bodyType == bodyType).FirstOrFallback();
+    }
+
+    public static BodyTypeGenderedDef Named(string defName)
+    {
+        return DefDatabase<BodyTypeGenderedDef>.GetNamed(defName);
+    }
 }

@@ -1,6 +1,5 @@
 ﻿using HarmonyLib;
 using RimWorld;
-using Simple_Trans;
 using Verse;
 
 namespace GenderAcceptance.Mian.Patches;
@@ -23,7 +22,10 @@ public static class Faction
                 var transphobic = pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false;
                 if (!transphobic && pawn.GetCurrentIdentity() != GenderIdentity.Transgender)
                     continue;
-                pawn.needs.mood.thoughts.memories.TryGainMemory(transphobic ? GADefOf.Transgender_Person_Joined_Negative : GADefOf.Transgender_Person_Joined_Positive, joinerPawn);
+                pawn.needs.mood.thoughts.memories.TryGainMemory(
+                    transphobic
+                        ? GADefOf.Transgender_Person_Joined_Negative
+                        : GADefOf.Transgender_Person_Joined_Positive, joinerPawn);
             }
             else
             {

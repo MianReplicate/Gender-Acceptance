@@ -10,7 +10,7 @@ public static class Dysphoria
     public static void Patch(Harmony harmony)
     {
         harmony.Patch(AccessTools.Method(typeof(ThoughtWorker_Precept_IsTrans_Social), "ShouldHaveThought"),
-            prefix: typeof(Dysphoria).GetMethod(nameof(ReplaceIsTransSocial)));
+            typeof(Dysphoria).GetMethod(nameof(ReplaceIsTransSocial)));
     }
 
     public static bool ReplaceIsTransSocial(Pawn p, Pawn otherPawn, ref ThoughtState __result)

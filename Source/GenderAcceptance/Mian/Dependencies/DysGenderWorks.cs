@@ -12,8 +12,10 @@ public class DysGenderWorks : Dysphoria
         var breasts = DefOfDysphoria.Breasts;
         var noBreasts = DefOfDysphoria.NoBreasts;
         var hediffs = pawn.health.hediffSet;
-        
-        return (pawn.GetGenderedAppearance() == Gendered.Feminine && GenderUtilities.HasFemaleReproductiveOrgan(pawn) && hediffs.HasHediff(breasts))
-               || (pawn.GetGenderedAppearance() == Gendered.Masculine && GenderUtilities.HasMaleReproductiveOrgan(pawn) && hediffs.HasHediff(noBreasts));
+
+        return (pawn.GetGenderedAppearance() == Gendered.Feminine && GenderUtilities.HasFemaleReproductiveOrgan(pawn) &&
+                hediffs.HasHediff(breasts))
+               || (pawn.GetGenderedAppearance() == Gendered.Masculine &&
+                   GenderUtilities.HasMaleReproductiveOrgan(pawn) && hediffs.HasHediff(noBreasts));
     }
 }

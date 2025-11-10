@@ -12,8 +12,6 @@ public static class GenderUtilityPatch
     public static void AddAppearance(Pawn pawn, ref string __result)
     {
         if (pawn?.RaceProps?.Humanlike ?? false)
-        {
             __result = pawn.GetGenderedAppearance().GetGenderNoun() + " " + __result;
-        }
     }
 }

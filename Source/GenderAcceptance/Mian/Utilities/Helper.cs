@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using RimWorld;
-using UnityEngine;
-using Verse;
-
-namespace GenderAcceptance.Mian;
+﻿namespace GenderAcceptance.Mian;
 
 public static class Helper
 {
@@ -11,9 +6,10 @@ public static class Helper
     {
         Verse.Log.Message("[Topic of Gender] " + text);
     }
+
     public static void Debug(string text)
     {
-        if(GASettings.Instance.enableLogging)
+        if (GASettings.Instance.enableLogging)
             Verse.Log.Message("[Topic of Gender] " + text);
     }
 

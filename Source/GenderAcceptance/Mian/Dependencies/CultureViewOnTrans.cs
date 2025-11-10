@@ -6,5 +6,5 @@ public enum CultureViewOnTrans
     Adored,
     Neutral,
     Abhorrent, // additional optional levels
-    Exalted,
+    Exalted
 }

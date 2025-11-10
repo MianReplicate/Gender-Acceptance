@@ -10,7 +10,8 @@ public static class IdeologyGADefOf
 
     public static void Init()
     {
-        if (!ModsConfig.IsActive("cammy.identity.gender")){
+        if (!ModsConfig.IsActive("cammy.identity.gender"))
+        {
             Transgender_Despised = DefDatabase<PreceptDef>.GetNamed("Transgender_Despised");
             Transgender_Adored = DefDatabase<PreceptDef>.GetNamed("Transgender_Adored");
         }
@@ -40,10 +41,10 @@ public static class GADefOf
     public static ThoughtDef Cisgender_Person_Joined;
     public static ThoughtDef Cisphobia;
     public static ThoughtDef Transphobia;
-        
+
     public static ThoughtDef Similar;
     public static ThoughtDef Chaser_Need_Thought;
-    
+
     public static ThoughtDef Accidental_Misgender;
 
     public static ThoughtDef Dehumanized;

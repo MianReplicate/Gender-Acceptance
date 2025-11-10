@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using RimWorld;
-using Simple_Trans;
 using Verse;
 
 namespace GenderAcceptance.Mian.InteractionWorkers;
@@ -9,13 +8,10 @@ public class Misgender : InteractionWorker
 {
     public override float RandomSelectionWeight(Pawn initiator, Pawn recipient)
     {
-        if (initiator.BelievesIsTrans(recipient))
-        {
-            return 0.05f;
-        }
+        if (initiator.BelievesIsTrans(recipient)) return 0.05f;
         return 0.005f;
     }
-        
+
     public override void Interacted(
         Pawn initiator,
         Pawn recipient,
@@ -25,10 +21,10 @@ public class Misgender : InteractionWorker
         out LetterDef letterDef,
         out LookTargets lookTargets)
     {
-        letterText = (string) null;
-        letterLabel = (string) null;
-        letterDef = (LetterDef) null;
-        lookTargets = (LookTargets) null;
+        letterText = null;
+        letterLabel = null;
+        letterDef = null;
+        lookTargets = null;
 
         if (!initiator.GetTransphobicStatus().GenerallyTransphobic)
         {

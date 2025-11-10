@@ -7,109 +7,113 @@ namespace GenderAcceptance.Mian.Needs;
 
 public enum ChaserCategory : byte
 {
-  Inactive,
-  JustHadIntimacy,
-  Neutral,
-  LongWhile,
-  ExtremelyLongWhile,
-  Aching,
+    Inactive,
+    JustHadIntimacy,
+    Neutral,
+    LongWhile,
+    ExtremelyLongWhile,
+    Aching
 }
 
 public class Chaser_Need : Need
 {
-      private static readonly float[] Thresholds = new float[4]
-  {
-    0.8f,
-    0.5f,
-    0.25f,
-    0.1f
-  };
-
-  public override bool ShowOnNeedList => !this.Disabled;
-
-  public override int GUIChangeArrow => this.IsFrozen ? 0 : !this.GainingNeed ? -1 : 1;
-  private bool GainingNeed => Find.TickManager.TicksGame < this.lastGainTick + 15;
-
-  private int lastGainTick = -999;
-  public ChaserCategory CurCategory
-  {
-    get
+    private static readonly float[] Thresholds = new float[4]
     {
-      if (Disabled)
-        return ChaserCategory.Inactive;
-      if ((double) this.CurLevel > (double) Chaser_Need.Thresholds[0])
-        return ChaserCategory.JustHadIntimacy;
-      if ((double) this.CurLevel > (double) Chaser_Need.Thresholds[1])
-        return ChaserCategory.Neutral;
-      if ((double) this.CurLevel > (double) Chaser_Need.Thresholds[2])
-        return ChaserCategory.LongWhile;
-      if ((double) this.CurLevel > (double) Chaser_Need.Thresholds[3])
-        return ChaserCategory.ExtremelyLongWhile;
-      return  ChaserCategory.Aching;
-    }
-  }
-  
-  private float FallPerInterval
-  {
-    get
+        0.8f,
+        0.5f,
+        0.25f,
+        0.1f
+    };
+
+    private int lastGainTick = -999;
+
+    public Chaser_Need(Pawn pawn)
+        : base(pawn)
     {
-      switch (this.CurCategory)
-      {
-        case ChaserCategory.Aching:
-          return 0.0001f;
-        case ChaserCategory.ExtremelyLongWhile:
-          return 0.0003f;
-        case ChaserCategory.LongWhile:
-          return 0.0006f;
-        case ChaserCategory.Neutral:
-          return 0.00105f;
-        case ChaserCategory.JustHadIntimacy:
-          return 0.0015f;
-        default:
-          throw new InvalidOperationException();
-      }
+        threshPercents = new List<float>(Thresholds);
     }
-  }
 
-  private bool Disabled => this.pawn.Dead || (!this.pawn.story?.traits?.HasTrait(GADefOf.Chaser) ?? false);
+    public override bool ShowOnNeedList => !Disabled;
 
-  public Chaser_Need(Pawn pawn)
-    : base(pawn)
-  {
-    this.threshPercents = new List<float>((IEnumerable<float>) Chaser_Need.Thresholds);
-  }
+    public override int GUIChangeArrow => IsFrozen ? 0 : !GainingNeed ? -1 : 1;
+    private bool GainingNeed => Find.TickManager.TicksGame < lastGainTick + 15;
 
-  public override void SetInitialLevel() => this.CurLevel = Rand.Range(0.7f, 1f);
-  
-  private void GainNeed(float amount)
-  {
-    if ((double) amount <= 0.0 || this.curLevelInt >= 1)
-      return;
-    this.curLevelInt += amount;
-    this.lastGainTick = Find.TickManager.TicksGame;
-  }
-
-  public void GainNeedFromInteraction()
-  {
-    GainNeed(Rand.Range(0.1f, 0.15f));
-  }
-
-  public void GainNeedFromSex()
-  {
-    GainNeed(Rand.Range(1f, 1.5f));
-  }
-
-  public override void NeedInterval()
-  {
-    if (this.Disabled)
+    public ChaserCategory CurCategory
     {
-      this.CurLevel = 1f;
+        get
+        {
+            if (Disabled)
+                return ChaserCategory.Inactive;
+            if (CurLevel > (double)Thresholds[0])
+                return ChaserCategory.JustHadIntimacy;
+            if (CurLevel > (double)Thresholds[1])
+                return ChaserCategory.Neutral;
+            if (CurLevel > (double)Thresholds[2])
+                return ChaserCategory.LongWhile;
+            if (CurLevel > (double)Thresholds[3])
+                return ChaserCategory.ExtremelyLongWhile;
+            return ChaserCategory.Aching;
+        }
     }
-    else
+
+    private float FallPerInterval
     {
-      if (this.IsFrozen)
-        return;
-      this.CurLevel -= this.FallPerInterval;
+        get
+        {
+            switch (CurCategory)
+            {
+                case ChaserCategory.Aching:
+                    return 0.0001f;
+                case ChaserCategory.ExtremelyLongWhile:
+                    return 0.0003f;
+                case ChaserCategory.LongWhile:
+                    return 0.0006f;
+                case ChaserCategory.Neutral:
+                    return 0.00105f;
+                case ChaserCategory.JustHadIntimacy:
+                    return 0.0015f;
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
     }
-  }
+
+    private bool Disabled => pawn.Dead || (!pawn.story?.traits?.HasTrait(GADefOf.Chaser) ?? false);
+
+    public override void SetInitialLevel()
+    {
+        CurLevel = Rand.Range(0.7f, 1f);
+    }
+
+    private void GainNeed(float amount)
+    {
+        if (amount <= 0.0 || curLevelInt >= 1)
+            return;
+        curLevelInt += amount;
+        lastGainTick = Find.TickManager.TicksGame;
+    }
+
+    public void GainNeedFromInteraction()
+    {
+        GainNeed(Rand.Range(0.1f, 0.15f));
+    }
+
+    public void GainNeedFromSex()
+    {
+        GainNeed(Rand.Range(1f, 1.5f));
+    }
+
+    public override void NeedInterval()
+    {
+        if (Disabled)
+        {
+            CurLevel = 1f;
+        }
+        else
+        {
+            if (IsFrozen)
+                return;
+            CurLevel -= FallPerInterval;
+        }
+    }
 }

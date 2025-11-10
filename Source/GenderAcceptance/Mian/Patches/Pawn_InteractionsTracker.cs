@@ -17,16 +17,17 @@ public static class Pawn_InteractionsTracker
         if (!__result || !recipient.RaceProps.Humanlike)
             return;
         if (GenderUtility.DoesChaserSeeTrans(___pawn, recipient))
-            ((Chaser_Need) ___pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromInteraction();
+            ((Chaser_Need)___pawn.needs?.TryGetNeed(GADefOf.Chaser_Need))?.GainNeedFromInteraction();
         if (intDef == InteractionDefOf.Chitchat)
         {
             ___pawn.AttemptTransvestigate(recipient, 0.001f, 0.005f);
 
-            var transgenders = ___pawn.GetTransgenderKnowledges(false).Where(knowledge => knowledge.BelievesTheyAreTrans() && knowledge.Pawn != recipient).ToList();
+            var transgenders = ___pawn.GetTransgenderKnowledges(false)
+                .Where(knowledge => knowledge.BelievesTheyAreTrans() && knowledge.Pawn != recipient).ToList();
             if (transgenders.Any())
             {
                 var randomCount = Rand.RangeInclusive(0, transgenders.Count);
-                for (int i = 0; i < randomCount; i++)
+                for (var i = 0; i < randomCount; i++)
                 {
                     var transphobic = ___pawn.GetTransphobicStatus(transgenders[i].Pawn);
                     var revealChance = 0.05f;
@@ -34,7 +35,7 @@ public static class Pawn_InteractionsTracker
                     if (transphobic.GenerallyTransphobic)
                     {
                         revealChance *= 1.25f;
-                        
+
                         if (transphobic.ChaserAttributeCounts)
                             revealChance *= 0.5f;
                         if (transphobic.HasTransphobicTrait)
@@ -64,15 +65,16 @@ public static class Pawn_InteractionsTracker
                         {
                             recipientKnowledge.playedNotification = true;
                             var message = new Message(
-                                "GA.FoundOutThroughChat".Translate(___pawn.Named("TELLER"), recipient.Named("RECEIVER"), transgenders[i].Pawn.Named("GOSSIPED")),
+                                "GA.FoundOutThroughChat".Translate(___pawn.Named("TELLER"), recipient.Named("RECEIVER"),
+                                    transgenders[i].Pawn.Named("GOSSIPED")),
                                 MessageTypeDefOf.NeutralEvent,
                                 new LookTargets(___pawn, recipient, transgenders[i].Pawn));
-                            Messages.Message(message);   
+                            Messages.Message(message);
                         }
-                        
+
                         TransKnowledgeManager.OnKnowledgeLearned(recipient, transgenders[i].Pawn);
                     }
-                }   
+                }
             }
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using GenderAcceptance.Mian.Dependencies;
 using RimWorld;
 using Verse;
 
@@ -16,11 +15,11 @@ public class Transvestigate : InteractionWorker
         out LetterDef letterDef,
         out LookTargets lookTargets)
     {
-        letterText = (string) null;
+        letterText = null;
         letterLabel = null;
         letterDef = null;
-        lookTargets = (LookTargets) null;
-        
+        lookTargets = null;
+
         initiator.AttemptTransvestigate(recipient);
     }
 }

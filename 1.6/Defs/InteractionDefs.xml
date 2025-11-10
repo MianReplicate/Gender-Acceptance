@@ -35,7 +35,7 @@
     
     <InteractionDef>
         <defName>PurposeMisgender</defName>
-        <label>purposemisgender</label>
+        <label>purposeful misgender</label>
         <workerClass>GenderAcceptance.Mian.InteractionWorkers.PurposeMisgender</workerClass>
         <symbol>Things/Mote/SpeechSymbols/Insult</symbol>
         

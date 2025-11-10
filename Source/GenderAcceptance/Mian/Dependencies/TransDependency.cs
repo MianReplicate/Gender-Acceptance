@@ -1,5 +1,4 @@
-﻿using GenderAcceptance.Mian;
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 
 namespace GenderAcceptance.Mian.Dependencies;
@@ -8,10 +7,12 @@ public abstract class TransDependency : ITransDependency
 {
     public abstract GenderIdentity GetCurrentIdentity(Pawn pawn);
     public abstract bool AppearsToHaveMatchingGenitalia(Pawn pawn);
-    
+
     public virtual CultureViewOnTrans CultureOpinionOnTrans(Pawn pawn)
     {
-        return pawn.Ideo?.HasPrecept(IdeologyGADefOf.Transgender_Despised) ?? false ? CultureViewOnTrans.Despised : pawn.Ideo?.HasPrecept(IdeologyGADefOf.Transgender_Adored) ?? false ? CultureViewOnTrans.Adored : CultureViewOnTrans.Neutral;
+        return pawn.Ideo?.HasPrecept(IdeologyGADefOf.Transgender_Despised) ?? false ? CultureViewOnTrans.Despised :
+            pawn.Ideo?.HasPrecept(IdeologyGADefOf.Transgender_Adored) ?? false ? CultureViewOnTrans.Adored :
+            CultureViewOnTrans.Neutral;
     }
 
     public virtual float GetGenderedPoints(Pawn pawn)
@@ -21,13 +22,12 @@ public abstract class TransDependency : ITransDependency
         if (bodyType != null)
         {
             var def = BodyTypeGenderedDef.FromBodyType(bodyType);
-            if(def != null)
+            if (def != null)
                 genderPoints += def.genderPoints;
         }
-        
+
         var styleGender = pawn.story?.hairDef?.styleGender;
         if (styleGender != null)
-        {
             switch (styleGender)
             {
                 case StyleGender.Male:
@@ -43,7 +43,6 @@ public abstract class TransDependency : ITransDependency
                     genderPoints -= 1;
                     break;
             }
-        }
 
         return genderPoints;
     }

@@ -1,9 +1,7 @@
 ﻿[![Athena Award Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Faward.athena.hackclub.com%2Fapi%2Fbadge)](https://award.athena.hackclub.com?utm_source=readme)
 
 ## Introduction 📜
-Topic of Gender is a mod that adds traits revolving around transphobia, cisphobia, and chasers to RimWorld.
-
-**TOPIC OF GENDER BY ITSELF DOES NOT ADD TRANSGENDER PAWNS. YOU NEED ONE OF THE LIBRARY MODS: Simple Trans, Identity: Dysphoria, or Intimacy - Gender Works**
+Topic of Gender is a mod that adds traits revolving around transphobia, cisphobia, and chasers to RimWorld. **It does not add transgender people on its own, you need a transgender mod for that, see later in the description**
 
 It also contains built in patches for mods such as Way Better Romance and Intimacy - A Lovin' Expansion.
 
@@ -17,9 +15,21 @@ It also contains built in patches for mods such as Way Better Romance and Intima
 - Transgender individuals are more fond of one another as they relate to being transgender.
 - Pawns may misgender transgender individuals whether purposefully or on accident.
 
+## Supported Trans Libraries 🏳️‍⚧️
+Download ONLY one of the specified transgender packages below. Steam will mention you need all of them, but IGNORE that and follow the rules below.
+
+Solo: This transgender mod works only by itself
+
+Both: These transgender mods **can** work together as one package, but can also be installed separately
+
+- Simple Trans (Solo)
+- Identity: Dysphoria & Intimacy - Gender Works (Solo or Both)
+
 ## FAQ ❓
-- Will you add compatibility with this one mod?
+- Will you add compatibility with this other transgender mod?
   - Suggest it and I can look into it!
+- Combat Extended?
+  - Of course. Did you think this mod was gonna turn your guns into transgender weapons?
 
 ## Credits 👏
 - Special thanks to divineDerivative for letting me use some of their code from Way Better Romance!

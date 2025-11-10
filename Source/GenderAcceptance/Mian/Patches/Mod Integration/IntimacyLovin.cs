@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using HarmonyLib;
+﻿using HarmonyLib;
 using LoveyDoveySexWithEuterpe;
 using Verse;
-using Verse.AI;
 
 namespace GenderAcceptance.Mian.Patches.Mod_Integration;
 
@@ -14,26 +10,28 @@ public static class IntimacyLovin
     {
         // The following patches replace ldfld gender lines with a call to get perceived gender instead so that the transphobia trait will work properly
         // (transphobic people don't believe trans people are the gender they say they are)
-        
-        harmony.Patch(typeof(InteractionWorker_Seduce).GetMethod(nameof(InteractionWorker_Seduce.RandomSelectionWeight)),
+
+        harmony.Patch(
+            typeof(InteractionWorker_Seduce).GetMethod(nameof(InteractionWorker_Seduce.RandomSelectionWeight)),
             postfix: typeof(IntimacyLovin).GetMethod(nameof(AddChaserRandomSelectionFactor)));
         harmony.Patch(typeof(SexUtilities).GetMethod(nameof(SexUtilities.SexDisposition)),
             postfix: typeof(IntimacyLovin).GetMethod(nameof(AddChaserDispositionFactor)));
     }
+
     public static void AddChaserRandomSelectionFactor(Pawn initiator, Pawn recipient, ref float __result)
     {
         //Adjust with chaser rating
-        if(GenderUtility.DoesChaserSeeTrans(initiator, recipient))
+        if (GenderUtility.DoesChaserSeeTrans(initiator, recipient))
             __result *= 2f;
     }
-    
+
     public static void AddChaserDispositionFactor(Pawn initiator, Pawn recipient, ref float __result)
     {
         //Adjust with chaser rating
-        if(GenderUtility.DoesChaserSeeTrans(initiator, recipient))
+        if (GenderUtility.DoesChaserSeeTrans(initiator, recipient))
             __result *= 2f;
     }
-    
+
     // public static IEnumerable<CodeInstruction> ReplaceAttractGenderWithPerceivedGender(IEnumerable<CodeInstruction> instructions)
     // {
     //     var codes = new List<CodeInstruction>(instructions);

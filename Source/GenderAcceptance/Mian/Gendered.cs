@@ -8,10 +8,11 @@ public enum Gendered
     None,
     Masculine,
     Feminine,
-    Androgynous,
+    Androgynous
 }
 
-public static class GenderedUtil {
+public static class GenderedUtil
+{
     public static string GetGenderNoun(this Gendered gendered)
     {
         switch (gendered)

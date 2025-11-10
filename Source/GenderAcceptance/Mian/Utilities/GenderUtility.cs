@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using GenderAcceptance.Mian.Dependencies;
 using RimWorld;
 using Verse;
 
 namespace GenderAcceptance.Mian;
 
-public static class GenderUtility {
-
+public static class GenderUtility
+{
 // Transphobic people see trans people as their AGAB, therefore a straight transphobic man could be attracted to a trans man based on this code
     // public static IEnumerable<CodeInstruction> ReplaceAttractGenderWithPerceivedGender(IEnumerable<CodeInstruction> instructions)
     // {
@@ -32,7 +31,7 @@ public static class GenderUtility {
             return 2f;
         return 0f;
     }
-        
+
     // does a chaser find the trans
     public static bool DoesChaserSeeTrans(Pawn initiator, Pawn recipient)
     {
@@ -43,20 +42,23 @@ public static class GenderUtility {
         return false;
     }
 
-    public static TransphobicStatus GetTransphobicStatus(this Pawn pawn, Pawn recipient=null)
+    public static TransphobicStatus GetTransphobicStatus(this Pawn pawn, Pawn recipient = null)
     {
-        var chaser = recipient != null ? DoesChaserSeeTrans(pawn, recipient) : (pawn.story?.traits?.HasTrait(GADefOf.Chaser) ?? false);
-        var transphobicTrait = (pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false);
+        var chaser = recipient != null
+            ? DoesChaserSeeTrans(pawn, recipient)
+            : pawn.story?.traits?.HasTrait(GADefOf.Chaser) ?? false;
+        var transphobicTrait = pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false;
         var transphobicPrecept = pawn.GetCurrentIdentity() == GenderIdentity.Cisgender
-                                 && (pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Despised || pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Abhorrent);
-        
+                                 && (pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Despised ||
+                                     pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Abhorrent);
+
         return new TransphobicStatus
-               {
-                   GenerallyTransphobic = chaser || transphobicTrait || transphobicPrecept,
-                   ChaserAttributeCounts = chaser,
-                   HasTransphobicTrait = transphobicTrait,
-                   TransphobicPreceptCounts = transphobicPrecept
-               };
+        {
+            GenerallyTransphobic = chaser || transphobicTrait || transphobicPrecept,
+            ChaserAttributeCounts = chaser,
+            HasTransphobicTrait = transphobicTrait,
+            TransphobicPreceptCounts = transphobicPrecept
+        };
     }
 
     public static Gender GetOppositeGender(this Pawn pawn)
@@ -84,18 +86,19 @@ public static class GenderUtility {
     // {
     //     return AttractedToPerson(pawn1, pawn2) && AttractedToPerson(pawn2, pawn1);
     // }
-        
+
     public static int CountGenderIndividuals(Pawn perceiver, GenderIdentity gender)
     {
-        int count = 0;
-        List<Pawn> colonists = perceiver.Map.mapPawns.FreeColonists;
+        var count = 0;
+        var colonists = perceiver.Map.mapPawns.FreeColonists;
 
-        foreach (Pawn pawn in colonists)
+        foreach (var pawn in colonists)
         {
             if (pawn.Dead || (pawn.BelievesIsTrans(pawn) && gender == GenderIdentity.Cisgender)) continue;
 
             count++;
         }
+
         return count;
     }
 
@@ -103,6 +106,7 @@ public static class GenderUtility {
     {
         return TransDependencies.TransLibrary.CultureOpinionOnTrans(pawn);
     }
+
     public static GenderIdentity GetCurrentIdentity(this Pawn pawn)
     {
         if (pawn.IsEnbyBySexTerm())
@@ -116,7 +120,7 @@ public static class GenderUtility {
     {
         if (pawn.GetGenderedAppearance() == Gendered.Androgynous)
             return true;
-        
+
         return TransDependencies.TransLibrary.AppearsToHaveMatchingGenitalia(pawn);
     }
 
@@ -132,11 +136,13 @@ public static class GenderUtility {
                 return Gendered.Androgynous;
         }
     }
+
     public static Gendered GetGenderedAppearance(this Pawn pawn)
     {
         var genderedPoints = pawn.GetGenderedPoints();
         return genderedPoints > 1 ? Gendered.Masculine : genderedPoints < -1 ? Gendered.Feminine : Gendered.Androgynous;
     }
+
     public static float GetGenderedPoints(this Pawn pawn)
     {
         return TransDependencies.TransLibrary.GetGenderedPoints(pawn);
@@ -149,25 +155,25 @@ public static class GenderUtility {
     }
 
     /// <summary>
-    /// Calculates a pawn's gendered points and makes it relative to their identity
-    /// The higher the points, the more their appearance fits their identity. The lower, the more their appearance does not fit.
+    ///     Calculates a pawn's gendered points and makes it relative to their identity
+    ///     The higher the points, the more their appearance fits their identity. The lower, the more their appearance does not
+    ///     fit.
     /// </summary>
     /// <param name="pawn">The pawn to check</param>
     /// <returns>The relative gendered points for the pawn</returns>
     public static float CalculateRelativeAppearanceFromIdentity(this Pawn pawn)
     {
         var points = pawn.GetGenderedPoints();
-        
+
         if (pawn.gender == Gender.Male)
             return points;
         if (pawn.gender == Gender.Female)
         {
             if (points < 0)
                 return Math.Abs(points);
-            else
-                return -points;
+            return -points;
         }
-        
+
         return -Math.Abs(points); // assume they are enby
     }
 }

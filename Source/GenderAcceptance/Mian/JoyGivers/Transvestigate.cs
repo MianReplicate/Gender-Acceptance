@@ -14,15 +14,16 @@ public class Transvestigate : JoyGiver
         if (PawnUtility.WillSoonHaveBasicNeed(pawn))
             return null;
         var candidates = new List<Pawn>();
-        TransvestigateUtility.GetInvestigatingCandidatesFor(pawn, candidates, true);
+        TransvestigateUtility.GetInvestigatingCandidatesFor(pawn, candidates);
         if (!candidates.Any())
-            return null; 
-        
+            return null;
+
         return JobMaker.MakeJob(def.jobDef, candidates.RandomElement());
     }
 
     public override float GetChance(Pawn pawn)
     {
-        return base.GetChance(pawn) * (pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false ? 1.5f : 1) * (pawn.story?.traits?.HasTrait(GADefOf.Chaser) ?? false ? 2f : 1);
+        return base.GetChance(pawn) * (pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false ? 1.5f : 1) *
+               (pawn.story?.traits?.HasTrait(GADefOf.Chaser) ?? false ? 2f : 1);
     }
 }

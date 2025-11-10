@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GenderAcceptance.Mian.MentalStates;
-using GenderAcceptance.Mian.Verbs;
 using RimWorld;
-using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -13,77 +11,54 @@ public class Transvestigate : JobDriver
 {
     private const TargetIndex TargetInd = TargetIndex.A;
 
-    private Pawn Target => (Pawn)(Thing)this.pawn.CurJob.GetTarget(TargetIndex.A);
+    private Pawn Target => (Pawn)(Thing)pawn.CurJob.GetTarget(TargetIndex.A);
 
-    public override bool TryMakePreToilReservations(bool errorOnFailed) => true;
+    public override bool TryMakePreToilReservations(bool errorOnFailed)
+    {
+        return true;
+    }
 
     protected override IEnumerable<Toil> MakeNewToils()
     {
-        this.FailOnDespawnedOrNull<Transvestigate>(TargetIndex.A);
-        // var verb = new Verbs.Transvestigate();
-        // var request = new CastPositionRequest
-        // {
-        //     caster = pawn,
-        //     verb = verb,
-        //     target = Target,
-        //     maxRangeFromTarget =
-        //         ((pawn == null || !pawn.Downed) ? verb.verbProps.range * 10f
-        //             : verb.verbProps.range),
-        //     wantCoverFromTarget = true
-        // };
+        this.FailOnDespawnedOrNull(TargetIndex.A);
 
-
-        var found = true;
-        // var found = CastPositionFinder.TryFindCastPosition(request, out IntVec3 vec3);
-        if (found)
-        {
-            yield return this.TransvestigatingSpreeDelayToil();
-            // var cell = Toils_Goto.GotoCell(vec3, PathEndMode.ClosestTouch);
-            // cell.socialMode = RandomSocialMode.Off;
-            // yield return cell;
-            // yield return Toils_Interpersonal.WaitToBeAbleToInteract(this.pawn);
-            Toil toil = Toils_Interpersonal.GotoInteractablePosition(TargetIndex.A);
-            toil.socialMode = RandomSocialMode.Off;
-            yield return toil;
-            yield return this.TransvestigateToil();
-        }
-        else
-        {
-            yield return Toils_General.Wait(30);
-        }
+        yield return TransvestigatingSpreeDelayToil();
+        var toil = Toils_Interpersonal.GotoInteractablePosition(TargetIndex.A);
+        toil.socialMode = RandomSocialMode.Off;
+        yield return toil;
+        yield return TransvestigateToil();
     }
 
-private Toil TransvestigateToil()
+    private Toil TransvestigateToil()
     {
-        return Toils_General.Do((Action) (() =>
+        return Toils_General.Do((Action)(() =>
         {
-            // if (!(this.pawn.MentalState is TransvestigateSpree mentalState2))
-            //     return;
-            this.pawn.AttemptTransvestigate(this.Target);
-            if (this.pawn.MentalState is TransvestigateSpree mentalState2)
+            pawn.AttemptTransvestigate(Target);
+            if (pawn.MentalState is TransvestigateSpree mentalState2)
             {
                 mentalState2.lastTransvestigatedTicks = Find.TickManager.TicksGame;
-                if (mentalState2.target != this.Target)
+                if (mentalState2.target != Target)
                     return;
-                mentalState2.transvestigatedTargetAtLeastOnce = true;   
+                mentalState2.transvestigatedTargetAtLeastOnce = true;
             }
         }));
     }
 
     private Toil TransvestigatingSpreeDelayToil()
     {
-        Toil toil = ToilMaker.MakeToil(nameof (TransvestigatingSpreeDelayToil));
-        toil.initAction = new Action(WaitAction);
-        toil.tickIntervalAction = (Action<int>) (delta => WaitAction());
+        var toil = ToilMaker.MakeToil();
+        toil.initAction = WaitAction;
+        toil.tickIntervalAction = delta => WaitAction();
         toil.socialMode = RandomSocialMode.Off;
         toil.defaultCompleteMode = ToilCompleteMode.Never;
         return toil;
 
         void WaitAction()
         {
-            if (this.pawn.MentalState is TransvestigateSpree mentalState && Find.TickManager.TicksGame - mentalState.lastTransvestigatedTicks < 1200)
+            if (pawn.MentalState is TransvestigateSpree mentalState &&
+                Find.TickManager.TicksGame - mentalState.lastTransvestigatedTicks < 1200)
                 return;
-            this.pawn.jobs.curDriver.ReadyForNextToil();
+            pawn.jobs.curDriver.ReadyForNextToil();
         }
     }
 }

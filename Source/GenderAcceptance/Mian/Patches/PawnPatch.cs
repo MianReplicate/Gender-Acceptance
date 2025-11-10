@@ -14,19 +14,19 @@ public class PawnPatch
     {
         if (writeGender && (__instance?.RaceProps?.Humanlike ?? false))
         {
-            var prefix = __instance.GetGenderedAppearance().GetGenderNoun();
-            Regex regex =
+            var prefix = __instance.GetGenderedAppearance().GetGenderNoun() + " " +
+                         __instance.GetCurrentIdentity().ToString().ToLower();
+            var regex =
                 new Regex("\\b" + Regex.Escape(__instance.gender.GetLabel(__instance.AnimalOrWildMan())) + "\\b",
                     RegexOptions.IgnoreCase);
 
             if (regex.IsMatch(__result))
-            {
-                __result = regex.Replace(__result, match => (ModsConfig.IsActive("lovelydovey.sex.withrosaline") ? prefix : char.ToUpper(prefix[0]) + prefix.Substring(1)) + " " + match.Value.ToLower());
-            }
+                __result = regex.Replace(__result,
+                    match => (ModsConfig.IsActive("lovelydovey.sex.withrosaline")
+                        ? prefix
+                        : char.ToUpper(prefix[0]) + prefix.Substring(1)) + " " + match.Value.ToLower());
             else
-            {
                 __result = prefix + " " + __result;
-            }
         }
     }
 }

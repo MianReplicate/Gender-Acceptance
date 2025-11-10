@@ -96,7 +96,7 @@
             <rulesStrings>
                 <li>r_logentry->\n\n[main].</li>
                 
-                <li>main(INITIATOR_isTransphobic==false)->[accepting]</li>
+                <li>main(INITIATOR_isTransphobic==false)->[accepting].</li>
                 <li>main(INITIATOR_isTransphobic==true)->[transphobic].\n\n[INITIATOR_nameDef] may out [RECIPIENT_nameDef] during chitchats.</li>
 
                 <li>accepting->[INITIATOR_nameDef], [friendlyVerb], has no problems with this revelation. [random_acceptance]</li>
@@ -105,8 +105,8 @@
                 <li>random_acceptance->[INITIATOR_pronoun] will support [RECIPIENT_possessive] the best [INITIATOR_pronoun] can</li>
                 <li>random_acceptance->[INITIATOR_pronoun] will stay by [RECIPIENT_possessive] side no matter what</li>
                 
-                <li>random_transphobic->[INITIATOR_nameDef] feels hurt, and is more weary of [RECIPIENT_nameDef] now as a result.</li>
-                <li>random_transphobic->[INITIATOR_nameDef] finds [INITIATOR_objective]self straying away from [RECIPIENT_nameDef] as a result.</li>
+                <li>random_transphobic->[INITIATOR_nameDef] feels hurt, and is more wary of [RECIPIENT_nameDef] now as a result</li>
+                <li>random_transphobic->[INITIATOR_nameDef] finds [INITIATOR_objective]self straying away from [RECIPIENT_nameDef] as a result</li>
 
                 <li>transphobic_talking_point->worrisome</li>
                 <li>transphobic_talking_point->problematic</li>

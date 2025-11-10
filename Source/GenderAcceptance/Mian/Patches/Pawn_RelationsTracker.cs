@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Reflection.Emit;
-using HarmonyLib;
+﻿using HarmonyLib;
 using RimWorld;
 using Verse;
 
@@ -17,15 +15,17 @@ public static class Pawn_RelationsTracker
         if (GenderUtility.DoesChaserSeeTrans(___pawn, otherPawn))
             __result *= 2;
     }
-    
+
     [HarmonyPatch(nameof(RimWorld.Pawn_RelationsTracker.AddDirectRelation))]
     [HarmonyPostfix]
-    public static void OnDirectRelationAdd(PawnRelationDef def, Pawn otherPawn, Pawn ___pawn, RimWorld.Pawn_RelationsTracker __instance)
+    public static void OnDirectRelationAdd(PawnRelationDef def, Pawn otherPawn, Pawn ___pawn,
+        RimWorld.Pawn_RelationsTracker __instance)
     {
         if (___pawn.GetCurrentIdentity() != GenderIdentity.Transgender)
             return;
-        
-        if (__instance.DirectRelationExists(def, otherPawn) && (otherPawn.RaceProps?.Humanlike ?? false) && (___pawn.RaceProps?.Humanlike ?? false))
+
+        if (__instance.DirectRelationExists(def, otherPawn) && (otherPawn.RaceProps?.Humanlike ?? false) &&
+            (___pawn.RaceProps?.Humanlike ?? false))
         {
             var baseChance = 0.05f;
             if (def.familyByBloodRelation)
@@ -35,7 +35,8 @@ public static class Pawn_RelationsTracker
 
             if (Rand.Chance(baseChance))
             {
-                Helper.Debug("Pawn " + ___pawn.Name + " is out to " + otherPawn.Name + " due to new relation: " + def.defName);
+                Helper.Debug("Pawn " + ___pawn.Name + " is out to " + otherPawn.Name + " due to new relation: " +
+                             def.defName);
                 otherPawn.GetKnowledgeOnPawn(___pawn).cameOut = true;
                 otherPawn.GetKnowledgeOnPawn(___pawn).playedNotification = true;
             }

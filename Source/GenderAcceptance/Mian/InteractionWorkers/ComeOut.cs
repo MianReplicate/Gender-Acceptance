@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GenderAcceptance.Mian.Dependencies;
 using RimWorld;
-using Simple_Trans;
 using UnityEngine;
 using Verse;
 
@@ -16,26 +14,27 @@ public class ComeOut : InteractionWorker
             return 0f;
         if (recipient.GetKnowledgeOnPawn(initiator).cameOut)
             return 0f;
-        
+
         var spouseRelation = initiator.relations.DirectRelationExists(PawnRelationDefOf.Spouse, recipient) ? 1.75f : 1f;
         var loversRelation = initiator.relations.DirectRelationExists(PawnRelationDefOf.Lover, recipient) ? 1.5f : 1f;
-        var parentsRelation = initiator.relations.DirectRelationExists(PawnRelationDefOf.Parent, recipient) ? 1.25f : 1f;
+        var parentsRelation =
+            initiator.relations.DirectRelationExists(PawnRelationDefOf.Parent, recipient) ? 1.25f : 1f;
         var environment = 1f;
 
         var cultureOpinion = initiator.CultureOpinionOnTrans();
-        if(cultureOpinion == CultureViewOnTrans.Despised)
+        if (cultureOpinion == CultureViewOnTrans.Despised)
             environment = 0.05f;
-        else if(cultureOpinion == CultureViewOnTrans.Adored)
+        else if (cultureOpinion == CultureViewOnTrans.Adored)
             environment = 1.75f;
         else if (cultureOpinion == CultureViewOnTrans.Exalted)
             environment = 2.5f;
         else if (cultureOpinion == CultureViewOnTrans.Abhorrent)
             environment = 0.01f;
-        
+
         var opinion = Mathf.Clamp(initiator.relations.OpinionOf(recipient), 0, 100) / 100;
         return opinion * spouseRelation * loversRelation * parentsRelation * environment;
     }
-        
+
     public override void Interacted(
         Pawn initiator,
         Pawn recipient,
@@ -45,22 +44,23 @@ public class ComeOut : InteractionWorker
         out LetterDef letterDef,
         out LookTargets lookTargets)
     {
-        letterText = (string) null;
+        letterText = null;
         letterLabel = null;
         letterDef = null;
-        lookTargets = (LookTargets) null;
-        
+        lookTargets = null;
+
         var transphobia = recipient.GetTransphobicStatus(initiator);
         var isNegative = transphobia.GenerallyTransphobic;
-        
+
         if (transphobia.ChaserAttributeCounts && isNegative)
-            isNegative = Rand.Chance(0.1f * NegativeInteractionUtility.NegativeInteractionChanceFactor(recipient, initiator));
+            isNegative =
+                Rand.Chance(0.1f * NegativeInteractionUtility.NegativeInteractionChanceFactor(recipient, initiator));
 
         var isPositive = !isNegative;
-        var constants = new Dictionary<string, string>()
+        var constants = new Dictionary<string, string>
         {
-            {"isPositive", isPositive.ToString()},
-            {"cameOut", "True"}
+            { "isPositive", isPositive.ToString() },
+            { "cameOut", "True" }
         };
 
         // var packs = new List<RulePackDef>()
@@ -70,15 +70,17 @@ public class ComeOut : InteractionWorker
 
         recipient.GetKnowledgeOnPawn(initiator).cameOut = true;
         TransKnowledgeManager.OnKnowledgeLearned(
-            recipient, 
+            recipient,
             initiator,
-            isPositive ? LetterDefOf.PositiveEvent : LetterDefOf.NeutralEvent, 
+            isPositive ? LetterDefOf.PositiveEvent : LetterDefOf.NeutralEvent,
             "GA.ComeOutLabel",
             // packs,
             constants: constants);
-        
-        initiator.needs.mood.thoughts.memories.TryGainMemory(isPositive ? GADefOf.CameOutPositive : GADefOf.CameOutNegative, recipient);
-        
-        recipient.needs.mood.thoughts.memories.TryGainMemory(isPositive ? GADefOf.FoundOutPawnIsTransMoodPositive : GADefOf.FoundOutPawnIsTransMoodNegative, recipient);
+
+        initiator.needs.mood.thoughts.memories.TryGainMemory(
+            isPositive ? GADefOf.CameOutPositive : GADefOf.CameOutNegative, recipient);
+
+        recipient.needs.mood.thoughts.memories.TryGainMemory(
+            isPositive ? GADefOf.FoundOutPawnIsTransMoodPositive : GADefOf.FoundOutPawnIsTransMoodNegative, recipient);
     }
 }

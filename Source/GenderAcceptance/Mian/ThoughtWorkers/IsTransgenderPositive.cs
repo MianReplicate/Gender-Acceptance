@@ -1,6 +1,5 @@
 ﻿using GenderAcceptance.Mian.Dependencies;
 using RimWorld;
-using Simple_Trans;
 using Verse;
 
 namespace GenderAcceptance.Mian.ThoughtWorkers;
@@ -11,11 +10,9 @@ public class IsTransgenderPositive : ThoughtWorker
     {
         if (ModsConfig.IsActive("cammy.identity.gender"))
             return ThoughtState.Inactive;
-        
+
         if (pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Adored && pawn.BelievesIsTrans(otherPawn))
-        {
             return ThoughtState.ActiveAtStage(0);
-        }
         return ThoughtState.Inactive;
     }
 }
