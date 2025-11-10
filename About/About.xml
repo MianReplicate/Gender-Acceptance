@@ -16,7 +16,7 @@
         </li>
         <li>
             <packageId>runaway.simpletrans</packageId>
-            <displayName>Requires Simple Trans, Gender Works or Identity: Dysphoria</displayName>
+            <displayName>Requires Simple Trans, Intimacy - Gender Works, or Identity: Dysphoria</displayName>
             <steamWorkshopUrl>steam://url/CommunityFilePage/3516912373</steamWorkshopUrl>
             <downloadUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=3516912373</downloadUrl>
 
@@ -27,7 +27,7 @@
         </li>
     </modDependencies>
 
-    <description>Topic of Gender is a mod (an addon to Simple Trans) that adds traits revolving around transphobia, cisphobia, and chasers to Rimworld.</description>
+    <description>Topic of Gender is a mod that adds traits revolving around transphobia, cisphobia, and chasers to Rimworld.</description>
     <loadAfter>
         <li>Ludeon.RimWorld</li>
         <li>brrainz.harmony</li>
