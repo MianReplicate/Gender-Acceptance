@@ -56,7 +56,10 @@
         <defName>Chaser_Found_Out</defName>
         <rulePack>
             <rulesStrings>
-                <li>r_logentry->\n\n[main].</li>
+                <li>r_logentry->\n\n[transphobia][main].</li>
+
+                <li>transphobia(INITIATOR_isTransphobic==true)->Despite [INITIATOR_nameDef]'s transphobia, </li>
+                <li>transphobia(INITIATOR_isTransphobic==false)-></li>
                 
                 <li>main->[INITIATOR_nameDef]'s pants feel rather wet, and [INITIATOR_pronoun] feels [INITIATOR_objective]self getting closer to [RECIPIENT_possessive] due to a [adjective] [want]</li>
                 <li>main->[INITIATOR_nameDef] finds [RECIPIENT_nameDef]'s transgender identity to be [describe], and wishes to get closer to [RECIPIENT_possessive]</li>
