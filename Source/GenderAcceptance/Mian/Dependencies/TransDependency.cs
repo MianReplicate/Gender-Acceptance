@@ -28,8 +28,14 @@ public abstract class TransDependency : ITransDependency
             if (def != null)
                 genderPoints += def.genderPoints;
         }
-        
-        var genders = pawn.apparel.WornApparel.Select(apparel => apparel.def.apparel.gender).ToList();
+
+        var apparelDefs = pawn.apparel.WornApparel.Select(apparel => apparel.def);
+        var overrideList = pawn.ideo?.Ideo?.GetAllPreceptsOfType<Precept_Apparel>().Where(precept => apparelDefs.Contains(precept.apparelDef)).ToList();
+        var genders = apparelDefs.Select(apparel =>
+        {
+            var preceptForApparel = overrideList?.Find(precept => precept.apparelDef == apparel);
+            return preceptForApparel != null ? preceptForApparel.TargetGender : apparel.apparel.gender;
+        }).ToList();
         
         var headGender = pawn.story?.headType?.gender;
         if (headGender.HasValue)
@@ -49,24 +55,28 @@ public abstract class TransDependency : ITransDependency
                     break;
             }
         }
-        
-        var styleGenders = new List<StyleGender>();
 
-        var bodyTattoo = pawn.style?.BodyTattoo?.styleGender;
-        if(bodyTattoo.HasValue)
-            styleGenders.Add(bodyTattoo.Value);
-        
-        var faceTattoo = pawn.style?.FaceTattoo?.styleGender;
-        if(faceTattoo.HasValue)
-            styleGenders.Add(faceTattoo.Value);
-        
-        var beard = pawn.style?.beardDef?.styleGender;
-        if(beard.HasValue)
-            styleGenders.Add(beard.Value);
+        var styleItems = new List<StyleItemDef>();
 
-        var hair = pawn.story?.hairDef?.styleGender;
-        if(hair.HasValue)
-            styleGenders.Add(hair.Value);
+        var bodyTattoo = pawn.style?.BodyTattoo;
+        if(bodyTattoo != null)
+            styleItems.Add(bodyTattoo);
+        
+        var faceTattoo = pawn.style?.FaceTattoo;
+        if(faceTattoo != null)
+            styleItems.Add(faceTattoo);
+        
+        var beard = pawn.style?.beardDef;
+        if(beard != null)
+            styleItems.Add(beard);
+
+        var hair = pawn.story?.hairDef;
+        if(hair != null)
+            styleItems.Add(hair);
+
+        var ideoStyle = pawn.ideo?.Ideo?.style;
+        var styleGenders = styleItems.Select(item => 
+            ideoStyle != null ? ideoStyle.GetGender(item) : item.styleGender).ToList();
         
         foreach (var styleGender in styleGenders)
         {
