@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mian\BodyTypeGenderedDef.cs" />
+    <Compile Include="Mian\DebugActions.cs" />
     <Compile Include="Mian\Dependencies\CultureViewOnTrans.cs" />
     <Compile Include="Mian\Dependencies\DysGenderWorks.cs" />
     <Compile Include="Mian\Dependencies\Dysphoria.cs" />

@@ -8,22 +8,22 @@
         <validWhileDespawned>false</validWhileDespawned>
         <stages>
             <li>
-                <label>Traditional Gender Norms Preferred</label>
+                <label>Traditional gender norms</label>
                 <description>Feels relief in maintaining traditional gender norms.</description>
                 <baseMoodEffect>+5</baseMoodEffect>
             </li>
             <li>
-                <label>Noticeable Transgender Individual</label>
+                <label>Noticeable transgender individual</label>
                 <description>Discomfort with a transgender individual, feeling it's untraditional.</description>
                 <baseMoodEffect>-3</baseMoodEffect>
             </li>
             <li>
-                <label>Few Transgender Individuals</label>
+                <label>Few transgender individuals</label>
                 <description>Unsettled by the presence of multiple transgender individuals.</description>
                 <baseMoodEffect>-6</baseMoodEffect>
             </li>
             <li>
-                <label>Too Many Transgender Individuals</label>
+                <label>Too many transgender individuals</label>
                 <description>Distressed by many transgender individuals, feeling overwhelmed.</description>
                 <baseMoodEffect>-9</baseMoodEffect>
             </li>
@@ -42,7 +42,7 @@
         <workerClass>GenderAcceptance.Mian.ThoughtWorkers.IsTransgenderNegative</workerClass>
         <stages>
             <li>
-                <label>Transphobia</label>
+                <label>Transgender despised</label>
                 <baseOpinionOffset>-20</baseOpinionOffset>
             </li>
         </stages>
@@ -58,22 +58,22 @@
         <validWhileDespawned>false</validWhileDespawned>
         <stages>
             <li>
-                <label>Lacking Transgender Individuals</label>
+                <label>Lacking gender diversity</label>
                 <description>Our community isn't diverse until we get transgender individuals.</description>
                 <baseMoodEffect>-4</baseMoodEffect>
             </li>
             <li>
-                <label>First Transgender Individual</label>
+                <label>First transgender individual</label>
                 <description>The presence of a transgender individual among us speaks volume about our diversity.</description>
                 <baseMoodEffect>+2</baseMoodEffect>
             </li>
             <li>
-                <label>Multiple Transgender Individuals</label>
+                <label>Multiple transgender individuals</label>
                 <description>Multiple transgender people within the community make us feel safe and diverse.</description>
                 <baseMoodEffect>+4</baseMoodEffect>
             </li>
             <li>
-                <label>Populated Transgender Community</label>
+                <label>Populated transgender community</label>
                 <description>Joyful for the abundance of transgender individuals, symbolizing full acceptance.</description>
                 <baseMoodEffect>+6</baseMoodEffect>
             </li>
@@ -107,7 +107,7 @@
         <workerClass>GenderAcceptance.Mian.ThoughtWorkers.IsTransgenderPositive</workerClass>
         <stages>
             <li>
-                <label>Transgender</label>
+                <label>Transgender adored</label>
                 <baseOpinionOffset>+20</baseOpinionOffset>
             </li>
         </stages>

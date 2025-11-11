@@ -10,11 +10,11 @@ namespace GenderAcceptance.Mian;
 
 public class TransKnowledgeTracker : IExposable
 {
-    public bool cameOut;
     private Pawn pawn;
     public bool playedNotification;
     public bool sex;
     public bool transvestigate;
+    public bool cameOut;
 
     public TransKnowledgeTracker()
     {
