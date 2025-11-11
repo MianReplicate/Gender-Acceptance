@@ -12,6 +12,7 @@ Topic of Gender is a mod that adds traits revolving around transphobia, cisphobi
 - Transgender individuals are more fond of one another as they relate to being transgender.
 - Pawns may misgender transgender individuals whether purposefully or on accident.
 - Pawns may transvestigate from time to time, and they can grow suspicious.
+- How likely a pawn is to suspect one is transgender is based on their masculinity and femininity stats. If their sex is male, but they express more feminine traits than masculine, they are more likely to be sussed out regardless of if they are cisgender or transgender.
 - Precept and ideologies for the Ideology DLC relating to acceptance of transgender individuals.
 
 ## Supported Trans Libraries 🏳️‍⚧️
