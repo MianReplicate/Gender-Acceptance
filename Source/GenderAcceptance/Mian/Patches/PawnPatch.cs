@@ -16,17 +16,8 @@ public class PawnPatch
         {
             var prefix = __instance.GetGenderedAppearance().GetGenderNoun() + " " +
                          __instance.GetCurrentIdentity().ToString().ToLower();
-            var regex =
-                new Regex("\\b" + Regex.Escape(__instance.gender.GetLabel(__instance.AnimalOrWildMan())) + "\\b",
-                    RegexOptions.IgnoreCase);
 
-            if (regex.IsMatch(__result))
-                __result = regex.Replace(__result,
-                    match => (ModsConfig.IsActive("lovelydovey.sex.withrosaline")
-                        ? prefix
-                        : char.ToUpper(prefix[0]) + prefix.Substring(1)) + " " + match.Value.ToLower());
-            else
-                __result = prefix + " " + __result;
+            __result = char.ToUpper(prefix[0]) + prefix.Substring(1) + " " + __result.ToLower();
         }
     }
 }
