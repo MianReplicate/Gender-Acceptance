@@ -18,10 +18,10 @@ public abstract class TransDependency : ITransDependency
     public abstract GenderIdentity GetCurrentIdentity(Pawn pawn);
     public abstract bool AppearsToHaveMatchingGenitalia(Pawn pawn);
 
-    public virtual CultureViewOnTrans CultureOpinionOnTrans(Pawn pawn)
+    public virtual CultureViewOnTrans CultureOpinionOnTrans(Ideo ideo)
     {
-        return pawn.Ideo?.HasPrecept(IdeologyGADefOf.Transgender_Despised) ?? false ? CultureViewOnTrans.Despised :
-            pawn.Ideo?.HasPrecept(IdeologyGADefOf.Transgender_Adored) ?? false ? CultureViewOnTrans.Adored :
+        return ideo?.HasPrecept(IdeologyGADefOf.Transgender_Despised) ?? false ? CultureViewOnTrans.Despised :
+            ideo?.HasPrecept(IdeologyGADefOf.Transgender_Adored) ?? false ? CultureViewOnTrans.Adored :
             CultureViewOnTrans.Neutral;
     }
 

@@ -22,7 +22,7 @@ public class ComeOut : InteractionWorker
             initiator.relations.DirectRelationExists(PawnRelationDefOf.Parent, recipient) ? 1.25f : 1f;
         var environment = 1f;
 
-        var cultureOpinion = initiator.CultureOpinionOnTrans();
+        var cultureOpinion = initiator.ideo?.Ideo?.CultureOpinionOnTrans();
         if (cultureOpinion == CultureViewOnTrans.Despised)
             environment = 0.05f;
         else if (cultureOpinion == CultureViewOnTrans.Adored)

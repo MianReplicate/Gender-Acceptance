@@ -50,8 +50,8 @@ public static class GenderUtility
                 : pawn.story?.traits?.HasTrait(GADefOf.Chaser) ?? false;
             var transphobicTrait = pawn.story?.traits?.HasTrait(GADefOf.Transphobic) ?? false;
             var transphobicPrecept = pawn.GetCurrentIdentity() == GenderIdentity.Cisgender
-                                     && (pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Despised ||
-                                         pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Abhorrent);
+                                     && (pawn.Ideo?.CultureOpinionOnTrans() == CultureViewOnTrans.Despised ||
+                                         pawn.Ideo?.CultureOpinionOnTrans() == CultureViewOnTrans.Abhorrent);
 
             return new TransphobicStatus
             {
@@ -102,11 +102,11 @@ public static class GenderUtility
     /// <summary>
     ///     Checks whether the culture is transphobic, accepting or neutral
     /// </summary>
-    /// <param name="pawn">The pawn to check</param>
-    /// <returns>Whether the pawn is in a culture that is transphobic, accepting or neutral</returns>
-    public static CultureViewOnTrans CultureOpinionOnTrans(this Pawn pawn)
+    /// <param name="ideo">The culture to check</param>
+    /// <returns>Whether the culture is transphobic, accepting or neutral</returns>
+    public static CultureViewOnTrans CultureOpinionOnTrans(this Ideo ideo)
     {
-        return TransDependencies.TransLibrary.CultureOpinionOnTrans(pawn);
+        return TransDependencies.TransLibrary.CultureOpinionOnTrans(ideo);
     }
 
     /// <summary>
@@ -133,12 +133,14 @@ public static class GenderUtility
     }
 
     /// <summary>
-    ///     Determines whether the pawn's genitalia matches up with their gender identity. Defaults to true for androgynous folks
+    ///     Determines whether the pawn's genitalia matches up with their gender identity. Defaults to true for androgynous folks.
     /// </summary>
     /// <param name="pawn">THe pawn to check</param>
     /// <returns>Whether genitalia matches up with the pawn's gender identity or not</returns>
     public static bool AppearsToHaveMatchingGenitalia(this Pawn pawn)
     {
+        if (!pawn.RaceProps.Humanlike)
+            return true;
         if (pawn.GetGenderedAppearance() == Gendered.Androgynous)
             return true;
 

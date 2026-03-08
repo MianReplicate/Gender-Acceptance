@@ -25,7 +25,6 @@ public static class GrammarUtilityPatch
             constants[prefix + "isTransgender"] = (pawn.GetCurrentIdentity() == GenderIdentity.Transgender).ToString();
             constants[prefix + "isHomo"] = pawn.LikesSameGender().ToString();
             constants[prefix + "mismatchedGenitalia"] = (!pawn.AppearsToHaveMatchingGenitalia()).ToString();
-
         }
 
         foreach (var rule in __result) yield return rule;

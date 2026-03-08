@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GenderAcceptance.Mian.Utilities;
+using RimWorld;
 using Verse;
 
 namespace GenderAcceptance.Mian.Dependencies;
@@ -36,9 +37,9 @@ public interface ITransDependency
     /// <summary>
     ///     Checks whether the culture is transphobic, accepting or neutral
     /// </summary>
-    /// <param name="pawn">THe pawn to check</param>
-    /// <returns>Whether the pawn is in a culture that is transphobic, accepting or neutral</returns>
-    public CultureViewOnTrans CultureOpinionOnTrans(Pawn pawn);
+    /// <param name="ideo">The culture to check</param>
+    /// <returns>Whether the culture is transphobic, accepting or neutral</returns>
+    public CultureViewOnTrans CultureOpinionOnTrans(Ideo ideo);
 
     /// <summary>
     ///     Calculates how gendered a pawn is depending on the trans mod used.

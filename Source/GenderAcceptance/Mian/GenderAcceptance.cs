@@ -1,4 +1,5 @@
-﻿using GenderAcceptance.Mian.Dependencies;
+﻿using System;
+using GenderAcceptance.Mian.Dependencies;
 using GenderAcceptance.Mian.Patches.Mod_Integration;
 using GenderAcceptance.Mian.Utilities;
 using HarmonyLib;
@@ -38,11 +39,22 @@ public static class Startup
 public class GASettings : ModSettings
 {
     public static GASettings Instance;
+    public float baseRandomOuttingChance;
+    public bool colonyIdeologyOverPawnIdeology;
+    public bool nonTransphobicPeopleNeverOut;
     public bool enableLogging;
+    
+    public const float DefaultBaseRandomOuttingChance = 0.01f;
+    public const bool DefaultColonyIdeologyOverPawnIdeology = true;
+    public const bool DefaultNonTransphobicPeopleNeverOut = false;
+    public const bool DefaultEnableLogging = false;
 
     public override void ExposeData()
     {
-        Scribe_Values.Look(ref enableLogging, "enableLogging");
+        Scribe_Values.Look(ref enableLogging, "enableLogging", DefaultEnableLogging, true);
+        Scribe_Values.Look(ref baseRandomOuttingChance, "baseRandomOuttingChance", DefaultBaseRandomOuttingChance, true);
+        Scribe_Values.Look(ref colonyIdeologyOverPawnIdeology, "colonyIdeologyOverPawnIdeology", DefaultColonyIdeologyOverPawnIdeology, true);
+        Scribe_Values.Look(ref nonTransphobicPeopleNeverOut, "nonTransphobicPeopleNeverOut", DefaultNonTransphobicPeopleNeverOut, true);
         base.ExposeData();
     }
 }
@@ -61,6 +73,27 @@ public class GenderAcceptance : Mod
         listingStandard.Begin(inRect);
         listingStandard.CheckboxLabeled("GA.EnableLoggingExplanation".Translate(),
             ref GASettings.Instance.enableLogging);
+        
+        GASettings.Instance.baseRandomOuttingChance = listingStandard.SliderLabeled(
+                                                       "GA.BaseRandomOuttingChance".Translate(
+                                                           GASettings.DefaultBaseRandomOuttingChance * 100f,
+                                                           GASettings.Instance.baseRandomOuttingChance * 100f),
+                                                       GASettings.Instance.baseRandomOuttingChance * 100f, 0f, 100f, tooltip: "GA.BaseRandomOuttingChanceTip".Translate()) /
+                                                   100f;
+        listingStandard.CheckboxLabeled("GA.ColonyIdeologyOverPawnIdeology".Translate(),
+            ref GASettings.Instance.colonyIdeologyOverPawnIdeology,
+            tooltip: "GA.ColonyIdeologyOverPawnIdeologyTip".Translate());      
+        listingStandard.CheckboxLabeled("GA.NonTransphobicPeopleNeverOut".Translate(),
+            ref GASettings.Instance.nonTransphobicPeopleNeverOut,
+            tooltip: "GA.NonTransphobicPeopleNeverOutTip".Translate());
+        if (listingStandard.ButtonText("GA.ResetSettings".Translate()))
+        {
+            GASettings.Instance.enableLogging = GASettings.DefaultEnableLogging;
+            GASettings.Instance.baseRandomOuttingChance = GASettings.DefaultBaseRandomOuttingChance;
+            GASettings.Instance.colonyIdeologyOverPawnIdeology = GASettings.DefaultColonyIdeologyOverPawnIdeology;
+            GASettings.Instance.nonTransphobicPeopleNeverOut = GASettings.DefaultNonTransphobicPeopleNeverOut;
+        }
+        
         listingStandard.End();
         base.DoSettingsWindowContents(inRect);
     }

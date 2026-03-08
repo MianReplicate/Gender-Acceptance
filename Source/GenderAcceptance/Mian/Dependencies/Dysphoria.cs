@@ -49,15 +49,15 @@ public class Dysphoria : TransDependency
         return GenderIdentity.Cisgender;
     }
 
-    public override CultureViewOnTrans CultureOpinionOnTrans(Pawn pawn)
+    public override CultureViewOnTrans CultureOpinionOnTrans(Ideo ideo)
     {
-        if (pawn.Ideo?.HasPrecept(Trans_Abhorrent) ?? false)
+        if (ideo?.HasPrecept(Trans_Abhorrent) ?? false)
             return CultureViewOnTrans.Abhorrent;
-        if (pawn.Ideo?.HasPrecept(Trans_Disapproved) ?? false)
+        if (ideo?.HasPrecept(Trans_Disapproved) ?? false)
             return CultureViewOnTrans.Despised;
-        if (pawn.Ideo?.HasPrecept(Trans_Approved) ?? false)
+        if (ideo?.HasPrecept(Trans_Approved) ?? false)
             return CultureViewOnTrans.Adored;
-        if (pawn.Ideo?.HasPrecept(Trans_Exalted) ?? false)
+        if (ideo?.HasPrecept(Trans_Exalted) ?? false)
             return CultureViewOnTrans.Exalted;
 
         return CultureViewOnTrans.Neutral;

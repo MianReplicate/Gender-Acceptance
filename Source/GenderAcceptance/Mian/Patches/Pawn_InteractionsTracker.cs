@@ -29,19 +29,14 @@ public static class Pawn_InteractionsTracker
         if (intDef == smallTalk || intDef == conversation || intDef == chitchat)
         {
             var multiplier = intDef == conversation ? 2f : 1f;
-            
-            // if(___pawn.CanTransvestigate())
-                // ___pawn.Transvestigate(recipient, 0.005f * multiplier);
 
             var transgenders = ___pawn.GetTransgenderKnowledges(false)
                 .Where(knowledge => knowledge.BelievesTheyAreTrans() && knowledge.Pawn != recipient).ToList();
             if (transgenders.Any())
-            {
-                var randomCount = Rand.RangeInclusive(0, transgenders.Count);
-                for (var i = 0; i < randomCount; i++)
-                {
-                    var transphobic = ___pawn.GetTransphobicStatus(transgenders[i].Pawn);
-                    var revealChance = 0.05f * multiplier;
+            {  
+                var randomPerson = transgenders.RandomElement();
+                    var transphobic = ___pawn.GetTransphobicStatus(randomPerson.Pawn);
+                    var revealChance = GASettings.Instance.baseRandomOuttingChance * multiplier;
 
                     if (transphobic.GenerallyTransphobic)
                     {
@@ -56,14 +51,15 @@ public static class Pawn_InteractionsTracker
                     }
                     else
                     {
-                        revealChance *= ___pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Adored ? 5f :
-                            ___pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Exalted ? 10f : 1f;
+                        Ideo ideo = GASettings.Instance.colonyIdeologyOverPawnIdeology ? recipient.Faction?.ideos?.PrimaryIdeo : ___pawn.Ideo;
+                        revealChance *= GASettings.Instance.nonTransphobicPeopleNeverOut ? 0f : ideo?.CultureOpinionOnTrans() == CultureViewOnTrans.Adored ? 5f :
+                            ideo?.CultureOpinionOnTrans() == CultureViewOnTrans.Exalted ? 10f : ideo?.CultureOpinionOnTrans() == CultureViewOnTrans.Despised ? 0.5f : ideo?.CultureOpinionOnTrans() == CultureViewOnTrans.Abhorrent ? 0.1f : 1f;
                     }
 
                     if (Rand.Chance(revealChance))
                     {
-                        var initKnowledge = ___pawn.GetKnowledgeOnPawn(transgenders[i].Pawn);
-                        var recipientKnowledge = recipient.GetKnowledgeOnPawn(transgenders[i].Pawn);
+                        var initKnowledge = ___pawn.GetKnowledgeOnPawn(randomPerson.Pawn);
+                        var recipientKnowledge = recipient.GetKnowledgeOnPawn(randomPerson.Pawn);
 
                         if (initKnowledge.cameOut)
                             recipientKnowledge.cameOut = true;
@@ -76,16 +72,15 @@ public static class Pawn_InteractionsTracker
                         {
                             recipientKnowledge.playedNotification = true;
                             var message = new Message(
-                                "GA.FoundOutThroughChat".Translate(___pawn.Named("TELLER"), recipient.Named("RECEIVER"),
-                                    transgenders[i].Pawn.Named("GOSSIPED")),
+                                (transphobic.GenerallyTransphobic ? "GA.IntentionallyFoundOutThroughChat" : "GA.AccidentallyFoundOutThroughChat").Translate(___pawn.Named("TELLER"), recipient.Named("RECEIVER"),
+                                    randomPerson.Pawn.Named("GOSSIPED")),
                                 MessageTypeDefOf.NeutralEvent,
-                                new LookTargets(___pawn, recipient, transgenders[i].Pawn));
+                                new LookTargets(___pawn, recipient, randomPerson.Pawn));
                             Messages.Message(message);
                         }
 
-                        TransKnowledgeManager.OnKnowledgeLearned(recipient, transgenders[i].Pawn);
+                        TransKnowledgeManager.OnKnowledgeLearned(recipient, randomPerson.Pawn);
                     }
-                }
             }
         }
     }

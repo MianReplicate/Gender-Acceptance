@@ -14,7 +14,7 @@ public class IsTransgenderNegative : ThoughtWorker
         if (pawn == otherPawn)
             return ThoughtState.Inactive;
 
-        if (pawn.CultureOpinionOnTrans() == CultureViewOnTrans.Despised && pawn.BelievesIsTrans(otherPawn))
+        if (pawn.ideo?.Ideo?.CultureOpinionOnTrans() == CultureViewOnTrans.Despised && pawn.BelievesIsTrans(otherPawn))
             return ThoughtState.ActiveAtStage(0);
         return ThoughtState.Inactive;
     }

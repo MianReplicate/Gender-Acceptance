@@ -3,8 +3,8 @@
 public enum CultureViewOnTrans
 {
     Despised,
-    Adored,
+    Abhorrent,
     Neutral,
-    Abhorrent, // additional optional levels
+    Adored,
     Exalted
 }
