@@ -18,7 +18,7 @@
 
   <GA.ModName>Topic of Gender</GA.ModName>
   <GA.EnableLoggingExplanation>Enable Developer Logging</GA.EnableLoggingExplanation>
-  <GA.BaseRandomOuttingChance>Base Outting Chance</GA.BaseRandomOuttingChance>
+  <GA.BaseRandomOuttingChance>Base Outting Chance (Default {0}%): {1}%</GA.BaseRandomOuttingChance>
   <GA.BaseRandomOuttingChanceTip>When pawns talk to other pawns, this is the initial base chance that determines whether they out other trans pawns they are aware of. This chance is then multiplied by other factors: transphobia, ideology, etc</GA.BaseRandomOuttingChanceTip>
   <GA.ColonyIdeologyOverPawnIdeology>Prioritize Colony Ideology Over Pawn Ideology</GA.ColonyIdeologyOverPawnIdeology>
   <GA.ColonyIdeologyOverPawnIdeologyTip>Whether the colony ideology or pawn ideology is used when modifying the base outting chance</GA.ColonyIdeologyOverPawnIdeologyTip>
