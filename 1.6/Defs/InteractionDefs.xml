@@ -55,7 +55,7 @@
                 <li>adjective->rudely</li>
                 
                 <li>comment(p=3)->misgendered [RECIPIENT_nameDef].</li>
-                <li>comment->exposed [RECIPIENT_nameDef]'s [PersonalCharacteristic] as a way to justify misgendering [RECIPIENT_pronoun].</li>
+                <li>comment->exposed [RECIPIENT_nameDef]'s [PersonalCharacteristic] as a way to justify misgendering [RECIPIENT_possessive].</li>
                 <li>comment->insulted [RECIPIENT_nameDef]'s gender identity and misgendered [RECIPIENT_pronoun].</li>
                 <li>comment->used the wrong pronouns for [RECIPIENT_nameDef].</li>
             </rulesStrings>
