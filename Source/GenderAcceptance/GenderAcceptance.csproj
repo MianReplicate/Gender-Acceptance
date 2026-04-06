@@ -1,51 +1,46 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <RootNamespace>GenderAcceptance</RootNamespace>
-    <AssemblyName>GenderAcceptance</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <LangVersion>latest</LangVersion>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup>
+  <!--    Mod information-->
+  <GameVersion>1.6</GameVersion>
+  <ModName>Template RimWorld Mod</ModName>
 
-    <DebugType>embedded</DebugType>
-    <EmbedAllSources>true</EmbedAllSources>
-    <DebugSymbols>false</DebugSymbols>
-    
-    <OutputPath>../../1.6/Assemblies/</OutputPath>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-  </PropertyGroup>
+  <!--    Don't change the below!-->
+  <OutputType>Library</OutputType>
+  <TargetFramework>net472</TargetFramework>
+  <LangVersion>12</LangVersion>
+  <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  <DebugType>embedded</DebugType>
+  <EmbedAllSources>true</EmbedAllSources>
+  <OutputPath>../../$(GameVersion)/Assemblies/</OutputPath>
+  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 
-  <PropertyGroup>
-    <ModName>Topic of Gender</ModName>
-  </PropertyGroup>
-  
+  <!-- System variables using SDK property functions -->
+  <IsWindows>$([System.OperatingSystem]::IsWindows())</IsWindows>
+  <IsLinux>$([System.OperatingSystem]::IsLinux())</IsLinux>
+  <IsMacOS>$([System.OperatingSystem]::IsMacOS())</IsMacOS>
+  <CurrentOS Condition="'$(IsMacOS)' == 'True'">MacOS</CurrentOS>
+  <CurrentOS Condition="'$(IsLinux)' == 'True'">Linux</CurrentOS>
+  <CurrentOS Condition="'$(IsWindows)' == 'True'">Windows</CurrentOS>
+  <UserName>$([System.Environment]::UserName)</UserName>
+  <UserFolder Condition="'$(CurrentOS)' != 'Windows'">$(HOME)</UserFolder>
+  <UserFolder Condition="'$(CurrentOS)' == 'Windows'">$(USERPROFILE)</UserFolder>
+
+  <!--    Some fallbacks for RimWorldPath, but otherwise define this in OS manually for best fit-->
+  <RimWorldPath Condition="'$(RimWorldPath)' == '' and '$(IsMacOS)' == 'True'">$(UserFolder)/Library/Application Support/Steam/steamapps/common/RimWorld</RimWorldPath>
+  <RimWorldPath Condition="'$(RimWorldPath)' == '' and '$(IsLinux)' == 'True'">$(UserFolder)/.local/share/Steam/steamapps/common/RimWorld</RimWorldPath>
+  <RimWorldPath Condition="'$(RimWorldPath)' == '' and '$(IsWindows)' == 'True'">C:/Program Files (x86)/Steam/steamapps/common/RimWorld</RimWorldPath>
+  <RimWorldInternal Condition="'$(IsMacOS)' == 'True'">$(RimWorldPath)/RimWorldMac.app</RimWorldInternal>
+  <RimWorldInternal Condition="'$(IsMacOS)' == 'False'">$(RimWorldPath)</RimWorldInternal>
+</PropertyGroup>
+
+<ItemGroup>
+  <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.4633" />
+  <PackageReference Include="Lib.Harmony.Ref" Version="2.4.2" />
+</ItemGroup>
+
   <ItemGroup>
-
-<!--    Set a RimWorldPath environment variable in your computer to the path of RimWorld! -->
-    <Reference Include="RimWorld">
-      <HintPath>$(RimWorldPath)\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-
-    <Reference Include="UnityEngine">
-      <HintPath>$(RimWorldPath)\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-
-    <Reference Include="System">
-      <HintPath>$(RimWorldPath)\RimWorldWin64_Data\Managed\System.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-
-    <Reference Include="Mscorlib">
-      <HintPath>$(RimWorldPath)\RimWorldWin64_Data\Managed\mscorlib.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    
-<!--    Subscribe to the dependencies below-->
+    <!--    Subscribe to the dependencies below-->
     <Reference Include="SimpleTransExpanded">
       <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\3516912373\1.6\Assemblies\Simple-Trans.dll</HintPath>
       <Private>False</Private>
@@ -58,111 +53,49 @@
       <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\3534254491\1.6\Assemblies\LoveyDoveySexWithRosaline.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    
+
     <Reference Include="WayBetterRomance">
       <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\2877731755\1.6\Assemblies\WayBetterRomance.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="IntimacyLovin">
       <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\3498422643\1.6\Assemblies\LoveyDoveySexWithEuterpe.dll</HintPath>
-      <Private>False</Private>
+    <Private>False</Private>
     </Reference>
   </ItemGroup>
+
+<!-- Post-build deployment -->
+<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  <Message Text="Username: $(UserName)" Importance="high"/>
+  <Message Text="Current Operating System: $(CurrentOS)" Importance="High" />
+  <Message Text="Deploying $(ModName) to RimWorld..." Importance="high" />
+
+  <!-- Remove existing mod from RimWorld if it exists -->
+  <RemoveDir Directories="$(RimWorldInternal)/Mods/$(ModName)" Condition="Exists('$(RimWorldInternal)/Mods/$(ModName)')" />
+
+  <!-- Define what to copy -->
   <ItemGroup>
-    <Compile Include="Mian\ActualGender.cs" />
-    <Compile Include="Mian\BodyTypeGenderedDef.cs" />
-    <Compile Include="Mian\DebugActions.cs" />
-    <Compile Include="Mian\Dependencies\CultureViewOnTrans.cs" />
-    <Compile Include="Mian\Dependencies\DysGenderWorks.cs" />
-    <Compile Include="Mian\Dependencies\Dysphoria.cs" />
-    <Compile Include="Mian\Dependencies\GenderWorks.cs" />
-    <Compile Include="Mian\Dependencies\SimpleTrans.cs" />
-    <Compile Include="Mian\Dependencies\TransDependencies.cs" />
-    <Compile Include="Mian\Dependencies\TransDependency.cs" />
-    <Compile Include="Mian\GADefOf.cs" />
-    <Compile Include="Mian\GameComps\VersionTracker.cs" />
-    <Compile Include="Mian\GenderAcceptance.cs" />
-    <Compile Include="Mian\Gendered.cs" />
-    <Compile Include="Mian\GenderIdentity.cs" />
-    <Compile Include="Mian\InteractionWorkers\ComeOut.cs" />
-    <Compile Include="Mian\InteractionWorkers\Misgender.cs" />
-    <Compile Include="Mian\InteractionWorkers\PurposeMisgender.cs" />
-    <Compile Include="Mian\InteractionWorkers\Transvestigate.cs" />
-    <Compile Include="Mian\JobDrivers\Transvestigate.cs" />
-    <Compile Include="Mian\JobGivers\TransvestigateSpree.cs" />
-    <Compile Include="Mian\JoyGivers\Transvestigate.cs" />
-    <Compile Include="Mian\MentalStateWorkers\TransvestigateSpree.cs" />
-    <Compile Include="Mian\MentalStates\TransvestigateSpree.cs" />
-    <Compile Include="Mian\Needs\Need_Chaser.cs" />
-    <Compile Include="Mian\Patches\Faction.cs" />
-    <Compile Include="Mian\Patches\GenderUtilityPatch.cs" />
-    <Compile Include="Mian\Patches\GrammarUtilityPatch.cs" />
-    <Compile Include="Mian\Patches\InteractionWorker_RomanceAttempt.cs" />
-    <Compile Include="Mian\Patches\LovePartnerRelationUtility.cs" />
-    <Compile Include="Mian\Patches\MemoryThoughtHandler.cs" />
-    <Compile Include="Mian\Patches\Mod Integration\Dysphoria.cs" />
-    <Compile Include="Mian\Patches\Mod Integration\IntimacyLovin.cs" />
-    <Compile Include="Mian\Patches\Mod Integration\SimpleTrans.cs" />
-    <Compile Include="Mian\Patches\Mod Integration\WayBetterRomance.cs" />
-    <Compile Include="Mian\Patches\PawnData.cs" />
-    <Compile Include="Mian\Patches\PawnPatch.cs" />
-    <Compile Include="Mian\Patches\Pawn_InteractionsTracker.cs" />
-    <Compile Include="Mian\Patches\Pawn_RelationsTracker.cs" />
-    <Compile Include="Mian\ThoughtWorkers\Need_Chaser.cs" />
-    <Compile Include="Mian\ThoughtWorkers\InternalTransphobia.cs" />
-    <Compile Include="Mian\ThoughtWorkers\IsCisphobic.cs" />
-    <Compile Include="Mian\ThoughtWorkers\IsTransgenderNegative.cs" />
-    <Compile Include="Mian\ThoughtWorkers\IsTransgenderPositive.cs" />
-    <Compile Include="Mian\ThoughtWorkers\IsTransphobic.cs" />
-    <Compile Include="Mian\ThoughtWorkers\PreceptTransgender.cs" />
-    <Compile Include="Mian\ThoughtWorkers\Similarity.cs" />
-    <Compile Include="Mian\TransphobicStatus.cs" />
-    <Compile Include="Mian\TransKnowledgeManager.cs" />
-    <Compile Include="Mian\Utilities\Constants.cs" />
-    <Compile Include="Mian\Utilities\GenderUtility.cs" />
-    <Compile Include="Mian\Utilities\Helper.cs" />
-    <Compile Include="Mian\Utilities\SexualityUtility.cs" />
-    <Compile Include="Mian\Utilities\TransvestigateUtility.cs" />
-    <Compile Include="Mian\Utilities\WBRUtility.cs" />
-    <Compile Include="Mian\Verbs\Transvestigate.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <!-- Source folder (excluding obj and bin) -->
+    <SourceFiles Include="$(MSBuildProjectDirectory)/**/*.*"
+                 Exclude="$(MSBuildProjectDirectory)/obj/**/*.*;$(MSBuildProjectDirectory)/bin/**/*.*;$(MSBuildProjectDirectory)/.idea/**/*.*;$(MSBuildProjectDirectory)/packages/**/*.*;" />
+
+    <!-- About folder -->
+    <AboutFiles Include="$(MSBuildProjectDirectory)/../../About/**/*.*" />
+
+    <!-- Root files -->
+    <RootFiles Include="$(MSBuildProjectDirectory)/../../LICENSE" />
+    <RootFiles Include="$(MSBuildProjectDirectory)/../../README.md" />
+    <RootFiles Include="$(MSBuildProjectDirectory)/../../loadFolders.xml"/>
+
+    <GameVersionFiles Include="$(MSBuildProjectDirectory)/../../$(GameVersion)/**/*.*" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Lib.Harmony.Ref" Version="2.4.1" />
-    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 
-  <!-- Post-build deployment -->
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Message Text="Deploying Gender Acceptance to RimWorld..." Importance="high" />
+  <!-- Copy all defined files -->
+  <Copy SourceFiles="@(SourceFiles)" DestinationFiles="@(SourceFiles->'$(RimWorldInternal)/Mods/$(ModName)/Source/%(RecursiveDir)%(Filename)%(Extension)')" />
+  <Copy SourceFiles="@(AboutFiles)" DestinationFiles="@(AboutFiles->'$(RimWorldInternal)/Mods/$(ModName)/About/%(RecursiveDir)%(Filename)%(Extension)')" />
+  <Copy SourceFiles="@(RootFiles)" DestinationFiles="@(RootFiles->'$(RimWorldInternal)/Mods/$(ModName)/%(Filename)%(Extension)')" />
+  <Copy SourceFiles="@(GameVersionFiles)" DestinationFiles="@(GameVersionFiles->'$(RimWorldInternal)/Mods/$(ModName)/$(GameVersion)/%(RecursiveDir)%(Filename)%(Extension)')" />
 
-    <!-- Remove existing mod from RimWorld if it exists -->
-    <RemoveDir Directories="$(RimWorldPath)\Mods\$(ModName)" Condition="Exists('$(RimWorldPath)\Mods\$(ModName)')" />
-
-    <!-- Define what to copy -->
-    <ItemGroup>
-      <!-- Source folder (excluding obj and bin) -->
-      <SourceFiles Include="$(MSBuildProjectDirectory)\**\*.*"
-                   Exclude="$(MSBuildProjectDirectory)\obj\**\*.*;$(MSBuildProjectDirectory)\bin\**\*.*;$(MSBuildProjectDirectory)\.idea\**\*.*;$(MSBuildProjectDirectory)\packages\**\*.*;" />
-      
-      <!-- About folder -->
-      <AboutFiles Include="$(MSBuildProjectDirectory)\..\..\About\**\*.*" />
-
-      <!-- Root files -->
-      <RootFiles Include="$(MSBuildProjectDirectory)\..\..\LICENSE" />
-      <RootFiles Include="$(MSBuildProjectDirectory)\..\..\README.md" />
-      <RootFiles Include="$(MSBuildProjectDirectory)\..\..\loadFolders.xml"/>
-      
-      <SixteenFiles Include="$(MSBuildProjectDirectory)\..\..\1.6\**\*.*" />
-    </ItemGroup>
-
-    <!-- Copy all defined files -->
-    <Copy SourceFiles="@(SourceFiles)" DestinationFiles="@(SourceFiles->'$(RimWorldPath)\Mods\$(ModName)\Source\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(AboutFiles)" DestinationFiles="@(AboutFiles->'$(RimWorldPath)\Mods\$(ModName)\About\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(RootFiles)" DestinationFiles="@(RootFiles->'$(RimWorldPath)\Mods\$(ModName)\%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(SixteenFiles)" DestinationFiles="@(SixteenFiles->'$(RimWorldPath)\Mods\$(ModName)\1.6\%(RecursiveDir)%(Filename)%(Extension)')" />
-
-    <Message Text="Topic of Gender deployed successfully to $(RimWorldPath)\Mods\$(ModName)" Importance="high" />
-  </Target>
+  <Message Text="$(ModName) deployed successfully to $(RimWorldInternal)/Mods/$(ModName)" Importance="high" />
+</Target>
 </Project>
