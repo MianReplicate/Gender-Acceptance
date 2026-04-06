@@ -26,7 +26,7 @@
                 <li>sex_event->[INITIATOR_nameDef]'s transdar went [goofy_aww_verb] [goofy_aww_verb] [goofy_aww_verb]</li>
                 <li>sex_event(INITIATOR_isHomo==true,p=1)->[INITIATOR_nameDef]'s gaydar whispered to [INITIATOR_possessive] that [INITIATOR_pronoun] was [sex_verb] a transgender person</li>
                 <li>sex_event(INITIATOR_isHomo==true,p=1)->[INITIATOR_nameDef]'s gay-ass whispered to [INITIATOR_possessive] that [INITIATOR_pronoun] was [sex_verb] a transgender person</li>
-                <li>sex_event->[INITIATOR_nameDef] couldn't shake off the feeling that she was [sex_verb] a transgender person</li>
+                <li>sex_event->[INITIATOR_nameDef] couldn't shake off the feeling that [INITIATOR_pronoun] was [sex_verb] a transgender person</li>
 
                 <li>sex_event->[INITIATOR_nameDef] swore [INITIATOR_pronoun] saw surgery scars</li>
                 
