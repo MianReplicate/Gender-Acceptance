@@ -37,8 +37,8 @@ public static class DebugActions
                             () =>
                             {
                                 var newValue = !value;
-                                fieldInfo.SetValue(tracker, newValue);
-
+                                tracker.EditValues(() => fieldInfo.SetValue(tracker, newValue));
+                                
                                 Find.WindowStack.Add(new Dialog_DebugOptionListLister(createAttributes()));
                             });
 

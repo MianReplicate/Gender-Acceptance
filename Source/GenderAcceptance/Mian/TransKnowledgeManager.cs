@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using GenderAcceptance.Mian.Utilities;
+using Multiplayer.API;
 using RimWorld;
 using Verse;
 using Verse.Grammar;
@@ -12,10 +13,15 @@ namespace GenderAcceptance.Mian;
 
 public class TransKnowledgeTracker : IExposable
 {
-    private Pawn pawn;
+    [SyncField]
+    public Pawn pawn;
+    [SyncField]
     public bool playedNotification;
+    [SyncField]
     public bool sex;
+    [SyncField]
     public bool transvestigate;
+    [SyncField]
     public bool cameOut;
 
     public TransKnowledgeTracker()
@@ -42,6 +48,25 @@ public class TransKnowledgeTracker : IExposable
     public bool BelievesTheyAreTrans()
     {
         return transvestigate || sex || cameOut;
+    }
+    
+    // Needed for user inputs for multiplayer purposes
+    public void EditValues(Action action)
+    {
+        if (MP.IsInMultiplayer)
+        {
+            MP.WatchBegin();
+            MP.Watch(this, nameof(pawn));
+            MP.Watch(this, nameof(playedNotification));
+            MP.Watch(this, nameof(sex));
+            MP.Watch(this, nameof(transvestigate));
+            MP.Watch(this, nameof(cameOut));
+        }
+
+        action();
+        
+        if(MP.IsInMultiplayer)
+            MP.WatchEnd();
     }
 }
 
@@ -235,6 +260,7 @@ public static class TransKnowledgeManager
             if (appearanceRoll)
                 rules.Add(new Rule_String("RECIPIENT_gendered",
                     recipient.GetOppositeGender().GetGenderedAppearance().GetGenderNoun()));
+            
             initiator.GetKnowledgeOnPawn(recipient).transvestigate = true;
             OnKnowledgeLearned(
                 initiator,
