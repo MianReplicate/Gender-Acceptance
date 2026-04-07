@@ -6,7 +6,7 @@
 
   <!--    Don't change the below!-->
   <OutputType>Library</OutputType>
-  <TargetFramework>net472</TargetFramework>
+  <TargetFramework>net48</TargetFramework>
   <LangVersion>12</LangVersion>
   <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   <DebugType>embedded</DebugType>
@@ -63,6 +63,10 @@
       <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\3498422643\1.6\Assemblies\LoveyDoveySexWithEuterpe.dll</HintPath>
     <Private>False</Private>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 <!-- Post-build deployment -->

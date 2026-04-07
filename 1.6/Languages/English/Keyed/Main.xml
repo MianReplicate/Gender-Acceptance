@@ -5,7 +5,7 @@
   <GA.TransSex>{INITIATOR_nameDef} believes {RECIPIENT_nameDef} is transgender.</GA.TransSex>
   <GA.PawnBelievesOtherPawnIsTransLabel>{INITIATOR_nameDef} has a suspicion about {RECIPIENT_nameDef}</GA.PawnBelievesOtherPawnIsTransLabel>
 
-  <GA.ComeOutLabel>{INITIATOR_nameDef} came out to {RECIPIENT_nameDef}</GA.ComeOutLabel>
+  <GA.ComeOutLabel>{RECIPIENT_nameDef} came out to {INITIATOR_nameDef}</GA.ComeOutLabel>
 
   <GA.Masculine>masculine</GA.Masculine>
   <GA.Feminine>feminine</GA.Feminine>
@@ -28,4 +28,5 @@
   <GA.VersionUpdate>URGENT FROM TOPIC OF GENDER! PLEASE READ</GA.VersionUpdate>
   <GA.VersionUpdateMain>Hi! Sorry for the interruption, but Topic of Gender has gotten a potential save-damaging update since the last time you've played.\n\nIf this is a new save, carry on, otherwise please continue reading.\n\nThis version has been marked as an update that could potentially affect the balance of your saves or damage them.\n\nIf you would like to know more, please go to the mod page on Steam and check the discussions for the changelog.</GA.VersionUpdateMain>
   
+  <GA.ResetSettings>Reset Settings</GA.ResetSettings>
 </LanguageData>
