@@ -225,11 +225,37 @@ public static class GenderUtility
             return points;
         if (pawn.GetActualGender() == ActualGender.Woman)
         {
-            if (points < 0)
-                return Math.Abs(points);
-            return -points;
+            return points < 0 ? Math.Abs(points) : -points;
         }
 
         return -Math.Abs(points); // assume they are enby
     }
+
+    public static float AppearanceMismatchChanceFactor(this Pawn pawn)
+    {
+        return AppearanceMismatchFactorCurve.Evaluate(pawn.CalculateRelativeAppearanceFromIdentity());
+    }
+    
+    private static readonly SimpleCurve AppearanceMismatchFactorCurve = new SimpleCurve
+    {
+        {
+            new CurvePoint(0f, 0f)
+        },
+        {
+            new CurvePoint(-1f, 1f)
+        },
+        {
+            new CurvePoint(-2f, 2f)
+        },
+        {
+            new CurvePoint(-4f, 3f)
+        },
+        {
+            new CurvePoint(-6f, 4f)
+        },
+        {
+            new CurvePoint(-10f, 6f)
+        }
+    };
+    
 }

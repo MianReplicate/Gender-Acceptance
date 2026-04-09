@@ -250,8 +250,9 @@ public static class TransKnowledgeManager
             return;
         lastTranvestigatedTicks[initiator] = Find.TickManager.TicksGame;
         var relative = recipient.CalculateRelativeAppearanceFromIdentity();
-        appearanceChance -= relative / 5 *
-            ((initiator.story?.traits?.HasTrait(GADefOf.Chaser) ?? false) && relative < 0 ? 1.5f : 1);
+        var appearanceFactor = recipient.AppearanceMismatchChanceFactor();
+        appearanceChance *= appearanceFactor *
+            ((initiator.story?.traits?.HasTrait(GADefOf.Chaser) ?? false) ? 2f : 1);
         var appearanceRoll = Rand.Chance(appearanceChance);
         Helper.Debug($"{initiator} tried transvestigating {recipient}. Appearance: {appearanceChance}, Success: {appearanceRoll}");
         if (appearanceRoll)

@@ -106,7 +106,7 @@
     <stages>
       <li>
         <label>misgendered someone</label>
-        <description>I accidentally misgendered {0}. I feel terrible.</description>
+        <description>I accidentally misgendered {1}. I feel terrible.</description>
         <baseMoodEffect>-5</baseMoodEffect>
       </li>
     </stages>

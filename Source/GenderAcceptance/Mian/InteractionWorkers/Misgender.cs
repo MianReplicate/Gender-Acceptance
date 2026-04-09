@@ -15,10 +15,7 @@ public class Misgender : InteractionWorker
         if (transphobicStatus.GenerallyTransphobic && initiator.BelievesIsTrans(recipient))
             return 0;
         
-        var genderMismatch = recipient.GetGenderedAppearance() != recipient.GetActualGender().GetGameGender().GetGenderedAppearance() ? 0.05f : 0f;
-        var relationship = -initiator.relations.OpinionOf(recipient) / 200;
-        
-        return Math.Max(0.001f, baseChance + genderMismatch + relationship);
+        return Math.Max(0.001f, baseChance * recipient.AppearanceMismatchChanceFactor());
     }
 
     public override void Interacted(
