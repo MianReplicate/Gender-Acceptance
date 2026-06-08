@@ -4,6 +4,7 @@ using Verse;
 
 namespace GenderAcceptance.Mian.Dependencies;
 
+[TransLibrary(["runaway.simpletrans"], "Simple Trans (Expanded)")]
 public class SimpleTrans : TransDependency
 {
 

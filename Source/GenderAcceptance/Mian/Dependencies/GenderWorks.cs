@@ -4,6 +4,7 @@ using Verse;
 
 namespace GenderAcceptance.Mian.Dependencies;
 
+[TransLibrary(["lovelydovey.sex.withrosaline"], "Intimacy - Gender Works")]
 public class GenderWorks : TransDependency
 {
     public override GenderIdentity GetCurrentIdentity(Pawn pawn)

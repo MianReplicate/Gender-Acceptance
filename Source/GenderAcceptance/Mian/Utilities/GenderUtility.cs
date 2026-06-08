@@ -188,26 +188,16 @@ public static class GenderUtility
         
         return TransDependencies.TransLibrary.GetGenderedPoints(pawn);
     }
+    
 
     /// <summary>
-    ///     Determines whether one is enby by if their biological sex is not male or female
-    /// </summary>
-    /// <param name="pawn">The pawn to check</param>
-    /// <returns>Whether a pawn is enby or not</returns>
-
-    private static bool IsEnbyBySexTerm(this Pawn pawn)
-    {
-        return pawn.gender != Gender.Male && pawn.gender != Gender.Female;
-    }
-
-    /// <summary>
-    /// Checks for whether a pawn is enby or not. This is a method meant to be patched by other mods that may add their own enby pawn variants
+    /// Checks for whether a pawn is enby or not.
     /// </summary>
     /// <param name="pawn">The pawn to check</param>
     /// <returns>Whether a pawn is enby or not</returns>
     public static bool IsEnby(this Pawn pawn)
     {
-        return pawn.IsEnbyBySexTerm(); // A catch-all for any enby mods that might add a third sex
+        return TransDependencies.TransLibrary.IsEnby(pawn);
     }
 
     /// <summary>
