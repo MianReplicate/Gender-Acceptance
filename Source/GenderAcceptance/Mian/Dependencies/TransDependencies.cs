@@ -46,13 +46,12 @@ public static class TransDependencies
         var transLibraries = LoadedModManager.RunningModsListForReading.SelectMany(content => content.assemblies.loadedAssemblies).SelectMany(a => a.GetTypes())
             .Where(t => t.HasAttribute<TransLibrary>())
             .SelectMany(t => (TransLibrary[])t.GetCustomAttributes(typeof(TransLibrary), false),
-                resultSelector: ((type, compat) => new { type, compat }))
-            .Where((arg => arg.compat.PackageIds.All(ModsConfig.IsActive))).ToList();
+                resultSelector: ((type, compat) => new { type, compat })).ToList();
 
         Type libraryToUse = null;
         var highestPriority = (int)TLPriority.Low;
 
-        foreach (var library in transLibraries)
+        foreach (var library in transLibraries.Where((arg => arg.compat.PackageIds.All(ModsConfig.IsActive))))
         {
             if (library.compat.Priority < highestPriority)
             {
@@ -64,7 +63,7 @@ public static class TransDependencies
         if (libraryToUse == null){
             Helper.Error(
                 "You have none of the transgender packages required downloaded! Please choose out of these, which packages to utilize: " +
-                string.Join("\n", transLibraries.Select(library => library.compat.Name)));
+                string.Join(", ", transLibraries.Select(library => library.compat.Name)));
             return;
         }
         
