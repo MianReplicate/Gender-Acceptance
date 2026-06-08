@@ -28,5 +28,7 @@
   <GA.VersionUpdate>URGENT FROM TOPIC OF GENDER! PLEASE READ</GA.VersionUpdate>
   <GA.VersionUpdateMain>Hi! Sorry for the interruption, but Topic of Gender has gotten a potential save-damaging update since the last time you've played.\n\nIf this is a new save, carry on, otherwise please continue reading.\n\nThis version has been marked as an update that could potentially affect the balance of your saves or damage them.\n\nIf you would like to know more, please go to the mod page on Steam and check the discussions for the changelog.</GA.VersionUpdateMain>
   
+  <GA.LongEvent.StartingTransLibraries>Starting up trans libraries!</GA.LongEvent.StartingTransLibraries>
+  
   <GA.ResetSettings>Reset Settings</GA.ResetSettings>
 </LanguageData>

@@ -5,6 +5,7 @@ using Verse;
 
 namespace GenderAcceptance.Mian.Dependencies;
 
+[TransLibrary(["cammy.identity.gender"], "Identity: Dysphoria")]
 public class Dysphoria : TransDependency
 {
     private static readonly PreceptDef Trans_Abhorrent = DefDatabase<PreceptDef>.GetNamed("Trans_Abhorrent");

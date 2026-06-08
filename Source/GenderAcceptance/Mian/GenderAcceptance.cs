@@ -17,9 +17,7 @@ public static class Startup
     static Startup()
     {
         Helper.Log("Transphobia? More like trans-dimensional timey wimey shi-");
-
-        TransDependencies.Setup();
-
+        
         var harmony = new Harmony("rimworld.mian.genderacceptance");
         harmony.PatchAll();
 
@@ -72,6 +70,8 @@ public class GenderAcceptance : Mod
     {
         GASettings.Instance = GetSettings<GASettings>();
         Constants.Version = content.ModMetaData.ModVersion;
+        
+        LongEventHandler.QueueLongEvent(TransDependencies.Startup, "GA.LongEvent.StartingTransLibraries", false, null);
     }
 
     public override void DoSettingsWindowContents(Rect inRect)

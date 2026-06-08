@@ -6,6 +6,7 @@ using Verse;
 namespace GenderAcceptance.Mian.Dependencies;
 
 // If Dysphoria and GenderWorks are both installed
+[TransLibrary(["cammy.identity.gender", "lovelydovey.sex.withrosaline"], "Identity: Dysphoria + Intimacy - Gender Works", TLPriority.HigherThanNormal)]
 public class DysGenderWorks : Dysphoria
 {
     public override bool AppearsToHaveMatchingGenitalia(Pawn pawn)
