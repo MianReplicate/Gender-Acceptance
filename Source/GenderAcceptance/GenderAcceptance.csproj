@@ -78,29 +78,17 @@
   <!-- Remove existing mod from RimWorld if it exists -->
   <RemoveDir Directories="$(RimWorldInternal)/Mods/$(ModName)" Condition="Exists('$(RimWorldInternal)/Mods/$(ModName)')" />
 
-  <!-- Define what to copy -->
   <ItemGroup>
-    <!-- Source folder (excluding obj and bin) -->
-    <SourceFiles Include="$(MSBuildProjectDirectory)/**/*.*"
-                 Exclude="$(MSBuildProjectDirectory)/obj/**/*.*;$(MSBuildProjectDirectory)/bin/**/*.*;$(MSBuildProjectDirectory)/.idea/**/*.*;$(MSBuildProjectDirectory)/packages/**/*.*;" />
-
-    <!-- About folder -->
-    <AboutFiles Include="$(MSBuildProjectDirectory)/../../About/**/*.*" />
-
-    <!-- Root files -->
-    <RootFiles Include="$(MSBuildProjectDirectory)/../../LICENSE" />
-    <RootFiles Include="$(MSBuildProjectDirectory)/../../README.md" />
-    <RootFiles Include="$(MSBuildProjectDirectory)/../../loadFolders.xml"/>
-
-    <GameVersionFiles Include="$(MSBuildProjectDirectory)/../../$(GameVersion)/**/*.*" />
+    <Files Include="$(MSBuildProjectDirectory)/../../**/*.*"/>
+    <Files Remove="$(MSBuildProjectDirectory)/../../**/.git/**/*;
+                   $(MSBuildProjectDirectory)/../../**/bin/**/*;
+                   $(MSBuildProjectDirectory)/../../**/obj/**/*;
+                   $(MSBuildProjectDirectory)/../../**/.idea/**/*;
+                   $(MSBuildProjectDirectory)/../../**/packages/**/*" />
   </ItemGroup>
 
-  <!-- Copy all defined files -->
-  <Copy SourceFiles="@(SourceFiles)" DestinationFiles="@(SourceFiles->'$(RimWorldInternal)/Mods/$(ModName)/Source/%(RecursiveDir)%(Filename)%(Extension)')" />
-  <Copy SourceFiles="@(AboutFiles)" DestinationFiles="@(AboutFiles->'$(RimWorldInternal)/Mods/$(ModName)/About/%(RecursiveDir)%(Filename)%(Extension)')" />
-  <Copy SourceFiles="@(RootFiles)" DestinationFiles="@(RootFiles->'$(RimWorldInternal)/Mods/$(ModName)/%(Filename)%(Extension)')" />
-  <Copy SourceFiles="@(GameVersionFiles)" DestinationFiles="@(GameVersionFiles->'$(RimWorldInternal)/Mods/$(ModName)/$(GameVersion)/%(RecursiveDir)%(Filename)%(Extension)')" />
-
+  <Copy SourceFiles="@(Files)" DestinationFiles="@(Files->'$(RimWorldInternal)/Mods/$(ModName)/%(RecursiveDir)%(Filename)%(Extension)')" />
+  
   <Message Text="$(ModName) deployed successfully to $(RimWorldInternal)/Mods/$(ModName)" Importance="high" />
 </Target>
 </Project>
