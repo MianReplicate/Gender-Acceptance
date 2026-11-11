@@ -1,0 +1,10 @@
+﻿<Defs>
+    <JobDef>
+        <defName>Transvestigate</defName>
+        <driverClass>GenderAcceptance.Mian.JobDrivers.Transvestigate</driverClass>
+        <reportString>transvestigating TargetA.</reportString>
+        <joyDuration>4000</joyDuration>
+        <joyGainRate>1</joyGainRate>
+        <joyKind>Social</joyKind>
+    </JobDef>
+</Defs>

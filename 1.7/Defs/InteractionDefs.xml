@@ -1,0 +1,84 @@
+﻿<Defs>
+    <InteractionDef>
+        <defName>Transvestigate</defName>
+        <label>transvestigate</label>
+        <workerClass>GenderAcceptance.Mian.InteractionWorkers.Transvestigate</workerClass>
+        <symbol>Things/Mote/SpeechSymbols/DeepTalk</symbol>
+
+        <logRulesInitiator>
+            <rulesStrings>
+                <li>r_logentry->[INITIATOR_nameDef] [comment] [RECIPIENT_nameDef].</li>
+
+                <li>comment->is transvestigating</li>
+                <li>comment->is watching</li>
+                <li>comment->is stalking</li>
+            </rulesStrings>
+        </logRulesInitiator>
+    </InteractionDef>
+    
+    <InteractionDef>
+        <defName>ComeOut</defName>
+        <label>comeout</label>
+        <workerClass>GenderAcceptance.Mian.InteractionWorkers.ComeOut</workerClass>
+        <symbol>Things/Mote/SpeechSymbols/ReduceWill</symbol>
+
+        <logRulesInitiator>
+            <rulesStrings>
+                <li>r_logentry->[INITIATOR_nameDef] [comment] to [RECIPIENT_nameDef].</li>
+                
+                <li>comment->came out</li>
+                <li>comment->poured their tears into coming out</li>
+                <li>comment->overcame the courage to come out</li>
+            </rulesStrings>
+        </logRulesInitiator>
+    </InteractionDef>
+    
+    <InteractionDef>
+        <defName>PurposeMisgender</defName>
+        <label>purposeful misgender</label>
+        <workerClass>GenderAcceptance.Mian.InteractionWorkers.PurposeMisgender</workerClass>
+        <symbol>Things/Mote/SpeechSymbols/Insult</symbol>
+        
+        <socialFightBaseChance>0.2</socialFightBaseChance>
+        <recipientThought>Misgendered</recipientThought>
+        <logRulesInitiator>
+            <rulesStrings>
+                <li>r_logentry->[INITIATOR_nameDef] [adjective] [comment]</li>
+                
+                <li>adjective->purposefully</li>
+                <li>adjective->openly</li>
+                <li>adjective->loudly</li>
+                <li>adjective->disrespectfully</li>
+                <li>adjective->cruelly</li>
+                <li>adjective->angrily</li>
+                <li>adjective->recklessly</li>
+                <li>adjective->rudely</li>
+                
+                <li>comment(p=3)->misgendered [RECIPIENT_nameDef].</li>
+                <li>comment->exposed [RECIPIENT_nameDef]'s [PersonalCharacteristic] as a way to justify misgendering [RECIPIENT_possessive].</li>
+                <li>comment->insulted [RECIPIENT_nameDef]'s gender identity and misgendered [RECIPIENT_pronoun].</li>
+                <li>comment->used the wrong pronouns for [RECIPIENT_nameDef].</li>
+            </rulesStrings>
+        </logRulesInitiator>
+    </InteractionDef>
+
+    <InteractionDef>
+        <defName>Misgender</defName>
+        <label>misgender</label>
+        <workerClass>GenderAcceptance.Mian.InteractionWorkers.Misgender</workerClass>
+        <symbol>Things/Mote/SpeechSymbols/Insult</symbol>
+        <socialFightBaseChance>0.01</socialFightBaseChance>
+        <recipientThought>Misgendered</recipientThought>
+        <logRulesInitiator>
+            <rulesStrings>
+                <li>r_logentry->[INITIATOR_nameDef] [adjective] [comment]</li>
+
+                <li>adjective->accidentally</li>
+                <li>adjective->mistakenly</li>
+                
+                <li>comment(p=3)->misgendered [RECIPIENT_nameDef].</li>
+                <li>comment->used the wrong pronouns for [RECIPIENT_nameDef].</li>
+            </rulesStrings>
+        </logRulesInitiator>
+    </InteractionDef>
+</Defs>

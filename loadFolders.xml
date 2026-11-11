@@ -5,4 +5,9 @@
         <li>1.6</li>
         <li IfModNotActive="cammy.identity.gender" IfModActive="Ludeon.RimWorld.Ideology">1.6/Mods/Ideology</li>
     </v1.6>
+    <v1.7>
+        <li>/</li>
+        <li>1.7</li>
+        <li IfModNotActive="cammy.identity.gender" IfModActive="Ludeon.RimWorld.Ideology">1.7/Mods/Ideology</li>
+    </v1.7>
 </loadFolders>

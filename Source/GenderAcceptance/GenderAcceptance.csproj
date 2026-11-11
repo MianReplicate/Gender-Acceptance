@@ -6,7 +6,7 @@
 
   <!--    Don't change the below!-->
   <OutputType>Library</OutputType>
-  <TargetFramework>net48</TargetFramework>
+  <TargetFramework>net10.0</TargetFramework>
   <LangVersion>12</LangVersion>
   <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   <DebugType>embedded</DebugType>
@@ -35,15 +35,15 @@
 </PropertyGroup>
 
 <ItemGroup>
-  <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.4633" />
-  <PackageReference Include="Lib.Harmony.Ref" Version="2.4.2" />
+  <PackageReference Include="Krafs.Rimworld.Ref" Version="1.7.5005-unstable" />
+  <PackageReference Include="Lib.Harmony.Ref" Version="3.0.0-rc.5" />
   <PackageReference Include="RimWorld.MultiplayerAPI" Version="0.6.0" />
 </ItemGroup>
 
   <ItemGroup>
     <!--    Subscribe to the dependencies below-->
     <Reference Include="SimpleTransExpanded">
-      <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\3516912373\1.6\Assemblies\Simple-Trans.dll</HintPath>
+      <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\3516912373\1.7\Assemblies\Simple-Trans.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="IdentityDysphoria">
@@ -60,7 +60,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="IntimacyLovin">
-      <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\3498422643\1.6\Assemblies\LoveyDoveySexWithEuterpe.dll</HintPath>
+      <HintPath>$(RimWorldPath)\..\..\workshop\content\294100\3498422643\1.7\Assemblies\LoveyDoveySexWithEuterpe.dll</HintPath>
     <Private>False</Private>
     </Reference>
   </ItemGroup>

@@ -1,0 +1,290 @@
+<Defs>
+  
+  <!--Phobias-->
+  <ThoughtDef>
+    <defName>Cisphobia</defName>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.IsCisphobic</workerClass>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>Cisphobia</label>
+        <baseOpinionOffset>-25</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>Transphobia</defName>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.IsTransphobic</workerClass>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>Transphobia</label>
+        <baseOpinionOffset>-25</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!--Misc-->
+  <ThoughtDef>
+    <defName>Need_Chaser_Thought</defName>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.Need_Chaser</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>Intimate with a trans person</label>
+        <description>Been around a trans person recently, feeling great!</description>
+        <baseMoodEffect>+15</baseMoodEffect>
+      </li>
+      <li>
+        <label>Need a trans person</label>
+        <description>I haven't felt the touch of a trans person in a while..</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+      <li>
+        <label>Longing for a trans person</label>
+        <description>I'm getting anxious and worried that I will never touch a trans person ever again.</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+      <li>
+        <label>Aching for a trans person</label>
+        <description>I am foaming at the mouth in desperate need for a transgender.</description>
+        <baseMoodEffect>-12</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>Similar</defName>
+    <workerClass>GenderAcceptance.Mian.ThoughtWorkers.Similarity</workerClass>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>Relates to being transgender</label>
+        <baseOpinionOffset>+15</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Transgender_Person_Joined_Positive</defName>
+    <durationDays>5</durationDays>
+    <stackLimit>10</stackLimit>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>Transgender person joined</label>
+        <description>It feels good knowing I'll have company that can relate to being transgender.</description>
+        <baseMoodEffect>+25</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Transgender_Person_Joined_Negative</defName>
+    <durationDays>5</durationDays>
+    <stackLimit>10</stackLimit>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>Transgender person joined</label>
+        <description>Disgusting! Why did we let {0} join?</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>Accidental_Misgender</defName>
+    <durationDays>2</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>misgendered someone</label>
+        <description>I accidentally misgendered {1}. I feel terrible.</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Misgendered</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>20</durationDays>
+    <stackLimit>300</stackLimit>
+    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <socialTargetDevelopmentalStageFilter>Child, Adult</socialTargetDevelopmentalStageFilter>
+    <stages>
+      <li>
+        <label>misgendered</label>
+        <baseOpinionOffset>-15</baseOpinionOffset>
+      </li>
+    </stages>
+    <thoughtToMake>MisgenderedMood</thoughtToMake>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>MisgenderedMood</defName>
+    <durationDays>2</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>misgendered</label>
+        <description>I was misgendered by {1}!</description>
+        <baseMoodEffect>-6</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>Cisgender_Person_Joined</defName>
+    <durationDays>5</durationDays>
+    <stackLimit>10</stackLimit>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>Cisgender person joined</label>
+        <description>Disgusting! Why did we let {0} join?</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Dehumanized</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>5</durationDays>
+    <stackLimit>300</stackLimit>
+    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Adult</developmentalStageFilter>
+    <socialTargetDevelopmentalStageFilter>Adult</socialTargetDevelopmentalStageFilter>
+    <stages>
+      <li>
+        <label>dehumanized</label>
+        <baseOpinionOffset>-15</baseOpinionOffset>
+      </li>
+    </stages>
+    <thoughtToMake>DehumanizedMood</thoughtToMake>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>DehumanizedMood</defName>
+    <durationDays>2</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>dehumanized</label>
+        <description>I was treated like an object by {1} during our lovin'. Was I just a sex toy to {1_objective}?</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>CameOutPositive</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>5</durationDays>
+    <stackLimit>300</stackLimit>
+    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <socialTargetDevelopmentalStageFilter>Child, Adult</socialTargetDevelopmentalStageFilter>
+    <stages>
+      <li>
+        <label>coming out to {1} went amazing</label>
+        <baseOpinionOffset>10</baseOpinionOffset>
+      </li>
+    </stages>
+    <thoughtToMake>CameOutMoodPositive</thoughtToMake>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>CameOutNegative</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>5</durationDays>
+    <stackLimit>300</stackLimit>
+    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <socialTargetDevelopmentalStageFilter>Child, Adult</socialTargetDevelopmentalStageFilter>
+    <stages>
+      <li>
+        <label>coming out to {1} was terrible</label>
+        <baseOpinionOffset>-10</baseOpinionOffset>
+      </li>
+    </stages>
+    <thoughtToMake>CameOutMoodNegative</thoughtToMake>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>CameOutMoodPositive</defName>
+    <durationDays>5</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>coming out to {1} went amazing</label>
+        <description>I came out to {1}. It went wonderfully, and my bond with {OTHERPAWN_possessive} is stronger than ever.</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>CameOutMoodNegative</defName>
+    <durationDays>5</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>coming out to {1} was terrible</label>
+        <description>I came out to {1}. It was terrible, and I don't know what my relationship is with {OTHERPAWN_possessive} anymore.</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>FoundOutPawnIsTransMoodPositive</defName>
+    <durationDays>2</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>found out {1} is transgender</label>
+        <description>I'll make sure to use {OTHERPAWN_possessive} preferred pronouns and to support {OTHERPAWN_possessive} the best I can.</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>FoundOutPawnIsTransMoodNegative</defName>
+    <durationDays>2</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>found out {1} is transgender</label>
+        <description>I'm disappointed that {1} is one of those "transgenders." It's a phase they'll grow out of I imagine.</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>

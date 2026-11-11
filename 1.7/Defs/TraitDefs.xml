@@ -1,0 +1,54 @@
+<Defs>
+    <TraitDef>
+        <defName>Chaser</defName>
+        <commonality>1.3</commonality>
+        <label>chaser</label>
+        <degreeDatas>
+            <li>
+                <label>chaser</label>
+                <description>[PAWN_nameDef] desires to get closer to transgender individuals to fulfil their dark desires.</description>
+                <enablesNeeds>
+                    <li>Need_Chaser</li>
+                </enablesNeeds>
+            </li>
+        </degreeDatas>
+        <conflictingTraits>
+            <li>Asexual</li>
+            <li>Transphobic</li>
+            <li MayRequire="divinederivative.romance">HeteroAce</li>
+            <li MayRequire="divinederivative.romance">HomoAce</li>
+            <li MayRequire="divinederivative.romance">BiAce</li>
+        </conflictingTraits>
+        <modExtensions>
+            <li MayRequire="lovelydovey.sex.witheuterpe" Class="LoveyDoveySexWithEuterpe.IntimacyModExtension">
+                <isNeedy>true</isNeedy>
+            </li>
+        </modExtensions>
+    </TraitDef>
+    <TraitDef>
+        <defName>Cisphobic</defName>
+        <commonality>0.5</commonality>
+        <label>cisphobic</label>
+        <degreeDatas>
+            <li>
+                <degree>0</degree>
+                <label>cisphobic</label>
+                <description>[PAWN_nameDef] dislikes cisgender individuals.</description>
+            </li>
+        </degreeDatas>
+    </TraitDef>
+    <TraitDef>
+        <defName>Transphobic</defName>
+        <label>transphobic</label>
+        <degreeDatas>
+            <li>
+                <degree>0</degree>
+                <label>transphobic</label>
+                <description>[PAWN_nameDef] dislikes transgender individuals.</description>
+            </li>
+        </degreeDatas>
+        <conflictingTraits>
+            <li>Transhumanist</li>
+        </conflictingTraits>
+    </TraitDef>
+</Defs>

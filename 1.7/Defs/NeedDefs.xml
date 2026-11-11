@@ -1,0 +1,14 @@
+﻿<Defs>
+    <NeedDef>
+        <defName>Need_Chaser</defName>
+        <needClass>GenderAcceptance.Mian.Needs.Need_Chaser</needClass>
+        <label>Trans Intimacy</label>
+        <description>Chasers desire some intimacy with a trans person from time to time through social interactions or lovin'. Without a trans person in the colony, they may become extremely unhappy.</description>
+        <minIntelligence>Humanlike</minIntelligence>
+        <freezeWhileSleeping>true</freezeWhileSleeping>
+        <freezeInMentalState>true</freezeInMentalState>
+        <showForCaravanMembers>false</showForCaravanMembers>
+        <developmentalStageFilter>Adult</developmentalStageFilter>
+        <onlyIfCausedByTrait>true</onlyIfCausedByTrait>
+    </NeedDef>
+</Defs>

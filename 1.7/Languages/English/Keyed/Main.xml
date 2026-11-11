@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  
+  <GA.HookupChanceChaser>Chaser</GA.HookupChanceChaser>
+  <GA.TransSex>{INITIATOR_nameDef} believes {RECIPIENT_nameDef} is transgender.</GA.TransSex>
+  <GA.PawnBelievesOtherPawnIsTransLabel>{INITIATOR_nameDef} has a suspicion about {RECIPIENT_nameDef}</GA.PawnBelievesOtherPawnIsTransLabel>
+
+  <GA.ComeOutLabel>{RECIPIENT_nameDef} came out to {INITIATOR_nameDef}</GA.ComeOutLabel>
+
+  <GA.Masculine>masculine</GA.Masculine>
+  <GA.Feminine>feminine</GA.Feminine>
+  <GA.Androgynous>androgynous</GA.Androgynous>
+
+  <GA.SocialFightTransphobia>{PAWN1_labelShort} started a social fight with {PAWN2_labelShort} because of {PAWN1_possessive} transphobic beliefs.</GA.SocialFightTransphobia>
+
+  <GA.IntentionallyFoundOutThroughChat>{TELLER_labelShort} gossiped to {RECEIVER_labelShort} about {GOSSIPED_labelShort}'s gender identity, leading {RECEIVER_labelShort} to find out the latter is transgender.</GA.IntentionallyFoundOutThroughChat>
+  <GA.AccidentallyFoundOutThroughChat>{TELLER_labelShort}'s word of choice implied to {RECEIVER_labelShort} that {GOSSIPED_labelShort} is transgender.</GA.AccidentallyFoundOutThroughChat>
+
+  <GA.ModName>Topic of Gender</GA.ModName>
+  <GA.EnableLoggingExplanation>Enable Developer Logging</GA.EnableLoggingExplanation>
+  <GA.BaseRandomOuttingChance>Base Outting Chance (Default {0}%): {1}%</GA.BaseRandomOuttingChance>
+  <GA.BaseRandomOuttingChanceTip>When pawns talk to other pawns, this is the initial base chance that determines whether they out other trans pawns they are aware of. This chance is then multiplied by other factors: transphobia, ideology, etc</GA.BaseRandomOuttingChanceTip>
+  <GA.ColonyIdeologyOverPawnIdeology>Prioritize Colony Ideology Over Pawn Ideology</GA.ColonyIdeologyOverPawnIdeology>
+  <GA.ColonyIdeologyOverPawnIdeologyTip>Whether the colony ideology or pawn ideology is used when modifying the base outting chance</GA.ColonyIdeologyOverPawnIdeologyTip>
+  <GA.NonTransphobicPeopleNeverOut>Non-Transphobic Pawns Never Out</GA.NonTransphobicPeopleNeverOut>
+  <GA.NonTransphobicPeopleNeverOutTip>Whether non-transphobic pawns should be able to out a pawn by accident or not</GA.NonTransphobicPeopleNeverOutTip>
+  
+  <GA.VersionUpdate>URGENT FROM TOPIC OF GENDER! PLEASE READ</GA.VersionUpdate>
+  <GA.VersionUpdateMain>Hi! Sorry for the interruption, but Topic of Gender has gotten a potential save-damaging update since the last time you've played.\n\nIf this is a new save, carry on, otherwise please continue reading.\n\nThis version has been marked as an update that could potentially affect the balance of your saves or damage them.\n\nIf you would like to know more, please go to the mod page on Steam and check the discussions for the changelog.</GA.VersionUpdateMain>
+  
+  <GA.LongEvent.StartingTransLibraries>Starting up trans libraries!</GA.LongEvent.StartingTransLibraries>
+  
+  <GA.ResetSettings>Reset Settings</GA.ResetSettings>
+</LanguageData>
