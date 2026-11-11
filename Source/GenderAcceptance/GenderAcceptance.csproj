@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 <PropertyGroup>
   <!--    Mod information-->
-  <GameVersion>1.6</GameVersion>
+  <GameVersion>1.7</GameVersion>
   <ModName>Topic of Gender</ModName>
 
   <!--    Don't change the below!-->

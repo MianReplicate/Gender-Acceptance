@@ -64,11 +64,6 @@ public class ComeOut : InteractionWorker
             { "cameOut", "True" }
         };
 
-        // var packs = new List<RulePackDef>()
-        // {
-        //     GADefOf.Coming_Out
-        // };
-
         recipient.GetKnowledgeOnPawn(initiator).cameOut = true;
         TransKnowledgeManager.OnKnowledgeLearned(
             recipient,
@@ -82,6 +77,6 @@ public class ComeOut : InteractionWorker
             isPositive ? GADefOf.CameOutPositive : GADefOf.CameOutNegative, recipient);
 
         recipient.needs.mood.thoughts.memories.TryGainMemory(
-            isPositive ? GADefOf.FoundOutPawnIsTransMoodPositive : GADefOf.FoundOutPawnIsTransMoodNegative, recipient);
+            isPositive ? GADefOf.FoundOutPawnIsTransMoodPositive : GADefOf.FoundOutPawnIsTransMoodNegative, initiator);
     }
 }
