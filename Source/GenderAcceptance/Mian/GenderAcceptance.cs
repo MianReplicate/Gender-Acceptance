@@ -3,7 +3,6 @@ using GenderAcceptance.Mian.Dependencies;
 using GenderAcceptance.Mian.Patches.Mod_Integration;
 using GenderAcceptance.Mian.Utilities;
 using HarmonyLib;
-using Multiplayer.API;
 using UnityEngine;
 using Verse;
 using Dysphoria = GenderAcceptance.Mian.Patches.Mod_Integration.Dysphoria;
@@ -33,11 +32,7 @@ public static class Startup
 
         if (ModsConfig.IsActive("cammy.identity.gender")) Dysphoria.Patch(harmony);
 
-        // Multiplayer code
-        if (!MP.enabled)
-            return;
-        
-        MP.RegisterAll();
+        MultiplayerSupport.Add();
     }
 }
 
